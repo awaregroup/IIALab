@@ -71,8 +71,10 @@ What is IoT Edge, container delivery mechanism.
 
 Introduction to deployment.json, expected state for IoT Edge, as well as the integrations with the IoT Hub.
 
+```
 az login
-az iot edge set-modules --device-id [device id] --hub-name [hub name] --content [file path]
+az iot edge set-modules --device-id [device id] --hub-name [hub name] --content deployment.example.json
+```
 
 ### Build and deploy a custom model that detects faces (from the ONNX model zoo) using existing software over IoT Edge
 

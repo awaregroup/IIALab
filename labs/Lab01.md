@@ -31,11 +31,28 @@ Devices running Windows 10 IoT Core can be installed and configured using the Io
 ![IoT Dashboard](./media/1_iotdashboard2.png)
 
 
+### 1.2 - Validating your install
+
+1. Once the Dragonboard has completed installing, a line entry will show in the IoT Dashboard as above
+2. Right click on your device and select 'Device Portal'
+3. In your browser enter the default username and password:
+
+|Name    |Value|
+|--------|-----|
+|Username|Administrator|
+|Password|p@ssw0rd|
+
+![Device Portal](./media/1_deviceportal1.png)
+
+4. Enter a name in the 'Change your device name' text box and click 'Save'. Your device should reboot and display the new name 
+
+
+
 ## 2 - Deploying your first app to your Dragonboard
 
-
-
 ### 2.1 - Hello world
+1. Open up the first lab project found in [C:\Labs\Lab01\Dragonboard.sln](file:///C:\Labs\Lab01\Dragonboard.sln) 
+1. 
 
 ### 2.2 - Adding an output
 

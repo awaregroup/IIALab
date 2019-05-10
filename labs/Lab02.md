@@ -20,24 +20,33 @@
 ### 1.0 - Create your workspace
 On your desktop open up the folder named iot-adkaddonkit then open the IoTCorePShell script. 
 
-New-IoTWorkspace C:\MyWorkspace Contoso arm
+```
+New-IoTWorkspace C:\MyWorkspace lab02 arm
 Import-IoTOEMPackage *
+```
 
 ### 1.1 - Install Board Support Package (BSP)
+
+```
 Import-IoTBSP 410c db410cetcetc.zip
 Add-IoTProduct ProductA 410c
+```
 
 ### 1.3 - Add Universal Windows App
 
+```
 Add-IoTAppxPackage "C:\DefaultApp\IoTCoreDefaultApp_1.2.0.0_ARM_Debug_Test\IoTCoreDefaultApp_1.2.0.0_ARM_Debug_Test.appx" fga Appx.MyUWPApp
 New-IoTCabPackage Appx.MyUWPApp
 Add-IoTProductFeature ProductA Test APPX_MYUWPAPP -OEM
+```
 
 ### 1.3 - Compile FFU image
 
+```
 New-IoTCabPackage All
 New-IoTFFUImage ProductX Test
+```
 
 ## 2 - Install your image
 
-Use the Windows 10 IoT Core Dashboard to flash the image in the same method as was done in Lab01
+Use the Windows 10 IoT Core Dashboard to flash the image in the same method as was done in Lab01 using the IoT Dashboard

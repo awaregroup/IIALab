@@ -11,21 +11,6 @@ Built for small, secured smart devices, Windows 10 IoT Core embraces a rich UWP 
 
 Explain how this is like FFU for the dragonboard, pre-prepared development FFU with Container support enabled.
 
-#### Install WinPE tools onto a drive & Copy the eMMC Installer Script & FFU Across
-
-Explain WinPE and how it fits into things & eMMC installer is a basic script that applies the WIM to the first internal HDD it finds.
-
-1. Insert a USB drive into your machine.
-1. Create a USB-bootable WinPE image:
-1. Start the Deployment and Imaging Tools Environment (C:\Program Files (x86)\Windows Kits\10\Assessment and Deployment Kit\Deployment Tools) as an administrator.
-1. Create a working copy of the Windows PE files. Specify either x86, amd64 or ARM: Copype amd64 C:\WINPE_amd64
-1. Install Windows PE to the USB flash drive, specifying the WinPE drive letter below. More information can be found here. MMakeWinPEMedia /UFD C:\WinPE_amd64 P:
-1. Download the Windows 10 IoT Core image by double-clicking on the downloaded ISO file and locating the mounted Virtual CD-drive.
-1. This drive will contain an install file (.msi); double click it. This will create a new directory on your PC under C:\Program Files (x86)\Microsoft IoT\FFU\ in which you should see an image file, "flash.ffu".
-1. Download, unzip and copy the eMMC Installer script to the USB device's root directory, along with the device's FFU.
-1. Connect the USB drive, mouse, and keyboard to the USB hub. Attach the HDMI display to your device, the device to the USB hub, and the power cord to the device.
-
-
 #### Boot off the USB drive and run the Installer Script
 
 Explain how to do this, the UP2's default to booting off the usb drive. Ensure they reset correctly.
@@ -71,8 +56,10 @@ What is IoT Edge, container delivery mechanism.
 
 Introduction to deployment.json, expected state for IoT Edge, as well as the integrations with the IoT Hub.
 
+```
 az login
-az iot edge set-modules --device-id [device id] --hub-name [hub name] --content [file path]
+az iot edge set-modules --device-id [device id] --hub-name [hub name] --content deployment.example.json
+```
 
 ### Build and deploy a custom model that detects faces (from the ONNX model zoo) using existing software over IoT Edge
 

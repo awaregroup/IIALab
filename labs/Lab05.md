@@ -1,5 +1,10 @@
 # Lab 05 - Machine Learning at the Edge
 
+### Software
+* Visual Studio Code with Python Plugin
+* Visual Studio with UWP Feature Enabled
+* Anaconda
+ 
 
 ## 1 - Custom Vision Service
 

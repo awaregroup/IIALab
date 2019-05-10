@@ -1,5 +1,7 @@
 # Lab 01 - Getting started with development on Windows 10 IoT Core with Arrow Dragonboard 410c
 
+This lab covers setting up Windows 10 IoT Core on an Arrow Dragonboard 410 and deploying apps using Visual Studio.
+
 ## Pre-requisites
 ### Hardware
 * Arrow Dragonboard 410c
@@ -52,7 +54,13 @@ Devices running Windows 10 IoT Core can be installed and configured using the Io
 
 ### 2.1 - Hello world
 1. Open up the first lab project found in [C:\Labs\Lab01\Dragonboard.sln](file:///C:\Labs\Lab01\Dragonboard.sln) 
-1. 
+1. Update the target system architecture to say 'ARM' as shown in the image below
+
+![](./media/1_vs3.png)
+
+1. Change target system from 'Local' to 'Remote Machine' and enter the IP address of your device. This can be found on the screen of your device
+
+![](./media/1_vs2.png)
 
 ### 2.2 - Adding an output
 

@@ -123,14 +123,16 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ML\MLModel.cs" />
-    <Compile Include="ML\MLModelInput.cs" />
-    <Compile Include="ML\MLModelOutput.cs" />
+    <Compile Include="ML\MLModelVariable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <Content Include="Assets\model.onnx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="IoTLabs.MachineLearning_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>

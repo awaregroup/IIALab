@@ -1,10 +1,5 @@
 # Lab 05 - Machine Learning at the Edge
 
-### Software
-* Visual Studio Code with Python Plugin
-* Visual Studio with UWP Feature Enabled
-* Anaconda
- 
 
 For this lab, we will use the Azure Custom Vision service to train a machine learning model for image classification. We will use that model to create a .NET application to pull frames from a connected USB camera, use Windows ML to classify the image, then send the result to Azure IoT Hub. We will deploy that application to a Windows IoT Core device using Azure IoT Edge. Finally, we will visualize the results using Time Series Insights.
 
@@ -369,14 +364,16 @@ The training process demonstrated today solves a regression problem, but this ca
 
 ## 3.2 - Add a new event source
 1. Sign in to the Azure portal.
-1. In the left menu, select All resources. Select your Time Series Insights environment.
-1. Under Environment Topology, select Event Sources, and then select Add.
-1. In the New event source pane, for Event source name, enter a name that's unique to this Time Series Insights environment. For example, enter event-stream.
-1. For Source, select IoT Hub.
-1. Select a value for Import option:
+2. In the left menu, select All resources. Select your Time Series Insights environment.
+3. Under Environment Topology, select Event Sources, and then select Add.
+4. In the New event source pane, for Event source name, enter a name that's unique to this Time Series Insights environment. For example, enter event-stream.
+5. For Source, select IoT Hub.
+6. Select a value for Import option:
 	* If you already have an IoT hub in one of your subscriptions, select Use IoT Hub from available subscriptions. This option is the easiest approach.
 	* If the IoT hub is external to your subscriptions, or if you want to choose advanced options, select Provide IoT Hub settings manually.
-1. The following table describes the required properties for the Provide IoT Hub settings manually:
+7. The following table describes the required properties for the Provide IoT Hub settings manually:
+
+
 Property | Description
 --- | ---
 Subscription ID | the subscription in which the IoT hub was created.
@@ -387,6 +384,7 @@ IoT hub policy key | The key is prepopulated.
 IoT hub consumer group | The consumer group that reads events from the IoT hub. We highly recommend that you use a dedicated consumer group for your event source.
 Event serialization format | Currently, JSON is the only available serialization format. The event messages must be in this format or no data can be read.
 Timestamp property name | To determine this value, you need to understand the message format of the message data that's sent to the IoT hub. This value is the name of the specific event property in the message data that you want to use as the event timestamp. The value is case-sensitive. If left blank, the event enqueue time in the event source is used as the event timestamp.
-1. Add the dedicated Time Series Insights consumer group name that you added to your IoT hub.
-1. Select Create.
-1. After you create the event source, Time Series Insights automatically starts streaming data to your environment.
+
+8. Add the dedicated Time Series Insights consumer group name that you added to your IoT hub.
+9. Select Create.
+10. After you create the event source, Time Series Insights automatically starts streaming data to your environment.

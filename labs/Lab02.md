@@ -17,21 +17,30 @@
 
 ## 1 - Build your image
 
-Microsoft enables device manufacturers and OEMs to design their own IoT Core images. These images are built using an IoT Workspace and customized using Board Support Packages (BSPs) containing drivers, apps and other additions.
-
 ### 1.1 - Create your workspace
 
-1. Open ```C:\labs\iot-adkaddonkit``` and run the script named ```IoTCorePShell```.
-1. In the PowerShell window, type the following commands:
+=======
+Microsoft enables device manufacturers and OEMs to design their own IoT Core images. These images are built using an IoT Workspace and customized using Board Support Packages (BSPs) containing drivers, apps and other additions.
 
-```
-New-IoTWorkspace -DirName "C:\labs\workspace" -OemName "lab02" -Arch "arm"
-Import-IoTOEMPackage *
-```
+### 1.0 - Create your workspace
+On your desktop, open the Labs shortcut and then navigate into the tools/iotadkaddon folder. This addonkit contains powershell scripts for package creation and image creation process.
+
+Open ```C:\labs\iot-adkaddonkit``` and run the script named ```IoTCorePShell```.
+
+You can configure multiple devices at once by creating new environments called workspaces that contain all the information about how to build and target a specific device of that architecture.
+
+Then type the following command
+```New-IoTWorkspace -DirName "C:\labs\lab02" -OemName "lab02" -Arch "arm"```
+
+This will create a new workspace targetted in the ARM environment and switch you immedately to this workspace. If you exit this window you can open the workspace bootstraper in the new workspace to pick up where you left off. (C:\Labs\lab02\IoTCorePshell.cmd)
+
+Required packages will automatically be imported to the workspace, but we can also include sample packages by running the following command
+```Import-IoTOEMPackage *```
 
 ### 1.2 - Install Board Support Package (BSP)
 
 1. Run the following PowerShell commands in the console from the previous step to enable Dragonboard 410c support on the IoT Core image:
+
 
 ```
 $productName = "ProductA"

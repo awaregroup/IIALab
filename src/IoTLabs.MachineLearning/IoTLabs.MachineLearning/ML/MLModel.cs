@@ -11,14 +11,14 @@ namespace IoTLabs.MachineLearning.ML
         private LearningModelSession _session;
         private LearningModelBinding _binding;
 
-        public async Task<MLModelOutput> EvaluateAsync(MLModelInput input)
+        public async Task<MLModelVariable> EvaluateAsync(MLModelVariable input)
         {
-            _binding.Bind("float_input", input.FloatInput);
+            _binding.Bind("float_input", input.Variable);
 
             var id = Guid.NewGuid().ToString();
             var result = await _session.EvaluateAsync(_binding, id);
 
-            return new MLModelOutput
+            return new MLModelVariable
             {
                 Variable = result.Outputs["variable"] as TensorFloat
             };

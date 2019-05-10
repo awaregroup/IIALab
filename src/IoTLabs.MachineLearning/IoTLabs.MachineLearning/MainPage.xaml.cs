@@ -29,9 +29,11 @@ namespace IoTLabs.MachineLearning
                 var model = await MLModel.CreateFromStreamAsync(modelFile as IRandomAccessStreamReference);
 
                 //make prediction
-                var modelOutput = await model.EvaluateAsync(new MLModelInput()
+                var inputShape = new long[2] { 1, 4 };
+                var inputFeatures = new float[4] { float.Parse(TextBox1.Text), float.Parse(TextBox2.Text), float.Parse(TextBox3.Text), float.Parse(TextBox4.Text) };
+                var modelOutput = await model.EvaluateAsync(new MLModelVariable()
                 {
-                    FloatInput = TensorFloat.CreateFromArray(new long[2] { 1, 4 }, new float[4] { float.Parse(TextBox1.Text), float.Parse(TextBox2.Text), float.Parse(TextBox3.Text), float.Parse(TextBox4.Text) })
+                    Variable = TensorFloat.CreateFromArray(inputShape, inputFeatures)
                 });
 
                 //display results

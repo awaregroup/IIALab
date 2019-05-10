@@ -7,7 +7,7 @@ using Windows.AI.MachineLearning;
 
 namespace IoTLabs.MachineLearning.ML
 {
-    public sealed class MLModelOutput
+    public sealed class MLModelVariable
     {
         public TensorFloat Variable { get; set; }
     }

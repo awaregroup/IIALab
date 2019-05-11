@@ -8,7 +8,7 @@
 
 ### Software
 * Visual Studio 2019 Community Edition (or above)
-* Dragonboard 410c - BSP Package https://developer.qualcomm.com/hardware/dragonboard-410c/software
+* Dragonboard 410c - BSP Package
 * Windows Assessment and Deployment KiT (Windows ADK)
 * Windows 10 IoT Core packages
 * IoT Core ADK Add-Ons
@@ -39,16 +39,30 @@ Required packages will automatically be imported to the workspace, but we can al
 
 ### 1.2 - Install Board Support Package (BSP)
 
-1. Run the following PowerShell commands in the console from the previous step to enable Dragonboard 410c support on the IoT Core image:
+Next include the board support package (BSP) provided by the component/silicon vendor containing drivers compatable with Windows IoT Core.
 
+Run the following PowerShell commands in the console from the previous step to install the BSP for the Dragonboard 410c.
 
 ```
-$productName = "ProductA"
-$bspName = "410c"
-
-Import-IoTBSP -BSPName $bspName -Source "db410cetcetc.zip"
-Add-IoTProduct -ProductName $productName -BSPName $bspName
+$bspName = "QCDB410C"
+Import-IoTBSP $bspName C:\labs\tools\dragonboard\db410c_bsp.zip"
 ```
+
+### 1.3 - Create product
+
+A product is a specific configuration of a device based upon a BSP that contains what custom applications and customisations are intended to be deployed to a range of devices.
+
+```
+$productName = "Lab02Product"
+Add-IoTProduct -ProductName $productName -BSPName $bspName 
+```
+You will be asked for further SMBIOS information such as Manufacturer name, Product Family, SKU, BaseboardManufacturer and BaseboardProduct, enter the example values as below.
+
+- System OEM Name: ContosoElectronics
+- System Family Name: SensorArray
+- System SKU Number: BLINK-V1
+- Baseboard Manufacturer Qualcomm
+- Baseboard Product: Dragonboard 410c
 
 ### 1.3 - Add Universal Windows App
 
@@ -67,11 +81,17 @@ Add-IoTProductFeature -Product $productName -Config $configName -FeatureID "APPX
 
 ### 1.3 - Compile FFU image
 
-1. Run these PowerShell commands to compile the workspace into an FFU image:
+By running the previous commands we have created packages that describe what content should be included in this product. Next we process these packages into cabinet files for inclusion in the final image.
 ```
 New-IoTCabPackage -PkgFile "All"
+```
+
+With all the cab packages compiled the FFU image can be created by running the following command, this can take up to ten minutes to complete.
+
+```
 New-IoTFFUImage -Product $productName -Config $configName
 ```
+
 
 ## 2 - Install custom image
 

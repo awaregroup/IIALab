@@ -69,7 +69,7 @@ You will be asked for further SMBIOS information such as Manufacturer name, Prod
 1. Run these PowerShell commands to inject the app from the previous lab into the image:
 
 ```
-#StartupType "fga" = Foreground App
+#StartupType "fga" means Foreground App
 
 $appName = "Appx.DragonboardTest"
 $configName = "Test"

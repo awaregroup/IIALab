@@ -41,7 +41,7 @@ namespace SampleModule
                 if (Options.ShowList) { }
                 if (Options.Exit) return -1;
                 if (string.IsNullOrEmpty(Options.FileName))
-                    throw new ApplicationException("Please use --filename to specify which file to use");
+                    throw new ApplicationException("Please use --file to specify which file to use");
 
 
                 //
@@ -75,8 +75,21 @@ namespace SampleModule
                 //
                 // Open file
                 //
+                List<float> lines = new List<float>();
+                try
+                {
+                    using (var fs = new StreamReader(Options.FileName))
+                    {
+                        // I just need this one line to load the records from the file in my List<CsvLine>
+                        lines = new CsvHelper.CsvReader(fs).GetRecords<float>().ToList();
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+                Console.WriteLine(lines);
 
-                
                 //
                 // Main loop
                 //

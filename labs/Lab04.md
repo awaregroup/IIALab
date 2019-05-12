@@ -22,31 +22,58 @@ IoT Edge is in GA on Windows and installs as a windows feature (todo: get the ri
 
 ## Deploying containers
 
+TODO : Fix up this whole segment
+
 Deploying and updating code is often challenging, especially when working with devices that may exibit different behavour than the machines that the code development occurs on. Azure IoT Edge simplifies this by orchistrating distribution of container images. These images define the operating system, any set up and configuration and the executable files to be run. As the entire execution environment is shipped with the software solution itself environment configuration issues are much less likely to occur. 
 
 Within a container you can control how isolated the network, storage, or other underlying subsystems are from other running processes on the same machne. Containers are also immutable and stateless by nature in that when they are removed, any changes to its state that are not stored in persistent storage disappear.
+
+Azure IoT Edge is a cloud based container orchistration service that allows secure integration with IoT Hubs, enabling containers (defined as modules) to send messages to the IoT Hub without the need to hard code connection strings within the container definition or the image itself. 
+
 
 ### Set up DPS by grabbing the needful things from the Device Portal
 
 This is like the other method of DPS except it associates only IoT Edge and the containers within it.
 
-IoT Core Dashboard
-1. Grab the Hardware Device Identity
-1. Set up a Device ID in the portal with that Hardware Device Identity, keep this as it will be used later.
+### 1.1 - Getting unique device identifiers
 
+**TODO :**
 
-### Set up IoT Edge by installing it (Notice the cab file installs / we could get this integrated with DISM?)
+``` 
+limpet -azuredps -enrollmentinfo
+```
 
-1. Install Azure IoT Edge. Follow this guide: [Install the Azure IoT Edge runtime on Windows](https://docs.microsoft.com/en-us/azure/iot-edge/how-to-install-iot-edge-windows)
-1. After installing Azure IoT Edge, deploy the [Simulated Temperature Sensor](https://docs.microsoft.com/en-us/azure/iot-edge/quickstart). 
-1. In VS Code, open the "Azure IoT Hub Devices" pane. 
-1. Look for the Edge Device Name there. 
-1. Expand "Modules". Notice three modules there, all green and connected.
-1. Right-click on that device, then select "Start monitoring D2C message".
-1. Look for simulated temperature sensor results in the output window.
+### 1.2 - Deploying Azure DPS
 
+1. Create a new "IoT Hub Device Provisioning Service" in the Azure Portal
+1. Open the newly created DPS Service 
+1. TODO : Get Scope ID
+1. Switch to the "Manage enrolments" pane
+1. Click "Add individual enrolment"
+1. Select "TPM" as the mechanism,
+1. Enter the endorsement key from the previous step
+1. Enter the registration id gathered from the previous step
+1. Enter the device id (this is the name of the device that will be created in IoT Hub)
+1. Select the IoT Edge toggle to "True"
+1. Click "Link a new IoT Hub" and select your existing IoT Hub with the "iothubowner" policy
+1. Click "Save"
 
-What is IoT Edge, container delivery mechanism.
+### Set up IoT Edge
+
+1. Remotely connect to powershell on the Device TODO: Instructions for remotely connecting
+1. Type in the following to the console and wait for the operation to complete, the machine will restart during this process.
+
+```
+. {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Deploy-IoTEdge
+```
+
+1. After the IoT Edge agent has been installed we can connect it up to our IoT Hub by enrolling it with DPS. You will need to enter your scope id and your registration id that you retrieved in step 1.2.
+
+```
+. {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Initialize-IoTEdge -Dps
+```
+
+1. You can check that IoT Edge has installed correctly by typing "iotedge check" and viewing the output.
 
 ### Deploy the default Temperature sensor monitor deployment
 

@@ -81,6 +81,27 @@
                 </Grid.RowDefinitions>
 
                 <Grid Background="Black" Grid.Row="0">
+                    <TextBlock Foreground="White" Text="GPS Location" Margin="10" FontSize="24" FontWeight="SemiBold" />
+                </Grid>
+
+                <StackPanel Orientation="Vertical" Grid.Row="1" Margin="0,10">
+                    <TextBox Header="Longitude" Margin="10,5" Text="{Binding GpsLocationLongitude}" FontSize="20"/>
+                    <TextBox Header="Lattitude" Margin="10,5" Text="{Binding GpsLocationLattitude}" FontSize="20"/>
+                    <TextBox Header="Altitude" Margin="10,5" Text="{Binding GpsLocationAltitude}" FontSize="20"/>
+                    <TextBox Header="Updated" Margin="10,5" Text="{Binding LastGpsLocationUpdate}" FontSize="20"/>
+                </StackPanel>
+
+            </Grid>
+
+            <Grid BorderBrush="Black" BorderThickness="1" Grid.RowSpan="2" VerticalAlignment="Center" Height="400" Margin="10,0" Width="250">
+                <Grid.RowDefinitions>
+                    <RowDefinition  Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid Background="Black" Grid.Row="0">
                     <TextBlock Foreground="White" Text="Accelerometer" Margin="10" FontSize="24" FontWeight="SemiBold" />
                 </Grid>
 
@@ -92,7 +113,7 @@
                 </StackPanel>
 
             </Grid>
-
+            
             <Grid BorderBrush="Black" BorderThickness="1" Grid.RowSpan="2" VerticalAlignment="Center" Height="400" Margin="10,0" Width="250">
                 <Grid.RowDefinitions>
                     <RowDefinition  Height="Auto"/>

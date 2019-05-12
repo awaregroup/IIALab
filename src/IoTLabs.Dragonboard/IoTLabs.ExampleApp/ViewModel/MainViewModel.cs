@@ -17,6 +17,7 @@ namespace IoTLabs.ExampleApp.ViewModel
         ISensor<GroveDigitalAccelerometerState> AccelSensor;
         ISensor<GroveMiniPIRMotionSensorState> MotionSensor;
         ISensor<GroveButtonSensorState> ButtonSensor;
+        ISensor<GpsLocationSensorState> LocationSensor;
 
         public MainViewModel()
         {
@@ -36,13 +37,17 @@ namespace IoTLabs.ExampleApp.ViewModel
         private string _pressure = "-";
         private string _lastBarometerUpdate = "-";
         private string _lastAccelerometerUpdate = "-";
+        private string _lastGpsLocationUpdate = "-";
         private string _accelerometerX = "-";
         private string _accelerometerY = "-";
         private string _accelerometerZ = "-";
         private string _motionEdge = "-";
         private string _motionPin = "-";
+        private string _gpsLocationLongitude = "-";
+        private string _gpsLocationLattitude = "-";
+        private string _gpsLocationAltitude = "-";
 
-      
+
         public bool ButtonIsPressed
         {
             get => _buttonIsPressed;
@@ -100,6 +105,11 @@ namespace IoTLabs.ExampleApp.ViewModel
             set { _lastAccelerometerUpdate = value; RaisePropertyChanged("LastAccelerometerUpdate"); }
         }
 
+        public string LastGpsLocationUpdate
+        {
+            get => _lastGpsLocationUpdate;
+            set { _lastGpsLocationUpdate = value; RaisePropertyChanged("LastGpsLocationUpdate"); }
+        }
 
         public string AccelerometerX
         {
@@ -117,6 +127,25 @@ namespace IoTLabs.ExampleApp.ViewModel
         {
             get => _accelerometerZ;
             set { _accelerometerZ = value; RaisePropertyChanged("AccelerometerZ"); }
+        }
+
+
+        public string GpsLocationLattitude
+        {
+            get => _gpsLocationLattitude;
+            set { _gpsLocationLattitude = value; RaisePropertyChanged("GpsLocationLattitude"); }
+        }
+
+        public string GpsLocationLongitude
+        {
+            get => _gpsLocationLongitude;
+            set { _gpsLocationLongitude = value; RaisePropertyChanged("GpsLocationLongitude"); }
+        }
+
+        public string GpsLocationAltitude
+        {
+            get => _gpsLocationAltitude;
+            set { _gpsLocationAltitude = value; RaisePropertyChanged("GpsLocationAltitude"); }
         }
 
 
@@ -191,6 +220,7 @@ namespace IoTLabs.ExampleApp.ViewModel
                         MotionSensor = GroveSensorFactory.CreateMiniPIRMotionSensorService();
                         AccelSensor = GroveSensorFactory.CreateAccelerometerSensorService();
                         ButtonSensor = GroveSensorFactory.CreateGroveButtonSensorService();
+                        LocationSensor = OnboardSensorFactory.CreateLocationSensor();
 
 
                         //Initialize
@@ -199,6 +229,7 @@ namespace IoTLabs.ExampleApp.ViewModel
                         await MotionSensor.Initialize();
                         await AccelSensor.Initialize();
                         await ButtonSensor.Initialize();
+                        await LocationSensor.Initialize();
 
                         //MotionSensor
                         ((IObservableSensor<GroveMiniPIRMotionSensorState>)MotionSensor).Register(new Action<GroveMiniPIRMotionSensorState>(
@@ -236,6 +267,36 @@ namespace IoTLabs.ExampleApp.ViewModel
                                 });
                             }));
 
+
+                        //Location Sensor
+                        ((IObservableSensor<GpsLocationSensorState>)LocationSensor).Register(new Action<GpsLocationSensorState>(
+                            (GpsLocationSensorState item) =>
+                            {
+                                DispatcherHelper.CheckBeginInvokeOnUI(() =>
+                                {
+                                    try
+                                    {
+                                        if (item.Position != null)
+                                            if (item.Position.Coordinate != null)
+                                                if (item.Position.Coordinate.Point != null)
+                                                   {
+                                                        GpsLocationAltitude = item.Position.Coordinate.Point.Position.Altitude.ToString("####0.0##");
+                                                        GpsLocationLongitude = item.Position.Coordinate.Point.Position.Longitude.ToString("##0.0####");
+                                                        GpsLocationLattitude = item.Position.Coordinate.Point.Position.Latitude.ToString("##0.0####");
+                                                        LastGpsLocationUpdate = item.TimeStamp.ToShortDateString() + " " + item.TimeStamp.ToLongTimeString();
+                                                   }
+
+                                    }
+                                    catch
+                                    {
+                                        GpsLocationAltitude = "-";
+                                        GpsLocationLongitude = "-";
+                                        GpsLocationLattitude = "-";
+                                        LastGpsLocationUpdate = "-";
+                                    }
+                                    //ButtonIsPressed = item.IsPressed;
+                                });
+                            }));
 
 
                         //Barometer Sensor
@@ -304,6 +365,13 @@ namespace IoTLabs.ExampleApp.ViewModel
                 {
                     ((IObservableSensor<GroveButtonSensorState>)ButtonSensor).Unregister();
                     ButtonSensor.Close();
+                }
+
+
+                if (LocationSensor != null)
+                {
+                    ((IObservableSensor<GpsLocationSensorState>)LocationSensor).Unregister();
+                    LocationSensor.Close();
                 }
 
                 if (MotionSensor != null)

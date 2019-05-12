@@ -67,10 +67,12 @@ Refer to this guide: [Add an IoT hub event source to your Time Series Insights e
 ![](./media/2_azure10.png)
 1. Set the fields as shown in the image below, then click "Next: Event Source"
 ![](./media/2_azure12.png)
-1. Set the Event Source fields as shown in the image below, click "Review + create" then "Create"
+1. Set the Event Source fields as shown in the image below
 ![](./media/2_azure13.png)
+1. Add a new Consumer Group called "tsi" and click "Add"
+![](./media/2_azure14.png)
 **Note: Make sure you click "Add" next to the Consumer Group before continuing**
 
 ### 3.2 - Configuring TSI
 
-To open 
+1. Open the [Time Series Insights Portal (insights.timeseries.azure.com)](https://insights.timeseries.azure.com)

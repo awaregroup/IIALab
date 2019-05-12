@@ -7,8 +7,7 @@ namespace IoTLabs.Dragonboard.Common
     public class GpsLocationSensorState : ISensorState
     {
         public Geoposition Position { get; set; } = null;
-        public DateTime TimeStamp { get; set; } = DateTime.Now;
-        public DateTimeOffset Timestamp { get; set; }
+        public DateTimeOffset Timestamp { get; set; } = DateTimeOffset.Now;
     }
 
     public class GpsLocationSensor : ISensor<GpsLocationSensorState>, IObservableSensor<GpsLocationSensorState>

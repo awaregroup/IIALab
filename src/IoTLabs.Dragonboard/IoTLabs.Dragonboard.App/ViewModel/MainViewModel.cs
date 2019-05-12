@@ -18,6 +18,7 @@ namespace IoTLabs.Dragonboard.App.ViewModel
         ISensor<GroveDigitalAccelerometerState> AccelSensor;
         ISensor<GroveMiniPIRMotionSensorState> MotionSensor;
         ISensor<GroveButtonSensorState> ButtonSensor;
+        ISensor<GpsLocationSensorState> LocationSensor;
 
         public MainViewModel()
         {
@@ -37,9 +38,15 @@ namespace IoTLabs.Dragonboard.App.ViewModel
         private string _pressure = "-";
         private string _lastBarometerUpdate = "-";
         private string _lastAccelerometerUpdate = "-";
+        private string _lastGpsLocationUpdate = "-";
         private string _accelerometerX = "-";
         private string _accelerometerY = "-";
         private string _accelerometerZ = "-";
+        private string _gpsLocationAltitude = "-";
+        private string _gpsLocationLongitude = "-";
+        private string _gpsLocationLattitude = "-";
+
+
         private string _motionEdge = "-";
         private string _motionPin = "-";
 
@@ -100,6 +107,13 @@ namespace IoTLabs.Dragonboard.App.ViewModel
             get => _lastAccelerometerUpdate;
             set { _lastAccelerometerUpdate = value; RaisePropertyChanged("LastAccelerometerUpdate"); }
         }
+        
+        public string LastGpsLocationUpdate
+        {
+            get => _lastGpsLocationUpdate;
+            set { _lastGpsLocationUpdate = value; RaisePropertyChanged("LastGpsLocationUpdate"); }
+        }
+
 
 
         public string AccelerometerX
@@ -118,6 +132,24 @@ namespace IoTLabs.Dragonboard.App.ViewModel
         {
             get => _accelerometerZ;
             set { _accelerometerZ = value; RaisePropertyChanged("AccelerometerZ"); }
+        }
+
+        public string GpsLocationAltitude
+        {
+            get => _gpsLocationAltitude;
+            set { _gpsLocationAltitude = value; RaisePropertyChanged("GpsLocationAltitude"); }
+        }
+
+        public string GpsLocationLongitude
+        {
+            get => _gpsLocationLongitude;
+            set { _gpsLocationLongitude = value; RaisePropertyChanged("GpsLocationLongitude"); }
+        }
+
+        public string GpsLocationLattitude
+        {
+            get => _gpsLocationLattitude;
+            set { _gpsLocationLattitude = value; RaisePropertyChanged("GpsLocationLattitude"); }
         }
 
 
@@ -217,6 +249,34 @@ namespace IoTLabs.Dragonboard.App.ViewModel
                                         }
 
                                     });
+                            }));
+
+
+
+                        //GpsLocationSensor
+                        LocationSensor = OnboardSensorFactory.CreateLocationSensor();
+                        await LocationSensor.Initialize();
+                        ((IObservableSensor<GpsLocationSensorState>)LocationSensor).Register(new Action<GpsLocationSensorState>(
+                            (GpsLocationSensorState item) =>
+                            {
+                                DispatcherHelper.CheckBeginInvokeOnUI(async () =>
+                                {
+                                    //Last = item.Timestamp.Date.ToShortDateString() + " " + item.Timestamp.Date.ToLongTimeString();
+                                    if (item.HasPosition)
+                                    {
+                                        GpsLocationAltitude = item.Position.Altitude.ToString("###0.00");
+                                        GpsLocationLongitude = item.Position.Longitude.ToString("###0.0000");
+                                        GpsLocationLattitude = item.Position.Latitude.ToString("###0.0000");
+                                        LastGpsLocationUpdate = item.Timestamp.Date.ToShortDateString() + " " + item.Timestamp.Date.ToLongTimeString();
+                                    }
+                                    else
+                                    {
+                                        GpsLocationAltitude = "-";
+                                        GpsLocationLongitude = "-";
+                                        GpsLocationLattitude = "-";
+                                        LastGpsLocationUpdate = item.Timestamp.Date.ToShortDateString() + " " + item.Timestamp.Date.ToLongTimeString();
+                                    }
+                                });
                             }));
 
 

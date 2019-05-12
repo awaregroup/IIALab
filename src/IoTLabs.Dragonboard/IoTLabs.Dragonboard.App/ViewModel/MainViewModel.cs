@@ -218,6 +218,13 @@ namespace IoTLabs.Dragonboard.App.ViewModel
                 {
                     try
                     {
+                        var iotHubConnectionString = "";
+
+                        //
+                        //=== ENTER SENSOR CONFIG IS HERE ===
+                        //
+                     
+                        
                         //LED
                         LedSensor = GroveSensorFactory.CreateRedLedSensorService();
                         await LedSensor.Initialize();
@@ -311,6 +318,9 @@ namespace IoTLabs.Dragonboard.App.ViewModel
                                });
                            }), 250);
 
+                        //
+                        //=== SENSOR CONFIG ENDS HERE ===
+                        //
                     }
                     catch (Exception ex)
                     {

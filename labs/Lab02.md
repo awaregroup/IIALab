@@ -33,13 +33,14 @@
 ![](./media/2_azure6.png)
 1. Enter "dragonboard" as the Device ID and click "Save" to create the device
 ![](./media/2_azure7.png)
+1. Click the device called "dragonboard" and copy the "Connection string (primary key)" field to the clipboard - we will use this later
+![](./media/2_azure8.png)
 
- Now, we will create a device. Switch to the "IoT Devices" pane and choose "Add"
-1. Enter a name for this device and then click "Save"
-1. Push Refresh then click on your newly created devices
-1. Copy the Connection String (Primary Key) by clicking on the blue copy box. Save this as you will need it later.
+### 1.3 - Connect Dragonboard app to Azure IoT Hub
 
-## TODO : The rest of the lab
+1. In Visual Studio, open 
+1. 
+
 
 ## 3 - Integration into TSI
 

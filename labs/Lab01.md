@@ -9,7 +9,6 @@ This lab covers setting up Windows 10 IoT Core on an Arrow Dragonboard 410 and d
 * Grove Mini PIR Sensor
 * Grove Barometer Sensor
 
-
 ### Software
 * Visual Studio 2019 Community Edition (or above)
 

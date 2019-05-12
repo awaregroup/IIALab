@@ -1,25 +1,40 @@
-# Lab 03 - Azure IoT Hub
+# Lab 02 - Azure IoT Hub
 
 ## Pre-requisites
 ### Hardware
 * Arrow Dragonboard 410c
 * Grove LED
-* Grove Button
+* Grove Mini PIR Sensor
+* Grove Barometer Sensor
 
 ### Software
 * Visual Studio 2019 Community Edition (or above)
 
 
-### 1.1 - Deploying Azure IoT Hub
+## 1 - Deploying Azure IoT Hub
 
-## Azure IoT Hub
+### 1.1 - Deploy Azure IoT Hub
 
-1. Sign into the Azure Portal
-1. Create a new "IoT Hub" resource by typing "IoT Hub" in the search bar at the top of the Azure Portal and choosing the entry under "Marketplace"
-1. Choose your existing resource group and the West US region. The name should contain the number in your username. eg: "msiotlabs-user01"
-1. Click "Review and Create"
-1. Once created, open the newly created IoT Hub in the resource group you selected.
-1. Now, we will create a device. Switch to the "IoT Devices" pane and choose "Add"
+1. Sign into the [Azure Portal (https://portal.azure.com)](https://portal.azure.com) with the supplied lab credentials
+1. Click "Create a resource", search for "IoT Hub"
+![](./media/2_azure1.png)
+1. Click on "IoT Hub" and "Create"
+![](./media/2_azure2.png)
+1. Fill out the details by choosing a name and select the existing subscription and resource group
+![](./media/2_azure3.png)
+1. Click "Review + create" and finally "Create" to complete the provisioning
+![](./media/2_azure4.png)
+
+### 1.2 - Configure Azure IoT Hub
+
+1. Click "Resource groups" on the left-hand menu, select the "winiot" resource group in the list and choose the IoT Hub previously created
+![](./media/2_azure5.png)
+1. Click "IoT devices" on the IoT Hub menu and click "Add"
+![](./media/2_azure6.png)
+1. Enter "dragonboard" as the Device ID and click "Save" to create the device
+![](./media/2_azure7.png)
+
+ Now, we will create a device. Switch to the "IoT Devices" pane and choose "Add"
 1. Enter a name for this device and then click "Save"
 1. Push Refresh then click on your newly created devices
 1. Copy the Connection String (Primary Key) by clicking on the blue copy box. Save this as you will need it later.

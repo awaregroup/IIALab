@@ -9,7 +9,7 @@ Built for small, secured smart devices, Windows 10 IoT Core embraces a rich UWP 
 
 ### Set up UP2 by flashing the FFU
 
-Explain how this is like FFU for the dragonboard, pre-prepared development FFU with Container support enabled.
+Explain how this is like FFU for the dragonboard, pre-prepared development FFU with Container support enabled. Name the UP2 with the name on the UP2 device (check IP address for confirmation)
 
 #### Boot off the USB drive and run the Installer Script
 
@@ -54,7 +54,7 @@ What is IoT Edge, container delivery mechanism.
 
 ### Deploy the default Temperature sensor monitor deployment
 
-Introduction to deployment.json, expected state for IoT Edge, as well as the integrations with the IoT Hub.
+TODO : Introduction to deployment.json, expected state for IoT Edge, as well as the integrations with the IoT Hub. Location of the example deployment.
 
 ```
 az login
@@ -71,6 +71,7 @@ az iot edge set-modules --device-id [device id] --hub-name [hub name] --content 
 
 
 #### Grab the C# and such for any vision model we provide and run it on the PC
+
 We can use our own model, download the C# code and run it, build the docker container 
 
 #### Set up and deploy Azure Container Registry
@@ -84,8 +85,33 @@ Refer to this guide: [Quickstart: Create a private container registry using the 
 1. Make note of the Login Server, username, and password. You'll need these later.
 
 
-## 3.5 - Containerize the sample app
+## Build & Test the sample
 
+```
+PS C:\WindowsAiEdgeLabCV> dotnet restore -r win-x64
+PS C:\WindowsAiEdgeLabCV> dotnet publish -r win-x64
+Microsoft (R) Build Engine version 16.0.225-preview+g5ebeba52a1 for .NET Core
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  Restore completed in 43.29 ms for C:\WindowsAiEdgeLabCV\WindowsAiEdgeLabCV.csproj.
+  WindowsAiEdgeLabCV -> C:\WindowsAiEdgeLabCV\bin\Debug\netcoreapp2.2\WindowsAiEdgeLabCV.dll
+  WindowsAiEdgeLabCV -> C:\WindowsAiEdgeLabCV\bin\Debug\netcoreapp2.2\publish\
+```
+
+Point the camera at one of your objects, still connected to your development PC.
+
+Run the sample locally to classify the object. This will test that the app is running correctly locally. We specify "Lifecam" for this model of camera. Here we can see that a "Mug" has been recognized.
+
+```
+PS C:\WindowsAiEdgeLabCV> dotnet run --model=CustomVision.onnx --device=LifeCam
+4/24/2019 4:09:04 PM: Loading modelfile 'CustomVision.onnx' on the CPU...
+4/24/2019 4:09:04 PM: ...OK 594 ticks
+4/24/2019 4:09:05 PM: Running the model...
+4/24/2019 4:09:05 PM: ...OK 47 ticks
+4/24/2019 4:09:05 PM: Recognized {"results":[{"label":"Mug","confidence":1.0}],"metrics":{"evaltimeinms":47,"cycletimeinms":0}}
+```
+
+## 3.5 - Containerize the sample app 
 
 ```powershell
 #SAMPLE: customvision:1.0-x64-iotcore
@@ -104,15 +130,28 @@ az acr login --name $registryName
 docker push $container
 ```
 
-## 4.1 - Deploy edge modules to device INtroduction to deployment.json
+## 4.1 - Deploy edge modules to device 
 
-Refer to this guide for more information: [Deploy Azure IoT Edge modules from Visual Studio Code](https://docs.microsoft.com/en-us/azure/iot-edge/how-to-deploy-modules-vscode)
+## Author a deployment.json file
 
-1. In Visual Studio Code, open the 'Azure IoT Hub Devices' pane by selecting the Explorer sidebar in the top left corner (Ctrl + Shift + E) and then clicking on the 'Azure IoT Hub Devices' at the bottom of the sidebar when it opens
-1. If you see '-> Select IoT Hub', you will need to log in with your Azure Subscription, select the 'MS IoT Labs - Windows IoT' subscription and the IoT Hub
-1. Right-click on your device (for example, 'A09') and click 'Create Deployment for Single Device'
-1. Select ```C:\Users\Admin\Desktop\WindowsIoT\deployment.json```
-1. Look for "deployment succeeded" in the output window.
+Now that we have a container with our inferencing logic safely up in our container registry, it's time to create an Azure IoT Edge deployment to our device.
+
+We will do this back on the development PC.
+
+TODO: Specify where in the lab files
+Amongst the lab files, you will find a deployment json file named deployment.win-x64.json. Open this file in VS Code. We must fill in the details for the container image we just built above, along with our container registry credentials.
+
+Search for "{ACR_*}" and replace those values with the correct values for your container repository.
+The ACR_IMAGE must exactly match what you pushed, e.g. aiedgelabcr.azurecr.io/customvision:1.0-x64-iotcore
+
+
+## Deploy the IoT Edge deployment.json file. 
+
+Just like the example deployment, use the following syntax to update the expected module state on the device. IoT Edge will pick up on this configuration change and deploy the container to the device.
+
+```
+az iot edge set-modules --device-id [device id] --hub-name [hub name] --content deployment.json
+```
 
 
 ## 4.2 - Verify the deployment on IoT device

@@ -3,12 +3,13 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Windows.Devices.Gpio;
 
-namespace IoTLabs.Dragonboard
+namespace IoTLabs.Dragonboard.Common
 {
 
-    public class GroveRedLedSensorState
+    public class GroveRedLedSensorState : ISensorState
     {
         public GpioPinValue CurrentValue { get; set; } = GpioPinValue.Low;
+        public DateTimeOffset Timestamp { get; set; } = DateTimeOffset.Now;
 
         public static GroveRedLedSensorState GroveRedLedSensorStateLow()
         {

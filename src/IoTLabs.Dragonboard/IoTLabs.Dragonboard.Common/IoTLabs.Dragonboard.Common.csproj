@@ -7,8 +7,8 @@
     <ProjectGuid>{6E7CF4F5-2DE0-43A6-9B6D-EB9D53853B1C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>IoTLabs.Dragonboard</RootNamespace>
-    <AssemblyName>IoTLabs.Dragonboard</AssemblyName>
+    <RootNamespace>IoTLabs.Dragonboard.Common</RootNamespace>
+    <AssemblyName>IoTLabs.Dragonboard.Common</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.17763.0</TargetPlatformVersion>
@@ -120,7 +120,7 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="GroveBaramoterSensorService.cs" />
+    <Compile Include="GroveBarometerSensorService.cs" />
     <Compile Include="GroveButtonSensorService.cs" />
     <Compile Include="GroveDigitalAccelerometerService.cs" />
     <Compile Include="GroveMiniPIRMotionSensorService.cs" />
@@ -128,7 +128,7 @@
     <Compile Include="GroveSensorFactory.cs" />
     <Compile Include="Interfaces.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Properties\IoTLabs.Dragonboard.rd.xml" />
+    <EmbeddedResource Include="Properties\IoTLabs.Dragonboard.Common.rd.xml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Glovebox.IoT.Devices">

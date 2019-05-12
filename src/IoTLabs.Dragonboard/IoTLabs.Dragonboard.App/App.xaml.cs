@@ -1,5 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Threading;
-using IoTLabs.ExampleApp.View;
+using IoTLabs.Dragonboard.App.View;
 using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -8,7 +8,7 @@ using Windows.UI.Xaml.Controls;
 
 using Windows.UI.Xaml.Navigation;
 
-namespace IoTLabs.ExampleApp
+namespace IoTLabs.Dragonboard.App
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.

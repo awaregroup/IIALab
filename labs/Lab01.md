@@ -6,7 +6,8 @@ This lab covers setting up Windows 10 IoT Core on an Arrow Dragonboard 410 and d
 ### Hardware
 * Arrow Dragonboard 410c
 * Grove LED
-* Grove Button
+* Grove PIR Sensor
+
 
 ### Software
 * Visual Studio 2019 Community Edition (or above)

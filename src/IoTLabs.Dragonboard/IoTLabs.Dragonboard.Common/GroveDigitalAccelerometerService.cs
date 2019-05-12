@@ -3,15 +3,15 @@ using System.Threading.Tasks;
 using Windows.Devices.Enumeration;
 using Windows.Devices.I2c;
 
-namespace IoTLabs.Dragonboard
+namespace IoTLabs.Dragonboard.Common
 {
 
-    public class GroveDigitalAccelerometerState
+    public class GroveDigitalAccelerometerState : ISensorState
     {
         public double X { get; set; } = 0;
         public double Y { get; set; } = 0;
         public double Z { get; set; } = 0;
-        public DateTime TimeStamp { get; set; } = DateTime.Now;
+        public DateTimeOffset Timestamp { get; set; } = DateTimeOffset.Now;
     }
 
     enum DigitalAccelerometerRegister : byte

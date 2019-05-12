@@ -7,8 +7,8 @@
     <ProjectGuid>{5B0CE79D-9DC5-4DA7-B61B-2FDFE8A16952}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>IoTLabs.ExampleApp</RootNamespace>
-    <AssemblyName>IoTLabs.ExampleApp</AssemblyName>
+    <RootNamespace>IoTLabs.Dragonboard.App</RootNamespace>
+    <AssemblyName>IoTLabs.Dragonboard.App</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.17763.0</TargetPlatformVersion>
@@ -17,7 +17,7 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
-    <PackageCertificateKeyFile>IoTLabs.ExampleApp_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>IoTLabs.Dragonboard.App_TemporaryKey.pfx</PackageCertificateKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -130,7 +130,6 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="IoTLabs.ExampleApp_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\LargeTile.scale-100.png" />
@@ -200,9 +199,9 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\IoTLabs.Dragonboard\IoTLabs.Dragonboard.csproj">
+    <ProjectReference Include="..\IoTLabs.Dragonboard.Common\IoTLabs.Dragonboard.Common.csproj">
       <Project>{6e7cf4f5-2de0-43a6-9b6d-eb9d53853b1c}</Project>
-      <Name>IoTLabs.Dragonboard</Name>
+      <Name>IoTLabs.Dragonboard.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

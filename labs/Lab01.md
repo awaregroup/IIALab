@@ -6,7 +6,9 @@ This lab covers setting up Windows 10 IoT Core on an Arrow Dragonboard 410 and d
 ### Hardware
 * Arrow Dragonboard 410c
 * Grove LED
-* Grove Button
+* Grove Mini PIR Sensor
+* 
+
 
 ### Software
 * Visual Studio 2019 Community Edition (or above)
@@ -50,10 +52,11 @@ Devices running Windows 10 IoT Core can be installed and configured using the Io
 
 
 
-## 2 - Deploying your first app to your Dragonboard
+## 2 - Deploying apps to Dragonboard
 
 ### 2.1 - Hello world
-1. Open up the first lab project found in [C:\Labs\Lab01\Dragonboard.sln](file:///C:\Labs\Lab01\Dragonboard.sln) 
+
+1. Open up the first lab project found in [C:\Labs\content\src\IoTLabs.Dragonboard\IoTLabs.Dragonboard.sln](file:///C:\Labs\content\src\IoTLabs.Dragonboard.sln) 
 1. Update the target system architecture to say 'ARM' as shown in the image below
 
 ![](./media/1_vs3.png)
@@ -62,7 +65,25 @@ Devices running Windows 10 IoT Core can be installed and configured using the Io
 
 ![](./media/1_vs2.png)
 
-### 2.2 - Adding an output
+1. Run the project to test it on your Dragonboard. You should see an interface, however no data should be showing
+
+### 2.2 - Adding sensors
+
+Our application uses a number of sensors to display as output on the screen. The next steps will cover connecting these sensors up. **Note:** When wiring up the sensors, specific ports are selected due to their voltage and wiring. The following diagram will be useful:
+
+![](./media/1_wiring.png)
+
+#### 2.2.1 - Red LED
+
+1. Refer to the wiring diagram to attach the Red LED Grove module to socket G4
+2. Open ```ViewModel/MainViewModel.cs``` in the Visual Studio project and paste the following lines in at line 189:
+```csharp
+//LED
+LedSensor = GroveSensorFactory.CreateRedLedSensorService();
+await LedSensor.Initialize();
+LedIsHigh = LedSensor.GetState().CurrentValue == GpioPinValue.High;
+``` 
+3. Run the project again and test the Red LED buttons in the application
 
 ### 2.3 - Adding an input
 

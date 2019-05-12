@@ -1,4 +1,4 @@
-# Lab 02 - Creating a custom FFU
+# Lab 03 - Azure IoT Hub
 
 ## Pre-requisites
 ### Hardware
@@ -8,95 +8,36 @@
 
 ### Software
 * Visual Studio 2019 Community Edition (or above)
-* Dragonboard 410c - BSP Package https://developer.qualcomm.com/hardware/dragonboard-410c/software
-* Windows Assessment and Deployment KiT (Windows ADK)
-* Windows 10 IoT Core packages
-* IoT Core ADK Add-Ons
-* IoT Core PowerShell environment
-* Dragonboard update tool
-
-## 1 - Build your image
-
-### 1.1 - Create your workspace
-
-=======
-Microsoft enables device manufacturers and OEMs to design their own IoT Core images. These images are built using an IoT Workspace and customized using Board Support Packages (BSPs) containing drivers, apps and other additions.
-
-### 1.0 - Create your workspace
-On your desktop, open the Labs shortcut and then navigate into the tools/iotadkaddon folder. This addonkit contains powershell scripts for package creation and image creation process.
-
-Open ```C:\labs\iot-adkaddonkit``` and run the script named ```IoTCorePShell```.
-
-You can configure multiple devices at once by creating new environments called workspaces that contain all the information about how to build and target a specific device of that architecture.
-
-Then type the following command
-```New-IoTWorkspace -DirName "C:\labs\lab02" -OemName "lab02" -Arch "arm"```
-
-This will create a new workspace targetted in the ARM environment and switch you immedately to this workspace. If you exit this window you can open the workspace bootstraper in the new workspace to pick up where you left off. (C:\Labs\lab02\IoTCorePshell.cmd)
-
-Required packages will automatically be imported to the workspace, but we can also include sample packages by running the following command
-```Import-IoTOEMPackage *```
-
-### 1.2 - Install Board Support Package (BSP)
-
-1. Run the following PowerShell commands in the console from the previous step to enable Dragonboard 410c support on the IoT Core image:
 
 
-```
-$productName = "ProductA"
-$bspName = "410c"
+### 1.1 - Deploying Azure IoT Hub
 
-Import-IoTBSP -BSPName $bspName -Source "db410cetcetc.zip"
-Add-IoTProduct -ProductName $productName -BSPName $bspName
-```
+## Azure IoT Hub
 
-### 1.3 - Add Universal Windows App
+1. Sign into the Azure Portal
+1. Create a new "IoT Hub" resource by typing "IoT Hub" in the search bar at the top of the Azure Portal and choosing the entry under "Marketplace"
+1. Choose your existing resource group and the West US region. The name should contain the number in your username. eg: "msiotlabs-user01"
+1. Click "Review and Create"
+1. Once created, open the newly created IoT Hub in the resource group you selected.
+1. Now, we will create a device. Switch to the "IoT Devices" pane and choose "Add"
+1. Enter a name for this device and then click "Save"
+1. Push Refresh then click on your newly created devices
+1. Copy the Connection String (Primary Key) by clicking on the blue copy box. Save this as you will need it later.
 
-1. Run these PowerShell commands to inject the app from the previous lab into the image:
+## TODO : The rest of the lab
 
-```
-#StartupType "fga" means Foreground App
+## 3 - Integration into TSI
 
-$appName = "Appx.DragonboardTest"
-$configName = "Test"
+## Azure Time Series Insights
 
-Add-IoTAppxPackage -AppxFile "C:\labs\Dragonboard\APPNAMEHERE" -StartupType "fga" -OutputName $appName
-New-IoTCabPackage -PkgFile $appName
-Add-IoTProductFeature -Product $productName -Config $configName -FeatureID "APPX_MYUWPAPP" -OEM
-```
+Refer to this guide: [Add an IoT hub event source to your Time Series Insights environment](https://docs.microsoft.com/en-us/azure/time-series-insights/time-series-insights-how-to-add-an-event-source-iothub)
 
-### 1.3 - Compile FFU image
-
-1. Run these PowerShell commands to compile the workspace into an FFU image:
-```
-New-IoTCabPackage -PkgFile "All"
-New-IoTFFUImage -Product $productName -Config $configName
-```
-
-## 2 - Install custom image
-
-### 2.2 - Installing custom image
-
-1. Connect Dragonboard to host PC with a Micro-USB cable
-1. Hold down the 'Volume Up (+)' button while plugging in the power adapter into the Dragonboard
-1. Open IoT Dashboard and click 'Setup a new device'
-1. Change the device type to 'Qualcomm \[Dragonboard 410c\]' and set the OS Build to 'Custom'
-1. Browse to the custom FFU file generated in the previous steps
-1. Accept the license agreement and click 'Install'
-
-![IoT Dashboard](./media/2_iotdashboard.png)
-
-### 2.3 - Validating your install
-
-1. Once the Dragonboard has completed installing, a line entry will show in the IoT Dashboard as above
-2. Right click on your device and select 'Device Portal'
-3. In your browser enter the default username and password:
-
-|Name    |Value|
-|--------|-----|
-|Username|Administrator|
-|Password|p@ssw0rd|
-
-![Device Portal](./media/1_deviceportal1.png)
-
-4. Enter a name in the 'Change your device name' text box and click 'Save'. Your device should reboot and display the new name 
+1. Sign into the Azure Portal
+1. Create a new "Time Series Insights environment" resource.
+1. Enter a unique name for this resource, include the number in your user acocunt name at the end. For example : "msiotlabs-01"
+1. Choose the "S1" pricing tier.
+1. Choose "Next: Event Source"
+1. For the event source, choose the existing Azure IoT Hub you configured above.
+1. For IoT Hub access policy, choose "iothubowner". 
+1. For "consumer group", click the "New" button then enter a unique name to use as the consumer group for events then *push "Add" before continuing*
+1. Click "Review & Create" then create the resource.

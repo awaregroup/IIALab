@@ -22,7 +22,7 @@ namespace SampleModule
             Add( "h|help", "show this message and exit", v => Help = v != null );
             Add( "l|list", "list available cameras and exit", v => ShowList = v != null);
             Add( "v|verbose", "print verbose logging information", v => Log.Verbose = v != null);
-            Add( "f|file=", "path to predictions {FILE}", v => FileName = v);
+            Add( "c|csv=", "path to predictions csv {FILE}", v => FileName = v);
             Add( "e|edge", "transmit through azure edge", v => UseEdge = v != null);
             Add( "m|model=", "path to model {FILE}", v => ModelPath = v);
             Add( "f|forever", "run forever", v => RunForever = v != null);

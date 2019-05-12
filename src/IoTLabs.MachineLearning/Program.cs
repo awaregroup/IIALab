@@ -40,8 +40,8 @@ namespace SampleModule
 
                 if (Options.ShowList) { }
                 if (Options.Exit) return -1;
-                if (string.IsNullOrEmpty(Options.DeviceId))
-                    throw new ApplicationException("Please use --device to specify which camera to use");
+                if (string.IsNullOrEmpty(Options.FileName))
+                    throw new ApplicationException("Please use --filename to specify which file to use");
 
 
                 //
@@ -89,7 +89,7 @@ namespace SampleModule
                     var inputShape = new long[2] { 1, 4 };
                     var inputFeatures = new float[4] { 100, 100, 100, 100 };
 
-                    MLModelVariable prediction = null;
+                    MLModelVariable result = null;
                     var evalticks = await BlockTimer("Running the model",
                         async () =>
                         {
@@ -106,7 +106,7 @@ namespace SampleModule
 
                     var message = new MessageBody 
                     {
-                        result = prediction.Variable.GetAsVectorView().First()
+                        result = result.Variable.GetAsVectorView().First()
                     };
                     message.metrics.evaltimeinms = evalticks;
                     var json = JsonConvert.SerializeObject(message);
@@ -132,16 +132,8 @@ namespace SampleModule
                 Console.WriteLine(ex);
                 return -1;
             }
-        }
-        
-        private static MessageBody ResultsToMessage(ScoringOutput outcome)
-        {
-            var resultVector = outcome.classLabel.GetAsVectorView();
-            var message = new MessageBody();
-            message.results = new LabelResult[1];
-            message.results[0] = new LabelResult() { label = resultVector.First(), confidence = 1.0 };
 
-            return message;
+            return 0;
         }
 
         

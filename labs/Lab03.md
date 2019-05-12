@@ -1,4 +1,4 @@
-# Lab 03 - Creating a custom FFU
+# Lab 03 - Creating a custom Windows IoT FFU
 
 ## Pre-requisites
 ### Hardware

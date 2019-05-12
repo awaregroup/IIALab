@@ -6,4 +6,4 @@ WORKDIR /app
 
 COPY $EXE_DIR/ ./
 
-CMD [ "WindowsAiEdgeLabTabular.exe", "-mModel.onnx", "-fInputs.csv", "-efv" ]
+CMD [ "WindowsAiEdgeLabTabular.exe", "-mModel.onnx", "-cInputs.csv", "-efv" ]

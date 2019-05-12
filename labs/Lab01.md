@@ -1,4 +1,4 @@
-# Lab 01 - Getting started with development on Windows 10 IoT Core with Arrow Dragonboard 410c
+# Lab 01 - Getting started with Windows IoT
 
 This lab covers setting up Windows 10 IoT Core on an Arrow Dragonboard 410 and deploying apps using Visual Studio.
 

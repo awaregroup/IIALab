@@ -1,41 +1,21 @@
 # Lab 04 - Introduction to Azure IoT Edge
 
-## Deploying Azure IoT Platform and connecting your device
+## 1 - Install Windows 10 IoT Core on UP2
 
-Windows 10 IoT Core is a version of Windows 10 that is optimized for smaller devices with or without a display that run on both ARM and x86/x64 devices
+1. Boot UP2 using USB provided in the lab
+2. Type the following to install a pre-prepared FFU designed for the UP2:
 
-Windows 10 IoT Core
-Built for small, secured smart devices, Windows 10 IoT Core embraces a rich UWP app experience
+```batch
+d:\
+.\eMMCInstaller.cmd
+```
+3. Reboot device by typing ```wpeutil reboot``` and verify Windows starts up 
 
-### Set up UP2 by flashing the FFU
+## 2 - Deploying containers
 
-TODO: Explain how this is like FFU for the dragonboard, pre-prepared development FFU with Container support enabled. Name the UP2 with the name on the UP2 device (check IP address for confirmation)
+### 2.1 - Deploying Azure Device Provisioning Service
 
-#### Boot off the USB drive and run the Installer Script
-
-TODO: Explain how to do this, the UP2's default to booting off the usb drive. Ensure they reset correctly.
-
-IoT Edge is in GA on Windows and installs as a windows feature (todo: get the right name) - install and set up and check that DPS has associated correctly. Also view config.yaml (for debugging)
-
-1. Go to the BIOS setup of the device. Select Windows as the Operating system and set the device to boot from your USB drive. When the system reboots, you will see the WinPE command prompt. Switch the WinPE prompt  to the USB Drive. This is usually C: or D: but you may need to try other driver letters.
-1. Run the eMMC Installer script, which will install the Windows 10 IoT Core image to the device's eMMC memory. When it completes, press any key and run wpeutil reboot. The system should boot into Windows 10 IoT Core, start the configuration process, and load the default application.
-
-## Deploying containers
-
-TODO : Fix up this whole segment
-
-Deploying and updating code is often challenging, especially when working with devices that may exibit different behavour than the machines that the code development occurs on. Azure IoT Edge simplifies this by orchistrating distribution of container images. These images define the operating system, any set up and configuration and the executable files to be run. As the entire execution environment is shipped with the software solution itself environment configuration issues are much less likely to occur. 
-
-Within a container you can control how isolated the network, storage, or other underlying subsystems are from other running processes on the same machne. Containers are also immutable and stateless by nature in that when they are removed, any changes to its state that are not stored in persistent storage disappear.
-
-Azure IoT Edge is a cloud based container orchistration service that allows secure integration with IoT Hubs, enabling containers (defined as modules) to send messages to the IoT Hub without the need to hard code connection strings within the container definition or the image itself. 
-
-
-### Set up DPS by grabbing the needful things from the Device Portal
-
-This is like the other method of DPS except it associates only IoT Edge and the containers within it.
-
-### 1.1 - Getting unique device identifiers
+#### 1.1 - Getting unique device identifiers
 
 **TODO :**
 

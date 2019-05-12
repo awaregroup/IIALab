@@ -282,14 +282,14 @@ namespace IoTLabs.Dragonboard.App.ViewModel
                                         GpsLocationAltitude = item.Position.Altitude.ToString("###0.00");
                                         GpsLocationLongitude = item.Position.Longitude.ToString("###0.0000");
                                         GpsLocationLattitude = item.Position.Latitude.ToString("###0.0000");
-                                        LastGpsLocationUpdate = item.Timestamp.Date.ToShortDateString() + " " + item.Timestamp.Date.ToLongTimeString();
+                                        LastGpsLocationUpdate = item.Timestamp.Date.ToShortDateString() + " " + item.Timestamp.ToString("HH:mm:ss");
                                     }
                                     else
                                     {
                                         GpsLocationAltitude = "-";
                                         GpsLocationLongitude = "-";
                                         GpsLocationLattitude = "-";
-                                        LastGpsLocationUpdate = item.Timestamp.Date.ToShortDateString() + " " + item.Timestamp.Date.ToLongTimeString();
+                                        LastGpsLocationUpdate = item.Timestamp.Date.ToShortDateString() + " " + item.Timestamp.ToString("HH:mm:ss");
                                     }
                                 });
                             }));
@@ -306,7 +306,7 @@ namespace IoTLabs.Dragonboard.App.ViewModel
                                    Temperature = item.TemperatureFahrenheit.ToString("##0.0") + " F";
                                    Humidity = item.HumidityPercent.ToString("##0.0") + "%";
                                    Pressure = item.PressureKilopascals.ToString("##0.0") + " kPA";
-                                   LastBarometerUpdate = item.Timestamp.Date.ToShortDateString() + " " + item.Timestamp.Date.ToLongTimeString();
+                                   LastBarometerUpdate = item.Timestamp.Date.ToShortDateString() + " " + item.Timestamp.ToString("HH:mm:ss");
                                });
                            }), 250);
 
@@ -322,7 +322,7 @@ namespace IoTLabs.Dragonboard.App.ViewModel
                                    AccelerometerX = item.X.ToString("##0.00");
                                    AccelerometerY = item.Y.ToString("##0.00");
                                    AccelerometerZ = item.Z.ToString("##0.00");
-                                   LastAccelerometerUpdate = item.Timestamp.Date.ToShortDateString() + " " + item.Timestamp.Date.ToLongTimeString();
+                                   LastAccelerometerUpdate = item.Timestamp.Date.ToShortDateString() + " " + item.Timestamp.ToString("HH:mm:ss");
                                });
                            }), 250);
 
@@ -332,7 +332,7 @@ namespace IoTLabs.Dragonboard.App.ViewModel
 
 
                         _ioTHubService = new IoTHubService(iotHubConnectionString);
-                        _tmrIoTHub = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(10000) };
+                        _tmrIoTHub = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(30000) };
                         _tmrIoTHub.Tick += async (sender, args) =>
                         {
 
@@ -356,7 +356,7 @@ namespace IoTLabs.Dragonboard.App.ViewModel
 
                                     //Send the payload if values exist
                                     if (pck.SensorValues.Count > 0)
-                                            await _ioTHubService.SubmitSensorsPayload(pck);
+                                        await _ioTHubService.SubmitSensorsPayload(pck);
 
                                 }
 

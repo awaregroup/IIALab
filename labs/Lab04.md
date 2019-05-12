@@ -1,4 +1,4 @@
-# Lab 04
+# Lab 04 - Introduction to Azure IoT Edge
 
 ## Deploying Azure IoT Platform and connecting your device
 

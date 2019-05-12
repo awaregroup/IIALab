@@ -1,4 +1,4 @@
-# Lab 02 - Azure IoT Hub
+# Lab 02 - Integrating Windows IoT with Azure
 
 ## Pre-requisites
 ### Hardware

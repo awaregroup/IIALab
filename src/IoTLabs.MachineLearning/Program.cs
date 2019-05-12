@@ -68,7 +68,7 @@ namespace SampleModule
                         var d = Directory.GetCurrentDirectory();
                         var path = d + "\\" + Options.ModelPath;
                         
-                        var modelFile = await StorageFile.GetFileFromApplicationUriAsync(new Uri(d));
+                        var modelFile = StorageFile.GetFileFromApplicationUriAsync(new Uri(d)).GetResults();
                         model = await MLModel.CreateFromStreamAsync(modelFile as IRandomAccessStreamReference);
                     });
 

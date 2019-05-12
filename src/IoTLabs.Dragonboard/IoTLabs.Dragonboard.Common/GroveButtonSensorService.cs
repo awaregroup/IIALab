@@ -4,12 +4,13 @@ using System.Threading.Tasks;
 using Windows.Devices.Gpio;
 
 
-namespace IoTLabs.Dragonboard
+namespace IoTLabs.Dragonboard.Common
 {
 
-    public class GroveButtonSensorState
+    public class GroveButtonSensorState : ISensorState
     {
         public bool IsPressed { get; set; } = false;
+        public DateTimeOffset Timestamp { get; set; } = DateTimeOffset.Now;
     }
 
     public class GroveButtonSensorService : ISensor<GroveButtonSensorState>, IObservableSensor<GroveButtonSensorState>
@@ -40,7 +41,7 @@ namespace IoTLabs.Dragonboard
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message);
+                Debug.WriteLine(ex);
                 return false;
             }
 

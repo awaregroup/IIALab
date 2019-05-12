@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IoTLabs.Dragonboard
+namespace IoTLabs.Dragonboard.Common
 {
     public static class GroveSensorFactory
     {
@@ -31,9 +31,9 @@ namespace IoTLabs.Dragonboard
             return item;
         }
 
-        public static ISensor<GroveBaramoterSensorState> CreateBarometerSensorService(int i2caddress = 0x76)
+        public static ISensor<GroveBarometerSensorState> CreateBarometerSensorService(int i2caddress = 0x76)
         {
-            GroveBaramoterSensorService item = new GroveBaramoterSensorService(i2caddress);
+            GroveBarometerSensorService item = new GroveBarometerSensorService(i2caddress);
             return item;
         }
 

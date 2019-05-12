@@ -3,14 +3,14 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Windows.Devices.Gpio;
 
-namespace IoTLabs.Dragonboard
+namespace IoTLabs.Dragonboard.Common
 {
 
-    public class GroveMiniPIRMotionSensorState
+    public class GroveMiniPIRMotionSensorState : ISensorState
     {
         public GpioPinEdge CurrentEdge { get; set; } = GpioPinEdge.RisingEdge;
         public int PinNumber { get; set; } = -1;
-        public DateTime TimeStamp { get; set; } = DateTime.Now;
+        public DateTimeOffset Timestamp { get; set; } = DateTimeOffset.Now;
     }
 
     //PIR

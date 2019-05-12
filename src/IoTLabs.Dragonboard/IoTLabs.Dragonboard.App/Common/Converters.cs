@@ -3,7 +3,7 @@ using System.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 
-namespace IoTLabs.ExampleApp.Common
+namespace IoTLabs.Dragonboard.App.Common
 {
     public class VisibilityConverter : IValueConverter
     {

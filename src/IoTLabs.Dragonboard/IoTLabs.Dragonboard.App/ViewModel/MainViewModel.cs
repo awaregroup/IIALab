@@ -4,16 +4,17 @@ using Windows.Devices.Gpio;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Threading;
-using IoTLabs.Dragonboard;
+using IoTLabs.Dragonboard.Common;
+using System.Diagnostics;
 
-namespace IoTLabs.ExampleApp.ViewModel
+namespace IoTLabs.Dragonboard.App.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
         public bool Initialized { get; set; } = false;
 
         ISensor<GroveRedLedSensorState> LedSensor;
-        ISensor<GroveBaramoterSensorState> BarometerSensor;
+        ISensor<GroveBarometerSensorState> BarometerSensor;
         ISensor<GroveDigitalAccelerometerState> AccelSensor;
         ISensor<GroveMiniPIRMotionSensorState> MotionSensor;
         ISensor<GroveButtonSensorState> ButtonSensor;
@@ -22,7 +23,7 @@ namespace IoTLabs.ExampleApp.ViewModel
         {
 
         }
-               
+
         #region "Properties"
 
         private bool _IsRisingEdgeMotion = false;
@@ -42,7 +43,7 @@ namespace IoTLabs.ExampleApp.ViewModel
         private string _motionEdge = "-";
         private string _motionPin = "-";
 
-      
+
         public bool ButtonIsPressed
         {
             get => _buttonIsPressed;
@@ -54,15 +55,15 @@ namespace IoTLabs.ExampleApp.ViewModel
             get => _IsFallingEdgeMotion;
             set { _IsFallingEdgeMotion = value; RaisePropertyChanged("IsFallingEdgeMotion"); RaisePropertyChanged("IsMotionDetected"); }
         }
-        
+
         public bool IsRisingEdgeMotion
         {
             get => _IsRisingEdgeMotion;
             set { _IsRisingEdgeMotion = value; RaisePropertyChanged("IsRisingEdgeMotion"); RaisePropertyChanged("IsMotionDetected"); }
         }
 
-        public bool IsMotionDetected => (_IsFallingEdgeMotion||_IsRisingEdgeMotion);
-        
+        public bool IsMotionDetected => (_IsFallingEdgeMotion || _IsRisingEdgeMotion);
+
 
         public bool LedIsHigh
         {
@@ -73,7 +74,7 @@ namespace IoTLabs.ExampleApp.ViewModel
         public string Temperature
         {
             get => _temperature;
-            set { _temperature = value; RaisePropertyChanged("Temperature");}
+            set { _temperature = value; RaisePropertyChanged("Temperature"); }
         }
 
         public string Humidity
@@ -133,7 +134,7 @@ namespace IoTLabs.ExampleApp.ViewModel
         }
 
         #endregion
-        
+
         #region "Commands"
 
         private RelayCommand _setFullLedCommand;
@@ -149,7 +150,7 @@ namespace IoTLabs.ExampleApp.ViewModel
                            {
                                if (LedSensor != null)
                                {
-                                   LedSensor.WriteState(new GroveRedLedSensorState() {CurrentValue=GpioPinValue.High});
+                                   LedSensor.WriteState(new GroveRedLedSensorState() { CurrentValue = GpioPinValue.High });
                                    LedIsHigh = LedSensor.GetState().CurrentValue == GpioPinValue.High;
                                }
 
@@ -185,22 +186,15 @@ namespace IoTLabs.ExampleApp.ViewModel
                 {
                     try
                     {
-                        //Create Instances
+                        //LED
                         LedSensor = GroveSensorFactory.CreateRedLedSensorService();
-                        BarometerSensor = GroveSensorFactory.CreateBarometerSensorService();
-                        MotionSensor = GroveSensorFactory.CreateMiniPIRMotionSensorService();
-                        AccelSensor = GroveSensorFactory.CreateAccelerometerSensorService();
-                        ButtonSensor = GroveSensorFactory.CreateGroveButtonSensorService();
-
-
-                        //Initialize
                         await LedSensor.Initialize();
-                        await BarometerSensor.Initialize();
-                        await MotionSensor.Initialize();
-                        await AccelSensor.Initialize();
-                        await ButtonSensor.Initialize();
+                        LedIsHigh = LedSensor.GetState().CurrentValue == GpioPinValue.High;
+
 
                         //MotionSensor
+                        MotionSensor = GroveSensorFactory.CreateMiniPIRMotionSensorService();
+                        await MotionSensor.Initialize();
                         ((IObservableSensor<GroveMiniPIRMotionSensorState>)MotionSensor).Register(new Action<GroveMiniPIRMotionSensorState>(
                             (GroveMiniPIRMotionSensorState item) =>
                             {
@@ -212,13 +206,13 @@ namespace IoTLabs.ExampleApp.ViewModel
                                         if (item.CurrentEdge == GpioPinEdge.FallingEdge)
                                         {
                                             IsFallingEdgeMotion = true;
-                                            await Task.Delay(TimeSpan.FromMilliseconds(2000));
+                                            await Task.Delay(TimeSpan.FromMilliseconds(250));
                                             IsFallingEdgeMotion = false;
                                         }
                                         else
                                         {
                                             IsRisingEdgeMotion = true;
-                                            await Task.Delay(TimeSpan.FromMilliseconds(2000));
+                                            await Task.Delay(TimeSpan.FromMilliseconds(250));
                                             IsRisingEdgeMotion = false;
                                         }
 
@@ -226,33 +220,25 @@ namespace IoTLabs.ExampleApp.ViewModel
                             }));
 
 
-                        //Button Sensor
-                        ((IObservableSensor<GroveButtonSensorState>)ButtonSensor).Register(new Action<GroveButtonSensorState>(
-                            (GroveButtonSensorState item) =>
-                            {
-                                DispatcherHelper.CheckBeginInvokeOnUI(() =>
-                                {
-                                    ButtonIsPressed = item.IsPressed;
-                                });
-                            }));
-
-
-
                         //Barometer Sensor
-                        ((IPollingSensor<GroveBaramoterSensorState>)BarometerSensor).Register(new Action<GroveBaramoterSensorState>(
-                           (GroveBaramoterSensorState item) =>
+                        BarometerSensor = GroveSensorFactory.CreateBarometerSensorService();
+                        await BarometerSensor.Initialize();
+                        ((IPollingSensor<GroveBarometerSensorState>)BarometerSensor).Register(new Action<GroveBarometerSensorState>(
+                           (GroveBarometerSensorState item) =>
                            {
                                DispatcherHelper.CheckBeginInvokeOnUI(() =>
                                {
-                                   Temperature = item.TemperatureCelcius.ToString("##0.0") + " C";
+                                   Temperature = item.TemperatureFahrenheit.ToString("##0.0") + " F";
                                    Humidity = item.HumidityPercent.ToString("##0.0") + "%";
                                    Pressure = item.PressureKilopascals.ToString("##0.0") + " kPA";
-                                   LastBarometerUpdate = item.TimeStamp.ToShortDateString() + " " + item.TimeStamp.ToLongTimeString();
+                                   LastBarometerUpdate = item.Timestamp.Date.ToShortDateString() + " " + item.Timestamp.Date.ToLongTimeString();
                                });
-                           }), 5000);
+                           }), 250);
 
 
                         //Accelerometer Sensor
+                        AccelSensor = GroveSensorFactory.CreateAccelerometerSensorService();
+                        await AccelSensor.Initialize();
                         ((IPollingSensor<GroveDigitalAccelerometerState>)AccelSensor).Register(new Action<GroveDigitalAccelerometerState>(
                            (GroveDigitalAccelerometerState item) =>
                            {
@@ -261,27 +247,22 @@ namespace IoTLabs.ExampleApp.ViewModel
                                    AccelerometerX = item.X.ToString("##0.00");
                                    AccelerometerY = item.Y.ToString("##0.00");
                                    AccelerometerZ = item.Z.ToString("##0.00");
-                                   LastAccelerometerUpdate = item.TimeStamp.ToShortDateString() + " " + item.TimeStamp.ToLongTimeString();
+                                   LastAccelerometerUpdate = item.Timestamp.Date.ToShortDateString() + " " + item.Timestamp.Date.ToLongTimeString();
                                });
-                           }), 5000);
-
-
-
-                        //Get Defaults
-                        LedIsHigh = LedSensor.GetState().CurrentValue == GpioPinValue.High;
-                        ButtonIsPressed = ButtonSensor.GetState().IsPressed;
+                           }), 250);
 
                     }
-                    catch
+                    catch (Exception ex)
                     {
+                        Debug.WriteLine(ex);
                     }
                 });
 
                 act.Invoke();
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                
+                Debug.WriteLine(ex);
             }
             Initialized = true;
         }
@@ -314,15 +295,13 @@ namespace IoTLabs.ExampleApp.ViewModel
 
                 if (BarometerSensor != null)
                 {
-                    ((IPollingSensor<GroveBaramoterSensorState>)BarometerSensor).Unregister();
+                    ((IPollingSensor<GroveBarometerSensorState>)BarometerSensor).Unregister();
                     BarometerSensor.Close();
                 }
-                
-
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                
+                Debug.WriteLine(ex);
             }
         }
 

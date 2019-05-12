@@ -1,32 +1,34 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Glovebox.IoT.Devices.Sensors;
 
-namespace IoTLabs.Dragonboard
+namespace IoTLabs.Dragonboard.Common
 {
 
-    public class GroveBaramoterSensorState  
+    public class GroveBarometerSensorState : ISensorState 
     {
         public double TemperatureCelcius { get; set; } = -272;
+        public double TemperatureFahrenheit { get; set; } = -272;
         public double HumidityPercent { get; set; } = 0;
         public double PressureKilopascals { get; set; } = 0;
-        public DateTime TimeStamp { get; set; } = DateTime.Now;
+        public DateTimeOffset Timestamp { get; set; } = DateTimeOffset.Now;
 
     }
 
     //BME280
-    public class GroveBaramoterSensorService : ISensor<GroveBaramoterSensorState>, IPollingSensor<GroveBaramoterSensorState>
+    public class GroveBarometerSensorService : ISensor<GroveBarometerSensorState>, IPollingSensor<GroveBarometerSensorState>
     {
 
         private BME280 _bme280Sensor;
         private int _i2cAddress = 0x76;
-        private GroveBaramoterSensorState _lastState = null;
+        private GroveBarometerSensorState _lastState = null;
 
-        internal GroveBaramoterSensorService() : this(0x76)
+        internal GroveBarometerSensorService() : this(0x76)
         {
         }
 
-        internal GroveBaramoterSensorService(int i2cAddress = 0x76)
+        internal GroveBarometerSensorService(int i2cAddress = 0x76)
         {
             _i2cAddress = i2cAddress;
         }
@@ -42,26 +44,27 @@ namespace IoTLabs.Dragonboard
             }
             catch (Exception e)
             {
-                
+                Debug.WriteLine(e);
             }
             return false;
         }
 
-        private GroveBaramoterSensorState GetBarometerState()
+        private GroveBarometerSensorState GetBarometerState()
         {
             try
             {
-                return new GroveBaramoterSensorState()
+                return new GroveBarometerSensorState()
                 {
-                    TimeStamp = DateTime.Now,
+                    Timestamp = DateTime.Now,
                     HumidityPercent = _bme280Sensor.Humidity,
                     PressureKilopascals = _bme280Sensor.Pressure.Kilopascals,
-                    TemperatureCelcius = _bme280Sensor.Temperature.DegreesCelsius
+                    TemperatureCelcius = _bme280Sensor.Temperature.DegreesCelsius,
+                    TemperatureFahrenheit = _bme280Sensor.Temperature.DegreesFahrenheit
                 };
             }
             catch (Exception e)
             {
-
+                Debug.WriteLine(e);
             }
             return null;
         }
@@ -71,13 +74,13 @@ namespace IoTLabs.Dragonboard
             
         }
 
-        public bool WriteState(GroveBaramoterSensorState payload)
+        public bool WriteState(GroveBarometerSensorState payload)
         {
             //sensor is read only
             return false;
         }
 
-        public GroveBaramoterSensorState GetState()
+        public GroveBarometerSensorState GetState()
         {
             return _lastState;
         }
@@ -87,9 +90,9 @@ namespace IoTLabs.Dragonboard
 
         private System.Threading.Timer _tmrUpdate = null;
         private readonly TimeSpan timerDue = new TimeSpan(0, 0, 5);
-        private Action<GroveBaramoterSensorState> _myAction = null;
+        private Action<GroveBarometerSensorState> _myAction = null;
 
-        public void Register(Action<GroveBaramoterSensorState> action, long pollingIntervalMs)
+        public void Register(Action<GroveBarometerSensorState> action, long pollingIntervalMs)
         {
             try
             {

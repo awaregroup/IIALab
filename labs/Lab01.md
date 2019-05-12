@@ -149,4 +149,11 @@ await MotionSensor.Initialize();
 ![](./media/1_createapppackages.png)
 2. Choose "I want to create packages for sideloading" and uncheck "Enable automatic updates"
 ![](./media/1_createapppackages4.png)
-3. 
+3. Select "Never" on "Generate app bundle" and select "ARM" as the Architecture 
+![](./media/1_createapppackages2.png)
+4. After package creation, click on the link to verify the .appx files have been created
+![](./media/1_createapppackages5.png)
+
+
+
+

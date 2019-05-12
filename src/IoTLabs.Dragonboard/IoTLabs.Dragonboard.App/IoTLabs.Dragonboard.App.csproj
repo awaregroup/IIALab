@@ -20,7 +20,7 @@
     <PackageCertificateKeyFile>IoTLabs.Dragonboard.App_TemporaryKey.pfx</PackageCertificateKeyFile>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
-    <AppxBundle>Always</AppxBundle>
+    <AppxBundle>Never</AppxBundle>
     <AppxBundlePlatforms>arm</AppxBundlePlatforms>
     <PackageCertificateThumbprint>1490DFA2BCB0D39665AEA15CDCFCC8BD10D81F9C</PackageCertificateThumbprint>
     <AppInstallerUri>C:\source\at-iotlabs\src\publish</AppInstallerUri>

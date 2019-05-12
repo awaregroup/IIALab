@@ -27,7 +27,7 @@ namespace SampleModule
             _binding.Bind("float_input", input.Variable);
 
             var id = Guid.NewGuid().ToString();
-            var result = await _session.EvaluateAsync(_binding, id);
+            var result = _session.EvaluateAsync(_binding, id).GetResults();
 
             return new MLModelVariable
             {
@@ -40,7 +40,7 @@ namespace SampleModule
             var device = new LearningModelDevice(LearningModelDeviceKind.Cpu);
 
             var model = new MLModel();
-            model._model = await LearningModel.LoadFromStreamAsync(stream);
+            model._model = LearningModel.LoadFromStreamAsync(stream).GetResults();
             model._session = new LearningModelSession(model._model, device);
             model._binding = new LearningModelBinding(model._session);
 

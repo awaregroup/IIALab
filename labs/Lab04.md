@@ -86,6 +86,7 @@ az iot edge set-modules --device-id [device id] --hub-name [hub name] --content 
 
 ### 4.3 - Monitor Device to Cloud messages
 
+TODO : Use Azure CLI
 1. In Visual Studio Code, open the 'Azure IoT Hub Devices' pane  
 1. Right-click your device and 'Start monitoring D2C messages'
 1. You should see the mock temperature sensor data start to flow into the IoT Hub.

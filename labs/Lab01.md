@@ -7,7 +7,7 @@ This lab covers setting up Windows 10 IoT Core on an Arrow Dragonboard 410 and d
 * Arrow Dragonboard 410c
 * Grove LED
 * Grove Mini PIR Sensor
-* 
+* Grove Barometer Sensor
 
 
 ### Software

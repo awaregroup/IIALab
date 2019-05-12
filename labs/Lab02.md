@@ -60,8 +60,6 @@ az iot hub monitor-events -n ENTERYOURIOTHUBNAME -d dragonboard
 
 ### 3.1 - Deploying Azure Time Series Insights
 
-Refer to this guide: [Add an IoT hub event source to your Time Series Insights environment](https://docs.microsoft.com/en-us/azure/time-series-insights/time-series-insights-how-to-add-an-event-source-iothub)
-
 1. Sign into the [Azure Portal (https://portal.azure.com)](https://portal.azure.com) with the supplied lab credentials
 1. Click "Create a resource", search for "Time Series Insights" and "Create"
 ![](./media/2_azure10.png)

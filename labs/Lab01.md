@@ -145,3 +145,8 @@ await MotionSensor.Initialize();
 
 ## 3 - Publishing your app
 
+1. In Visual Studio, click ```Project > Store > Create App Packages...```
+![](./media/1_createapppackages.png)
+2. Choose "I want to create packages for sideloading" and uncheck "Enable automatic updates"
+![](./media/1_createapppackages4.png)
+3. 

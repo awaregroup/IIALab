@@ -70,24 +70,3 @@ The training process demonstrated today solves a regression problem, but this ca
 1. Tune model
 1. Export model to ONNX file
 
-
-## 3 - Integration into TSI
-
-## 3.1 - Add a consumer group to your IoT hub
-1. Applications use consumer groups to pull data from Azure IoT Hub. Provide a dedicated consumer group that's used only by this Time Series Insights environment to reliably read data from your IoT hub.
-1. To add a new consumer group to your IoT hub:
-1. In the Azure portal, find and open your IoT hub.
-1. In the menu, under Settings, select Built-in Endpoints, and then select the Events endpoint.
-1. Under Consumer groups, enter a unique name for the consumer group. Use this same name in your Time Series Insights environment when you create a new event source.
-1. Select Save.
-
-## 3.2 - Add a new event source
-1. Sign in to the Azure portal.
-2. In the left menu, select All resources. Select your Time Series Insights environment.
-3. Under Environment Topology, select Event Sources, and then select Add.
-4. In the New event source pane, for Event source name, enter a name that's unique to this Time Series Insights environment. For example, enter event-stream.
-5. For Source, select IoT Hub.
-6. Select the "Use IoT Hub from Avaliable Subscriptions" dropdown
-7. Add the dedicated Time Series Insights consumer group name that you added to your IoT hub.
-8. Select Create.
-9. After you create the event source, Time Series Insights automatically starts streaming data to your environment.

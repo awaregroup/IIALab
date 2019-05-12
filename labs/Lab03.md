@@ -1,4 +1,4 @@
-# Lab 02 - Creating a custom FFU
+# Lab 03 - Creating a custom FFU
 
 ## Pre-requisites
 ### Hardware
@@ -30,9 +30,9 @@ Open ```C:\labs\iot-adkaddonkit``` and run the script named ```IoTCorePShell```.
 You can configure multiple devices at once by creating new environments called workspaces that contain all the information about how to build and target a specific device of that architecture.
 
 Then type the following command
-```New-IoTWorkspace -DirName "C:\labs\lab02" -OemName "lab02" -Arch "arm"```
+```New-IoTWorkspace -DirName "C:\labs\Lab03" -OemName "Lab03" -Arch "arm"```
 
-This will create a new workspace targetted in the ARM environment and switch you immedately to this workspace. If you exit this window you can open the workspace bootstraper in the new workspace to pick up where you left off. (C:\Labs\lab02\IoTCorePshell.cmd)
+This will create a new workspace targetted in the ARM environment and switch you immedately to this workspace. If you exit this window you can open the workspace bootstraper in the new workspace to pick up where you left off. (C:\Labs\Lab03\IoTCorePshell.cmd)
 
 Required packages will automatically be imported to the workspace, but we can also include sample packages by running the following command
 ```Import-IoTOEMPackage *```
@@ -53,7 +53,7 @@ Import-IoTBSP $bspName C:\labs\tools\dragonboard\db410c_bsp.zip"
 A product is a specific configuration of a device based upon a BSP that contains what custom applications and customisations are intended to be deployed to a range of devices.
 
 ```
-$productName = "Lab02Product"
+$productName = "Lab03Product"
 Add-IoTProduct -ProductName $productName -BSPName $bspName 
 ```
 You will be asked for further SMBIOS information such as Manufacturer name, Product Family, SKU, BaseboardManufacturer and BaseboardProduct, enter the example values as below.
@@ -64,7 +64,7 @@ You will be asked for further SMBIOS information such as Manufacturer name, Prod
 - Baseboard Manufacturer Qualcomm
 - Baseboard Product: Dragonboard 410c
 
-### 1.3 - Add Universal Windows App
+### 1.3 - Add Universal Windows App : TODO
 
 1. Run these PowerShell commands to inject the app from the previous lab into the image:
 

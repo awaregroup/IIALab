@@ -2,12 +2,13 @@
 using Windows.Devices.Geolocation;
 using System.Threading.Tasks;
 
-namespace IoTLabs.Dragonboard
+namespace IoTLabs.Dragonboard.Common
 {
-    public class GpsLocationSensorState 
+    public class GpsLocationSensorState : ISensorState
     {
         public Geoposition Position { get; set; } = null;
         public DateTime TimeStamp { get; set; } = DateTime.Now;
+        public DateTimeOffset Timestamp { get; set; }
     }
 
     public class GpsLocationSensor : ISensor<GpsLocationSensorState>, IObservableSensor<GpsLocationSensorState>

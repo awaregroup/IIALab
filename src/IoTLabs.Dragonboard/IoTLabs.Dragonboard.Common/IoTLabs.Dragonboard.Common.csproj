@@ -120,6 +120,7 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="GPSLocationSensor.cs" />
     <Compile Include="GroveBarometerSensorService.cs" />
     <Compile Include="GroveButtonSensorService.cs" />
     <Compile Include="GroveDigitalAccelerometerService.cs" />

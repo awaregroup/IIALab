@@ -85,8 +85,63 @@ LedIsHigh = LedSensor.GetState().CurrentValue == GpioPinValue.High;
 ``` 
 3. Run the project again and test the Red LED buttons in the application
 
-### 2.3 - Adding an input
+#### 2.2.2 - Barometer/Temperature/Humidity
+
+1. Refer to the wiring diagram to attach the Barometer Grove module to socket P13
+2. Open ```ViewModel/MainViewModel.cs``` in the Visual Studio project and paste the following lines in at line 194:
+
+```csharp
+//Barometer Sensor
+BarometerSensor = GroveSensorFactory.CreateBarometerSensorService();
+await BarometerSensor.Initialize();
+((IPollingSensor<GroveBarometerSensorState>)BarometerSensor).Register(new Action<GroveBarometerSensorState>(
+    (GroveBarometerSensorState item) =>
+    {
+        DispatcherHelper.CheckBeginInvokeOnUI(() =>
+        {
+            Temperature = item.TemperatureFahrenheit.ToString("##0.0") + " F";
+            Humidity = item.HumidityPercent.ToString("##0.0") + "%";
+            Pressure = item.PressureKilopascals.ToString("##0.0") + " kPA";
+            LastBarometerUpdate = item.Timestamp.Date.ToShortDateString() + " " + item.Timestamp.Date.ToLongTimeString();
+        });
+    }), 250);
+``` 
+3. Run the project again and test the sensor values are updating in the application
+
+#### 2.2.3 - PIR (Motion) Sensor
+
+1. Refer to the wiring diagram to attach the Barometer Grove module to socket G3
+2. Open ```ViewModel/MainViewModel.cs``` in the Visual Studio project and paste the following lines in at line 209:
+
+```csharp
+//MotionSensor
+MotionSensor = GroveSensorFactory.CreateMiniPIRMotionSensorService();
+await MotionSensor.Initialize();
+((IObservableSensor<GroveMiniPIRMotionSensorState>)MotionSensor).Register(new Action<GroveMiniPIRMotionSensorState>(
+    (GroveMiniPIRMotionSensorState item) =>
+    {
+        DispatcherHelper.CheckBeginInvokeOnUI(async () =>
+            {
+                MotionEdge = item.CurrentEdge.ToString();
+                MotionPin = item.PinNumber.ToString();
+
+                if (item.CurrentEdge == GpioPinEdge.FallingEdge)
+                {
+                    IsFallingEdgeMotion = true;
+                    await Task.Delay(TimeSpan.FromMilliseconds(250));
+                    IsFallingEdgeMotion = false;
+                }
+                else
+                {
+                    IsRisingEdgeMotion = true;
+                    await Task.Delay(TimeSpan.FromMilliseconds(250));
+                    IsRisingEdgeMotion = false;
+                }
+
+            });
+    }));
+``` 
+3. Run the project again and test the sensor values are updating in the application
 
 ## 3 - Publishing your app
 
-etc.

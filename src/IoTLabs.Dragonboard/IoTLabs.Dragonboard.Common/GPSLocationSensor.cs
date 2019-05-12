@@ -6,7 +6,8 @@ namespace IoTLabs.Dragonboard.Common
 {
     public class GpsLocationSensorState : ISensorState
     {
-        public Geoposition Position { get; set; } = null;
+        public BasicGeoposition Position { get; set; }
+        public bool HasPosition { get; set; } = false;
         public DateTimeOffset Timestamp { get; set; } = DateTimeOffset.Now;
     }
 
@@ -53,32 +54,18 @@ namespace IoTLabs.Dragonboard.Common
                 switch (accessStatus)
                 {
                     case GeolocationAccessStatus.Allowed:
-                        // Create Geolocator and define perodic-based tracking (2 second interval).
                         _geolocator = new Geolocator { ReportInterval = 2000 };
-
-                        // Subscribe to the PositionChanged event to get location updates.
                         _geolocator.PositionChanged += OnPositionChanged;
-
-                        // Subscribe to StatusChanged event to get updates of location status changes.
                         _geolocator.StatusChanged += OnStatusChanged;
-
-                        //_rootPage.NotifyUser("Waiting for update...", NotifyType.StatusMessage);
-                        //LocationDisabledMessage.Visibility = Visibility.Collapsed;
-                        //StartTrackingButton.IsEnabled = false;
-                        //StopTrackingButton.IsEnabled = true;
-
                         return true;
-
                         break;
 
                     case GeolocationAccessStatus.Denied:
-                        //_rootPage.NotifyUser("Access to location is denied.", NotifyType.ErrorMessage);
-                        //LocationDisabledMessage.Visibility = Visibility.Visible;
+                        //Shouldn't happen on IoT Core unless sensor is not available
                         break;
 
                     case GeolocationAccessStatus.Unspecified:
-                        //_rootPage.NotifyUser("Unspecificed error!", NotifyType.ErrorMessage);
-                        //LocationDisabledMessage.Visibility = Visibility.Collapsed;
+                        //Shouldn't happen on IoT Core unless sensor is not available
                         break;
                 }
 
@@ -86,20 +73,33 @@ namespace IoTLabs.Dragonboard.Common
             catch
             {
             }
-            
+
             return false;
         }
 
         private void OnStatusChanged(Geolocator sender, StatusChangedEventArgs args)
         {
-            
+
         }
 
         async private void OnPositionChanged(Geolocator sender, PositionChangedEventArgs e)
         {
             try
             {
-                _lastState = new GpsLocationSensorState() { Position = e.Position};
+
+                if (e.Position != null)
+                    if (e.Position.Coordinate != null)
+                        if (e.Position.Coordinate.Point != null)
+                        {
+                            _lastState = new GpsLocationSensorState() { Position = e.Position.Coordinate.Point.Position, HasPosition = true };
+                            if (myAction != null)
+                            {
+                                myAction.Invoke(_lastState);
+                            }
+                            return;
+                        }
+
+                _lastState = new GpsLocationSensorState() { HasPosition = false };
                 if (myAction != null)
                 {
                     myAction.Invoke(_lastState);
@@ -108,12 +108,6 @@ namespace IoTLabs.Dragonboard.Common
             catch
             {
             }
-
-            //await System.ServiceModel.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-            //{
-            //    //_rootPage.NotifyUser("Location updated.", NotifyType.StatusMessage);
-            //    //UpdateLocationData(e.Position);
-            //});
         }
 
 

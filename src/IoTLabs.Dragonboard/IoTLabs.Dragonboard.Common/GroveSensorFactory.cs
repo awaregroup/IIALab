@@ -6,6 +6,15 @@ using System.Threading.Tasks;
 
 namespace IoTLabs.Dragonboard.Common
 {
+
+    public static class OnboardSensorFactory
+    {
+        public static ISensor<GpsLocationSensorState> CreateLocationSensor()
+        {
+            return new GpsLocationSensor();
+        }
+    }
+
     public static class GroveSensorFactory
     {
 

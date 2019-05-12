@@ -344,18 +344,18 @@ namespace IoTLabs.Dragonboard.App.ViewModel
                                     //Create a payload to send
                                     IoTHubSensorPack pck = new IoTHubSensorPack()
                                     {
-                                        AllPayloads = new Dictionary<string, ISensorState>()
+                                        SensorValues = new Dictionary<string, ISensorState>()
                                     };
 
-                                    if (LedSensor != null) pck.AllPayloads.Add("LED", LedSensor.GetState());
-                                    if (MotionSensor != null) pck.AllPayloads.Add("Motion", MotionSensor.GetState());
-                                    if (BarometerSensor != null) pck.AllPayloads.Add("Barometer", BarometerSensor.GetState());
-                                    if (AccelSensor != null) pck.AllPayloads.Add("Accelerometer", AccelSensor.GetState());
-                                    if (ButtonSensor != null) pck.AllPayloads.Add("Button", ButtonSensor.GetState());
-                                    if (LocationSensor != null) pck.AllPayloads.Add("GPS", LocationSensor.GetState());
+                                    if (LedSensor != null) pck.SensorValues.Add("LED", LedSensor.GetState());
+                                    if (MotionSensor != null) pck.SensorValues.Add("Motion", MotionSensor.GetState());
+                                    if (BarometerSensor != null) pck.SensorValues.Add("Barometer", BarometerSensor.GetState());
+                                    if (AccelSensor != null) pck.SensorValues.Add("Accelerometer", AccelSensor.GetState());
+                                    if (ButtonSensor != null) pck.SensorValues.Add("Button", ButtonSensor.GetState());
+                                    if (LocationSensor != null) pck.SensorValues.Add("GPS", LocationSensor.GetState());
 
                                     //Send the payload if values exist
-                                    if (pck.AllPayloads.Count > 0)
+                                    if (pck.SensorValues.Count > 0)
                                             await _ioTHubService.SubmitSensorsPayload(pck);
 
                                 }

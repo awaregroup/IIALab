@@ -13,7 +13,7 @@ namespace IoTLabs.Dragonboard.App.Services
 
     public class IoTHubSensorPack
     {
-        public Dictionary<string, ISensorState> AllPayloads = new Dictionary<string, ISensorState>();
+        public Dictionary<string, ISensorState> SensorValues = new Dictionary<string, ISensorState>();
     }
 
     public class IoTHubService

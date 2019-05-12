@@ -19,11 +19,9 @@
 
 ### 1.1 - Create your workspace
 
-=======
 Microsoft enables device manufacturers and OEMs to design their own IoT Core images. These images are built using an IoT Workspace and customized using Board Support Packages (BSPs) containing drivers, apps and other additions.
 
-### 1.0 - Create your workspace
-On your desktop, open the Labs shortcut and then navigate into the tools/iotadkaddon folder. This addonkit contains powershell scripts for package creation and image creation process.
+On your desktop, open the Labs shortcut and then navigate into the tools/iotadkaddon folder. This addonkit contains PowerShell scripts for package creation and image creation process.
 
 Open ```C:\labs\iot-adkaddonkit``` and run the script named ```IoTCorePShell```.
 

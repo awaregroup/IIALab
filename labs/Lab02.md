@@ -38,22 +38,38 @@
 
 ### 1.3 - Connect Dragonboard app to Azure IoT Hub
 
-1. In Visual Studio, open 
-1. 
+1. In Visual Studio, open ```ViewModel/MainViewModel.cs``` and browse to **line 221** 
+1. Update the iotHubConnectionString with the text on your clipboard
+![](./media/2_azure9.png)
+1. Start debugging to run the updated app on the Dragonboard
+
+### 1.4 - Montior Azure IoT Hub events with Azure CLI
+
+1. Open an Command Prompt as Administrator
+1. Type the following commands to monitor messages from the Dragonboard:
+
+```batch
+az login
+az extension add --name azure-cli-iot-ext
+az iot hub monitor-events -n ENTERYOURIOTHUBNAME -d dragonboard
+```
 
 
-## 3 - Integration into TSI
+## 3 - Data visualization with Azure Time Series Insights (TSI)
 
-## Azure Time Series Insights
+### 3.1 - Deploying Azure Time Series Insights
 
 Refer to this guide: [Add an IoT hub event source to your Time Series Insights environment](https://docs.microsoft.com/en-us/azure/time-series-insights/time-series-insights-how-to-add-an-event-source-iothub)
 
-1. Sign into the Azure Portal
-1. Create a new "Time Series Insights environment" resource.
-1. Enter a unique name for this resource, include the number in your user acocunt name at the end. For example : "msiotlabs-01"
-1. Choose the "S1" pricing tier.
-1. Choose "Next: Event Source"
-1. For the event source, choose the existing Azure IoT Hub you configured above.
-1. For IoT Hub access policy, choose "iothubowner". 
-1. For "consumer group", click the "New" button then enter a unique name to use as the consumer group for events then *push "Add" before continuing*
-1. Click "Review & Create" then create the resource.
+1. Sign into the [Azure Portal (https://portal.azure.com)](https://portal.azure.com) with the supplied lab credentials
+1. Click "Create a resource", search for "Time Series Insights" and "Create"
+![](./media/2_azure10.png)
+1. Set the fields as shown in the image below, then click "Next: Event Source"
+![](./media/2_azure12.png)
+1. Set the Event Source fields as shown in the image below, click "Review + create" then "Create"
+![](./media/2_azure13.png)
+**Note: Make sure you click "Add" next to the Consumer Group before continuing**
+
+### 3.2 - Configuring TSI
+
+To open 

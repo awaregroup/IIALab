@@ -24,6 +24,8 @@
 1. Push Refresh then click on your newly created devices
 1. Copy the Connection String (Primary Key) by clicking on the blue copy box. Save this as you will need it later.
 
+## TODO : The rest of the lab
+
 ## 3 - Integration into TSI
 
 ## Azure Time Series Insights

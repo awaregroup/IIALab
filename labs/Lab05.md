@@ -70,3 +70,8 @@ The training process demonstrated today solves a regression problem, but this ca
 1. Tune model
 1. Export model to ONNX file
 
+# TODO : Use the ONNX file in the sample app
+
+# TODO : Create task runner to deploy to ACI & Docker Hub
+
+# TODO : To TSI

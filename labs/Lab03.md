@@ -120,3 +120,6 @@ New-IoTFFUImage -Product $productName -Config $configName
 ![Device Portal](./media/1_deviceportal1.png)
 
 4. Enter a name in the 'Change your device name' text box and click 'Save'. Your device should reboot and display the new name 
+
+
+# TODO Check the UWP app has deployed correctly

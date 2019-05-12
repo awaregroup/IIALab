@@ -75,7 +75,7 @@ limpet -azuredps -enrollmentinfo
 
 1. You can check that IoT Edge has installed correctly by typing "iotedge check" and viewing the output.
 
-### Deploy the default Temperature sensor monitor deployment
+### Deploy the mock temperature sensor monitor deployment
 
 TODO : Introduction to deployment.json, expected state for IoT Edge, as well as the integrations with the IoT Hub. Location of the example deployment.
 
@@ -84,20 +84,20 @@ az login
 az iot edge set-modules --device-id [device id] --hub-name [hub name] --content deployment.example.json
 ```
 
-### Build and deploy a custom model that detects faces (from the ONNX model zoo) using existing software over IoT Edge
-
-## 4.3 - Monitor Device to Cloud messages
+### 4.3 - Monitor Device to Cloud messages
 
 1. In Visual Studio Code, open the 'Azure IoT Hub Devices' pane  
 1. Right-click your device and 'Start monitoring D2C messages'
-1. Test your model by holding up objects in front of the camera
+1. You should see the mock temperature sensor data start to flow into the IoT Hub.
 
+
+### Build and deploy a custom model that detects faces (from the ONNX model zoo) using existing software over IoT Edge
 
 #### Grab the C# and such for any vision model we provide and run it on the PC
 
 We can use our own model, download the C# code and run it, build the docker container 
 
-#### Set up and deploy Azure Container Registry
+#### Set up and deploy Azure Container Registry : TODO Flesh this out
 
 Refer to this guide: [Quickstart: Create a private container registry using the Azure portal](https://docs.microsoft.com/en-us/azure/container-registry/container-registry-get-started-portal)
 
@@ -113,12 +113,6 @@ Refer to this guide: [Quickstart: Create a private container registry using the 
 ```
 PS C:\WindowsAiEdgeLabCV> dotnet restore -r win-x64
 PS C:\WindowsAiEdgeLabCV> dotnet publish -r win-x64
-Microsoft (R) Build Engine version 16.0.225-preview+g5ebeba52a1 for .NET Core
-Copyright (C) Microsoft Corporation. All rights reserved.
-
-  Restore completed in 43.29 ms for C:\WindowsAiEdgeLabCV\WindowsAiEdgeLabCV.csproj.
-  WindowsAiEdgeLabCV -> C:\WindowsAiEdgeLabCV\bin\Debug\netcoreapp2.2\WindowsAiEdgeLabCV.dll
-  WindowsAiEdgeLabCV -> C:\WindowsAiEdgeLabCV\bin\Debug\netcoreapp2.2\publish\
 ```
 
 Point the camera at one of your objects, still connected to your development PC.
@@ -176,6 +170,10 @@ Just like the example deployment, use the following syntax to update the expecte
 az iot edge set-modules --device-id [device id] --hub-name [hub name] --content deployment.json
 ```
 
+Run the following command to get information about the modules deployed to your IoT Hub.
+```
+az iot hub module-identity list --device-id $deviceId --hub-name $iotHub
+```
 
 ## 4.2 - Verify the deployment on IoT device
 
@@ -190,6 +188,3 @@ Once the modules have deployed to your device, you can inspect that the "customv
 ```powershell
 iotedge logs customvision
 ```
-
-On main PC, 
-az iot hub module-identity list --device-id $deviceId --hub-name $iotHub

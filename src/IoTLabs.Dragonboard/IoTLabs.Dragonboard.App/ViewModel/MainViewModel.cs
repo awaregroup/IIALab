@@ -6,12 +6,20 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Threading;
 using IoTLabs.Dragonboard.Common;
 using System.Diagnostics;
+using System.Collections.Generic;
+using Windows.UI.Xaml;
+using IoTLabs.Dragonboard.App.Services;
 
 namespace IoTLabs.Dragonboard.App.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
         public bool Initialized { get; set; } = false;
+
+
+        string iotHubConnectionString = "HostName=intelligentedge.azure-devices.net;DeviceId=DragonNiall;SharedAccessKey=Wa+EljALOOrf4DJH+dj1SQioOGNLauWa0Gzlx6DAPVY=";
+        IoTHubService _ioTHubService = null;
+        DispatcherTimer _tmrIoTHub = null;
 
         ISensor<GroveRedLedSensorState> LedSensor;
         ISensor<GroveBarometerSensorState> BarometerSensor;
@@ -107,7 +115,7 @@ namespace IoTLabs.Dragonboard.App.ViewModel
             get => _lastAccelerometerUpdate;
             set { _lastAccelerometerUpdate = value; RaisePropertyChanged("LastAccelerometerUpdate"); }
         }
-        
+
         public string LastGpsLocationUpdate
         {
             get => _lastGpsLocationUpdate;
@@ -218,13 +226,13 @@ namespace IoTLabs.Dragonboard.App.ViewModel
                 {
                     try
                     {
-                        var iotHubConnectionString = "";
+
 
                         //
                         //=== ENTER SENSOR CONFIG IS HERE ===
                         //
-                     
-                        
+
+
                         //LED
                         LedSensor = GroveSensorFactory.CreateRedLedSensorService();
                         await LedSensor.Initialize();
@@ -321,6 +329,45 @@ namespace IoTLabs.Dragonboard.App.ViewModel
                         //
                         //=== SENSOR CONFIG ENDS HERE ===
                         //
+
+
+                        _ioTHubService = new IoTHubService(iotHubConnectionString);
+                        _tmrIoTHub = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(10000) };
+                        _tmrIoTHub.Tick += async (sender, args) =>
+                        {
+
+                            try
+                            {
+                                //collect values
+                                if (_ioTHubService != null)
+                                {
+                                    //Create a payload to send
+                                    IoTHubSensorPack pck = new IoTHubSensorPack()
+                                    {
+                                        AllPayloads = new Dictionary<string, ISensorState>()
+                                    };
+
+                                    if (LedSensor != null) pck.AllPayloads.Add("LED", LedSensor.GetState());
+                                    if (MotionSensor != null) pck.AllPayloads.Add("Motion", MotionSensor.GetState());
+                                    if (BarometerSensor != null) pck.AllPayloads.Add("Barometer", BarometerSensor.GetState());
+                                    if (AccelSensor != null) pck.AllPayloads.Add("Accelerometer", AccelSensor.GetState());
+                                    if (ButtonSensor != null) pck.AllPayloads.Add("Button", ButtonSensor.GetState());
+                                    if (LocationSensor != null) pck.AllPayloads.Add("GPS", LocationSensor.GetState());
+
+                                    //Send the payload if values exist
+                                    if (pck.AllPayloads.Count > 0)
+                                            await _ioTHubService.SubmitSensorsPayload(pck);
+
+                                }
+
+                            }
+                            catch
+                            {
+                            }
+                        };
+
+                        _tmrIoTHub.Start();
+
                     }
                     catch (Exception ex)
                     {
@@ -337,10 +384,22 @@ namespace IoTLabs.Dragonboard.App.ViewModel
             Initialized = true;
         }
 
-        public void UnloadSensors()
+        public async Task UnloadSensors()
         {
             try
             {
+
+                if (_tmrIoTHub != null)
+                {
+                    if (_tmrIoTHub.IsEnabled)
+                        _tmrIoTHub.Stop();
+                    _tmrIoTHub = null;
+                }
+
+                if (_ioTHubService!=null)
+                    {
+                        await _ioTHubService.Close();
+                    }
 
                 if (LedSensor != null)
                     LedSensor.Close();

@@ -24,7 +24,7 @@ namespace IoTLabs.Dragonboard.App.View
                 vm.LoadSensors();
             };
 
-            this.Unloaded += delegate (object sender, RoutedEventArgs args)
+            this.Unloaded += async delegate (object sender, RoutedEventArgs args)
             {
                 vm.UnloadSensors();
             };

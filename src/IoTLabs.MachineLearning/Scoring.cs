@@ -1,10 +1,21 @@
-﻿using System;
+using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using Windows.AI.MachineLearning;
+using Windows.Media;
+using Windows.Storage;
 using Windows.Storage.Streams;
+using Windows.AI.MachineLearning;
 
-namespace IoTLabs.MachineLearning.ML
+using static EdgeModuleSamples.Common.AsyncHelper;
+
+namespace SampleModule
 {
+    
+    public sealed class MLModelVariable
+    {
+        public TensorFloat Variable; 
+    }
+    
     public sealed class MLModel
     {
         private LearningModel _model;

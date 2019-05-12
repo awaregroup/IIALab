@@ -6,7 +6,8 @@ This lab covers setting up Windows 10 IoT Core on an Arrow Dragonboard 410 and d
 ### Hardware
 * Arrow Dragonboard 410c
 * Grove LED
-* Grove PIR Sensor
+* Grove Mini PIR Sensor
+* 
 
 
 ### Software
@@ -51,7 +52,7 @@ Devices running Windows 10 IoT Core can be installed and configured using the Io
 
 
 
-## 2 - Deploying your first app to your Dragonboard
+## 2 - Deploying apps to Dragonboard
 
 ### 2.1 - Hello world
 1. Open up the first lab project found in [C:\Labs\Lab01\Dragonboard.sln](file:///C:\Labs\Lab01\Dragonboard.sln) 

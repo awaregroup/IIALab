@@ -54,6 +54,7 @@ az extension add --name azure-cli-iot-ext
 az iot hub monitor-events -n ENTERYOURIOTHUBNAME -d dragonboard
 ```
 
+3. Watch the console window as telemetry messages start to stream through from the Dragonboard device
 
 ## 3 - Data visualization with Azure Time Series Insights (TSI)
 

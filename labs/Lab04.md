@@ -93,10 +93,10 @@ dotnet publish -c Release -o ./release -r win-x64
 2. Then enter the name of your container (note: the number value after the colon denotes the version, increment this every time you make a change)
 ```powershell
 #SAMPLE: customvision:1.0-x64-iotcore
-$container = "[container-name]"
+$imageName = "[image-name]"
 #SAMPLE: aiedgelabcr
 $registryName = "[azure-container-registry-name]"
-$imageTag = "$registryName.azurecr.io/$container"
+$imageTag = "$registryName.azurecr.io/$imageName"
 docker build . -t $imageTag
 ```
 

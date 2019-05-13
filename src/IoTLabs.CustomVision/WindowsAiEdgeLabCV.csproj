@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -7,10 +7,6 @@
     <Win32Resource />
     <LangVersion>7.3</LangVersion>
   </PropertyGroup>
-
-  <ItemGroup>
-    <None Remove="CustomVision.onnx" />
-  </ItemGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <WarningLevel>1</WarningLevel>
@@ -50,11 +46,14 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="CustomVision.onnx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
   <Target Name="CopyCustomContentOnPublish" AfterTargets="Publish">
     <Copy SourceFiles="CustomVision.onnx" DestinationFolder="$(PublishDir)" />
-    <Copy SourceFiles="Dockerfile" DestinationFolder="$(PublishDir)" />
-    <Copy SourceFiles="Dockerfile.iotcore-gpu" DestinationFolder="$(PublishDir)" />
-    <Copy SourceFiles="Dockerfile.enterprise" DestinationFolder="$(PublishDir)" />
   </Target>
 
 </Project>

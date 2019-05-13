@@ -1,6 +1,6 @@
 FROM mcr.microsoft.com/windows:1809
 
-ARG EXE_DIR=.
+ARG EXE_DIR=release
 
 WORKDIR /app
 

@@ -91,7 +91,12 @@ namespace SampleModule
             MediaFrameReference result = null;
             do
             {
-                evtFrame.WaitOne();
+                
+                var frameReceived = evtFrame.WaitOne(4000);
+                if(!frameReceived)
+                {
+                    throw new Exception("Unable to get exclusive lock for camera device, are other camera applications open?");
+                }
                 evtFrame.Reset();
 
                 result = mediaFrameReader.TryAcquireLatestFrame();

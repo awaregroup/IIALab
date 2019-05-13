@@ -3,57 +3,36 @@
 ## Set up your UP Squared Device
 
 1. Plug the HDMI cable from the Dragonboard into the UP Squared Device.
-1. You should see information about the device, including the device name and IP Address, you will need this later.
+1. You should see information about the device, including the device name and IP Address. You will need this to connect to the device via the IoT Dashboard
+1. Next open the Azure Portal and Sign in
+1. Click "Resource groups" on the left-hand menu, select the "winiot" resource group in the list and choose the IoT Hub previously created
+1. Click "IoT Edge" on the IoT Hub side menu and click "Add an IoT Edge device". Note that this is a slightly different menu than the one used earlier in the lab.
+1. Enter the device name as the Device ID and click "Save" to create the device
+1. Click the newly saved device (you may need to refresh) and copy the "Connection string (primary key)" field to the clipboard - we will use this later
 
-#### 1.1 - Getting unique device identifiers
-
-1. Launch the IoT Dashboard
-1. Find the device with the name and IP address mentioned in the previous step.
-1. Right click on this device and click "Open Device Portal". Type "administrator" for the username, and "p@ssw0rd" for the password.
-1. On the side panel of the device protal click "TPM Configuration" then click the "Install Latest" button. You can then close this browser window.
-1. Remotely connect to powershell on the device, by openning the IoT Dashboard then clicking on the three dots in the "Actions" column and then clicking "Launch Powershell". When prompted,enter "p@ssw0rd" as the password.
-1. Enter the following command, and keep the registration id and the endorsement key for later use.
-
-``` 
-limpet -azuredps -enrollmentinfo
-```
-
-### 1.2 - Deploying Azure DPS
-
-1. Create a new "IoT Hub Device Provisioning Service" in the Azure Portal
-1. Open the newly created DPS Service and copy the "ID Scope" for later use, it should look something like this : "0ne0005A474"
-1. Switch to the "Manage enrolments" pane
-1. Click "Add individual enrolment"
-1. Select "TPM" as the mechanism,
-1. Enter the endorsement key from the previous step
-1. Enter the registration id gathered from the previous step
-1. Enter the device id (this is the name of the device that will be created in IoT Hub, eg "A17")
-1. Select the IoT Edge toggle to "True"
-1. Click "Link a new IoT Hub" and select your existing IoT Hub with the "iothubowner" policy
-1. Click "Save"
 
 ### Set up IoT Edge
 
-1. Remotely connect to powershell on the device, by openning the IoT Dashboard then clicking on the three dots in the "Actions" column and then clicking "Launch Powershell". When prompted,enter "p@ssw0rd" as the password.
+1. Remotely connect to powershell on the device, by opening the IoT Dashboard then clicking on the three dots in the "Actions" column and then clicking "Launch Powershell". When prompted,enter "p@ssw0rd" as the password.
 1. Type in the following to the console and wait for the operation to complete, the machine will restart during this process and you will need to reconnect to the devices's powershell.
 
 ```
 . {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Deploy-IoTEdge
 ```
 
-1. After the IoT Edge agent has been installed we can connect it up to our IoT Hub by enrolling it with DPS. You will need to enter your scope id and your registration id that you retrieved in step 1.2.
+1. After the IoT Edge agent has been installed we can connect it up to our IoT Hub by supplying the connection string you retreived earlier.
 
 ```
-. {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Initialize-IoTEdge -Dps -ScopeId [scope-id] -RegistrationId [registration-id]
+. {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Initialize-IoTEdge
 ```
 
-1. You can check that IoT Edge has installed correctly by typing "iotedge check" and viewing the output.
+1. You can check that IoT Edge has installed correctly by typing "iotedge check" and viewing the output. The command "Get-IoTEdgeLog" may also assist in troubleshooting any issues that occur.
 
 ### Deploy the mock temperature sensor monitor deployment
 
 ```
 az login
-az iot edge set-modules --device-id [device id] --hub-name [hub name] --content deployment.example.json
+az iot edge set-modules --device-id [device name] --hub-name [hub name] --content "C:\Labs\Content\src\IoTLabs.IoTEdge\deployment.example.json"
 ```
 
 ### 4.3 - Monitor Device to Cloud messages
@@ -63,13 +42,9 @@ az extension add --name azure-cli-iot-ext
 az iot hub monitor-events -n [hub name] -d [device id]
 ```
  
-### Build and deploy a custom model that detects faces (from the ONNX model zoo) using existing software over IoT Edge
+### Build and deploy a custom model that detects UP Squared Devices
 
-#### Grab the C# and such for any vision model we provide and run it on the PC
-
-We can use our own model, download the C# code and run it, build the docker container 
-
-#### Set up and deploy Azure Container Registry : TODO Flesh this out
+#### Set up and deploy Azure Container Registry
 
 Refer to this guide: [Quickstart: Create a private container registry using the Azure portal](https://docs.microsoft.com/en-us/azure/container-registry/container-registry-get-started-portal)
 
@@ -81,32 +56,41 @@ Refer to this guide: [Quickstart: Create a private container registry using the 
 
 
 ## Build & Test the sample
+Next we will build and deploy our own container.
+
+1. Open a powershell window at this location "C:\Labs\Content\src\IoTLabs.CustomVision"
+1. Restore the packages by running the following command
 
 ```
-PS C:\WindowsAiEdgeLabCV> dotnet restore -r win-x64
-PS C:\WindowsAiEdgeLabCV> dotnet publish -r win-x64
+dotnet restore -r win-x64
 ```
 
-Point the camera at one of your objects, still connected to your development PC.
-
-Run the sample locally to classify the object. This will test that the app is running correctly locally. We specify "Lifecam" for this model of camera. Here we can see that a "Mug" has been recognized.
+1. Connect the camera to your laptop and point the camera at the Up Squared
+1. Run the sample locally to classify the object. This will test that the app is running correctly locally. We specify "Lifecam" for this model of camera. Here we can see that a "up2" has been recognized.
 
 ```
-PS C:\WindowsAiEdgeLabCV> dotnet run --model=CustomVision.onnx --device=LifeCam
+dotnet run --model=CustomVision.onnx --device=LifeCam
 4/24/2019 4:09:04 PM: Loading modelfile 'CustomVision.onnx' on the CPU...
 4/24/2019 4:09:04 PM: ...OK 594 ticks
 4/24/2019 4:09:05 PM: Running the model...
 4/24/2019 4:09:05 PM: ...OK 47 ticks
-4/24/2019 4:09:05 PM: Recognized {"results":[{"label":"Mug","confidence":1.0}],"metrics":{"evaltimeinms":47,"cycletimeinms":0}}
+4/24/2019 4:09:05 PM: Recognized {"results":[{"label":"up2","confidence":1.0}],"metrics":{"evaltimeinms":47,"cycletimeinms":0}}
 ```
 
 ## 3.5 - Containerize the sample app 
 
+Next we will publish the sample app by typing the following command
+
+1. Publish the executables into a folder named release by running the following command
+```
+dotnet publish -c Release -o ./release -r win-x64
+```
+
 ```powershell
 #SAMPLE: customvision:1.0-x64-iotcore
-$container = "ENTER YOUR CONTAINER NAME HERE"
-#SAMPLE: aiedgelabcr.azurecr.io/
-$registryName = "ENTER YOUR REGISTRY NAME HERE"
+$container = "[ENTER YOUR CONTAINER NAME HERE]"
+#SAMPLE: aiedgelabcr
+$registryName = "[ENTER YOUR REGISTRY NAME HERE]"
 docker build . -t "$registryName.azurecr.io/$container"
 ```
 
@@ -123,15 +107,11 @@ docker push $container
 
 ## Author a deployment.json file
 
-Now that we have a container with our inferencing logic safely up in our container registry, it's time to create an Azure IoT Edge deployment to our device.
+Now that we have a container with our inferencing logic stored in our container registry, it's time to create an Azure IoT Edge deployment to our device.
 
-We will do this back on the development PC.
-
-TODO: Specify where in the lab files
-Amongst the lab files, you will find a deployment json file named deployment.win-x64.json. Open this file in VS Code. We must fill in the details for the container image we just built above, along with our container registry credentials.
-
-Search for "{ACR_*}" and replace those values with the correct values for your container repository.
-The ACR_IMAGE must exactly match what you pushed, e.g. aiedgelabcr.azurecr.io/customvision:1.0-x64-iotcore
+1. Go to "C:\Labs\Content\src\IoTLabs.IoTEdge"
+1. Edit the "deployment.template.win-x64.json" file
+1. Search for "{ACR_*}" and replace those values with the correct values for your container repository. The ACR_IMAGE must exactly match what you pushed, e.g. aiedgelabcr.azurecr.io/customvision:1.0-x64-iotcore
 
 
 ## Deploy the IoT Edge deployment.json file. 
@@ -139,12 +119,12 @@ The ACR_IMAGE must exactly match what you pushed, e.g. aiedgelabcr.azurecr.io/cu
 Just like the example deployment, use the following syntax to update the expected module state on the device. IoT Edge will pick up on this configuration change and deploy the container to the device.
 
 ```
-az iot edge set-modules --device-id [device id] --hub-name [hub name] --content deployment.json
+az iot edge set-modules --device-id [device name] --hub-name [hub name] --content "C:\Labs\Content\src\IoTLabs.IoTEdge\deployment.template.win-x64.json"
 ```
 
 Run the following command to get information about the modules deployed to your IoT Hub.
 ```
-az iot hub module-identity list --device-id $deviceId --hub-name $iotHub
+az iot hub module-identity list --device-id [device name] --hub-name [hub name]
 ```
 
 ## 4.2 - Verify the deployment on IoT device
@@ -155,8 +135,8 @@ The module deployment is instant, however changes to the device can take around 
 iotedge list
 ```
 
-Once the modules have deployed to your device, you can inspect that the "customvision" module is operating correctly:
+Once the modules have deployed to your device, you can inspect that the module is operating correctly:
 
 ```powershell
-iotedge logs customvision
+iotedge logs [container-name]
 ```

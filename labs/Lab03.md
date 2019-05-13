@@ -17,7 +17,7 @@
 
 ## 1 - Build your image
 
-### 1.1 - Create your workspace
+### 1.0 - Create your workspace
 
 Microsoft enables device manufacturers and OEMs to design their own IoT Core images. These images are built using an IoT Workspace and customized using Board Support Packages (BSPs) containing drivers, apps and other additions.
 
@@ -28,10 +28,11 @@ On your desktop, open the Labs shortcut and then navigate into the tools/iotadka
 
 This will create a new workspace targetted in the ARM environment and switch you immedately to this workspace. If you exit this window you can open the workspace bootstraper in the new workspace to pick up where you left off. (C:\Labs\Lab03\IoTCorePshell.cmd)
 
-Required packages will automatically be imported to the workspace, but we can also include sample packages by running the following command
+### 1.2 Install Example OEM Packages
+Most required packages will automatically be imported to the workspace, but we can include sample packages by running the following command
 ```Import-IoTOEMPackage *```
 
-### 1.2 - Install Board Support Package (BSP)
+### 1.3 - Install Board Support Package (BSP)
 
 Next include the board support package (BSP) provided by the component/silicon vendor containing drivers compatable with Windows IoT Core.
 
@@ -42,7 +43,7 @@ $bspName = "QCDB410C"
 Import-IoTBSP -BSPName $bspName -Source "C:\labs\tools\Dragonboard\db410c_bsp.zip"
 ```
 
-### 1.3 - Create product
+### 1.4 - Create product
 
 A product is a specific configuration of a device based upon a BSP that contains what custom applications and customisations are intended to be deployed to a range of devices.
 
@@ -58,7 +59,7 @@ You will be asked for further SMBIOS information such as Manufacturer name, Prod
 - Baseboard Manufacturer Qualcomm
 - Baseboard Product: Dragonboard 410c
 
-### 1.3 - Add Universal Windows App
+### 1.5 - Add Universal Windows App
 
 1. Change the path to the Appx file you generated in lab01, then run these powershell scripts to bundle the application with your image. **Note: DO NOT update the $configName**
 
@@ -71,7 +72,7 @@ New-IoTCabPackage -PkgFile $appName
 Add-IoTProductFeature -Product $productName -Config $configName -FeatureID "APPX_DRAGONBOARDTEST" -OEM
 ```
 
-### 1.4 - Compile FFU image
+### 1.6 - Compile FFU image
 
 By running the previous commands we have created packages that describe what content should be included in this product. Next we process these packages into cabinet files for inclusion in the final image.
 ```

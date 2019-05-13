@@ -93,10 +93,11 @@ dotnet publish -c Release -o ./release -r win-x64
 2. Then enter the name of your container (note: the number value after the colon denotes the version, increment this every time you make a change)
 ```powershell
 #SAMPLE: customvision:1.0-x64-iotcore
-$imageName = "[container-name]"
+$container = "[container-name]"
 #SAMPLE: aiedgelabcr
 $registryName = "[azure-container-registry-name]"
-docker build . -t "$registryName.azurecr.io/$container"
+$imageTag = "$registryName.azurecr.io/$container"
+docker build . -t $imageTag
 ```
 
 
@@ -106,7 +107,7 @@ docker build . -t "$registryName.azurecr.io/$container"
 
 ```powershell
 az acr login --name $registryName
-docker push $imageName
+docker push $imageTag
 ```
 
 ## 4.0 - Deploy edge modules to device 

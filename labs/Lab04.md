@@ -20,7 +20,7 @@
 2. Type in the following to the console and wait for the operation to complete, the machine will restart during this process and you will need to reconnect to the devices's powershell.
 
 ```
- {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Deploy-IoTEdge
+. {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Deploy-IoTEdge
 ```
 
 3. After the IoT Edge agent has been installed we can connect it up to our IoT Hub by supplying the connection string you retreived earlier.

@@ -1,23 +1,18 @@
 # Lab 04 - Introduction to Azure IoT Edge
 
-## 1 - Install Windows 10 IoT Core on UP2
+## Set up your UP Squared Device
 
-1. Boot UP2 using USB provided in the lab
-2. Type the following to install a pre-prepared FFU designed for the UP2:
-
-```batch
-d:\
-.\eMMCInstaller.cmd
-```
-3. Reboot device by typing ```wpeutil reboot``` and verify Windows starts up 
-
-## 2 - Deploying containers
-
-### 2.1 - Deploying Azure Device Provisioning Service
+1. Plug the HDMI cable from the Dragonboard into the UP Squared Device.
+1. You should see information about the device, including the device name and IP Address, you will need this later.
 
 #### 1.1 - Getting unique device identifiers
 
-**TODO :**
+1. Launch the IoT Dashboard
+1. Find the device with the name and IP address mentioned in the previous step.
+1. Right click on this device and click "Open Device Portal". Type "administrator" for the username, and "p@ssw0rd" for the password.
+1. On the side panel of the device protal click "TPM Configuration" then click the "Install Latest" button. You can then close this browser window.
+1. Remotely connect to powershell on the device, by openning the IoT Dashboard then clicking on the three dots in the "Actions" column and then clicking "Launch Powershell". When prompted,enter "p@ssw0rd" as the password.
+1. Enter the following command, and keep the registration id and the endorsement key for later use.
 
 ``` 
 limpet -azuredps -enrollmentinfo
@@ -26,22 +21,21 @@ limpet -azuredps -enrollmentinfo
 ### 1.2 - Deploying Azure DPS
 
 1. Create a new "IoT Hub Device Provisioning Service" in the Azure Portal
-1. Open the newly created DPS Service 
-1. TODO : Get Scope ID
+1. Open the newly created DPS Service and copy the "ID Scope" for later use, it should look something like this : "0ne0005A474"
 1. Switch to the "Manage enrolments" pane
 1. Click "Add individual enrolment"
 1. Select "TPM" as the mechanism,
 1. Enter the endorsement key from the previous step
 1. Enter the registration id gathered from the previous step
-1. Enter the device id (this is the name of the device that will be created in IoT Hub)
+1. Enter the device id (this is the name of the device that will be created in IoT Hub, eg "A17")
 1. Select the IoT Edge toggle to "True"
 1. Click "Link a new IoT Hub" and select your existing IoT Hub with the "iothubowner" policy
 1. Click "Save"
 
 ### Set up IoT Edge
 
-1. Remotely connect to powershell on the Device TODO: Instructions for remotely connecting
-1. Type in the following to the console and wait for the operation to complete, the machine will restart during this process.
+1. Remotely connect to powershell on the device, by openning the IoT Dashboard then clicking on the three dots in the "Actions" column and then clicking "Launch Powershell". When prompted,enter "p@ssw0rd" as the password.
+1. Type in the following to the console and wait for the operation to complete, the machine will restart during this process and you will need to reconnect to the devices's powershell.
 
 ```
 . {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Deploy-IoTEdge
@@ -50,14 +44,12 @@ limpet -azuredps -enrollmentinfo
 1. After the IoT Edge agent has been installed we can connect it up to our IoT Hub by enrolling it with DPS. You will need to enter your scope id and your registration id that you retrieved in step 1.2.
 
 ```
-. {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Initialize-IoTEdge -Dps
+. {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Initialize-IoTEdge -Dps -ScopeId [scope-id] -RegistrationId [registration-id]
 ```
 
 1. You can check that IoT Edge has installed correctly by typing "iotedge check" and viewing the output.
 
 ### Deploy the mock temperature sensor monitor deployment
-
-TODO : Introduction to deployment.json, expected state for IoT Edge, as well as the integrations with the IoT Hub. Location of the example deployment.
 
 ```
 az login
@@ -66,12 +58,11 @@ az iot edge set-modules --device-id [device id] --hub-name [hub name] --content 
 
 ### 4.3 - Monitor Device to Cloud messages
 
-TODO : Use Azure CLI
-1. In Visual Studio Code, open the 'Azure IoT Hub Devices' pane  
-1. Right-click your device and 'Start monitoring D2C messages'
-1. You should see the mock temperature sensor data start to flow into the IoT Hub.
-
-
+```
+az extension add --name azure-cli-iot-ext
+az iot hub monitor-events -n [hub name] -d [device id]
+```
+ 
 ### Build and deploy a custom model that detects faces (from the ONNX model zoo) using existing software over IoT Edge
 
 #### Grab the C# and such for any vision model we provide and run it on the PC

@@ -64,22 +64,20 @@ You will be asked for further SMBIOS information such as Manufacturer name, Prod
 - Baseboard Manufacturer Qualcomm
 - Baseboard Product: Dragonboard 410c
 
-### 1.3 - Add Universal Windows App : TODO
+### 1.3 - Add Universal Windows App
 
-1. Run these PowerShell commands to inject the app from the previous lab into the image:
+1. Change the path to the Appx file you generated in lab01, then run these powershell scripts to bundle the application with your image.
 
 ```
-#StartupType "fga" means Foreground App
-
 $appName = "Appx.DragonboardTest"
 $configName = "Test"
 
-Add-IoTAppxPackage -AppxFile "C:\labs\Dragonboard\APPNAMEHERE" -StartupType "fga" -OutputName $appName
+Add-IoTAppxPackage -AppxFile "[path-to-generated-appx-from-lab01]" -StartupType "fga" -OutputName $appName
 New-IoTCabPackage -PkgFile $appName
-Add-IoTProductFeature -Product $productName -Config $configName -FeatureID "APPX_MYUWPAPP" -OEM
+Add-IoTProductFeature -Product $productName -Config $configName -FeatureID "APPX_IOTLABDEMO" -OEM
 ```
 
-### 1.3 - Compile FFU image
+### 1.4 - Compile FFU image
 
 By running the previous commands we have created packages that describe what content should be included in this product. Next we process these packages into cabinet files for inclusion in the final image.
 ```
@@ -121,5 +119,4 @@ New-IoTFFUImage -Product $productName -Config $configName
 
 4. Enter a name in the 'Change your device name' text box and click 'Save'. Your device should reboot and display the new name 
 
-
-# TODO Check the UWP app has deployed correctly
+5. Check the sensors and the bundled application works as expected.

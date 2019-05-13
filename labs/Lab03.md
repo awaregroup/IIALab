@@ -68,7 +68,7 @@ $configName = "Test"
 
 Add-IoTAppxPackage -AppxFile "[path-to-generated-appx-from-lab01]" -StartupType "fga" -OutputName $appName
 New-IoTCabPackage -PkgFile $appName
-Add-IoTProductFeature -Product $productName -Config $configName -FeatureID "APPX_IOTLABDEMO" -OEM
+Add-IoTProductFeature -Product $productName -Config $configName -FeatureID "APPX_DRAGONBOARDTEST" -OEM
 ```
 
 ### 1.4 - Compile FFU image

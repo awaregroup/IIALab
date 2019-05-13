@@ -38,7 +38,7 @@
 
 ### 1.3 - Connect Dragonboard app to Azure IoT Hub
 
-1. In Visual Studio, open ```ViewModel/MainViewModel.cs``` and browse to **line 221** 
+1. In Visual Studio, open ```ViewModel/MainViewModel.cs``` and browse to **line 20** 
 1. Update the iotHubConnectionString with the text on your clipboard
 ![](./media/2_azure9.png)
 1. Start debugging to run the updated app on the Dragonboard

@@ -17,7 +17,7 @@ namespace IoTLabs.Dragonboard.App.ViewModel
         public bool Initialized { get; set; } = false;
 
 
-        string iotHubConnectionString = "";
+        string iotHubConnectionString = "HostName=msiotlabs-user01-winiot.azure-devices.net;DeviceId=dragonboard;SharedAccessKey=RVGMdK7Dci4ofnMfZsj4yp856Dr1hxI5ZhuQdLMRqUA=";
         IoTHubService _ioTHubService = null;
         DispatcherTimer _tmrIoTHub = null;
 
@@ -233,20 +233,19 @@ namespace IoTLabs.Dragonboard.App.ViewModel
                         //
 
 
-                        
+
 
                         //
                         //=== SENSOR CONFIG ENDS HERE ===
                         //
 
-
-                        _ioTHubService = new IoTHubService(iotHubConnectionString);
-                        _tmrIoTHub = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(30000) };
-                        _tmrIoTHub.Tick += async (sender, args) =>
+                        if (!string.IsNullOrWhiteSpace(iotHubConnectionString))
                         {
-
-                            try
+                            _ioTHubService = new IoTHubService(iotHubConnectionString);
+                            _tmrIoTHub = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(3000) };
+                            _tmrIoTHub.Tick += async (sender, args) =>
                             {
+
                                 //collect values
                                 if (_ioTHubService != null)
                                 {
@@ -268,15 +267,11 @@ namespace IoTLabs.Dragonboard.App.ViewModel
                                         await _ioTHubService.SubmitSensorsPayload(pck);
 
                                 }
+                            };
 
-                            }
-                            catch
-                            {
-                            }
-                        };
+                            _tmrIoTHub.Start();
 
-                        _tmrIoTHub.Start();
-
+                        }
                     }
                     catch (Exception ex)
                     {

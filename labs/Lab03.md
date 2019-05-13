@@ -61,13 +61,15 @@ You will be asked for further SMBIOS information such as Manufacturer name, Prod
 
 ### 1.5 - Add Universal Windows App
 
-1. Change the path to the Appx file you generated in lab01, then run these powershell scripts to bundle the application with your image. **Note: DO NOT update the $configName**
+1. Change the path to the full path of the appx file you generated in lab01 (including the file name), then run these powershell scripts to bundle the application with your image.
+
+**Note: Do not change the $configName or the $appName. The following scripts assume the application name is fixed and the configuration environment is set to be the test environment.**
 
 ```
 $appName = "Appx.DragonboardTest"
 $configName = "Test"
 
-Add-IoTAppxPackage -AppxFile "[path-to-generated-appx-from-lab01]" -StartupType "fga" -OutputName $appName
+Add-IoTAppxPackage -AppxFile "[full-path-to-appx-file-from-lab01]" -StartupType "fga" -OutputName $appName
 New-IoTCabPackage -PkgFile $appName
 Add-IoTProductFeature -Product $productName -Config $configName -FeatureID "APPX_DRAGONBOARDTEST" -OEM
 ```

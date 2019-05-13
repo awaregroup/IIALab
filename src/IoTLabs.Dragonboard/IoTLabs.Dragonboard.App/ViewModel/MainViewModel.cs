@@ -17,7 +17,7 @@ namespace IoTLabs.Dragonboard.App.ViewModel
         public bool Initialized { get; set; } = false;
 
 
-        string iotHubConnectionString = "HostName=intelligentedge.azure-devices.net;DeviceId=DragonNiall;SharedAccessKey=Wa+EljALOOrf4DJH+dj1SQioOGNLauWa0Gzlx6DAPVY=";
+        string iotHubConnectionString = "";
         IoTHubService _ioTHubService = null;
         DispatcherTimer _tmrIoTHub = null;
 
@@ -233,98 +233,7 @@ namespace IoTLabs.Dragonboard.App.ViewModel
                         //
 
 
-                        //LED
-                        LedSensor = GroveSensorFactory.CreateRedLedSensorService();
-                        await LedSensor.Initialize();
-                        LedIsHigh = LedSensor.GetState().CurrentValue == GpioPinValue.High;
-
-
-                        //MotionSensor
-                        MotionSensor = GroveSensorFactory.CreateMiniPIRMotionSensorService();
-                        await MotionSensor.Initialize();
-                        ((IObservableSensor<GroveMiniPIRMotionSensorState>)MotionSensor).Register(new Action<GroveMiniPIRMotionSensorState>(
-                            (GroveMiniPIRMotionSensorState item) =>
-                            {
-                                DispatcherHelper.CheckBeginInvokeOnUI(async () =>
-                                    {
-                                        MotionEdge = item.CurrentEdge.ToString();
-                                        MotionPin = item.PinNumber.ToString();
-
-                                        if (item.CurrentEdge == GpioPinEdge.FallingEdge)
-                                        {
-                                            IsFallingEdgeMotion = true;
-                                            await Task.Delay(TimeSpan.FromMilliseconds(250));
-                                            IsFallingEdgeMotion = false;
-                                        }
-                                        else
-                                        {
-                                            IsRisingEdgeMotion = true;
-                                            await Task.Delay(TimeSpan.FromMilliseconds(250));
-                                            IsRisingEdgeMotion = false;
-                                        }
-
-                                    });
-                            }));
-
-
-
-                        //GpsLocationSensor
-                        LocationSensor = OnboardSensorFactory.CreateLocationSensor();
-                        await LocationSensor.Initialize();
-                        ((IObservableSensor<GpsLocationSensorState>)LocationSensor).Register(new Action<GpsLocationSensorState>(
-                            (GpsLocationSensorState item) =>
-                            {
-                                DispatcherHelper.CheckBeginInvokeOnUI(async () =>
-                                {
-                                    //Last = item.Timestamp.Date.ToShortDateString() + " " + item.Timestamp.Date.ToLongTimeString();
-                                    if (item.HasPosition)
-                                    {
-                                        GpsLocationAltitude = item.Position.Altitude.ToString("###0.00");
-                                        GpsLocationLongitude = item.Position.Longitude.ToString("###0.0000");
-                                        GpsLocationLattitude = item.Position.Latitude.ToString("###0.0000");
-                                        LastGpsLocationUpdate = item.Timestamp.Date.ToShortDateString() + " " + item.Timestamp.ToString("HH:mm:ss");
-                                    }
-                                    else
-                                    {
-                                        GpsLocationAltitude = "-";
-                                        GpsLocationLongitude = "-";
-                                        GpsLocationLattitude = "-";
-                                        LastGpsLocationUpdate = item.Timestamp.Date.ToShortDateString() + " " + item.Timestamp.ToString("HH:mm:ss");
-                                    }
-                                });
-                            }));
-
-
-                        //Barometer Sensor
-                        BarometerSensor = GroveSensorFactory.CreateBarometerSensorService();
-                        await BarometerSensor.Initialize();
-                        ((IPollingSensor<GroveBarometerSensorState>)BarometerSensor).Register(new Action<GroveBarometerSensorState>(
-                           (GroveBarometerSensorState item) =>
-                           {
-                               DispatcherHelper.CheckBeginInvokeOnUI(() =>
-                               {
-                                   Temperature = item.TemperatureFahrenheit.ToString("##0.0") + " F";
-                                   Humidity = item.HumidityPercent.ToString("##0.0") + "%";
-                                   Pressure = item.PressureKilopascals.ToString("##0.0") + " kPA";
-                                   LastBarometerUpdate = item.Timestamp.Date.ToShortDateString() + " " + item.Timestamp.ToString("HH:mm:ss");
-                               });
-                           }), 250);
-
-
-                        //Accelerometer Sensor
-                        AccelSensor = GroveSensorFactory.CreateAccelerometerSensorService();
-                        await AccelSensor.Initialize();
-                        ((IPollingSensor<GroveDigitalAccelerometerState>)AccelSensor).Register(new Action<GroveDigitalAccelerometerState>(
-                           (GroveDigitalAccelerometerState item) =>
-                           {
-                               DispatcherHelper.CheckBeginInvokeOnUI(() =>
-                               {
-                                   AccelerometerX = item.X.ToString("##0.00");
-                                   AccelerometerY = item.Y.ToString("##0.00");
-                                   AccelerometerZ = item.Z.ToString("##0.00");
-                                   LastAccelerometerUpdate = item.Timestamp.Date.ToShortDateString() + " " + item.Timestamp.ToString("HH:mm:ss");
-                               });
-                           }), 250);
+                        
 
                         //
                         //=== SENSOR CONFIG ENDS HERE ===

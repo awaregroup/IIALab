@@ -34,14 +34,14 @@
 ## 2.0 - Deploy the mock temperature sensor monitor deployment
 
 ```
+az extension add --name azure-cli-iot-ext
 az login
-az iot edge set-modules --device-id [device name] --hub-name [hub name] --content "C:\Labs\Content\src\IoTLabs.IoTEdge\deployment.example.json"
+az iot edge set-modules --device-id [device name] --hub-name [hub name] --content "C:\Labs\Content\src\IoTLabs.IoTEdge\deployment.example.win-x64.json"
 ```
 
 ### 2.1 - Monitor Device to Cloud messages
 
 ```
-az extension add --name azure-cli-iot-ext
 az iot hub monitor-events -n [hub name] -d [device id]
 ```
  

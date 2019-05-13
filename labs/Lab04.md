@@ -79,35 +79,34 @@ dotnet run --model=CustomVision.onnx --device=LifeCam
 
 ## 3.5 - Containerize the sample app 
 
-Next we will publish the sample app by typing the following command
-
-1. Publish the executables into a folder named release by running the following command
+-  Publish the executables into a folder named release by running the following command
 ```
 dotnet publish -c Release -o ./release -r win-x64
 ```
-
+- Then enter the name of your container (note: the number value after the colon denotes the version, increment this every time you make a change)
 ```powershell
 #SAMPLE: customvision:1.0-x64-iotcore
-$container = "[ENTER YOUR CONTAINER NAME HERE]"
+$imageName = "[container-name]"
 #SAMPLE: aiedgelabcr
-$registryName = "[ENTER YOUR REGISTRY NAME HERE]"
+$registryName = "[azure-container-registry-name]"
 docker build . -t "$registryName.azurecr.io/$container"
 ```
 
+
 ## 3.6 - Authenticate and push to Azure Container Registry
 
-1. Authenticate to the Azure Container Registry
+- Authenticate to the Azure Container Registry and push the new image that was built in the previous step.
 
 ```powershell
 az acr login --name $registryName
-docker push $container
+docker push $imageName
 ```
 
 ## 4.1 - Deploy edge modules to device 
 
 ## Author a deployment.json file
 
-Now that we have a container with our inferencing logic stored in our container registry, it's time to create an Azure IoT Edge deployment to our device.
+Now that we have a container image with our inferencing logic stored in our container registry, it's time to create an Azure IoT Edge deployment to our device.
 
 1. Go to "C:\Labs\Content\src\IoTLabs.IoTEdge"
 1. Edit the "deployment.template.win-x64.json" file

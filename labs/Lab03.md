@@ -23,12 +23,8 @@ Microsoft enables device manufacturers and OEMs to design their own IoT Core ima
 
 On your desktop, open the Labs shortcut and then navigate into the tools/iotadkaddon folder. This addonkit contains PowerShell scripts for package creation and image creation process.
 
-Open ```C:\labs\iot-adkaddonkit``` and run the script named ```IoTCorePShell```.
-
-You can configure multiple devices at once by creating new environments called workspaces that contain all the information about how to build and target a specific device of that architecture.
-
-Then type the following command
-```New-IoTWorkspace -DirName "C:\labs\Lab03" -OemName "Lab03" -Arch "arm"```
+1. Open ```C:\labs\tools\IoTADKAddon``` and run the script named ```IoTCorePShell``` as Administrator
+2. ```New-IoTWorkspace -DirName "C:\labs\Lab03" -OemName "Lab03" -Arch "arm"```
 
 This will create a new workspace targetted in the ARM environment and switch you immedately to this workspace. If you exit this window you can open the workspace bootstraper in the new workspace to pick up where you left off. (C:\Labs\Lab03\IoTCorePshell.cmd)
 
@@ -43,7 +39,7 @@ Run the following PowerShell commands in the console from the previous step to i
 
 ```
 $bspName = "QCDB410C"
-Import-IoTBSP $bspName C:\labs\tools\dragonboard\db410c_bsp.zip"
+Import-IoTBSP -BSPName $bspName -Source "C:\labs\tools\Dragonboard\db410c_bsp.zip"
 ```
 
 ### 1.3 - Create product
@@ -64,7 +60,7 @@ You will be asked for further SMBIOS information such as Manufacturer name, Prod
 
 ### 1.3 - Add Universal Windows App
 
-1. Change the path to the Appx file you generated in lab01, then run these powershell scripts to bundle the application with your image.
+1. Change the path to the Appx file you generated in lab01, then run these powershell scripts to bundle the application with your image. **Note: DO NOT update the $configName**
 
 ```
 $appName = "Appx.DragonboardTest"

@@ -74,3 +74,10 @@ az iot hub monitor-events -n ENTERYOURIOTHUBNAME -d dragonboard
 ### 3.2 - Configuring TSI
 
 1. Open the [Time Series Insights Portal (insights.timeseries.azure.com)](https://insights.timeseries.azure.com)
+
+## 4 - Republish appx files
+
+1. Refer to Step 3 in Lab 1 to run through the steps in Visual Studio for publishing packages
+
+
+With your new appx files you can move on to [Lab 3 - Creating a custom Windows IoT FFU](./Lab03.md)

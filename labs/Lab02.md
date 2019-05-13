@@ -70,6 +70,7 @@ az iot hub monitor-events -n ENTERYOURIOTHUBNAME -d dragonboard
 1. Add a new Consumer Group called "tsi" and click "Add"
 ![](./media/2_azure14.png)
 **Note: Make sure you click "Add" next to the Consumer Group before continuing**
+1. Click "Review and Create" then "Create" to finish setting up your Time Series Insights environment.
 
 ### 3.2 - Configuring TSI
 

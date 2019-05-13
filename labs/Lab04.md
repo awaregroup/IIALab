@@ -49,7 +49,7 @@ az iot hub monitor-events -n [hub name] -d [device id]
 
 ### 3.1 Set up and deploy Azure Container Registry
 
-Refer to this guide: [Quickstart: Create a private container registry using the Azure portal](https://docs.microsoft.com/en-us/azure/container-registry/container-registry-get-started-portal)
+[Quickstart: Create a private container registry using the Azure portal](https://docs.microsoft.com/en-us/azure/container-registry/container-registry-get-started-portal)
 
 1. Sign into the Azure Portal
 1. Create a new "Container Registry" resource

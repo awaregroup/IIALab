@@ -58,7 +58,7 @@ az iot hub monitor-events -n [hub name] -d [device id]
 1. Make note of the Login Server, username, and password. You'll need these later.
 
 
-## 3.2 Build & Test the sample
+### 3.2 Build & Test the sample
 Next we will build and deploy our own container.
 
 1. Open a powershell window at this location "C:\Labs\Content\src\IoTLabs.CustomVision"
@@ -80,7 +80,7 @@ dotnet run --model=CustomVision.onnx --device=LifeCam
 4/24/2019 4:09:05 PM: Recognized {"results":[{"label":"up2","confidence":1.0}],"metrics":{"evaltimeinms":47,"cycletimeinms":0}}
 ```
 
-## 3.3 - Containerize the sample app 
+### 3.3 - Containerize the sample app 
 
 1.  Publish the executables into a folder named release by running the following command
 ```
@@ -96,7 +96,7 @@ docker build . -t "$registryName.azurecr.io/$container"
 ```
 
 
-## 3.4 - Authenticate and push to Azure Container Registry
+### 3.4 - Authenticate and push to Azure Container Registry
 
 - Authenticate to the Azure Container Registry and push the new image that was built in the previous step.
 

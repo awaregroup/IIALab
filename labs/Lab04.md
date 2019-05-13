@@ -2,13 +2,13 @@
 
 ## 1.0 - Set up your UP Squared Device
 
-1. Plug the HDMI cable from the Dragonboard into the UP Squared Device.
-1. You should see information about the device, including the device name and IP Address. You will need this to connect to the device via the IoT Dashboard
+1. Plug the HDMI & Ethernet cable from the Dragonboard into the UP Squared Device. 
+1. You should see information about the device, including the device name and IP Address. You will need this to connect to the device via the IoT Dashboard.
 1. Next open the Azure Portal and Sign in
 1. Click "Resource groups" on the left-hand menu, select the "winiot" resource group in the list and choose the IoT Hub previously created
 1. Click "IoT Edge" on the IoT Hub side menu and click "Add an IoT Edge device" at the top. Note that this is a slightly different menu than the one used earlier in the lab.
 ![IoT Hub Portal](./media/4_SelectIoTEdge.png)
-1. Enter the device name as the Device ID and click "Save" to create the device
+1. Enter the device name (from step 2) as the device id and click "Save" to create the device
 1. Click the newly saved device (you may need to refresh) and copy the "Connection string (primary key)" field to the clipboard - we will use this later
 ![IoT Edge Device Information](./media/4_CopyConnectionStringIoTEdge.png)
 

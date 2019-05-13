@@ -31,7 +31,11 @@
 
 4. You can check that IoT Edge has installed correctly by typing "iotedge check" and viewing the output. The command "Get-IoTEdgeLog" may also assist in troubleshooting any issues that occur.
 
+
 ## 2.0 - Deploy the mock temperature sensor monitor deployment
+
+1. Switch back to your main development device 
+2. Run the following commands to deploy a mock temperature sensor monitor by deploying up a desired module state configuration to your IoT Edge device.
 
 ```
 az extension add --name azure-cli-iot-ext

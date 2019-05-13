@@ -348,3 +348,5 @@ healthchecksdb
 # Backup folder for Package Reference Convert tool in Visual Studio 2017
 MigrationBackup/
 /src/IoTLabs.MachineLearning/IoTLabs.MachineLearning/Assets/model.onnx
+/src/IoTLabs.MachineLearning/model.onnx
+/src/IoTLabs.MachineLearning/test_data.csv

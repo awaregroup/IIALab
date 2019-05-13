@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="CustomVision.onnx" />
+    <None Remove="model.onnx" />
   </ItemGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -17,6 +17,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CsvHelper" Version="12.1.2" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
     <PackageReference Include="Mono.Options.Core" Version="1.0.0" />
     <PackageReference Include="Microsoft.Azure.Devices.Client" Version="1.19.0" />
@@ -51,7 +52,7 @@
   </ItemGroup>
 
   <Target Name="CopyCustomContentOnPublish" AfterTargets="Publish">
-    <Copy SourceFiles="CustomVision.onnx" DestinationFolder="$(PublishDir)" />
+    <Copy SourceFiles="model.onnx" DestinationFolder="$(PublishDir)" />
     <Copy SourceFiles="Dockerfile" DestinationFolder="$(PublishDir)" />
     <Copy SourceFiles="Dockerfile.iotcore-gpu" DestinationFolder="$(PublishDir)" />
     <Copy SourceFiles="Dockerfile.enterprise" DestinationFolder="$(PublishDir)" />

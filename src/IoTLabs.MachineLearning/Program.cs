@@ -18,10 +18,11 @@ using Windows.Media;
 using EdgeModuleSamples.Common;
 using static EdgeModuleSamples.Common.AsyncHelper;
 using static Helpers.BlockTimerHelper;
+using WindowsAiEdgeLabTabular;
 
 namespace SampleModule
 {
-    class ImageInference
+    class TabularInference
     {
         private static AppOptions Options;
         private static ModuleClient ioTHubModuleClient;
@@ -41,7 +42,7 @@ namespace SampleModule
                 if (Options.ShowList) { }
                 if (Options.Exit) return -1;
                 if (string.IsNullOrEmpty(Options.FileName))
-                    throw new ApplicationException("Please use --filename to specify which file to use");
+                    throw new ApplicationException("Please use --file to specify which file to use");
 
 
                 //
@@ -58,76 +59,102 @@ namespace SampleModule
                 AssemblyLoadContext.Default.Unloading += (ctx) => cts.Cancel();
                 Console.CancelKeyPress += (sender, cpe) => cts.Cancel();
 
+
                 //
                 // Load model
                 //
 
                 MLModel model = null;
+                Console.WriteLine($"Loading model from: '{Options.ModelPath}', Exists: '{File.Exists(Options.ModelPath)}'");
                 await BlockTimer($"Loading modelfile '{Options.ModelPath}' on the {(Options.UseGpu ? "GPU" : "CPU")}",
-                    async () => {
+                    async () =>
+                    {
                         var d = Directory.GetCurrentDirectory();
                         var path = d + "\\" + Options.ModelPath;
-                        
-                        var modelFile = StorageFile.GetFileFromApplicationUriAsync(new Uri(d)).GetResults();
-                        model = await MLModel.CreateFromStreamAsync(modelFile as IRandomAccessStreamReference);
+
+                        StorageFile modelFile = await AsAsync(StorageFile.GetFileFromPathAsync(path));
+                        model = await MLModel.CreateFromStreamAsync(modelFile);
                     });
 
-                //
-                // Open file
-                //
 
-                
-                //
-                // Main loop
-                //
                 do
                 {
                     //
-                    // Evaluate model
+                    // Open file
                     //
-
-                    var inputShape = new long[2] { 1, 4 };
-                    var inputFeatures = new float[4] { 100, 100, 100, 100 };
-
-                    MLModelVariable result = null;
-                    var evalticks = await BlockTimer("Running the model",
-                        async () =>
-                        {
-                            var prediction = await model.EvaluateAsync(new MLModelVariable()
-                            {
-                                Variable = TensorFloat.CreateFromArray(inputShape, inputFeatures)
-                            });
-                        });
-
-
-                    //
-                    // Print results
-                    //
-
-                    var message = new MessageBody 
+                    var rows = new List<DataRow>();
+                    try
                     {
-                        result = result.Variable.GetAsVectorView().First()
-                    };
-                    message.metrics.evaltimeinms = evalticks;
-                    var json = JsonConvert.SerializeObject(message);
-                    Log.WriteLineRaw($"Recognized {json}");
+                        using (var fs = new StreamReader(Options.FileName))
+                        {
+                            // I just need this one line to load the records from the file in my List<CsvLine>
+                            rows = new CsvHelper.CsvReader(fs).GetRecords<DataRow>().ToList();
+                            Console.WriteLine($"Loaded {rows.Count} row(s)");
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                    }
+                    Console.WriteLine(rows);
+
 
                     //
-                    // Send results to Edge
+                    // Main loop
                     //
 
-                    if (Options.UseEdge)
-                    { 
-                        var eventMessage = new Message(Encoding.UTF8.GetBytes(json));
-                        await ioTHubModuleClient.SendEventAsync("resultsOutput", eventMessage); 
+                    foreach (var row in rows)
+                    {
+                        //
+                        // Evaluate model
+                        //
 
-                        // Let's not totally spam Edge :)
-                        await Task.Delay(500);
+                        var inputShape = new long[2] { 1, 4 };
+                        var inputFeatures = new float[4] { row.Temperature, row.Pressure, row.Humidity, row.ExternalTemperature };
+
+                        MLModelVariable result = null;
+                        var evalticks = await BlockTimer("Running the model",
+                            async () =>
+                            {
+                                result = await model.EvaluateAsync(new MLModelVariable()
+                                {
+                                    Variable = TensorFloat.CreateFromArray(inputShape, inputFeatures)
+                                });
+                            });
+
+                        //
+                        // Print results
+                        //
+
+                        var message = new MessageBody
+                        {
+                            result = result.Variable.GetAsVectorView().First()
+                        };
+                        message.metrics.evaltimeinms = evalticks;
+                        var json = JsonConvert.SerializeObject(message);
+                        Log.WriteLineRaw($"Recognized {json}");
+
+                        //
+                        // Send results to Edge
+                        //
+
+                        if (Options.UseEdge)
+                        {
+                            var eventMessage = new Message(Encoding.UTF8.GetBytes(json));
+                            await ioTHubModuleClient.SendEventAsync("resultsOutput", eventMessage);
+
+                            // Let's not totally spam Edge :)
+                            await Task.Delay(500);
+                        }
+
+
+                        Console.WriteLine("Waiting 1 second...");
+                        Thread.Sleep(1000);
                     }
                 }
-                while (Options.RunForever && ! cts.Token.IsCancellationRequested);
+                while (Options.RunForever && !cts.Token.IsCancellationRequested);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 Console.WriteLine(ex);
                 return -1;
@@ -136,7 +163,7 @@ namespace SampleModule
             return 0;
         }
 
-        
+
         /// <summary>
         /// Initializes the ModuleClient and sets up the callback to receive
         /// messages containing temperature information

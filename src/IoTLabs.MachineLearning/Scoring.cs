@@ -7,6 +7,7 @@ using Windows.Storage.Streams;
 using Windows.AI.MachineLearning;
 
 using static EdgeModuleSamples.Common.AsyncHelper;
+using System.Threading;
 
 namespace SampleModule
 {
@@ -27,7 +28,9 @@ namespace SampleModule
             _binding.Bind("float_input", input.Variable);
 
             var id = Guid.NewGuid().ToString();
-            var result = _session.EvaluateAsync(_binding, id).GetResults();
+            var wait = _session.EvaluateAsync(_binding, id);
+            while (wait.Status != Windows.Foundation.AsyncStatus.Completed) { Thread.Sleep(100); }
+            var result = wait.GetResults();
 
             return new MLModelVariable
             {
@@ -40,7 +43,10 @@ namespace SampleModule
             var device = new LearningModelDevice(LearningModelDeviceKind.Cpu);
 
             var model = new MLModel();
-            model._model = LearningModel.LoadFromStreamAsync(stream).GetResults();
+            var load = LearningModel.LoadFromStreamAsync(stream);
+            while (load.Status != Windows.Foundation.AsyncStatus.Completed) { Thread.Sleep(100); }
+            model._model = load.GetResults();
+
             model._session = new LearningModelSession(model._model, device);
             model._binding = new LearningModelBinding(model._session);
 

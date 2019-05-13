@@ -121,7 +121,7 @@ namespace SampleModule
                             var message = ResultsToMessage(outcome);
                             message.metrics.evaltimeinms = evalticks;
                             var json = JsonConvert.SerializeObject(message);
-                            Log.WriteLineRaw($"Recognized {json}");
+                            Log.WriteLineRaw($"Inferenced: {json}");
 
                             //
                             // Send results to Edge

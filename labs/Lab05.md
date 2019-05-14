@@ -131,6 +131,12 @@ The training process demonstrated today solves a regression problem, but this ca
 
 ## Step 1 - Training a model
 
+In VSCode navigate to src\IoTLabs.MachineLearning and open the XGBoost_to_ONNX.py file, this will open a notebook style script.
+
+You can run cells of this notebook by pressing Shift+Enter, the output of each cell will appear in the right hand side of the code window.
+
+An explanation of each step of the script is as follows:
+
 1. Data importing with pandas
 	* We downloaded this data from the [UCI Dataset Depository](http://archive.ics.uci.edu/ml/datasets/Combined%20Cycle%20Power%20Plant)
 	* We import our dataset and ignore the column headers, normally we would keep the headers but in our case this will cause issues when exporting the model

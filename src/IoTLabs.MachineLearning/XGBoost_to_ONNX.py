@@ -27,20 +27,12 @@ data = pd.read_csv("./PowerPlantDataSet.csv", index_col=None, header=None, skipr
 data.head()
 
 #%%
-seaborn.heatmap(data.corr().abs())
+sns.heatmap(data.corr().abs())
 
 
 #%%
 for i in range(4):
-    seaborn.jointplot(data[i],data[4], kind="kde")
-
-
-#%%
-plt.hist(data[0], normed=True, alpha=0.5,label="Temperature")
-
-
-#%%
-sns.pairplot(data, hue='4', size=2.5);
+    sns.jointplot(data[i],data[4], kind="kde")
 
 
 #%%
@@ -85,9 +77,5 @@ conv_model = convert_xgboost(model, initial_types=[('float_input', FloatTensorTy
 assert(conv_model is not None)
 
 save_model(conv_model, 'model.onnx')
-
-
-#%%
-
 
 

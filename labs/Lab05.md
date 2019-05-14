@@ -6,8 +6,6 @@ For this lab, we will use the Azure Custom Vision service to train a machine lea
 ## Ready to go
 
 When starting the lab, you should have these things open on your development machine:
-
-
 1. These instructions
 1. Visual Studio Code
 1. [Custom Vision Portal](https://www.customvision.ai/) open in a browser tab, and log in with your Azure Subscription. Select the Directory associated with your Azure custom vision resource. 
@@ -48,7 +46,7 @@ If you are running this lab in an environment where this has already been set up
 
 ### Get your model file
 
-Copy the CustomVision.onnx model file from your downloads directory where you exported it into the lab directory.
+Copy the CustomVision.onnx model file from your downloads directory into the lab directory "C:\Labs\Content\src\IoTLabs.CustomVision", overwrite the existing onnx file.
 
 ### Build & Test the sample
 

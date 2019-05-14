@@ -7,12 +7,22 @@ For this lab, we will use the Azure Custom Vision service to train a machine lea
 
 When starting the lab, you should have these things open on your development machine:
 
+
 1. These instructions
 1. Visual Studio Code
-1. [Custom Vision Portal](https://www.customvision.ai/) open in a browser tab, and logged in with your Azure Subscription. Select the Directory associated with your Azure custom vision resource. 
+1. [Custom Vision Portal](https://www.customvision.ai/) open in a browser tab, and logged in with your Azure Subscription. 
 1. [Time Series Insights explorer](https://insights.timeseries.azure.com/) in another browser tab, also logged in
 
 # Part 1: Custom Vision
+
+## Prepare your Custom Vision Environment
+1. Log into the Azure Portal
+1. Type "Custom Vision" into the search bar at the top, and click on the "Custom Vision" entry below "Marketplace"
+1. Enter a name for this custom vision resource : eg lab05-yourname
+1. Choose a location closest to you from the location drop down list
+1. Choose S0 for both pricing tiers
+1. Select the same resource group you have been using prior to this lab
+1. Click create
 
 ## Step 1: Train a model
 
@@ -106,6 +116,9 @@ Following the same approach as above, we will run the app on the target device t
 4/27/2019 8:31:38 AM: ...OK 1953 ticks
 4/27/2019 8:31:42 AM: Recognized {"results":[{"label":"Mug","confidence":1.0}],"metrics":{"evaltimeinms":1953,"cycletimeinms":0}}
 ```
+
+# Step 4 : Deploy to IoT Edge
+Using the skills you learned in Lab04 from Step 3.2 onwards, redeploy this solution to the Up Squared using IoT Edge.
 
 # Part 2 - XGboost for Sensor Data
 

@@ -142,3 +142,4 @@ Once the modules have deployed to your device, you can inspect that the module i
 ```powershell
 iotedge logs [container-name]
 ```
+    

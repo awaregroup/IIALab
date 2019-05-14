@@ -54,7 +54,7 @@ az iot edge set-modules --device-id [device name] --hub-name [hub name] --conten
 
 ### 2.2 - Monitor Device to Cloud messages
 
-1. Enter the following command to mointor Device-to-Cloud (D2C) messages being published to the IoT Hub:
+1. Enter the following command to monitor Device-to-Cloud (D2C) messages being published to the IoT Hub:
 
 ```
 az iot hub monitor-events -n [hub name] -d [device id]
@@ -167,4 +167,13 @@ Once the modules have deployed to your device, you can inspect that the module i
 ```powershell
 iotedge logs [container-name]
 ```
-    
+
+
+### 4.4 - Monitor Device to Cloud messages
+
+1. Switch back to your development machine
+1. Enter the following command in powershell to monitor Device-to-Cloud (D2C) messages being published to the IoT Hub, you should see the events change as you move the camera to face the up2 device.
+
+```
+az iot hub monitor-events -n [hub name] -d [device id]
+```

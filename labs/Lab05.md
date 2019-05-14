@@ -132,7 +132,7 @@ The training process demonstrated today solves a regression problem, but this ca
 
 In VSCode navigate to src\IoTLabs.MachineLearning and open the XGBoost_to_ONNX.py file, this will open a notebook style script.
 
-You can run cells of this notebook by pressing Shift+Enter, the output of each cell will appear in the right hand side of the code window.
+You can run cells of this notebook by pressing *Shift+Enter*, the output of each cell will appear in the right hand side of the code window.
 
 An explanation of each step of the script is as follows:
 
@@ -153,6 +153,7 @@ An explanation of each step of the script is as follows:
 	* We first convert our XGBoost model into the ONNX format to allow the model to run in WinML.
 	* After checking that the conversion is successful we save the model and are now ready to deploy it to the device.
 
+*Go through the entire script before proceeding.*
 
 ## Step 2 - Integration into TSI
 
@@ -161,13 +162,14 @@ An explanation of each step of the script is as follows:
 1. We build and deploy the app with the same method used in the previous part of this Lab.
 
 ```
-PS C:\WindowsAiEdgeLabCV> dotnet restore -r win-x64
-PS C:\WindowsAiEdgeLabCV> dotnet publish -r win-x64
+cd "C:\Labs\src\IoTLabs.MachineLearning"
+dotnet restore -r win-x64
+dotnet publish -r win-x64
 ```
 
 We run the app locally on our test data with the following command
 ```
-C:\IoTLab\src\IoTLabs.MachineLearning>dotnet run --model=model.onnx --csv="test_data.csv"
+C:\Labs\src\IoTLabs.MachineLearning>dotnet run --model=model.onnx --csv="test_data.csv"
 Loading model from: 'model.onnx', Exists: 'True'
 14-May-19 10:48:16 AM: Loading modelfile 'model.onnx' on the CPU...
 14-May-19 10:48:17 AM: ...OK 812 ticks

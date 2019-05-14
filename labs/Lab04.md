@@ -49,7 +49,7 @@ This lab introduces Azure IoT Edge with Windows 10 IoT Core.
 az extension add --name azure-cli-iot-ext
 
 az login
-az iot edge set-modules --device-id [device name] --hub-name [hub name] --content "C:\Labs\Content\src\IoTLabs.IoTEdge\deployment.template.lab04.win-x64.json"
+az iot edge set-modules --device-id [device name] --hub-name [hub name] --content "C:\Labs\Content\src\IoTLabs.IoTEdge\deployment.example.win-x64.json"
 ```
 
 ### 2.2 - Monitor Device to Cloud messages

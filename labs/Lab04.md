@@ -1,78 +1,97 @@
 # Lab 04 - Introduction to Azure IoT Edge
 
+This lab introduces Azure IoT Edge with Windows 10 IoT Core.
+
 ## 1.0 - Set up your UP Squared Device
 
-1. Plug the HDMI & Ethernet cable from the Dragonboard into the UP Squared Device. 
-1. You should see information about the device, including the device name and IP Address. You will need this to connect to the device via the IoT Dashboard.
-1. Next open the Azure Portal and Sign in
-1. Click "Resource groups" on the left-hand menu, select the "winiot" resource group in the list and choose the IoT Hub previously created
-1. Click "IoT Edge" on the IoT Hub side menu and click "Add an IoT Edge device" at the top. Note that this is a slightly different menu than the one used earlier in the lab.
+### 1.1 - Cloud setup
+
+1. Attach Ethernet, HDMI, Keyboard/Mouse into the UP Squared device
+1. Make a note of the UP Squared device name written on the case starting with A. For example, A19 
+1. Open a browser and navigate to the [Azure Portal https://portal.azure.com](https://portal.azure.com). Use the lab credentials provided
+1. Click "Resource groups" on the left-hand menu, select the "winiot" resource group in the list and choose the IoT Hub created in [Lab 2](./Lab02.md#11---deploy-azure-iot-hub)
+![](./media/2_azure5.png)
+1. Click "IoT Edge" on the IoT Hub side menu and click "Add an IoT Edge device" at the top. **Note: that this is a slightly different menu than the one used earlier in the lab**
 ![IoT Hub Portal](./media/4_SelectIoTEdge.png)
-1. Enter the device name (from step 2) as the device id and click "Save" to create the device
-1. Click the newly saved device (you may need to refresh) and copy the "Connection string (primary key)" field to the clipboard - we will use this later
+1. Enter the UP Squared name (from step 2) as the device id and click "Save" to create the device
+1. Refresh the list and open the device properties
+1. Copy "Connection string (primary key)" to the clipboard
 ![IoT Edge Device Information](./media/4_CopyConnectionStringIoTEdge.png)
 
 
-### 1.1 - Set up IoT Edge
+### 1.1 - Device setup
 
-1. Remotely connect to powershell on the device, by opening the IoT Dashboard then clicking on the three dots in the "Actions" column and then clicking "Launch Powershell". When prompted,enter "p@ssw0rd" as the password.
+1. Open ```IoT Dashboard```, right click on your device starting with A (for example, A19) and click "Launch PowerShell". When prompted, enter "p@ssw0rd" as the password
 ![IoT Dashboard](./media/4_SelectPowershellDevice.png)
-2. Type in the following to the console and wait for the operation to complete, the machine will restart during this process and you will need to reconnect to the devices's powershell.
+2. Install the Azure IoT Edge runtime on the device by running the following command and wait for the device to reboot:
 
 ```
 . {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Deploy-IoTEdge
 ```
 
-3. After the IoT Edge agent has been installed we can connect it up to our IoT Hub by supplying the connection string you retreived earlier.
+3. Re-connect the remote PowerShell session 
+4. Configure the Azure IoT Edge runtime with the following command:
 
 ```
 . {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Initialize-IoTEdge
 ```
 
-4. You can check that IoT Edge has installed correctly by typing "iotedge check" and viewing the output. The command "Get-IoTEdgeLog" may also assist in troubleshooting any issues that occur.
+5. Enter ```iotedge check``` to validate the Azure IoT Edge runtime installation. ```Get-IoTEdgeLog``` can also be used to debug issues
 
-## 2.0 - Deploy the mock temperature sensor monitor deployment
+
+## 2.0 - Deploy Simulated Temperature Sensor
+
+### 2.1 - Module deployment
+
+1. Close the remote PowerShell and run the following commands on the laptop PowerShell:
 
 ```
 az extension add --name azure-cli-iot-ext
+
 az login
 az iot edge set-modules --device-id [device name] --hub-name [hub name] --content "C:\Labs\Content\src\IoTLabs.IoTEdge\deployment.example.win-x64.json"
 ```
 
-### 2.1 - Monitor Device to Cloud messages
+### 2.2 - Monitor Device to Cloud messages
+
+1. Enter the following command to mointor Device-to-Cloud (D2C) messages being published to the IoT Hub:
 
 ```
 az iot hub monitor-events -n [hub name] -d [device id]
 ```
  
-## 3.0 Build and deploy a custom model that detects UP Squared Devices
+## 3.0 - Custom container deployment
 
-### 3.1 Set up and deploy Azure Container Registry
+### 3.1 - Deploy Azure Container Registry (ACR)
 
-[Quickstart: Create a private container registry using the Azure portal](https://docs.microsoft.com/en-us/azure/container-registry/container-registry-get-started-portal)
+For more information read: [Quickstart: Create a private container registry using the Azure portal](https://docs.microsoft.com/en-us/azure/container-registry/container-registry-get-started-portal).
 
 1. Sign into the Azure Portal
 1. Create a new "Container Registry" resource
-1. Once created, switch to the "Access Keys" pane.
+1. Once created, switch to the "Access Keys" pane
 1. Enable the "Admin User"
-1. Make note of the Login Server, username, and password. You'll need these later.
+1. Make note of the Login Server, username, and password. You'll need these later
 
 
-### 3.2 Build & Test the sample
-Next we will build and deploy our own container.
+### 3.2 - Build and test code
 
-1. Open a powershell window at this location "C:\Labs\Content\src\IoTLabs.CustomVision"
-2. Restore the packages by running the following command
+1. Open PowerShell and type: 
 
 ```
+cd "C:\Labs\Content\src\IoTLabs.CustomVision"
 dotnet restore -r win-x64
 ```
 
-3. Connect the camera to your laptop and point the camera at the Up Squared
-4. Run the sample locally to classify the object. This will test that the app is running correctly locally. We specify "Lifecam" for this model of camera. Here we can see that a "up2" has been recognized.
+2. Connect the USB webcam to your laptop and point the camera at the UP Squared
+4. Run the following command to start the machine learning application. The console should return a string identifying the UP Squared: 
 
 ```
 dotnet run --model=CustomVision.onnx --device=LifeCam
+```
+
+Output should match the following:
+
+```
 4/24/2019 4:09:04 PM: Loading modelfile 'CustomVision.onnx' on the CPU...
 4/24/2019 4:09:04 PM: ...OK 594 ticks
 4/24/2019 4:09:05 PM: Running the model...
@@ -82,30 +101,34 @@ dotnet run --model=CustomVision.onnx --device=LifeCam
 
 ### 3.3 - Containerize the sample app 
 
-1.  Publish the executables into a folder named release by running the following command
+1.  Publish the executables into a folder named release by running the following command:
+
 ```
 dotnet publish -c Release -o ./release -r win-x64
 ```
+
 2. Then enter the name of your container (note: the number value after the colon denotes the version, increment this every time you make a change)
 ```powershell
-#SAMPLE: customvision:1.0-x64-iotcore
-$imageName = "[container-name]"
 #SAMPLE: aiedgelabcr
 $registryName = "[azure-container-registry-name]"
-docker build . -t "$registryName.azurecr.io/$container"
+$version = "1.0"
+$imageName = "customvision"
+
+$containerTag = "$registryName.azurecr.io/$($imageName):$version-x64-iotcore"
+docker build . -t $containerTag
 ```
 
 
-### 3.4 - Authenticate and push to Azure Container Registry
+### 3.4 - Push containter to ACR
 
-- Authenticate to the Azure Container Registry and push the new image that was built in the previous step.
+1. Run the following commands to login and upload the container into Azure:
 
 ```powershell
 az acr login --name $registryName
-docker push $imageName
+docker push $containerTag
 ```
 
-## 4.0 - Deploy edge modules to device 
+## 4.0 - Deploy IoT Edge Modules
 
 ### 4.1 - Author a deployment.json file
 
@@ -114,6 +137,8 @@ Now that we have a container image with our inferencing logic stored in our cont
 1. Go to "C:\Labs\Content\src\IoTLabs.IoTEdge"
 1. Edit the "deployment.template.win-x64.json" file
 1. Search for "{ACR_*}" and replace those values with the correct values for your container repository. The ACR_IMAGE must exactly match what you pushed, e.g. aiedgelabcr.azurecr.io/customvision:1.0-x64-iotcore
+
+**Hint: you can type $containerTag to get the full container string from PowerShell.**
 
 
 ### 4.2 - Deploy the IoT Edge deployment.json file. 

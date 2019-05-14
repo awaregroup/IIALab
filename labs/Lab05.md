@@ -92,7 +92,7 @@ The command completed successfully.
 Next copy the 'publish' folder over to our device
 
 ```
-PS C:\WindowsAiEdgeLabCV> robocopy .\release\ q:\data\modules\customvision
+robocopy .\release\ q:\data\modules\customvision
 ```
 
 ### Test the sample on the target device

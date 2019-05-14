@@ -60,7 +60,7 @@ Point the camera at one of your objects, still connected to your development PC.
 Run the sample locally to classify the object. This will test that the app is running correctly locally. We specify "Lifecam" for this model of camera. Here we can see that a "Mug" has been recognized.
 
 ```
-PS C:\WindowsAiEdgeLabCV> dotnet run --model=CustomVision.onnx --device=LifeCam
+dotnet run --model=CustomVision.onnx --device=LifeCam
 4/24/2019 4:09:04 PM: Loading modelfile 'CustomVision.onnx' on the CPU...
 4/24/2019 4:09:04 PM: ...OK 594 ticks
 4/24/2019 4:09:05 PM: Running the model...

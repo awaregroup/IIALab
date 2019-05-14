@@ -164,7 +164,7 @@ An explanation of each step of the script is as follows:
 ```
 cd "C:\Labs\src\IoTLabs.MachineLearning"
 dotnet restore -r win-x64
-dotnet publish -r win-x64
+dotnet publish -c Release -o ./release -r win-x64
 ```
 
 We run the app locally on our test data with the following command
@@ -182,171 +182,60 @@ System.Collections.Generic.List`1[WindowsAiEdgeLabTabular.DataRow]
 
 ## Step 3: Build and push a container
 
-### Connect to our IoT Core device
+### 3.0 - Containerize the sample app 
 
-IoT Core container images must be built on an IoT Core device. 
-
-We will need a way to copy files to our device and a Windows PowerShell window from our development PC connected to that device.
-
-First, we will map the Q: drive to our device so we can access files. 
-
-You'll need the Device IP Address. To get the IP Address open the "IoT Dashboard" from the desktop of your surface and select "My Devices".
- 
-The name of your device is written on the underside of the case in white.
-Right click on your device and select "Copy IPv4 Address".
+1.  Publish the executables into a folder named release by running the following command:
 
 ```
-PS C:\WindowsAiEdgeLabCV> $DeviceIPAddress = {ENTER YOUR IP ADDRESS HERE}
-PS C:\WindowsAiEdgeLabCV> net use q: \\$DeviceIPAddress\c$ p@ssw0rd /USER:Administrator
-The command completed successfully.
+dotnet publish -c Release -o ./release -r win-x64
 ```
 
-Second, we'll connect a Windows PowerShell session to our target device. Open a new Windows PowerShell window, and connect to the device. When prompted enter the Device Administrator Password.
+2. Then enter the name of your container (note: the number value after the colon denotes the version, increment this every time you make a change)
+```powershell
+#SAMPLE: aiedgelabcr
+$registryName = "[azure-container-registry-name]"
+$version = "1.0"
+$imageName = "tabularmodel"
 
-```
-PS C:\WindowsAiEdgeLabCV> Enter-PSSession -ComputerName $DeviceIPAddress -Credential ~\Administrator
-```
-
-### Copy published files to target device
-
-We will copy the 'publish' folder over to our device
-
-```
-robocopy .\bin\Debug\netcoreapp2.2\win-x64\publish\ q:\data\modules\tabularmodel
+$containerTag = "$registryName.azurecr.io/$($imageName):$version-x64-iotcore"
+docker build . -t $containerTag
 ```
 
-### Test the sample on the target device
 
-Following the same approach as above, we will run the app on the target device to ensure we have the correct camera there, and it's working on that device.
+### 3.1 - Push containter to ACR
 
-1. Connect the camera to the IoT Core device.
-1. In the Windows PowerShell window to the IoT Core device...
-1. Change to the "C:\data\modules\tabularmodel" directory
-1. Do a test run as we did previously:
+1. Run the following commands to login and upload the container into Azure:
 
-```
-[192.168.1.102]: PS C:\Data\Users\Administrator\Documents> cd C:\data\modules\tabularmodel
-
-[192.168.1.102]: PS C:\data\modules\tabularmodel> .\WindowsAiEdgeLabTabular.exe --model=model.onnx --csv=test_data.csv
+```powershell
+az acr login --name $registryName
+docker push $containerTag
 ```
 
-### Containerize the sample app
+## 4.0 - Deploy IoT Edge Modules
 
-Build the container on the device. To make things easier in this lab, we will set the value of $Container to the address where we will push our container. This will be in the container repository we set up earlier. Find the "Container Registry Login Server" address from the steps above. For example, I am using "aiedgelabcr.azurecr.io" 
-to test the lab, so I will do as follows:
+### 4.1 - Author a deployment.json file
 
-```
-[192.168.1.102]: PS C:\data\modules\tabularmodel> $Container = "aiedgelabcr.azurecr.io/tabularmodel:1.0-x64-iotcore"
-```
+Now that we have a container image with our inferencing logic stored in our container registry, it's time to create an Azure IoT Edge deployment to our device.
 
-Still in the "C:\data\modules\tabularmodel" directory, we will now build the container on the IoT Core device.
-Note that if we were building for an IoT Enterprise device, we could just do this on our development machine.
+1. Go to "C:\Labs\Content\src\IoTLabs.IoTEdge"
+1. Edit the "deployment.template.lab05.win-x64.json" file
+1. Search for any variables starting with ACR and replace those values with the correct values for your container repository. The ACR_IMAGE must exactly match what you pushed, e.g. aiedgelabcr.azurecr.io/tabularmodel:1.0-x64-iotcore
 
-```
-[192.168.1.102]: PS C:\data\modules\tabularmodel> docker build . -t $Container
-Sending build context to Docker daemon  90.54MB
+**Hint: you can type $containerTag to get the full container string from PowerShell.**
 
-Step 1/5 : FROM mcr.microsoft.com/windows/iotcore:1809
- ---> b292a83fe7c1
-Step 2/5 : ARG EXE_DIR=.
- ---> Using cache
- ---> cccdd52d4b4f
-Step 3/5 : WORKDIR /app
- ---> Using cache
- ---> 3e071099a8a8
-Step 4/5 : COPY $EXE_DIR/ ./
- ---> 951c8a6e96bc
-Step 5/5 : CMD [ "WindowsAiEdgeLabTabular.exe", "-mmodel.onnx", "-ctest_data.csv", "-ef" ]
- ---> Running in ae981c4d8819
-Removing intermediate container ae981c4d8819
- ---> fee066f14f2c
-Successfully built fee066f14f2c
-Successfully tagged aiedgelabcr.azurecr.io/tabularmodel:1.0-x64-iotcore
-```
 
-### Push the container
+### 4.2 - Deploy the IoT Edge deployment.json file. 
 
-Now that we are sure the app is working correctly within the container, we will push it to our registry.
-
-Before that, we will need to login to the container registry using the Container Registry Username and Container Registry Password obtained in previous steps.
+Just like the example deployment, use the following syntax to update the expected module state on the device. IoT Edge will pick up on this configuration change and deploy the container to the device.
 
 ```
-PS C:\WindowsAiEdgeLabTabular> docker login $ContainerRegistryLoginServer -u $ContainerRegistryUsername -p $ContainerRegistryPassword
-Login Succeeded
+az iot edge set-modules --device-id [device name] --hub-name [hub name] --content "C:\Labs\Content\src\IoTLabs.IoTEdge\deployment.template.lab05.win-x64.json"
 ```
 
-Then we'll push the container into our registry.
-
+Run the following command to get information about the modules deployed to your IoT Hub.
 ```
-[192.168.1.102]: PS C:\data\modules\tabularmodel> docker push $Container
-The push refers to repository [aiedgelabcr.azurecr.io/tabularmodel]
-c1933e4141d1: Preparing
-ecdb3e0bf60d: Preparing
-b7f45a54f179: Preparing
-6bd44acbda1a: Preparing
-13e7d127b442: Preparing
-13e7d127b442: Skipped foreign layer
-c1933e4141d1: Pushed
-b7f45a54f179: Pushed
-6bd44acbda1a: Pushed
-ecdb3e0bf60d: Pushed
-1.0-x64-iotcore: digest: sha256:7ba0ac77a29d504ce19ed2ccb2a2c67addb24533e4e3b66476ca018566b58086 size: 1465
+az iot hub module-identity list --device-id [device name] --hub-name [hub name]
 ```
-
-## Step 4: Create an Azure IoT Edge deployment to the target device
-
-### Author a deployment.json file
-
-Now that we have a container with our inferencing logic safely up in our container registry, it's time to create an Azure IoT Edge deployment to our device.
-
-We will do this back on the development PC.
-
-Amongst the lab files, you will find a deployment json file at the following path : "C:\Labs\Content\src\IoTLabs.IoTEdge\deployment.template.lab05.win-x64.json" . 
-
-Open this file in Visual Studio Code. We must fill in the details for the container image we just built above, along with our container registry credentials.
-
-Search for any variables starting with ACR and replace those values with the correct values for your container repository. The ACR_IMAGE must exactly match what you pushed, e.g. aiedgelabcr.azurecr.io/tabularmodel:1.0-x64-iotcore
-
-```
-    "$edgeAgent": {
-      "properties.desired": {
-        "runtime": {
-          "settings": {
-            "registryCredentials": {
-              "{ACR_NAME}": {
-                "username": "{ACR_USER}",
-                "password": "{ACR_PASSWORD}",
-                "address": "{ACR_NAME}.azurecr.io"
-              }
-            }
-          }
-        }
-...
-        "modules": {
-            "squeezenet": {
-            "settings": {
-              "image": "{ACR_IMAGE}",
-              "createOptions": "{\"HostConfig\":{\"Devices\":[{\"CgroupPermissions\":\"\",\"PathInContainer\":\"\",\"PathOnHost\":\"class/E5323777-F976-4f5b-9B55-B94699C46E44\"},{\"CgroupPermissions\":\"\",\"PathInContainer\":\"\",\"PathOnHost\":\"class/5B45201D-F2F2-4F3B-85BB-30FF1F953599\"}],\"Isolation\":\"Process\"}}"
-            }
-          }
-```
-
-### Deploy edge modules to device
-
-Refer to this guide: [Deploy Azure IoT Edge modules from Visual Studio Code](https://docs.microsoft.com/en-us/azure/iot-edge/how-to-deploy-modules-vscode)
-
-1. In VS Code, open the "Azure IoT Hub Devices" pane. 
-1. Locate the device there named according to the edge device name from when you created it in the hub. 
-1. Right-click on that device, then select "Create deployment for single device".
-1. Choose the deployment.json file you edited in the step above.
-1. Press OK
-1. Look for "deployment succeeded" in the output window.
-
-```
-[Edge] Start deployment to device [ai-edge-lab-device]
-[Edge] Deployment succeeded.
-```
-
 ### Verify the deployment on device
 
 Wait a few minutes for the deployment to go through. On the target device you can inspect the running modules. Success looks like this:

@@ -155,7 +155,7 @@ An explanation of each step of the script is as follows:
 
 *Go through the entire script before proceeding.*
 
-## Step 2 - Integration into TSI
+## Step 2 - Use Converted Model in an Application
 
 ### 2.1 - Add model to UWP app
 1. Once we have exported the model it will already be in the right file to build the app.

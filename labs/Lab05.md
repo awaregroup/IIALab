@@ -118,7 +118,7 @@ Following the same approach as above, we will run the app on the target device t
 ```
 
 # Step 4 : Deploy to IoT Edge
-Using the skills you learned in Lab04 from Step 3.2 onwards, redeploy this solution to the Up Squared using IoT Edge.
+Using the skills you learned in [Lab 04](./labs/Lab04.md) from Step 3.2 onwards, redeploy this solution to the Up Squared using IoT Edge.
 
 # Part 2 - XGboost for Sensor Data
 

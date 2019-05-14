@@ -28,7 +28,7 @@ When starting the lab, you should have these things open on your development mac
 1. Using the Camera app on your development PC, take at least 5 pictures each of your objects. Store these pictures on your computer. Organize all the photos for each object into a folder named for this object. It will make them easier to upload.
 1. Log into the [Custom Vision Portal](https://www.customvision.ai/)
 1. Choose the Directory associated with your Azure account
-1. Create a New Project. Be sure to choose a "compact" domain.
+1. Create a New Project. Be sure to choose a "compact" domain and *Classification* not Object Detection
 1. Upload them to your custom vision project. I recommend to upload one object at a time, so it's easy to apply a tag to all your images. Each time you upload all the images for a given object, specify the tag at that time.
 1. Select "Train" to train the model
 1. Select "Quick Test" to test the model.

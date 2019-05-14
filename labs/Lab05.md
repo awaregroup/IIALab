@@ -167,7 +167,8 @@ dotnet restore -r win-x64
 dotnet publish -c Release -o ./release -r win-x64
 ```
 
-We run the app locally on our test data with the following command
+We run the app locally on our test data with the following command. 
+* To stop the execution push "Ctrl + C" *
 ```
 C:\Labs\src\IoTLabs.MachineLearning>dotnet run --model=model.onnx --csv="test_data.csv"
 Loading model from: 'model.onnx', Exists: 'True'

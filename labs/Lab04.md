@@ -136,7 +136,7 @@ Now that we have a container image with our inferencing logic stored in our cont
 
 1. Go to "C:\Labs\Content\src\IoTLabs.IoTEdge"
 1. Edit the "deployment.template.win-x64.json" file
-1. Search for "{ACR_*}" and replace those values with the correct values for your container repository. The ACR_IMAGE must exactly match what you pushed, e.g. aiedgelabcr.azurecr.io/customvision:1.0-x64-iotcore
+1. Search for any variables starting with ACR and replace those values with the correct values for your container repository. The ACR_IMAGE must exactly match what you pushed, e.g. aiedgelabcr.azurecr.io/customvision:1.0-x64-iotcore
 
 **Hint: you can type $containerTag to get the full container string from PowerShell.**
 

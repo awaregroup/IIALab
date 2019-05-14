@@ -49,7 +49,7 @@ This lab introduces Azure IoT Edge with Windows 10 IoT Core.
 az extension add --name azure-cli-iot-ext
 
 az login
-az iot edge set-modules --device-id [device name] --hub-name [hub name] --content "C:\Labs\Content\src\IoTLabs.IoTEdge\deployment.example.win-x64.json"
+az iot edge set-modules --device-id [device name] --hub-name [hub name] --content "C:\Labs\Content\src\IoTLabs.IoTEdge\deployment.template.lab04.win-x64.json"
 ```
 
 ### 2.2 - Monitor Device to Cloud messages
@@ -135,7 +135,7 @@ docker push $containerTag
 Now that we have a container image with our inferencing logic stored in our container registry, it's time to create an Azure IoT Edge deployment to our device.
 
 1. Go to "C:\Labs\Content\src\IoTLabs.IoTEdge"
-1. Edit the "deployment.template.win-x64.json" file
+1. Edit the "deployment.template.lab04.win-x64.json" file
 1. Search for any variables starting with ACR and replace those values with the correct values for your container repository. The ACR_IMAGE must exactly match what you pushed, e.g. aiedgelabcr.azurecr.io/customvision:1.0-x64-iotcore
 
 **Hint: you can type $containerTag to get the full container string from PowerShell.**
@@ -146,7 +146,7 @@ Now that we have a container image with our inferencing logic stored in our cont
 Just like the example deployment, use the following syntax to update the expected module state on the device. IoT Edge will pick up on this configuration change and deploy the container to the device.
 
 ```
-az iot edge set-modules --device-id [device name] --hub-name [hub name] --content "C:\Labs\Content\src\IoTLabs.IoTEdge\deployment.template.win-x64.json"
+az iot edge set-modules --device-id [device name] --hub-name [hub name] --content "C:\Labs\Content\src\IoTLabs.IoTEdge\deployment.template.lab04.win-x64.json"
 ```
 
 Run the following command to get information about the modules deployed to your IoT Hub.

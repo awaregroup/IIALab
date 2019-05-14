@@ -204,7 +204,7 @@ docker build . -t $containerTag
 ```
 
 
-### 3.1 - Push containter to ACR
+### 3.1 - Push container to ACR
 
 1. Run the following commands to login and upload the container into Azure:
 

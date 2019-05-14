@@ -162,7 +162,7 @@ An explanation of each step of the script is as follows:
 1. We build and deploy the app with the same method used in the previous part of this Lab.
 
 ```
-cd "C:\Labs\src\IoTLabs.MachineLearning"
+cd "C:\Labs\Content\src\IoTLabs.MachineLearning"
 dotnet restore -r win-x64
 dotnet publish -c Release -o ./release -r win-x64
 ```

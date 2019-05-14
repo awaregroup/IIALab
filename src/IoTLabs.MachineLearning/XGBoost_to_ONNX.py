@@ -27,24 +27,16 @@ data = pd.read_csv("./PowerPlantDataSet.csv", index_col=None, header=None, skipr
 data.head()
 
 #%%
-seaborn.heatmap(data.corr().abs())
+sns.heatmap(data.corr().abs())
 
 
 #%%
 for i in range(4):
-    seaborn.jointplot(data[i],data[4], kind="kde")
+    sns.jointplot(data[i],data[4], kind="kde")
 
 
 #%%
-plt.hist(data[0], normed=True, alpha=0.5,label="Temperature")
-
-
-#%%
-sns.pairplot(data, hue='4', size=2.5);
-
-
-#%%
-X = data[[0,1,2,3]] # here we convert the old labels into numbers to make them compatible with the model exporter
+X = data[[0,1,2,3]] 
 y = data[4]
 
 

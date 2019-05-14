@@ -294,10 +294,11 @@ Now that we have a container with our inferencing logic safely up in our contain
 
 We will do this back on the development PC.
 
-Amongst the lab files, you will find a deployment json file named deployment.win-x64.json. Open this file in VS Code. We must fill in the details for the container image we just built above, along with our container registry credentials.
+Amongst the lab files, you will find a deployment json file at the following path : "C:\Labs\Content\src\IoTLabs.IoTEdge\deployment.template.lab05.win-x64.json" . 
 
-Search for "{ACR_*}" and replace those values with the correct values for your container repository.
-The ACR_IMAGE must exactly match what you pushed, e.g. aiedgelabcr.azurecr.io/tabularmodel:1.0-x64-iotcore
+Open this file in Visual Studio Code. We must fill in the details for the container image we just built above, along with our container registry credentials.
+
+Search for any variables starting with ACR and replace those values with the correct values for your container repository. The ACR_IMAGE must exactly match what you pushed, e.g. aiedgelabcr.azurecr.io/tabularmodel:1.0-x64-iotcore
 
 ```
     "$edgeAgent": {

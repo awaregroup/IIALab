@@ -183,6 +183,7 @@ System.Collections.Generic.List`1[WindowsAiEdgeLabTabular.DataRow]
 ## Step 3: Build and push a container
 
 ### 3.0 - Containerize the sample app 
+The following steps assume that you have created a Azure Container Registry in the previous lab.
 
 1.  Publish the executables into a folder named release by running the following command:
 
@@ -190,9 +191,9 @@ System.Collections.Generic.List`1[WindowsAiEdgeLabTabular.DataRow]
 dotnet publish -c Release -o ./release -r win-x64
 ```
 
-2. Then enter the name of your container (note: the number value after the colon denotes the version, increment this every time you make a change)
+2. Then enter the name of your container image (note: the number value after the colon denotes the version, increment this every time you make a change)
 ```powershell
-#SAMPLE: aiedgelabcr
+#SAMPLE: aiedgelabcr (this is the same container registry created in lab 04)
 $registryName = "[azure-container-registry-name]"
 $version = "1.0"
 $imageName = "tabularmodel"

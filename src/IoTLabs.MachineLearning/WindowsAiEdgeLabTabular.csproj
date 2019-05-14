@@ -51,6 +51,12 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="test_data.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
   <Target Name="CopyCustomContentOnPublish" AfterTargets="Publish">
     <Copy SourceFiles="model.onnx" DestinationFolder="$(PublishDir)" />
     <Copy SourceFiles="Dockerfile" DestinationFolder="$(PublishDir)" />

@@ -21,22 +21,20 @@ This lab introduces Azure IoT Edge with Windows 10 IoT Core.
 
 ### 1.1 - Device setup
 
-1. Open ```IoT Dashboard```, right click on your device starting with A (for example, A19) and click "Launch PowerShell". When prompted, enter "p@ssw0rd" as the password
-![IoT Dashboard](./media/4_SelectPowershellDevice.png)
-2. Install the Azure IoT Edge runtime on the device by running the following command and wait for the device to reboot:
+1. Install the Azure IoT Edge runtime on the device by running the following command and wait for the device to reboot:
 
 ```
 . {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Deploy-IoTEdge
 ```
 
-3. Re-connect the remote PowerShell session 
-4. Configure the Azure IoT Edge runtime with the following command:
+2. Re-connect the remote PowerShell session 
+3. Configure the Azure IoT Edge runtime with the following command:
 
 ```
 . {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Initialize-IoTEdge
 ```
 
-5. Enter ```iotedge check``` to validate the Azure IoT Edge runtime installation. ```Get-IoTEdgeLog``` can also be used to debug issues
+4. Enter ```iotedge check``` to validate the Azure IoT Edge runtime installation. ```Get-IoTEdgeLog``` can also be used to debug issues
 
 
 ## 2.0 - Deploy Simulated Temperature Sensor
@@ -114,7 +112,7 @@ $registryName = "[azure-container-registry-name]"
 $version = "1.0"
 $imageName = "customvision"
 
-$containerTag = "$registryName.azurecr.io/$($imageName):$version-x64-iotcore"
+$containerTag = "$registryName.azurecr.io/$($imageName):$version-x64-winent"
 docker build . -t $containerTag
 ```
 
@@ -136,7 +134,7 @@ Now that we have a container image with our inferencing logic stored in our cont
 
 1. Go to "C:\Labs\Content\src\IoTLabs.IoTEdge"
 1. Edit the "deployment.template.lab04.win-x64.json" file
-1. Search for any variables starting with ACR and replace those values with the correct values for your container repository. The ACR_IMAGE must exactly match what you pushed, e.g. aiedgelabcr.azurecr.io/customvision:1.0-x64-iotcore
+1. Search for any variables starting with ACR and replace those values with the correct values for your container repository. The ACR_IMAGE must exactly match what you pushed, e.g. aiedgelabcr.azurecr.io/customvision:1.0-x64-winent
 
 **Hint: you can type $containerTag to get the full container string from PowerShell.**
 

@@ -21,20 +21,20 @@ This lab introduces Azure IoT Edge with Windows 10 IoT Core.
 ### 1.2 - Device setup
 1. On your Surface LaptopOpen powershell as Administrator
 
-1. Install the Azure IoT Edge runtime on the device by running the following command and wait for the device to reboot:
+2. Install the Azure IoT Edge runtime on the device by running the following command and wait for the device to reboot:
 
 ```
 . {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Deploy-IoTEdge
 ```
 
-1. Re-open the remote PowerShell session as Administrator 
-1. Configure the Azure IoT Edge runtime with the following command:
+3. Re-open the remote PowerShell session as Administrator 
+4. Configure the Azure IoT Edge runtime with the following command:
 
 ```
 . {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Initialize-IoTEdge
 ```
-1. Enter the Device Connection string from step 1.1: 
-1. To validate the Azure IoT Edge runtime installation, use the command:
+5. Enter the Device Connection string from step 1.1: 
+6. To validate the Azure IoT Edge runtime installation, use the command:
 
 ```
 iotedge check
@@ -50,7 +50,16 @@ Get-IoTEdgeLog
 
 ### 2.1 - Module deployment
 
-1. Close the remote PowerShell and run the following commands on the laptop PowerShell:
+1. Open Powershell as Administrator:
+
+2. Install the Azure CLI:
+
+```
+Invoke-WebRequest -Uri https://aka.ms/installazurecliwindows -OutFile .\AzureCLI.msi; Start-Process msiexec.exe -Wait -ArgumentList '/I AzureCLI.msi /quiet'
+
+```
+3. Close your Powershell window and reopen it as Administrator.
+4. Run the following commands replacing [devicename] and [hub name] with their respective fields:
 
 ```
 az extension add --name azure-cli-iot-ext

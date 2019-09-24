@@ -7,10 +7,10 @@ This lab introduces Azure IoT Edge with Windows 10 IoT Core.
 ### 1.1 - Cloud setup
 
 1. Make a note of the Surface Laptop device name printed on the the device. For example, IOTEDGE02 
-2. Open a browser and navigate to the [Azure Portal https://portal.azure.com](https://portal.azure.com). Login with the lab credentials provided.
-3. Click "**Resource groups**" on the left-hand menu, select the "**winiot**" resource group in the list and choose the IoT Hub created in [Lab 2](./Lab02.md#11---deploy-azure-iot-hub)
+1. Open a browser and navigate to the [Azure Portal (https://portal.azure.com)](https://portal.azure.com). Login with the lab credentials provided.
+1. Click "**Resource groups**" on the left-hand menu, select the "**winiot**" resource group in the list and choose the IoT Hub created in [Lab 2](./Lab02.md#11---deploy-azure-iot-hub)
 ![](./media/2_azure5.png)
-4. Click "**IoT Edge**" on the IoT Hub side menu and click "**Add an IoT Edge device**" at the top. **Note: that this is a slightly different menu than the one used earlier in the lab**
+1. Click "**IoT Edge**" on the IoT Hub side menu and click "**Add an IoT Edge device**" at the top. **Note: that this is a slightly different menu than the one used earlier in the lab**
 ![IoT Hub Portal](./media/4_SelectIoTEdge.png)
 1. Enter the Surface Laptop name (from step 2) as the device id and click "**Save**" to create the device
 1. Refresh the list and open the device properties
@@ -18,7 +18,7 @@ This lab introduces Azure IoT Edge with Windows 10 IoT Core.
 ![IoT Edge Device Information](./media/4_CopyConnectionStringIoTEdge.png)
 
 
-### 1.1 - Device setup
+### 1.2 - Device setup
 
 1. Install the Azure IoT Edge runtime on the device by running the following command and wait for the device to reboot:
 
@@ -62,7 +62,16 @@ az iot edge set-modules --device-id [device name] --hub-name [hub name] --conten
 ```
 az iot hub monitor-events -n [hub name] -d [device id]
 ```
- 
+
+
+## 3.0 - Configuring Azure Stream Analytics on Edge
+### 3.1 - Deploying ASA on your IoT Edge device(s)
+1. In the [Azure Portal (https://portal.azure.com)](https://portal.azure.com) open the "**winiot**" resource group
+1. Open the IoT Hub resource, navigate to "**IoT Edge** and select the device that was created in [step 1.1](#user-content-2---device-setup)
+1. Select "**Set modules**", then under the "**Deployment Modules**" heading click "**+ Add**" and choose "**Azure Stream Analytics Module**"
+1. Select the Subscription and the Edge Job, then click "**Save**".
+
+
 ## 4.0 - Deploy IoT Edge Modules
 
 ### 4.1 - Author a deployment.json file

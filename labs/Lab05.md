@@ -114,7 +114,7 @@ Following the same approach as above, we will run the app on the target device t
 4/27/2019 8:31:42 AM: Recognized {"results":[{"label":"Mug","confidence":1.0}],"metrics":{"evaltimeinms":1953,"cycletimeinms":0}}
 ```
 
-# Step 4 : Deploy to IoT Edge
+## Step 4 : Deploy to IoT Edge
 Using the skills you learned in [Lab 04](./labs/Lab04.md) from Step 3.2 onwards, redeploy this solution to the Up Squared using IoT Edge.
 
 

@@ -19,7 +19,7 @@ This lab introduces Azure IoT Edge with Windows 10 IoT Core.
 
 
 ### 1.2 - IoT Device setup using Azure CLI
-1. On your Surface Laptop, open powershell as Administrator
+1. Open PowerShell as Administrator
 2. Install the Azure IoT Edge runtime on the device by running the following command and wait for the device to reboot:
 ```powershell
 . {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Deploy-IoTEdge
@@ -39,14 +39,14 @@ iotedge check
 
 ### 2.1 - Module deployment using Azure CLI
 
-1. Open PowerShell as Administrator:
-1. Run the following commands replacing [device name] and [hub name] with their respective fields:
+1. Open PowerShell as Administrator
+1. Run the following commands replacing [device id] and [hub name] with their respective fields:
 
 ```powershell
 az extension add --name azure-cli-iot-ext
 
 az login
-az iot edge set-modules --device-id [device name] --hub-name [hub name] --content "C:\Labs\Content\src\IoTLabs.IoTEdge\deployment.example.win-x64.json"
+az iot edge set-modules --device-id [device id] --hub-name [hub name] --content "C:\Labs\Content\src\IoTLabs.IoTEdge\deployment.example.win-x64.json"
 ```
 
 ### 2.2 - Monitor Device-to-Cloud messages
@@ -139,11 +139,3 @@ iotedge logs SimulatedTemperatureSensor
 ```
 You should see that the machine temperature increases until it reaches a temperature higher than the 24 degree threshold for at least 30 seconds.
 ![Temperature Reset](/media/lab04/temperature-reset.jpg)
-
-
-
-
-
-
-
-

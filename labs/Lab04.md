@@ -133,7 +133,17 @@ The module deployment is instant, however changes to the device can take around 
 iotedge list
 ```
 ![List Modules](/media/lab04/list-modules.jpg)
-3. You can also see a list of logs for your module using the following command:
+3. Try running the following to see the logs from our simulated temperature sensor:
 ```powershell
-iotedge logs [module name]
+iotedge logs SimulatedTemperatureSensor
 ```
+You should see that the machine temperature increases until it reaches a temperature higher than the 26 degree threshold for at least 30 seconds.
+![Temperature Reset](/media/lab04/temperature-reset.jpg)
+
+
+
+
+
+
+
+

@@ -23,26 +23,26 @@ This lab introduces Azure IoT Edge with Windows 10 IoT Core.
 
 2. Install the Azure IoT Edge runtime on the device by running the following command and wait for the device to reboot:
 
-```
+```powershell
 . {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Deploy-IoTEdge
 ```
 
 3. Re-open the remote PowerShell session as Administrator 
 4. Configure the Azure IoT Edge runtime with the following command:
 
-```
+```powershell
 . {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Initialize-IoTEdge
 ```
 5. Enter the Device Connection string from step 1.1: 
 6. To validate the Azure IoT Edge runtime installation, use the command:
 
-```
+```powershell
 iotedge check
 ``` 
 
 *You may also use this command to debug issues:*
 
-```
+```powershell
 Get-IoTEdgeLog
 ```
 
@@ -54,14 +54,14 @@ Get-IoTEdgeLog
 
 2. Install the Azure CLI:
 
-```
+```powershell
 Invoke-WebRequest -Uri https://aka.ms/installazurecliwindows -OutFile .\AzureCLI.msi; Start-Process msiexec.exe -Wait -ArgumentList '/I AzureCLI.msi /quiet'
 
 ```
 3. Close your Powershell window and reopen it as Administrator.
 4. Run the following commands replacing [devicename] and [hub name] with their respective fields:
 
-```
+```powershell
 az extension add --name azure-cli-iot-ext
 
 az login
@@ -72,18 +72,39 @@ az iot edge set-modules --device-id [device name] --hub-name [hub name] --conten
 
 1. Enter the following command to monitor Device-to-Cloud (D2C) messages being published to the IoT Hub:
 
-```
+```powershell
 az iot hub monitor-events -n [hub name] -d [device id]
 ```
 
 
 ## 3.0 - Configuring Azure Stream Analytics on Edge
-### 3.1 - Deploying ASA on your IoT Edge device(s)
+### 3.1 - Setting up Modules
 1. In the [Azure Portal (https://portal.azure.com)](https://portal.azure.com) open the **winiot** resource group
-1. Open the IoT Hub resource, navigate to **IoT Edge** and select the device that was created in [step 1.1](#user-content-2---device-setup)
-1. Select **Set modules**, then under the **Deployment Modules** heading click **+ Add** and choose **Azure Stream Analytics Module**
-1. Select the Subscription and the Edge Job, then click **Save**.
+1. Open the IoT Hub resource, navigate to **IoT Edge** and select the device that was created in [step 1.1](./#user-content-2---device-setup)
+![IoT Edge Devices](./media/lab04/iot-edge-devices.jpg)
+1. Select **Set modules**
+![IoT Edge Devices](./media/lab04/set-modules.jpg)
+1. Under the **Deployment Modules** heading click **+ Add** and choose **Azure Stream Analytics Module**
+![IoT Edge Devices](./media/lab04/add-asa-module.jpg)
+1. Set the Subscription as **MSIoTLabs-IIA** and Edge Job as **msiotlabs-iia-{user}-asa**, then click **Save**
+*Note: You may have to click on the **Edge job** dropdown for the save button to show.*
+1. When the module has loaded, select **Configure** and take note of the **Name** field. You will be using this module name in the next step.
+1. Click **Save**, then **Next**
 
+### 3.2 - Selecting the routes
+1. Replace the current json with the following, replacing {moduleName} with the module name found in the previous step:
+
+```javascript
+{
+    "routes": {
+        "telemetryToCloud": "FROM /messages/modules/SimulatedTemperatureSensor/* INTO $upstream",
+        "alertsToCloud": "FROM /messages/modules/{moduleName}/* INTO $upstream",
+        "alertsToReset": "FROM /messages/modules/{moduleName}/* INTO BrokeredEndpoint(\"/modules/SimulatedTemperatureSensor/inputs/control\")",
+        "telemetryToAsa": "FROM /messages/modules/SimulatedTemperatureSensor/* INTO BrokeredEndpoint(\"/modules/{moduleName}/inputs/temperature\")"
+    }
+}
+```
+2. Select **Next**, then **Submit**
 
 ## 4.0 - Deploy IoT Edge Modules
 

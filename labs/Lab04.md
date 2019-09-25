@@ -84,7 +84,7 @@ INTO
 FROM 
    temperature TIMESTAMP BY timeCreated 
 GROUP BY TumblingWindow(second,30) 
-HAVING Avg(machine.temperature) > 26
+HAVING Avg(machine.temperature) > 24
 ```
 3. Click **Save query**
 
@@ -137,7 +137,7 @@ iotedge list
 ```powershell
 iotedge logs SimulatedTemperatureSensor
 ```
-You should see that the machine temperature increases until it reaches a temperature higher than the 26 degree threshold for at least 30 seconds.
+You should see that the machine temperature increases until it reaches a temperature higher than the 24 degree threshold for at least 30 seconds.
 ![Temperature Reset](/media/lab04/temperature-reset.jpg)
 
 

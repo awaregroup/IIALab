@@ -84,7 +84,7 @@ INTO
 FROM 
    temperature TIMESTAMP BY timeCreated 
 GROUP BY TumblingWindow(second,30) 
-HAVING Avg(machine.temperature) > 70
+HAVING Avg(machine.temperature) > 26
 ```
 3. Click **Save query**
 

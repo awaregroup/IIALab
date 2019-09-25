@@ -40,7 +40,7 @@ iotedge check
 ### 2.1 - Module deployment using Azure CLI
 
 1. Open PowerShell as Administrator:
-1. Run the following commands replacing [devicename] and [hub name] with their respective fields:
+1. Run the following commands replacing [device name] and [hub name] with their respective fields:
 
 ```powershell
 az extension add --name azure-cli-iot-ext

@@ -86,7 +86,7 @@ FROM
 GROUP BY TumblingWindow(second,30) 
 HAVING Avg(machine.temperature) > 70
 ```
-1. Click **Save query**
+3. Click **Save query**
 
 ### 3.5 - Adding Storage Account
 1. Under the **Configure** heading in the left hand menu, select **Storage account settings**

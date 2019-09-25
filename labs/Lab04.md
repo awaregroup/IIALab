@@ -105,6 +105,7 @@ HAVING Avg(machine.temperature) > 24
 1. Under the **Deployment Modules** heading click **+ Add** and choose **Azure Stream Analytics Module**
 ![Adding ASA Module](/media/lab04/add-asa-module.jpg)
 1. Set the Subscription as **MSIoTLabs-IIA** and Edge Job as **msiotlabs-iia-[user]-asa**, then click **Save**
+
 *Note: You may have to click on the **Edge job** dropdown for the save button to show.*
 1. When the module has loaded, select **Configure** and take note of the **Name** field. You will be using this module name in the next step.
 3. Click **Save**, then **Next**

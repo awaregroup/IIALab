@@ -1,0 +1,376 @@
+{
+  "@id": "urn:st:SensorTileBox:1",
+  "@type": "CapabilityModel",
+  "implements": [
+    {
+      "@id": "urn:st:SensorTileBox:urn_azureiot_DeviceManagement_DeviceInformation:1",
+      "@type": "InterfaceInstance",
+      "name": "urn_azureiot_DeviceManagement_DeviceInformation",
+      "schema": {
+        "@id": "urn:azureiot:DeviceManagement:DeviceInformation:1",
+        "@type": "Interface",
+        "displayName": {
+          "en": "Device information"
+        },
+        "contents": [
+          {
+            "@id": "urn:azureiot:DeviceManagement:DeviceInformation:manufacturer:1",
+            "@type": "Property",
+            "comment": "Company name of the device manufacturer. This could be the same as the name of the original equipment manufacturer (OEM). Ex. Contoso.",
+            "displayName": {
+              "en": "Manufacturer"
+            },
+            "name": "manufacturer",
+            "schema": "string"
+          },
+          {
+            "@id": "urn:azureiot:DeviceManagement:DeviceInformation:model:1",
+            "@type": "Property",
+            "comment": "Device model name or ID. Ex. Surface Book 2.",
+            "displayName": {
+              "en": "Device model"
+            },
+            "name": "model",
+            "schema": "string"
+          },
+          {
+            "@id": "urn:azureiot:DeviceManagement:DeviceInformation:swVersion:1",
+            "@type": "Property",
+            "comment": "Version of the software on your device. This could be the version of your firmware. Ex. 1.3.45",
+            "displayName": {
+              "en": "Software version"
+            },
+            "name": "swVersion",
+            "schema": "string"
+          },
+          {
+            "@id": "urn:azureiot:DeviceManagement:DeviceInformation:osName:1",
+            "@type": "Property",
+            "comment": "Name of the operating system on the device. Ex. Windows 10 IoT Core.",
+            "displayName": {
+              "en": "Operating system name"
+            },
+            "name": "osName",
+            "schema": "string"
+          },
+          {
+            "@id": "urn:azureiot:DeviceManagement:DeviceInformation:processorArchitecture:1",
+            "@type": "Property",
+            "comment": "Architecture of the processor on the device. Ex. x64 or ARM.",
+            "displayName": {
+              "en": "Processor architecture"
+            },
+            "name": "processorArchitecture",
+            "schema": "string"
+          },
+          {
+            "@id": "urn:azureiot:DeviceManagement:DeviceInformation:processorManufacturer:1",
+            "@type": "Property",
+            "comment": "Name of the manufacturer of the processor on the device. Ex. Intel.",
+            "displayName": {
+              "en": "Processor manufacturer"
+            },
+            "name": "processorManufacturer",
+            "schema": "string"
+          },
+          {
+            "@id": "urn:azureiot:DeviceManagement:DeviceInformation:totalStorage:1",
+            "@type": "Property",
+            "comment": "Total available storage on the device in kilobytes. Ex. 2048000 kilobytes.",
+            "displayName": {
+              "en": "Total storage"
+            },
+            "name": "totalStorage",
+            "displayUnit": {
+              "en": "kilobytes"
+            },
+            "schema": "long"
+          },
+          {
+            "@id": "urn:azureiot:DeviceManagement:DeviceInformation:totalMemory:1",
+            "@type": "Property",
+            "comment": "Total available memory on the device in kilobytes. Ex. 256000 kilobytes.",
+            "displayName": {
+              "en": "Total memory"
+            },
+            "name": "totalMemory",
+            "displayUnit": {
+              "en": "kilobytes"
+            },
+            "schema": "long"
+          }
+        ]
+      }
+    },
+    {
+      "@id": "urn:st:SensorTileBox:MagnetometerSensor:1",
+      "@type": "InterfaceInstance",
+      "name": "MagnetometerSensor",
+      "schema": {
+        "@id": "urn:st:MagnetometerSensor:1",
+        "@type": "Interface",
+        "displayName": {
+          "en": "Magnetometer Sensor"
+        },
+        "contents": [
+          {
+            "@id": "urn:st:MagnetometerSensor:magx:1",
+            "@type": "Telemetry",
+            "description": {
+              "en": "Magnetometer X axis"
+            },
+            "displayName": {
+              "en": "Mag X"
+            },
+            "name": "magx",
+            "displayUnit": {
+              "en": "mGa"
+            },
+            "schema": "double"
+          },
+          {
+            "@id": "urn:st:MagnetometerSensor:magy:1",
+            "@type": "Telemetry",
+            "description": {
+              "en": "Magnetometer Y axis"
+            },
+            "displayName": {
+              "en": "Mag Y"
+            },
+            "name": "magy",
+            "displayUnit": {
+              "en": "mGa"
+            },
+            "schema": "double"
+          },
+          {
+            "@id": "urn:st:MagnetometerSensor:magz:1",
+            "@type": "Telemetry",
+            "description": {
+              "en": "Magnetometer Z axis"
+            },
+            "displayName": {
+              "en": "Mag Z"
+            },
+            "name": "magz",
+            "displayUnit": {
+              "en": "mGa"
+            },
+            "schema": "double"
+          }
+        ]
+      }
+    },
+    {
+      "@id": "urn:st:SensorTileBox:GyroscopeSensor:1",
+      "@type": "InterfaceInstance",
+      "name": "GyroscopeSensor",
+      "schema": {
+        "@id": "urn:st:GyroscopeSensor:1",
+        "@type": "Interface",
+        "displayName": {
+          "en": "Gyroscope Sensor"
+        },
+        "contents": [
+          {
+            "@id": "urn:st:GyroscopeSensor:gyrox:1",
+            "@type": "Telemetry",
+            "description": {
+              "en": "Gyroscope X axis"
+            },
+            "displayName": {
+              "en": "Gyro X"
+            },
+            "name": "gyrox",
+            "displayUnit": {
+              "en": "dps"
+            },
+            "schema": "double"
+          },
+          {
+            "@id": "urn:st:GyroscopeSensor:gyroy:1",
+            "@type": "Telemetry",
+            "description": {
+              "en": "Gyroscope Y axis"
+            },
+            "displayName": {
+              "en": "Gyro Y"
+            },
+            "name": "gyroy",
+            "displayUnit": {
+              "en": "dps"
+            },
+            "schema": "double"
+          },
+          {
+            "@id": "urn:st:GyroscopeSensor:gyroz:1",
+            "@type": "Telemetry",
+            "description": {
+              "en": "Gyro Z axis"
+            },
+            "displayName": {
+              "en": "Gryo Z"
+            },
+            "name": "gyroz",
+            "displayUnit": {
+              "en": "dps"
+            },
+            "schema": "double"
+          }
+        ]
+      }
+    },
+    {
+      "@id": "urn:st:SensorTileBox:TemperatureSensor:1",
+      "@type": "InterfaceInstance",
+      "name": "TemperatureSensor",
+      "schema": {
+        "@id": "urn:st:TemperatureSensor:1",
+        "@type": "Interface",
+        "displayName": {
+          "en": "Temperature Sensor"
+        },
+        "contents": [
+          {
+            "@id": "urn:st:TemperatureSensor:temp:1",
+            "@type": "Telemetry",
+            "description": {
+              "en": "Temperature"
+            },
+            "displayName": {
+              "en": "Temp"
+            },
+            "name": "temp",
+            "displayUnit": {
+              "en": "Celsius"
+            },
+            "schema": "double"
+          }
+        ]
+      }
+    },
+    {
+      "@id": "urn:st:SensorTileBox:BarometerSensor:1",
+      "@type": "InterfaceInstance",
+      "name": "BarometerSensor",
+      "schema": {
+        "@id": "urn:st:PressureSensor:1",
+        "@type": "Interface",
+        "displayName": {
+          "en": "Barometer Sensor"
+        },
+        "contents": [
+          {
+            "@id": "urn:st:PressureSensor:press:1",
+            "@type": "Telemetry",
+            "description": {
+              "en": "Pressure"
+            },
+            "displayName": {
+              "en": "Pressure"
+            },
+            "name": "press",
+            "displayUnit": {
+              "en": "mbar"
+            },
+            "schema": "double"
+          }
+        ]
+      }
+    },
+    {
+      "@id": "urn:st:SensorTileBox:HumiditySensor:1",
+      "@type": "InterfaceInstance",
+      "name": "HumiditySensor",
+      "schema": {
+        "@id": "urn:st:HumiditySensor:1",
+        "@type": "Interface",
+        "displayName": {
+          "en": "Humidity Sensor"
+        },
+        "contents": [
+          {
+            "@id": "urn:st:HumiditySensor:hum:1",
+            "@type": "Telemetry",
+            "description": {
+              "en": "Humidity"
+            },
+            "displayName": {
+              "en": "Humidity"
+            },
+            "name": "hum",
+            "displayUnit": {
+              "en": "%"
+            },
+            "schema": "double"
+          }
+        ]
+      }
+    },
+    {
+      "@id": "urn:st:SensorTileBox:AccelerometerSensor:1",
+      "@type": "InterfaceInstance",
+      "name": "AccelerometerSensor",
+      "schema": {
+        "@id": "urn:st:AccelerometerSensor:1",
+        "@type": "Interface",
+        "displayName": {
+          "en": "Accelerometer Sensor"
+        },
+        "contents": [
+          {
+            "@id": "urn:st:AccelerometerSensor:accx:1",
+            "@type": "Telemetry",
+            "description": {
+              "en": "Acceleration X axis"
+            },
+            "displayName": {
+              "en": "AccX"
+            },
+            "name": "accx",
+            "displayUnit": {
+              "en": "mg"
+            },
+            "schema": "double"
+          },
+          {
+            "@id": "urn:st:AccelerometerSensor:accy:1",
+            "@type": "Telemetry",
+            "description": {
+              "en": "Acceleration Y axis"
+            },
+            "displayName": {
+              "en": "AccY"
+            },
+            "name": "accy",
+            "displayUnit": {
+              "en": "mg"
+            },
+            "schema": "double"
+          },
+          {
+            "@id": "urn:st:AccelerometerSensor:accz:1",
+            "@type": "Telemetry",
+            "description": {
+              "en": "Acceleration Z axis"
+            },
+            "displayName": {
+              "en": "AccZ"
+            },
+            "name": "accz",
+            "displayUnit": {
+              "en": "mg"
+            },
+            "schema": "double"
+          }
+        ]
+      }
+    }
+  ],
+  "displayName": {
+    "en": "ST SensorTile.Box"
+  },
+  "@context": [
+    "http://azureiot.com/v1/contexts/IoTModel.json"
+  ]
+}

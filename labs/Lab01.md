@@ -1,4 +1,4 @@
-# Lab 01 - Getting started with Windows IoT
+# Lab 01 - Getting started with Windows 10 IoT
 
 This lab covers setting up Windows 10 IoT Core on a SolidRun HummingBoard Edge board and deploying apps using Visual Studio.
 
@@ -62,7 +62,7 @@ Devices running Windows 10 IoT Core can be installed and configured using the Io
 4. Run the project to test it on your HummingBoard. You should see an interface, however no data should be showing - **Note: the first deployment can take a few minutes**
 
 
-## 3 - Publishing your app
+## 3 - Publishing your app _(optional)_
 
 1. In Visual Studio, in the Solution Explorer tab on the right, click on MainPage.xaml 
 2. Click ```Project > Store > Create App Packages...```
@@ -74,6 +74,11 @@ Devices running Windows 10 IoT Core can be installed and configured using the Io
 5. After package creation, click on the link to verify the .appx files have been created
 ![](./media/1_createapppackages5.png)
 
+## 4 - Sideload custom MSIX packages _(optional)_
+
+1. TODO: Flesh these out properly
+1. Use portal to delete existing app
+1. Install new app from msix packages
 
 Once you've confirmed the appx file has been created, you can move onto the next lab: [2 - Integrating Windows IoT with Azure](./Lab02.md)
 

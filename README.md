@@ -1,4 +1,4 @@
-# Hands-on with Microsoft Windows 10 IoT Core 
+# IoT in Action Labs - Windows 10 IoT with Azure IoT Central
 
 ## Lab 1
 [Getting started with Windows 10 IoT](./labs/Lab01.md)

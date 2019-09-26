@@ -2,178 +2,140 @@
 
 This lab introduces Azure IoT Edge with Windows 10 IoT Core.
 
-## 1.0 - Set up your UP Squared Device
+## 1.0 - Set up your Surface Laptop Device
 
 ### 1.1 - Cloud setup
 
-1. Attach Ethernet, HDMI, Keyboard/Mouse into the UP Squared device
-1. Make a note of the UP Squared device name written on the case starting with A. For example, A19 
-1. Open a browser and navigate to the [Azure Portal https://portal.azure.com](https://portal.azure.com). Use the lab credentials provided
-1. Click "Resource groups" on the left-hand menu, select the "winiot" resource group in the list and choose the IoT Hub created in [Lab 2](./Lab02.md#11---deploy-azure-iot-hub)
+1. Make a note of the Surface Laptop device name printed on the device. For example, IOTEDGE02 
+1. Open a browser and navigate to the [Azure Portal (https://portal.azure.com)](https://portal.azure.com). Log in with the lab credentials provided.
+1. Click **Resource groups** on the left-hand menu, select the **winiot** resource group in the list and choose the IoT Hub created in [Lab 2](./Lab02.md#11---deploy-azure-iot-hub)
 ![](./media/2_azure5.png)
-1. Click "IoT Edge" on the IoT Hub side menu and click "Add an IoT Edge device" at the top. **Note: that this is a slightly different menu than the one used earlier in the lab**
+1. Click **IoT Edge** on the IoT Hub side menu and click **Add an IoT Edge device** at the top. **Note: that this is a slightly different menu than the one used earlier in the lab**
 ![IoT Hub Portal](./media/4_SelectIoTEdge.png)
-1. Enter the UP Squared name (from step 2) as the device id and click "Save" to create the device
+1. Enter the Surface Laptop name (from earlier) as the device id and click **Save** to create the device
 1. Refresh the list and open the device properties
-1. Copy "Connection string (primary key)" to the clipboard
+1. We will be using the **Connection string (primary key)** in the next step - so keep this page ready 
 ![IoT Edge Device Information](./media/4_CopyConnectionStringIoTEdge.png)
 
 
-### 1.1 - Device setup
-
-1. Open ```IoT Dashboard```, right click on your device starting with A (for example, A19) and click "Launch PowerShell". When prompted, enter "p@ssw0rd" as the password
-![IoT Dashboard](./media/4_SelectPowershellDevice.png)
-2. Install the Azure IoT Edge runtime on the device by running the following command and wait for the device to reboot:
-
-```
+### 1.2 - IoT Device setup using Azure CLI
+1. Open PowerShell as Administrator
+2. Install the Azure IoT Edge runtime on the device by running the following command and waiting for the device to reboot:
+```powershell
 . {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Deploy-IoTEdge
 ```
-
-3. Re-connect the remote PowerShell session 
+3. Re-open the PowerShell session as Administrator 
 4. Configure the Azure IoT Edge runtime with the following command:
-
-```
+```powershell
 . {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Initialize-IoTEdge
 ```
-
-5. Enter ```iotedge check``` to validate the Azure IoT Edge runtime installation. ```Get-IoTEdgeLog``` can also be used to debug issues
-
+5. Enter the Device Connection string from the previous step: 
+6. To validate the Azure IoT Edge runtime installation, use the command:
+```powershell
+iotedge check
+``` 
 
 ## 2.0 - Deploy Simulated Temperature Sensor
+### 2.1 - Module deployment using Azure CLI
 
-### 2.1 - Module deployment
+1. Open PowerShell as Administrator
+1. Run the following commands replacing [device id] and [hub name] with their respective fields:
 
-1. Close the remote PowerShell and run the following commands on the laptop PowerShell:
-
-```
+```powershell
 az extension add --name azure-cli-iot-ext
 
 az login
-az iot edge set-modules --device-id [device name] --hub-name [hub name] --content "C:\Labs\Content\src\IoTLabs.IoTEdge\deployment.example.win-x64.json"
+az iot edge set-modules --device-id [device id] --hub-name [hub name] --content "C:\Labs\Content\src\IoTLabs.IoTEdge\deployment.example.win-x64.json"
 ```
 
-### 2.2 - Monitor Device to Cloud messages
-
+### 2.2 - Monitor Device-to-Cloud messages
 1. Enter the following command to monitor Device-to-Cloud (D2C) messages being published to the IoT Hub:
 
-```
-az iot hub monitor-events -n [hub name] -d [device id]
-```
- 
-## 3.0 - Custom container deployment
-
-### 3.1 - Deploy Azure Container Registry (ACR)
-
-For more information read: [Quickstart: Create a private container registry using the Azure portal](https://docs.microsoft.com/en-us/azure/container-registry/container-registry-get-started-portal).
-
-1. Sign into the Azure Portal
-1. Create a new "Container Registry" resource
-1. Once created, switch to the "Access Keys" pane
-1. Enable the "Admin User"
-1. Make note of the Login Server, username, and password. You'll need these later
-
-
-### 3.2 - Build and test code
-
-1. Open PowerShell and type: 
-
-```
-cd "C:\Labs\Content\src\IoTLabs.CustomVision"
-dotnet restore -r win-x64
-```
-
-2. Connect the USB webcam to your laptop and point the camera at the UP Squared
-4. Run the following command to start the machine learning application. The console should return a string identifying the UP Squared: 
-
-```
-dotnet run --model=CustomVision.onnx --device=LifeCam
-```
-
-Output should match the following:
-
-```
-4/24/2019 4:09:04 PM: Loading modelfile 'CustomVision.onnx' on the CPU...
-4/24/2019 4:09:04 PM: ...OK 594 ticks
-4/24/2019 4:09:05 PM: Running the model...
-4/24/2019 4:09:05 PM: ...OK 47 ticks
-4/24/2019 4:09:05 PM: Recognized {"results":[{"label":"up2","confidence":1.0}],"metrics":{"evaltimeinms":47,"cycletimeinms":0}}
-```
-
-### 3.3 - Containerize the sample app 
-
-1.  Publish the executables into a folder named release by running the following command:
-
-```
-dotnet publish -c Release -o ./release -r win-x64
-```
-
-2. Then enter the name of your container (note: the number value after the colon denotes the version, increment this every time you make a change)
 ```powershell
-#SAMPLE: aiedgelabcr
-$registryName = "[azure-container-registry-name]"
-$version = "1.0"
-$imageName = "customvision"
-
-$containerTag = "$registryName.azurecr.io/$($imageName):$version-x64-iotcore"
-docker build . -t $containerTag
+az iot hub monitor-events --device-id [device id] --hub-name  [hub name]
 ```
+## 3.0 - Configure Azure Stream Analytics Edge Job
+### 3.1 - Navigate to your Azure Stream Analytics Edge Job
+1. In the [Azure Portal (https://portal.azure.com)](https://portal.azure.com) open the **winiot** resource group
+1. Open the **Stream Analytics job** resource
+![Stream Analytics Job](/media/lab04/asa-overview.jpg)
 
+### 3.2 - Adding Inputs
+1. Under the **Job topology** heading in the left hand menu, select **Inputs**
+1. Select **Add stream input**, then select **Edge Hub**
+1. Set the **Input Alias** as **temperature** and leave the rest of the settings as default.
+1. Click **Save**
 
-### 3.4 - Push containter to ACR
+### 3.3 - Adding Outputs
+1. Under the **Job topology** heading in the left hand menu, select **Outputs**
+1. Select **Add**, then select **Edge Hub**
+1. Set the **Output Alias** as **alert** and leave the rest of the settings as default.
+1. Click **Save**
 
-1. Run the following commands to login and upload the container into Azure:
-
-```powershell
-az acr login --name $registryName
-docker push $containerTag
+### 3.4 - Adding Query
+1. Under the **Job topology** heading in the left hand menu, select **Query**
+1. Replace the current query with the following:
+```sql
+SELECT  
+    'reset' AS command 
+INTO 
+   alert 
+FROM 
+   temperature TIMESTAMP BY timeCreated 
+GROUP BY TumblingWindow(second,30) 
+HAVING Avg(machine.temperature) > 24
 ```
+3. Click **Save query**
 
-## 4.0 - Deploy IoT Edge Modules
+### 3.5 - Adding Storage Account
+1. Under the **Configure** heading in the left hand menu, select **Storage account settings**
+1. Click **Add storage account**
+1. Leave the toggle set to **Select storage account from your subscriptions** and 
+1. Set **Container** to **Create new** and enter a name in the box.
+1. Click **Save**
 
-### 4.1 - Author a deployment.json file
+## 4.0 - Configure IoT Edge to use Azure Stream Analytics Edge Job
+### 4.1 - Module deployment using Azure Portal
+1. In the [Azure Portal (https://portal.azure.com)](https://portal.azure.com) open the **winiot** resource group
+1. Open the **IoT Hub** resource, navigate to **IoT Edge** and then select the device created in [step 1.1](#11---cloud-setup)
+![IoT Edge Devices](/media/lab04/iot-edge-devices.jpg)
+1. Click **Set modules**
+![Set Modules](/media/lab04/set-modules.jpg)
+1. Under the **Deployment Modules** heading click **+ Add** and choose **Azure Stream Analytics Module**
+![Adding ASA Module](/media/lab04/add-asa-module.jpg)
+1. Set the Subscription as **MSIoTLabs-IIA** and Edge Job as **msiotlabs-iia-[user]-asa**, then click **Save**
 
-Now that we have a container image with our inferencing logic stored in our container registry, it's time to create an Azure IoT Edge deployment to our device.
+*Note: You may have to click on the **Edge job** dropdown for the save button to show.*
+1. When the module has loaded, select **Configure** and take note of the **Name** field. You will be using this module name in the next step.
+3. Click **Save**, then **Next**
 
-1. Go to "C:\Labs\Content\src\IoTLabs.IoTEdge"
-1. Edit the "deployment.template.lab04.win-x64.json" file
-1. Search for any variables starting with ACR and replace those values with the correct values for your container repository. The ACR_IMAGE must exactly match what you pushed, e.g. aiedgelabcr.azurecr.io/customvision:1.0-x64-iotcore
+### 4.2 - Selecting the routes
+1. Replace the current JSON with the following, substituting **[module name]** with the module name found in the previous step:
 
-**Hint: you can type $containerTag to get the full container string from PowerShell.**
-
-
-### 4.2 - Deploy the IoT Edge deployment.json file. 
-
-Just like the example deployment, use the following syntax to update the expected module state on the device. IoT Edge will pick up on this configuration change and deploy the container to the device.
-
+```javascript
+{
+    "routes": {
+        "telemetryToCloud": "FROM /messages/modules/SimulatedTemperatureSensor/* INTO $upstream",
+        "alertsToCloud": "FROM /messages/modules/[module name]/* INTO $upstream",
+        "alertsToReset": "FROM /messages/modules/[module name]/* INTO BrokeredEndpoint(\"/modules/SimulatedTemperatureSensor/inputs/control\")",
+        "telemetryToAsa": "FROM /messages/modules/SimulatedTemperatureSensor/* INTO BrokeredEndpoint(\"/modules/[module name]/inputs/temperature\")"
+    }
+}
 ```
-az iot edge set-modules --device-id [device name] --hub-name [hub name] --content "C:\Labs\Content\src\IoTLabs.IoTEdge\deployment.template.lab04.win-x64.json"
-```
+2. Select **Next**, then **Submit**
 
-Run the following command to get information about the modules deployed to your IoT Hub.
-```
-az iot hub module-identity list --device-id [device name] --hub-name [hub name]
-```
+### 4.3 - Verify deployment on the IoT device
+The module deployment is instant, however changes to the device can take around 5-7 minutes to take effect. Let's check that our device has loaded our Azure Stream Analytics module from the last step.
 
-### 4.3 - Verify the deployment on IoT device
-
-The module deployment is instant, however changes to the device can take around 5-7 minutes to take effect. On the **target device** you can inspect the running modules with the following command in the remote PowerShell terminal:
-
+1. Open Powershell as Administrator
+1. Inspect the currently running modules using the following command:
 ```powershell
 iotedge list
 ```
-
-Once the modules have deployed to your device, you can inspect that the module is operating correctly:
-
+![List Modules](/media/lab04/list-modules.jpg)
+3. Try running the following to see the logs from our simulated temperature sensor:
 ```powershell
-iotedge logs [container-name]
+iotedge logs SimulatedTemperatureSensor
 ```
-
-
-### 4.4 - Monitor Device to Cloud messages
-
-1. Switch back to your development machine
-1. Enter the following command in powershell to monitor Device-to-Cloud (D2C) messages being published to the IoT Hub, you should see the events change as you move the camera to face the up2 device.
-
-```
-az iot hub monitor-events -n [hub name] -d [device id]
-```
+You should see that the machine temperature increases until it reaches a temperature higher than the 24 degree threshold for at least 30 seconds.
+![Temperature Reset](/media/lab04/temperature-reset.jpg)

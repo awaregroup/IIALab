@@ -14,13 +14,13 @@ This lab introduces Azure IoT Edge with Windows 10 IoT Core.
 ![IoT Hub Portal](./media/4_SelectIoTEdge.png)
 1. Enter the Surface Laptop name (from earlier) as the device id and click **Save** to create the device
 1. Refresh the list and open the device properties
-1. Copy **Connection string (primary key)** to the clipboard
+1. We will be using the **Connection string (primary key)** in the next step - so keep this page ready 
 ![IoT Edge Device Information](./media/4_CopyConnectionStringIoTEdge.png)
 
 
 ### 1.2 - IoT Device setup using Azure CLI
 1. Open PowerShell as Administrator
-2. Install the Azure IoT Edge runtime on the device by running the following command and wait for the device to reboot:
+2. Install the Azure IoT Edge runtime on the device by running the following command and waiting for the device to reboot:
 ```powershell
 . {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Deploy-IoTEdge
 ```

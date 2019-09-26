@@ -24,7 +24,7 @@ This lab introduces Azure IoT Edge with Windows 10 IoT Core.
 ```powershell
 . {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Deploy-IoTEdge
 ```
-3. Re-open the remote PowerShell session as Administrator 
+3. Re-open the PowerShell session as Administrator 
 4. Configure the Azure IoT Edge runtime with the following command:
 ```powershell
 . {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Initialize-IoTEdge
@@ -36,7 +36,6 @@ iotedge check
 ``` 
 
 ## 2.0 - Deploy Simulated Temperature Sensor
-
 ### 2.1 - Module deployment using Azure CLI
 
 1. Open PowerShell as Administrator
@@ -53,7 +52,7 @@ az iot edge set-modules --device-id [device id] --hub-name [hub name] --content 
 1. Enter the following command to monitor Device-to-Cloud (D2C) messages being published to the IoT Hub:
 
 ```powershell
-az iot hub monitor-events -n [hub name] -d [device id]
+az iot hub monitor-events --device-id [device id] --hub-name  [hub name]
 ```
 ## 3.0 - Configure Azure Stream Analytics Edge Job
 ### 3.1 - Navigate to your Azure Stream Analytics Edge Job
@@ -111,7 +110,7 @@ HAVING Avg(machine.temperature) > 24
 3. Click **Save**, then **Next**
 
 ### 4.2 - Selecting the routes
-1. Replace the current JSON with the following, substituting [module name] with the module name found in the previous step:
+1. Replace the current JSON with the following, substituting **[module name]** with the module name found in the previous step:
 
 ```javascript
 {

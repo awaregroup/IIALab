@@ -69,7 +69,7 @@ iotedge list
 iotedge logs SimulatedTemperatureSensor
 ```
 
-Your device should be recieving simulated temperature data every 5 seconds with the machine temperature steadily rising.
+Your device should be receiving simulated temperature data every 5 seconds with the machine temperature steadily rising.
 
 ### 2.3 - Monitor Device-to-Cloud messages
 1. Enter the following command to monitor Device-to-Cloud (D2C) messages being published to the IoT Hub:

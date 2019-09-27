@@ -162,7 +162,7 @@ You should see that the machine temperature increases until it reaches a tempera
 ![Temperature Reset](/media/lab04/temperature-reset.jpg)
 
 
-## 5.0 - Updating IoT Edge Device Modules
+## 5.0 - Updating Existing IoT Edge Device Modules
 ### 5.1 - Update Module Twin
 1. In the [Azure Portal (https://portal.azure.com)](https://portal.azure.com) open the **msiotlabs-iia-user##** resource group
 2. Open the **IoT Hub** resource, navigate to **IoT Edge** and then select the device created in [step 1.1](#11---cloud-setup)

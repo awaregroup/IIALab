@@ -1,6 +1,6 @@
-# Lab 04 - Introduction to Azure IoT Edge
+# Lab 04 - Introduction to Azure Stream Analytics with Azure IoT Edge
 
-This lab introduces Azure IoT Edge with Windows 10 IoT Core.
+This lab introduces Azure Stream Analytics with Azure IoT Edge on Windows 10 IoT Enterprise.
 
 ## 1.0 - Set up your Surface Laptop Device
 

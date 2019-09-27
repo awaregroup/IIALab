@@ -20,6 +20,7 @@ This lab introduces Azure IoT Edge with Windows 10 IoT Core.
 
 ### 1.2 - IoT Device setup using Azure CLI
 1. Open PowerShell as Administrator
+![](/media/lab04/powershell.jpg)
 2. Install the Azure IoT Edge runtime on the device by running the following command and waiting for the device to reboot:
 ```powershell
 . {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Deploy-IoTEdge
@@ -35,7 +36,9 @@ This lab introduces Azure IoT Edge with Windows 10 IoT Core.
 iotedge check
 ``` 
 
+
 ## 2.0 - Deploy Simulated Temperature Sensor
+
 ### 2.1 - Module deployment using Azure CLI
 
 1. Open PowerShell as Administrator
@@ -53,13 +56,31 @@ az account set --subscription 'MSIoTLabs-IIA'
 az iot edge set-modules --device-id [device id] --hub-name [hub name] --content "C:\Labs\Content\src\IoTLabs.IoTEdge\deployment.example.win-x64.json"
 ```
 
-### 2.2 - Monitor Device-to-Cloud messages
+### 2.2 - Verify Deployment on IoT Edge Device
+The module deployment is instant, however changes to the device can take around 5-7 minutes to take effect. Let's check to see if our device has loaded the SimulatedTemperatureSensor module.
+
+1. Run the following PowerShell command to see the current modules:
+```powershell
+iotedge list
+```
+
+2. Try running the following to see the logs from our simulated temperature sensor:
+```powershell
+iotedge logs SimulatedTemperatureSensor
+```
+
+Your device should be recieving simulated temperature data every 5 seconds with the machine temperature steadily rising.
+
+### 2.3 - Monitor Device-to-Cloud messages
 1. Enter the following command to monitor Device-to-Cloud (D2C) messages being published to the IoT Hub:
 ```powershell
 az iot hub monitor-events --device-id [device id] --hub-name  [hub name]
 ```
+2. The first time that you run this command, you are required to update a dependency by pressing **y** then **enter**
+
 
 ## 3.0 - Configure Azure Stream Analytics Edge Job
+
 ### 3.1 - Navigate to your Azure Stream Analytics Edge Job
 1. In the [Azure Portal (https://portal.azure.com)](https://portal.azure.com) open the **msiotlabs-iia-user##** resource group
 2. Open the **Stream Analytics job** resource
@@ -92,7 +113,9 @@ HAVING Avg(machine.temperature) > 24
 ```
 3. Click **Save query**
 
+
 ## 4.0 - Configure IoT Edge to use Azure Stream Analytics Edge Job
+
 ### 4.1 - Module deployment using Azure Portal
 1. In the [Azure Portal (https://portal.azure.com)](https://portal.azure.com) open the **msiotlabs-iia-user##** resource group
 2. Open the **IoT Hub** resource, navigate to **IoT Edge** and then select the device created in [step 1.1](#11---cloud-setup)
@@ -121,7 +144,7 @@ HAVING Avg(machine.temperature) > 24
 ```
 2. Select **Next**, then **Submit**
 
-### 4.3 - Verify deployment on the IoT device
+### 4.3 - Verify Deployment on IoT Edge Device
 The module deployment is instant, however changes to the device can take around 5-7 minutes to take effect. Let's check that our device has loaded our Azure Stream Analytics module from the last step.
 
 1. Open Powershell as Administrator
@@ -150,9 +173,31 @@ You should see that the machine temperature increases until it reaches a tempera
 7. Leave the routes as they are and click **Next**
 8. Click **Submit**
 
-### 5.1 - Update Stream Analytics Edge Job
+### 5.2 - Update Stream Analytics Edge Job
 1. In the [Azure Portal (https://portal.azure.com)](https://portal.azure.com) open the **msiotlabs-iia-user##** resource group
 2. Open the **Stream Analytics job** resource
+3. Under the **Job topology** heading in the left hand menu, select **Query**
+4. Replace the current query with the following:
+```sql
+SELECT  
+    'reset' AS command 
+INTO 
+   alert 
+FROM 
+   temperature TIMESTAMP BY timeCreated 
+GROUP BY TumblingWindow(second,30) 
+HAVING Avg(machine.temperature) > 50
+```
+5. Click **Save query**
 
-
-
+### 5.3 - Push the Updated Module
+1. In the [Azure Portal (https://portal.azure.com)](https://portal.azure.com) open the **msiotlabs-iia-user##** resource group
+2. Open the **IoT Hub** resource, navigate to **IoT Edge** and then select the device created in [step 1.1](#11---cloud-setup)
+3. Click **Set modules**
+4. You will notice that the **SimulatedTemperatureSensor** module has a warning saying: "Module outdated - click here to update"
+![](/media/lab04/outdated-module.jpg)
+5. Click **Configure** next to the **SimulatedTemperatureSensor** module
+6. Click the **Update ASA module**, then click **Save** and finally **Next**.
+![](/media/lab04/update-asa-module.jpg)
+7. Leave the routes as they are and click **Next**
+8. Click **Submit**

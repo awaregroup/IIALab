@@ -8,9 +8,9 @@ This lab introduces Azure IoT Edge with Windows 10 IoT Core.
 
 1. Make a note of the Surface Laptop device name printed on the device. For example, IOTEDGE02 
 1. Open a browser and navigate to the [Azure Portal (https://portal.azure.com)](https://portal.azure.com). Log in with the lab credentials provided.
-1. Click **Resource groups** on the left-hand menu, select the **winiot** resource group in the list and choose the IoT Hub created in [Lab 2](./Lab02.md#11---deploy-azure-iot-hub)
+1. Click **Resource groups** on the left-hand menu, select the **msiotlabs-iia-user** resource group in the list and choose the **IoT Hub** created in [Lab 2](./Lab02.md#11---deploy-azure-iot-hub)
 ![](./media/2_azure5.png)
-1. Click **IoT Edge** on the IoT Hub side menu and click **Add an IoT Edge device** at the top. **Note: that this is a slightly different menu than the one used earlier in the lab**
+1. In the left hand menu under the heading **Automatic Device Management**, click **IoT Edge** on the IoT Hub side menu and click **Add an IoT Edge device** at the top. **Note: that this is a slightly different menu than the one used earlier in the lab**
 ![IoT Hub Portal](./media/4_SelectIoTEdge.png)
 1. Enter the Surface Laptop name (from earlier) as the device id and click **Save** to create the device
 1. Refresh the list and open the device properties
@@ -56,7 +56,7 @@ az iot hub monitor-events --device-id [device id] --hub-name  [hub name]
 ```
 ## 3.0 - Configure Azure Stream Analytics Edge Job
 ### 3.1 - Navigate to your Azure Stream Analytics Edge Job
-1. In the [Azure Portal (https://portal.azure.com)](https://portal.azure.com) open the **winiot** resource group
+1. In the [Azure Portal (https://portal.azure.com)](https://portal.azure.com) open the **msiotlabs-iia-user** resource group
 1. Open the **Stream Analytics job** resource
 ![Stream Analytics Job](/media/lab04/asa-overview.jpg)
 

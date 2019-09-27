@@ -1,5 +1,7 @@
 # Intelligent Edge in a Day with Windows IoT and Azure IoT 
 
+This set of hands-on-labs aims to give you a high level overview of the solution capabilities across the Azure IoT Platform as well as the Windows for IoT family.
+
 ## Lab 1 - Build your Intelligent Edge device 
 [Getting started with Windows 10 IoT Core and UWP Applications](./labs/Lab01.md)
 

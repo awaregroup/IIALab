@@ -8,7 +8,7 @@ This lab introduces Azure IoT Edge with Windows 10 IoT Core.
 
 1. Make a note of the Surface Laptop device name printed on the device. For example, IOTEDGE02 
 1. Open a browser and navigate to the [Azure Portal (https://portal.azure.com)](https://portal.azure.com). Log in with the lab credentials provided.
-1. Click **Resource groups** on the left-hand menu, select the **msiotlabs-iia-user** resource group in the list and choose the **IoT Hub** created in [Lab 2](./Lab02.md#11---deploy-azure-iot-hub)
+1. Click **Resource groups** on the left-hand menu, select the **msiotlabs-iia-user##** resource group in the list and choose the **IoT Hub** created in [Lab 2](./Lab02.md#11---deploy-azure-iot-hub)
 ![](./media/2_azure5.png)
 1. In the left hand menu under the heading **Automatic Device Management**, click **IoT Edge**. Then click **Add an IoT Edge device** at the top. **Note: that this is a slightly different menu than the one used earlier in the lab**
 ![IoT Hub Portal](./media/4_SelectIoTEdge.png)
@@ -39,21 +39,26 @@ iotedge check
 ### 2.1 - Module deployment using Azure CLI
 
 1. Open PowerShell as Administrator
-1. Run the following commands replacing [device id] and [hub name] with their respective fields:
-
+1. Login to Azure CLI using the following command:
 ```powershell
 az extension add --name azure-cli-iot-ext
-
 az login
+```
+1. Set your account to the correct subscription:
+```powershell
+az account set --subscription 'MSIoTLabs-IIA'
+```
+1. Run the following command replacing [device id] and [hub name] with their respective fields:
+```powershell
 az iot edge set-modules --device-id [device id] --hub-name [hub name] --content "C:\Labs\Content\src\IoTLabs.IoTEdge\deployment.example.win-x64.json"
 ```
 
 ### 2.2 - Monitor Device-to-Cloud messages
 1. Enter the following command to monitor Device-to-Cloud (D2C) messages being published to the IoT Hub:
-
 ```powershell
 az iot hub monitor-events --device-id [device id] --hub-name  [hub name]
 ```
+
 ## 3.0 - Configure Azure Stream Analytics Edge Job
 ### 3.1 - Navigate to your Azure Stream Analytics Edge Job
 1. In the [Azure Portal (https://portal.azure.com)](https://portal.azure.com) open the **msiotlabs-iia-user** resource group

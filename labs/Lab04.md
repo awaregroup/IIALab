@@ -61,7 +61,7 @@ az iot hub monitor-events --device-id [device id] --hub-name  [hub name]
 
 ## 3.0 - Configure Azure Stream Analytics Edge Job
 ### 3.1 - Navigate to your Azure Stream Analytics Edge Job
-1. In the [Azure Portal (https://portal.azure.com)](https://portal.azure.com) open the **msiotlabs-iia-user** resource group
+1. In the [Azure Portal (https://portal.azure.com)](https://portal.azure.com) open the **msiotlabs-iia-user##** resource group
 2. Open the **Stream Analytics job** resource
 ![Stream Analytics Job](/media/lab04/asa-overview.jpg)
 
@@ -94,19 +94,17 @@ HAVING Avg(machine.temperature) > 24
 
 ## 4.0 - Configure IoT Edge to use Azure Stream Analytics Edge Job
 ### 4.1 - Module deployment using Azure Portal
-1. In the [Azure Portal (https://portal.azure.com)](https://portal.azure.com) open the **winiot** resource group
+1. In the [Azure Portal (https://portal.azure.com)](https://portal.azure.com) open the **msiotlabs-iia-user##** resource group
 2. Open the **IoT Hub** resource, navigate to **IoT Edge** and then select the device created in [step 1.1](#11---cloud-setup)
 ![IoT Edge Devices](/media/lab04/iot-edge-devices.jpg)
 3. Click **Set modules**
 ![Set Modules](/media/lab04/set-modules.jpg)
 4. Under the **Deployment Modules** heading click **+ Add** and choose **Azure Stream Analytics Module**
 ![Adding ASA Module](/media/lab04/add-asa-module.jpg)
-5. Set the Subscription as **MSIoTLabs-IIA** and Edge Job as **msiotlabs-iia-[user]-asa**, then click **Save**
-
-*Note: You may have to click on the **Edge job** dropdown for the save button to show.*
-
-6. When the module has loaded, select **Configure** and take note of the **Name** field. You will be using this module name in the next step.
-7. Click **Save**, then **Next**
+5. Set the Subscription as **MSIoTLabs-IIA** and Edge Job as **msiotlabs-iia-user##-streamanalytics**, then click **Save**
+6. *Note: You may have to click on the **Edge job** dropdown for the save button to show.*
+7. When the module has loaded, select **Configure** and take note of the **Name** field. You will be using this module name in the next step.
+8. Click **Save**, then **Next**
 
 ### 4.2 - Selecting the routes
 1. Replace the current JSON with the following, substituting **[module name]** with the module name found in the previous step:
@@ -132,9 +130,29 @@ The module deployment is instant, however changes to the device can take around 
 iotedge list
 ```
 ![List Modules](/media/lab04/list-modules.jpg)
+
 3. Try running the following to see the logs from our simulated temperature sensor:
 ```powershell
 iotedge logs SimulatedTemperatureSensor
 ```
 You should see that the machine temperature increases until it reaches a temperature higher than the 24 degree threshold for at least 30 seconds.
 ![Temperature Reset](/media/lab04/temperature-reset.jpg)
+
+
+## 5.0 - Updating IoT Edge Device Modules
+### 5.1 - Update Module Twin
+1. In the [Azure Portal (https://portal.azure.com)](https://portal.azure.com) open the **msiotlabs-iia-user##** resource group
+2. Open the **IoT Hub** resource, navigate to **IoT Edge** and then select the device created in [step 1.1](#11---cloud-setup)
+3. Click **Set modules**
+4. Click **Configure** next to the **SimulatedTemperatureSensor** module
+5. Update **SendInterval** from **5** to a new value of  **1**
+6. Click **Save**, then click **Next**, then click **Next**
+7. Leave the routes as they are and click **Next**
+8. Click **Submit**
+
+### 5.1 - Update Stream Analytics Edge Job
+1. In the [Azure Portal (https://portal.azure.com)](https://portal.azure.com) open the **msiotlabs-iia-user##** resource group
+2. Open the **Stream Analytics job** resource
+
+
+

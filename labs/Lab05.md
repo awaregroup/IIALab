@@ -17,11 +17,21 @@ When starting the lab, you should have these things open on your development mac
 
 1. Log into the Azure Portal
 1. Type "Custom Vision" into the search bar at the top, and click on the "Custom Vision" entry below "Marketplace"
-1. Enter a name for this custom vision resource : eg lab05-yourname
-1. Choose a location closest to you from the location drop down list
-1. Choose S0 for both pricing tiers
-1. Select the same resource group you have been using prior to this lab
-1. Click create
+1. Click Create.
+1. Configure as follows:
+
+   | Field | Value |
+   | --- | --- |
+   | Name | lab05-yourname |
+   | Subscription | MSIoTLabs-IIA |
+   | Location | Select the closest one to you |
+   | Prediction pricing tier | S0 |
+   | Training pricing tier | S0 |
+   | Resource group | Select the same resource group you have been using prior to this lab |
+  
+1. Verify that all the details you have entered are correct.
+   * **TODO Image**
+1. Click Create
 
 ## Step 1: Train a model
 
@@ -49,6 +59,8 @@ When starting the lab, you should have these things open on your development mac
     | Domains | General (compact) |
     | Export Capabilities | Basic platforms (Tensorflow, CoreML, ONNX, ...) |
     
+1. Verify that all the details you have entered are correct.
+   * **TODO Image**
 1. Click Create project.
 
 ### 1.2 - Upload and tag training data
@@ -56,17 +68,21 @@ When starting the lab, you should have these things open on your development mac
 1. Click the Add image button and bulk upload your images based on the object type.
     * Upload all of object1 first and add the object1 tag, then all of object2 and add the object2 tag etc.
     * Each time you upload all the images for a given object, specify the tag at that time.
+ 1. Example of bulk uploading and tagging images.
+   * **TODO Image**
     
 ### 1.3 - Train your model
 
 1. Click on the Training button (green one in the top right).
 1. Select the Quick Training option.
 1. Click Train.
+ 1. Example of testing your model.
+   * **TODO Image**
 
 ### 1.4 - Test your model
 
 1. Select "Quick Test" to test the model.
-. Using the camera app on your PC, take one more picture of one of the objects
+1. Using the camera app on your PC, take one more picture of one of the objects
 1. Upload the picture you took, verify that it was predicted correctly.
 
 ### 1.5 - Export your model
@@ -77,6 +93,8 @@ When starting the lab, you should have these things open on your development mac
 1. Select ONNX for the type.
 1. Select ONNX1.2 for the version.
 1. Click Export.
+1. An example of exporting your model.
+   * **TODO Image**
 1. After downloading, rename the file "CustomVision.onnx"
 
 ## Step 2: Package the model into a C# .NET Application
@@ -161,7 +179,7 @@ dotnet publish -c Release -o ./release -r win-x64 --self-contained true
 #SAMPLE: aiedgelabcr (this is the same container registry created in lab 04)
 $registryName = "[azure-container-registry-name]"
 $version = "1.0"
-$imageName = "tabularmodel"
+$imageName = "customvision"
 
 $containerTag = "$registryName.azurecr.io/$($imageName):$version-x64-iotcore"
 docker build . -t $containerTag
@@ -202,12 +220,18 @@ Now we need to create a device registration for an IoT Edge Device in IoT Hub th
 1. Login to the Azure Portal.
 1. Find your IoT Hub.
 1. Go to Automatic Device Management > IoT Edge.
+   **TODO Image**
 1. Click + Add an IoT Edge device.
+   **TODO Image**
 1. Enter a name for you IoT Edge device
 1. Leave the rest of the settings as the default values.
+1. Verify that all the details you have entered are correct.
+   * **TODO Image**
 1. Click Save.
 1. Click Refresh to update the list of devices.
 1. Click on your device to view it's details.
+1. An example of the device details page
+   * **TODO Image**
 
 ### 5.1 - Author a deployment.json file
 
@@ -215,12 +239,13 @@ Now that we have a container image with our inferencing logic stored in our cont
 
 1. Go to "C:\Labs\Content\src\IoTLabs.IoTEdge"
 1. Edit the "deployment.template.lab05.win-x64.json" file
-1. Search for any variables starting with ACR and replace those values with the correct values for your container repository. The ACR_IMAGE must exactly match what you pushed, e.g. aiedgelabcr.azurecr.io/tabularmodel:1.0-x64-iotcore
+1. Search for any variables starting with ACR and replace those values with the correct values for your container repository. The ACR_IMAGE must exactly match what you pushed, e.g. aiedgelabcr.azurecr.io/customvision:1.0-x64-iotcore
 
 **Hint: you can type $containerTag to get the full container string from PowerShell.**
 
-
 ### 5.2 - Deploy the IoT Edge deployment.json file. 
+
+On your development machine:
 
 Just like the example deployment, use the following syntax to update the expected module state on the device. IoT Edge will pick up on this configuration change and deploy the container to the device.
 
@@ -228,30 +253,46 @@ Just like the example deployment, use the following syntax to update the expecte
 az iot edge set-modules --device-id [device name] --hub-name [hub name] --content "C:\Labs\Content\src\IoTLabs.IoTEdge\deployment.template.lab05.win-x64.json"
 ```
 
-The first time that you run this command, you are required to update a dependency by pressing **y** then **Enter**.
-
 Run the following command to get information about the modules deployed to your IoT Hub.
 ```
 az iot hub module-identity list --device-id [device name] --hub-name [hub name]
 ```
 
-### 5.3 - Verify the deployment on device
+### 5.3 - Verify the deploy has started in Azure
+
+1. Navigate to your IoT Edge Device in your IoT Hub.
+1. Go to the device details page.
+1. Under the Modules tab click on the customvision module.
+   **TODO Image**
+1. Under the IoT Edge Module Settings tab.
+1. Verify that the Desired Value for the Image URI matches the one that you entered in your deployment template.
+1. An example of IoT Edge Module Settings.
+   **TODO Image**
+
+**Hint: The Desired Value column matches what is specified in the deploment template, the Reported Value column matches what the devices believes it is running.**
+
+
+### 5.4 - Verify the deployment on device
 
 Wait a few minutes for the deployment to go through. On the target device you can inspect the running modules. Success looks like this:
 
 ```
 [192.168.1.102]: PS C:\data\modules\customvision> iotedge list
 NAME             STATUS           DESCRIPTION      CONFIG
-customvision     running          Up 32 seconds    aiedgelabcr.azurecr.io/tabularmodel:1.0-x64-iotcore
+customvision     running          Up 32 seconds    aiedgelabcr.azurecr.io/customvision:1.0-x64-iotcore
 edgeAgent        running          Up 2 minutes     mcr.microsoft.com/azureiotedge-agent:1.0
 edgeHub          running          Up 1 second      mcr.microsoft.com/azureiotedge-hub:1.0
 ```
 
-Once the modules are up, you can inspect that the "tabularmodel" module is operating correctly:
+Once the modules are up, you can inspect that the "customvision" module is operating correctly:
 
 ```
-[192.168.1.102]: PS C:\data\modules\customvision> iotedge logs tabularmodel
+PS C:\data\modules\customvision> iotedge logs customvision
 ```
+
+## Step 6 : Validate results in Time Series Insights
+
+### TODO
 
 Finally, back on the development machine, we can monitor device to cloud (D2C) messages from VS Code to ensure the messages are going up.
 

@@ -104,7 +104,8 @@ az iot hub monitor-events --device-id [device id] --hub-name  [hub name]
 2. Replace the current query with the following:
 ```sql
 SELECT  
-    'reset' AS command 
+    'reset' AS command,
+    'lab04' AS source
 INTO 
    alert 
 FROM 
@@ -173,6 +174,7 @@ You should see that the machine temperature increases until it reaches a tempera
 6. Click **Save**, then click **Next**, then click **Next**
 7. Leave the routes as they are and click **Next**
 8. Click **Submit**
+9. Run through step 4.3 again to verify that the SimulatedTemperatureSensor module is now reporting every second instead of every 5 seconds
 
 ### 5.2 - Update Stream Analytics Edge Job
 1. In the [Azure Portal (https://portal.azure.com)](https://portal.azure.com) open the **msiotlabs-iia-user##** resource group
@@ -180,14 +182,15 @@ You should see that the machine temperature increases until it reaches a tempera
 3. Under the **Job topology** heading in the left hand menu, select **Query**
 4. Replace the current query with the following:
 ```sql
-SELECT  
-    'reset' AS command 
+SELECT
+    AVG(machine.temperature) as temperature,
+    MAX(timeCreated) as timeCreated,
+    'lab4' AS source 
 INTO 
-   alert 
-FROM 
-   temperature TIMESTAMP BY timeCreated 
-GROUP BY TumblingWindow(second,30) 
-HAVING Avg(machine.temperature) > 50
+   alert
+FROM
+     temperature TIMESTAMP BY timeCreated 
+GROUP BY TumblingWindow(second,15) 
 ```
 5. Click **Save query**
 
@@ -200,5 +203,14 @@ HAVING Avg(machine.temperature) > 50
 5. Click **Configure** next to the **SimulatedTemperatureSensor** module
 6. Click the **Update ASA module**, then click **Save** and finally **Next**.
 ![](/media/lab04/update-asa-module.jpg)
-7. Leave the routes as they are and click **Next**
-8. Click **Submit**
+7. Replace the current JSON with the following, substituting **[module name]** with the module name found in the previous step:
+```javascript
+{
+   {
+  "routes": {
+    "AsaToIotHub": "FROM /messages/modules/[module name]/* INTO $upstream",
+    "telemetryToAsa": "FROM /messages/modules/SimulatedTemperatureSensor/* INTO BrokeredEndpoint(\"/modules/[module name]/inputs/temperature\")"
+  }
+}
+```
+8. Click **Next**, then **Submit**

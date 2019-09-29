@@ -9,6 +9,8 @@ using Windows.Media.MediaProperties;
 
 using EdgeModuleSamples.Common;
 using static EdgeModuleSamples.Common.AsyncHelper;
+using System.Security.Cryptography.X509Certificates;
+using Windows.Globalization.DateTimeFormatting;
 
 //
 // This sample directly implements the following:
@@ -20,6 +22,7 @@ namespace SampleModule
 {
     class FrameSource: IDisposable
     {
+        private const int MinimumVideoWidth = 480;
         private MediaCapture mediaCapture = null;
         private MediaFrameReader mediaFrameReader = null;
         private EventWaitHandle evtFrame = null;
@@ -32,17 +35,26 @@ namespace SampleModule
         public async Task StartAsync(string Name, bool UseGpu = false)
         {
             var frameSourceGroups = await AsAsync(MediaFrameSourceGroup.FindAllAsync());
-            var selectedGroup = frameSourceGroups.Where(x=>x.DisplayName.Contains(Name)).FirstOrDefault();
+
+            Log.WriteLine($"Found the following devices: {(frameSourceGroups.Any() ? string.Join(", ", frameSourceGroups.Select(x => x.DisplayName)) : "no imaging devices found")}");
+
+			// Only select colour cameras to filter out IR ones
+			var selectedGroup = frameSourceGroups
+				.Where(x => x.DisplayName.Contains(Name) && x.SourceInfos.FirstOrDefault().SourceKind == MediaFrameSourceKind.Color)
+				.OrderBy(x => x.DisplayName)
+				.FirstOrDefault();
 
             if (null == selectedGroup)
-                throw new ApplicationException($"Unable to find frame source named {Name}");
+                throw new ApplicationException($"Unable to find frame source named '{Name}'");
+
+            Log.WriteLine($"Selected device named '{selectedGroup.DisplayName}', based on '{Name}' filter");
 
             var colorSourceInfo = selectedGroup.SourceInfos
-                .Where(x=>x.MediaStreamType == MediaStreamType.VideoRecord && x.SourceKind == MediaFrameSourceKind.Color)
+                .Where(x => x.MediaStreamType == MediaStreamType.VideoRecord && x.SourceKind == MediaFrameSourceKind.Color)
                 .FirstOrDefault();
 
             if (null == colorSourceInfo)
-                throw new ApplicationException($"Unable to find color video recording source on {Name}");
+                throw new ApplicationException($"Unable to find color video recording source on '{selectedGroup.DisplayName}' device");
 
             mediaCapture = new MediaCapture();
 
@@ -56,21 +68,32 @@ namespace SampleModule
                 MemoryPreference =  UseGpu ? MediaCaptureMemoryPreference.Auto : MediaCaptureMemoryPreference.Cpu,
                 StreamingCaptureMode = StreamingCaptureMode.Video
             };
+
             try
             {
+				Log.WriteLine($"Before async call to initialise {nameof(mediaCapture)} object...");
                 await AsAsync(mediaCapture.InitializeAsync(settings));
-            }
-            catch (Exception ex)
+				Log.WriteLine($"After async call to initialise {nameof(mediaCapture)} object...");
+			}
+			catch (Exception ex)
             {
                 throw new ApplicationException("MediaCapture initialization failed: " + ex.Message, ex);
             }
 
-            var colorFrameSource = mediaCapture.FrameSources[colorSourceInfo.Id];
+			// TODO: Use Console.Write to output this
 
-            var preferredFormat = colorFrameSource.SupportedFormats.Where(format => format.VideoFormat.Width >= 1080).FirstOrDefault();
+			var colorFrameSource = mediaCapture.FrameSources[colorSourceInfo.Id];
+
+            List<MediaFrameFormat> orderedVideoResolutions = colorFrameSource.SupportedFormats.OrderByDescending(x => x.VideoFormat.Width).ToList();
+
+            Log.WriteLine($"Found the following supportedFormats(video resolutions): {string.Join(", ", orderedVideoResolutions.Select(x => $"{x.VideoFormat.Width}x{x.VideoFormat.Height}"))}");
+
+            var preferredFormat = orderedVideoResolutions.Where(format => format.VideoFormat.Width >= MinimumVideoWidth).FirstOrDefault();
 
             if (null == preferredFormat)
-                throw new ApplicationException("Our desired format is not supported");
+                throw new ApplicationException($"Our desired minimum video width ({MinimumVideoWidth}) is not supported by the imaging devices found on this machine");
+
+            Log.WriteLine($"Selected: {preferredFormat.VideoFormat.Width}x{preferredFormat.VideoFormat.Height}, based on minimum video width requirement of >= '{MinimumVideoWidth}'");
 
             await AsAsync(colorFrameSource.SetFormatAsync(preferredFormat));
 

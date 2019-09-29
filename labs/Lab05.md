@@ -114,43 +114,26 @@ dotnet run --model=CustomVision.onnx --device=Front
 
 ## Step 3: Run the code on our IoT Core Device
 
-### Connect to our IoT Core device
-
-We will need a way to copy files to our device and a Windows PowerShell window from our development PC connected to that device.
-
-First, we will map the Q: drive to our device so we can access files. 
-
-You'll need the Device IP Address. To get the IP Address open the "IoT Dashboard" from the desktop of your surface and select "My Devices".
- 
-The name of your device is written on the underside of the case in white.
-Right click on your device and select "Copy IPv4 Address".
-
-```
-net use q: \\[ENTER YOUR DEVICE IP ADDRESS HERE]\c$ p@ssw0rd /USER:Administrator
-The command completed successfully.
-```
-
 ### Copy published files to target device
 
-Next copy the 'publish' folder over to our device
-
-```
-robocopy .\release\ q:\data\modules\customvision
-```
+1. Zip up the release folder.
+1. Copy this folder onto your IoT Core Device using a USB drive or Azure Blob storage.
+1. Unzip the relase folder.
 
 ### Test the sample on the target device
 
 Following the same approach as above, we will run the app on the target device to ensure we have the correct camera there, and it's working on that device.
 
 1. Connect the camera to the IoT Core device.
-1. In the Windows PowerShell window to the IoT Core device. (Use the IoT Core Dashboard to connect to the remote powershell)
-1. Change to the "C:\data\modules\customvision" directory
-1. Do a test run as we did previously:
+1. Open a Windows Explorer window.
+1. Navigate to where you unzipped the release folder.
+1. Go into the release folder.
+1. In the address bar type "powershell" then press enter.
+1. Run the following command: `.\WindowsAiEdgeLabCV.exe --model=CustomVision.onnx --device=Front`
+    * We are running the self-contained executable published by the `dotnet publish` command.
 
 ```
-[192.168.X.X]: PS C:\Data\Users\Administrator\Documents> cd C:\data\modules\customvision
-
-[192.168.X.X]: PS C:\data\modules\customvision> .\WindowsAiEdgeLabCV.exe --model=CustomVision.onnx --device=LifeCam
+PS C:\data\modules\customvision> .\WindowsAiEdgeLabCV.exe --model=CustomVision.onnx --device=Front
 4/27/2019 8:31:31 AM: Loading modelfile 'CustomVision.onnx' on the CPU...
 4/27/2019 8:31:32 AM: ...OK 1516 ticks
 4/27/2019 8:31:36 AM: Running the model...

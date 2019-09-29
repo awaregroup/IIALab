@@ -38,11 +38,11 @@ namespace SampleModule
 
             Log.WriteLine($"Found the following devices: {(frameSourceGroups.Any() ? string.Join(", ", frameSourceGroups.Select(x => x.DisplayName)) : "no imaging devices found")}");
 
-			// Only select colour cameras to filter out IR ones
-			var selectedGroup = frameSourceGroups
-				.Where(x => x.DisplayName.Contains(Name) && x.SourceInfos.FirstOrDefault().SourceKind == MediaFrameSourceKind.Color)
-				.OrderBy(x => x.DisplayName)
-				.FirstOrDefault();
+            // Only select colour cameras to filter out IR ones
+            var selectedGroup = frameSourceGroups
+                .Where(x => x.DisplayName.Contains(Name) && x.SourceInfos.FirstOrDefault().SourceKind == MediaFrameSourceKind.Color)
+                .OrderBy(x => x.DisplayName)
+                .FirstOrDefault();
 
             if (null == selectedGroup)
                 throw new ApplicationException($"Unable to find frame source named '{Name}'");
@@ -71,18 +71,18 @@ namespace SampleModule
 
             try
             {
-				Log.WriteLine($"Before async call to initialise {nameof(mediaCapture)} object...");
+                Log.WriteLine($"Before async call to initialise {nameof(mediaCapture)} object...");
                 await AsAsync(mediaCapture.InitializeAsync(settings));
-				Log.WriteLine($"After async call to initialise {nameof(mediaCapture)} object...");
-			}
-			catch (Exception ex)
+                Log.WriteLine($"After async call to initialise {nameof(mediaCapture)} object...");
+            }
+            catch (Exception ex)
             {
                 throw new ApplicationException("MediaCapture initialization failed: " + ex.Message, ex);
             }
 
-			// TODO: Use Console.Write to output this
+            // TODO: Use Console.Write to output this
 
-			var colorFrameSource = mediaCapture.FrameSources[colorSourceInfo.Id];
+            var colorFrameSource = mediaCapture.FrameSources[colorSourceInfo.Id];
 
             List<MediaFrameFormat> orderedVideoResolutions = colorFrameSource.SupportedFormats.OrderByDescending(x => x.VideoFormat.Width).ToList();
 

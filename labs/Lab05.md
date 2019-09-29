@@ -249,8 +249,12 @@ edgeHub          running          Up 1 second      mcr.microsoft.com/azureiotedg
 Once the modules are up, you can inspect that the "customvision" module is operating correctly:
 
 ```
-[192.168.1.102]: PS C:\data\modules\customvision> iotedge logs customvision
+PS C:\data\modules\customvision> iotedge logs customvision
 ```
+
+## Step 6 : Validate results in Time Series Insights
+
+### TODO
 
 Finally, back on the development machine, we can monitor device to cloud (D2C) messages from VS Code to ensure the messages are going up.
 

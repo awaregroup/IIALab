@@ -291,6 +291,53 @@ Once the modules are up, you can inspect that the "customvision" module is opera
 PS C:\data\modules\customvision> iotedge logs customvision
 ```
 
+### 5.5 - Troubleshooting modules
+
+#### 1. Check that IoT Edge is configured correctly
+
+Run the following command, using PowerShell in Administrator mode:
+
+```
+iotedge check
+```
+
+#### 2. Get the logs for an IoT Edge module
+
+```
+iotedge logs <module-name>
+```
+
+#### 3. Restart an IoT Edge module
+
+If a module is not running you can try restarting it through the `iotedge` runtime, using PowerShell in Administrator mode:
+
+```
+iotedge restart <module-name>
+```
+
+#### 4. Get the logs for the IoT Edge runtime
+
+If the module logs are empty or unhelpful, can you pull all of the IoT Edge logs, using PowerShell in Administrator mode:
+
+```
+. {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Get-IoTEdgeLog
+```
+
+
+#### 5. Restart the IoT Edge runtime
+
+This will restart all of the modules on the IoT Edge device, using PowerShell in Administrator mode:
+
+```
+Restart-Service iotedge
+```
+
+Make sure to check that the `iotedge` runtime has started successfully:
+
+```
+Get-Service iotedge
+```
+
 ## Step 6 : Validate results in Time Series Insights
 
 ### TODO

@@ -219,16 +219,15 @@ Now that we have a container image with our inferencing logic stored in our cont
 
 **Hint: you can type $containerTag to get the full container string from PowerShell.**
 
-
 ### 5.2 - Deploy the IoT Edge deployment.json file. 
+
+On your development machine:
 
 Just like the example deployment, use the following syntax to update the expected module state on the device. IoT Edge will pick up on this configuration change and deploy the container to the device.
 
 ```
 az iot edge set-modules --device-id [device name] --hub-name [hub name] --content "C:\Labs\Content\src\IoTLabs.IoTEdge\deployment.template.lab05.win-x64.json"
 ```
-
-The first time that you run this command, you are required to update a dependency by pressing **y** then **Enter**.
 
 Run the following command to get information about the modules deployed to your IoT Hub.
 ```
@@ -247,10 +246,10 @@ edgeAgent        running          Up 2 minutes     mcr.microsoft.com/azureiotedg
 edgeHub          running          Up 1 second      mcr.microsoft.com/azureiotedge-hub:1.0
 ```
 
-Once the modules are up, you can inspect that the "tabularmodel" module is operating correctly:
+Once the modules are up, you can inspect that the "customvision" module is operating correctly:
 
 ```
-[192.168.1.102]: PS C:\data\modules\customvision> iotedge logs tabularmodel
+[192.168.1.102]: PS C:\data\modules\customvision> iotedge logs customvision
 ```
 
 Finally, back on the development machine, we can monitor device to cloud (D2C) messages from VS Code to ensure the messages are going up.

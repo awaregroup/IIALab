@@ -30,7 +30,7 @@ When starting the lab, you should have these things open on your development mac
    | Resource group | Select the same resource group you have been using prior to this lab |
   
 1. Verify that all the details you have entered are correct.
-   * ![Create Custom Vision resources](/media/lab05/create-custom-vision-resource.jpg)
+   ![Create Custom Vision resources](/media/lab05/create-custom-vision-resource.jpg)
 1. Click Create
 1. Wait for the deployment to complete.
 
@@ -61,7 +61,7 @@ When starting the lab, you should have these things open on your development mac
     | Export Capabilities | Basic platforms (Tensorflow, CoreML, ONNX, ...) |
     
 1. Verify that all the details you have entered are correct.
-   * ![Create Custom Vision project](/media/lab05/create-custom-vision-project.jpg)
+   ![Create Custom Vision project](/media/lab05/create-custom-vision-project.jpg)
 1. Click Create project.
 
 ### 1.2 - Upload and tag training data
@@ -70,7 +70,7 @@ When starting the lab, you should have these things open on your development mac
     * Upload all of object1 first and add the object1 tag, then all of object2 and add the object2 tag etc.
     * Each time you upload all the images for a given object, specify the tag at that time.
  1. Example of bulk uploading and tagging images.
-   * ![Upload and tag images](/media/lab05/upload-and-tag-images.jpg)
+   ![Upload and tag images](/media/lab05/upload-and-tag-images.jpg)
     
 ### 1.3 - Train your model
 
@@ -78,7 +78,7 @@ When starting the lab, you should have these things open on your development mac
 1. Select the Quick Training option.
 1. Click Train.
  1. Example of testing your model.
-   * ![Train model](/media/lab05/train-your-model.jpg)
+   ![Train model](/media/lab05/train-your-model.jpg)
 
 ### 1.4 - Test your model
 
@@ -95,7 +95,7 @@ When starting the lab, you should have these things open on your development mac
 1. Select ONNX1.2 for the version.
 1. Click Export.
 1. An example of exporting your model.
-   * ![Export model](/media/lab05/export-your-model.jpg)
+   ![Export model](/media/lab05/export-your-model.jpg)
 1. After downloading, rename the file "CustomVision.onnx"
 
 ## Step 2: Package the model into a C# .NET Application
@@ -221,18 +221,18 @@ Now we need to create a device registration for an IoT Edge Device in IoT Hub th
 1. Login to the Azure Portal.
 1. Find your IoT Hub.
 1. Go to Automatic Device Management > IoT Edge.
-   * ![Create IoT Edge Device 1](/media/lab05/add-iot-edge-device-in-azure1.jpg)
+   ![Create IoT Edge Device 1](/media/lab05/add-iot-edge-device-in-azure1.jpg)
 1. Click + Add an IoT Edge device.
-   * ![Create IoT Edge Device 2](/media/lab05/add-iot-edge-device-in-azure2.jpg)
+   ![Create IoT Edge Device 2](/media/lab05/add-iot-edge-device-in-azure2.jpg)
 1. Enter a name for you IoT Edge device
 1. Leave the rest of the settings as the default values.
 1. Verify that all the details you have entered are correct.
-   * ![Create IoT Edge Device 3](/media/lab05/add-iot-edge-device-in-azure3.jpg)
+   ![Create IoT Edge Device 3](/media/lab05/add-iot-edge-device-in-azure3.jpg)
 1. Click Save.
 1. Click Refresh to update the list of devices.
 1. Click on your device to view it's details.
 1. An example of the device details page
-   * ![Create IoT Edge Device 4](/media/lab05/add-iot-edge-device-in-azure4.jpg)
+   ![Create IoT Edge Device 4](/media/lab05/add-iot-edge-device-in-azure4.jpg)
 
 ### 5.1 - Author a deployment.json file
 
@@ -264,11 +264,11 @@ az iot hub module-identity list --device-id [device name] --hub-name [hub name]
 1. Navigate to your IoT Edge Device in your IoT Hub.
 1. Go to the device details page.
 1. Under the Modules tab click on the customvision module.
-   * ![Verify Azure module deployment 1](/media/lab05/verify-azure-deployment-of-customvision-module1.jpg)
+   ![Verify Azure module deployment 1](/media/lab05/verify-azure-deployment-of-customvision-module1.jpg)
 1. Under the IoT Edge Module Settings tab.
 1. Verify that the Desired Value for the Image URI matches the one that you entered in your deployment template.
 1. An example of IoT Edge Module Settings.
-   * ![Verify Azure module deployment 2](/media/lab05/verify-azure-deployment-of-customvision-module2.jpg)
+   ![Verify Azure module deployment 2](/media/lab05/verify-azure-deployment-of-customvision-module2.jpg)
 
 **Hint: The Desired Value column matches what is specified in the deploment template, the Reported Value column matches what the devices believes it is running.**
 

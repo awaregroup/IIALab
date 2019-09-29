@@ -81,6 +81,16 @@ namespace SampleModule
             }
 
             // TODO: Use Console.Write to output this
+            Console.WriteLine($"{nameof(colorSourceInfo)} is {(colorSourceInfo == null ? "is null" : "is not null")}");
+            Console.WriteLine($"colorSourceInfo.Id ({nameof(colorSourceInfo.Id)}) is {colorSourceInfo.Id}");
+
+            Console.WriteLine($"{nameof(mediaCapture)} is {(mediaCapture == null ? "is null" : "is not null")}");
+            Console.WriteLine($"mediaCapture.FrameSources ({nameof(mediaCapture.FrameSources)}) has {mediaCapture.FrameSources.Count} items");
+
+            foreach (var source in mediaCapture.FrameSources)
+            {
+                Console.WriteLine($"{source.Key}: {source.Value}");
+            }
 
             var colorFrameSource = mediaCapture.FrameSources[colorSourceInfo.Id];
 

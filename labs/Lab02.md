@@ -1,80 +1,72 @@
-# Lab 02 - Integrating Windows IoT with Azure
+# Lab 02 - Integrating Windows 10 IoT with Azure IoT Central
 
 ## Pre-requisites
-### Hardware
-* Arrow Dragonboard 410c
-* Grove LED
-* Grove Mini PIR Sensor
-* Grove Barometer Sensor
 
 ### Software
-* Visual Studio 2019 Community Edition (or above)
+* Web Browser
+
+## 1 - Deploying Azure IoT Central (IOTC)
+
+### 1.1 - Create IOTC application
+
+1. Navigate to [apps.azureiotcentral.com](https://apps.azureiotcentral.com) and log in with supplied lab credentials
+![](./media/2_iotc1.png)
+2. Click "New Application", and choose the following settings:
+
+|Name    |Value|
+|--------|-----|
+|Payment Plan|Pay-as-you-go|
+|Application Template|Preview Application|
+|Application Name|[choose a name]|
+
+3. Click "Create" to provision your application
 
 
-## 1 - Deploying Azure IoT Hub
+### 1.2 - Create Device Template
 
-### 1.1 - Deploy Azure IoT Hub
+1. Navigate to Device Templates and click 'New'
+![](./media/2_iotc2.png)
 
-1. Sign into the [Azure Portal (https://portal.azure.com)](https://portal.azure.com) with the supplied lab credentials
-1. Click "Create a resource", search for "IoT Hub"
-![](./media/2_azure1.png)
-1. Click on "IoT Hub" and "Create"
-![](./media/2_azure2.png)
-1. Fill out the details by choosing a name and select the existing subscription and resource group
-![](./media/2_azure3.png)
-1. Click "Review + create" and finally "Create" to complete the provisioning
-![](./media/2_azure4.png)
+1. IoT Central can import existing Device Templates from the [Azure IoT Device Catalog](), however we are creating our own device. Click 'Custom'.
+![](./media/2_iotc3.png)
 
-### 1.2 - Configure Azure IoT Hub
+1. Name your device and click 'Import Capability Model'
+![](./media/2_iotc4.png)
 
-1. Click "Resource groups" on the left-hand menu, select the "winiot" resource group in the list and choose the IoT Hub previously created
-![](./media/2_azure5.png)
-1. Click "IoT devices" on the IoT Hub menu and click "Add"
-![](./media/2_azure6.png)
-1. Enter "dragonboard" as the Device ID and click "Save" to create the device
-![](./media/2_azure7.png)
-1. Click the device called "dragonboard" and copy the "Connection string (primary key)" field to the clipboard - we will use this later
-![](./media/2_azure8.png)
+1. Browse to the `src/IoT Central/` folder and upload the file named `ST SensorTile.Box.json`.
+![](./media/2_iotc5.png)
 
-### 1.3 - Connect Dragonboard app to Azure IoT Hub
+1. Click 'Views' and click 'Generate Default Views'
+![](./media/2_iotc7.png)
 
-1. In Visual Studio, open ```ViewModel/MainViewModel.cs``` and browse to **line 20** 
-1. Update the iotHubConnectionString with the text on your clipboard
-![](./media/2_azure9.png)
-1. Start debugging to run the updated app on the Dragonboard
+1. Click 'Publish' and confirm the process by clicking 'Publish' again.
+![](./media/2_iotc6.png)
 
-### 1.4 - Montior Azure IoT Hub events with Azure CLI
+### 1.3 - Create Device Template
 
-1. Open an Command Prompt as Administrator
-1. Type the following commands to monitor messages from the Dragonboard:
+1. Click 'Devices', choose your newly created Device Template and click 'New'.
+![](./media/2_iotc8.png)
 
-```batch
-az login
-az extension add --name azure-cli-iot-ext
-az iot hub monitor-events -n ENTERYOURIOTHUBNAME -d dragonboard
-```
+1. Confirm that the 'Simulated' toggle is **unchecked**, then click 'Create'.
 
-3. Watch the console window as telemetry messages start to stream through from the Dragonboard device
+1. Click on your new device to see the device dashboard. There should be no data showing yet.
+![](./media/2_iotc9.png)
 
-## 3 - Data visualization with Azure Time Series Insights (TSI)
+1. Click the 'Connect' button and record the `Scope ID`, `Device ID` and `Primary Key`. These are the Azure IoT Hub Device Provisioning Service (DPS) details. You will need these to set up your device.
+![](./media/2_iotc10.png)
 
-### 3.1 - Deploying Azure Time Series Insights
+### 1.4 - Monitor IOTC Application
 
-1. Sign into the [Azure Portal (https://portal.azure.com)](https://portal.azure.com) with the supplied lab credentials
-1. Click "Create a resource", search for "Time Series Insights" and "Create"
-![](./media/2_azure10.png)
-1. Set the fields as shown in the image below, then click "Next: Event Source"
-![](./media/2_azure12.png)
-1. Set the Event Source fields as shown in the image below
-![](./media/2_azure13.png)
-1. Add a new Consumer Group called "tsi" and click "Add"
-![](./media/2_azure14.png)
-**Note: Make sure you click "Add" next to the Consumer Group before continuing**
-1. Click "Review and Create" then "Create" to finish setting up your Time Series Insights environment.
+1. Go to settings and generate API Token
+1. Connect to IOTC event stream with iotc-explorer tool
+1. See simulated events being pushed to IOTC
 
-### 3.2 - Configuring TSI
+### 1.4 - Connect HummingBoard to IOTC
 
-1. Open the [Time Series Insights Portal (insights.timeseries.azure.com)](https://insights.timeseries.azure.com)
+1. Add connection string
+1. Re-deploy app
+1. See telemetry in IOTC
+
 
 ## 4 - Republish appx files
 

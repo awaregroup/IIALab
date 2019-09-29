@@ -22,7 +22,7 @@ namespace SampleModule
 {
     class FrameSource: IDisposable
     {
-        private const int MinimumVideoWidth = 480;
+        private const int MinimumVideoWidth = 1080;
         private MediaCapture mediaCapture = null;
         private MediaFrameReader mediaFrameReader = null;
         private EventWaitHandle evtFrame = null;

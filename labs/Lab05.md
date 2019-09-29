@@ -161,7 +161,7 @@ dotnet publish -c Release -o ./release -r win-x64 --self-contained true
 #SAMPLE: aiedgelabcr (this is the same container registry created in lab 04)
 $registryName = "[azure-container-registry-name]"
 $version = "1.0"
-$imageName = "tabularmodel"
+$imageName = "customvision"
 
 $containerTag = "$registryName.azurecr.io/$($imageName):$version-x64-iotcore"
 docker build . -t $containerTag

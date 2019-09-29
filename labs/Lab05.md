@@ -24,18 +24,58 @@ When starting the lab, you should have these things open on your development mac
 
 ## Step 1: Train a model
 
+### Take training images
+
 1. Plug the USB camera into your development PC.
-1. Using the Camera app on your development PC, take at least 5 pictures each of your objects. Store these pictures on your computer. Organize all the photos for each object into a folder named for this object. It will make them easier to upload.
-1. Log into the [Custom Vision Portal](https://www.customvision.ai/)
-1. Choose the Directory associated with your Azure account
-1. Create a New Project. Be sure to choose a "compact" domain and *Classification* not Object Detection
-1. Upload them to your custom vision project. I recommend to upload one object at a time, so it's easy to apply a tag to all your images. Each time you upload all the images for a given object, specify the tag at that time.
-1. Select "Train" to train the model
+1. Using the Camera app on your development PC, take at least 5 pictures each of your objects. 
+    * Store these pictures on your computer. 
+    * Organize all the photos for each object into a folder named for this object - this will make them easier to upload.
+    
+### Create a Custom Vision Image Classification project
+
+1. Log into the [Custom Vision Portal](https://www.customvision.ai/).
+1. Choose the Directory associated with your Azure account.
+1. Create a New Project. 
+1. Configure your project as follows:
+
+    | Field | Value |
+    | --- | --- |
+    | Name | Enter a unique name |
+    | Description | Leave blank |
+    | Resource | Select any available resource in the subscription |
+    | Project Types | Classification |
+    | Classification Types | Multiclass (Single tag per image) |
+    | Domains | General (compact) |
+    | Export Capabilities | Basic platforms (Tensorflow, CoreML, ONNX, ...) |
+    
+1. Click Create project.
+
+### Upload and tag training data
+
+1. Click the Add image button and bulk upload your images based on the object type.
+    * Upload all of object1 first and add the object1 tag, then all of object2 and add the object2 tag etc.
+    * Each time you upload all the images for a given object, specify the tag at that time.
+    
+### Train your model
+
+1. Click on the Training button (green one in the top right).
+1. Select the Quick Training option.
+1. Click Train.
+
+### Test your model
+
 1. Select "Quick Test" to test the model.
 . Using the camera app on your PC, take one more picture of one of the objects
 1. Upload the picture you took, verify that it was predicted correctly.
-1. Export the model. From the "Performance" tab, select the "Export" command.
-1. Choose "ONNX", then "ONNX1.2" version.
+
+### Export your model
+
+1. Switch to the Performance tab in the portal.
+1. Click on Publish.
+1. Click on Export.
+1. Select ONNX for the type.
+1. Select ONNX1.2 for the version.
+1. Click Export.
 1. After downloading, rename the file "CustomVision.onnx"
 
 ## Step 2: Package the model into a C# .NET Application

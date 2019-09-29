@@ -7,7 +7,7 @@ This lab introduces Azure Stream Analytics with Azure IoT Edge on Windows 10 IoT
 ### 1.1 - Cloud setup
 
 1. Make a note of the Surface Laptop device name printed on the device. For example, IOTEDGE02 
-2. Open a browser and navigate to the [Azure Portal (https://portal.azure.com)](https://portal.azure.com). Log in with the lab credentials provided.
+2. Open a browser and navigate to the [Azure Portal (portal.azure.com)](https://portal.azure.com). Log in with the lab credentials provided.
 3. Click **Resource groups** on the left-hand menu, select the **msiotlabs-iia-user##** resource group in the list and choose the **IoT Hub** created in [Lab 2](./Lab02.md#11---deploy-azure-iot-hub)
 ![](./media/2_azure5.png)
 4. In the left hand menu under the heading **Automatic Device Management**, click **IoT Edge**. Then click **Add an IoT Edge device** at the top. **Note: that this is a slightly different menu than the one used earlier in the lab**
@@ -25,7 +25,8 @@ This lab introduces Azure Stream Analytics with Azure IoT Edge on Windows 10 IoT
 ```powershell
 . {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Deploy-IoTEdge
 ```
-3. Re-open the PowerShell session as Administrator 
+3. When prompted, press 'Y' to reboot
+3. When the system is booted again, re-open the PowerShell session as Administrator 
 4. Configure the Azure IoT Edge runtime with the following command:
 ```powershell
 . {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Initialize-IoTEdge

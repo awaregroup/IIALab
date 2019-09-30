@@ -182,7 +182,7 @@ $registryName = "[azure-container-registry-name]"
 $version = "1.0"
 $imageName = "customvision"
 
-$containerTag = "$registryName.azurecr.io/$($imageName):$version-x64-iotcore"
+$containerTag = "$registryName.azurecr.io/$($imageName):$version-x64-win1809"
 docker build . -t $containerTag
 ```
 

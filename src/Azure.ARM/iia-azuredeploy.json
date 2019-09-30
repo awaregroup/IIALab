@@ -1,0 +1,256 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "prefix": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 10,
+            "defaultValue": "msiotlabs",
+            "metadata": {
+                "description": "Specifies the organisation."
+            }
+        },
+        "projectName": {
+            "type": "string",
+            "minLength": 3,
+            "defaultValue": "iia-user01",
+            "metadata": {
+                "description": "Specifies the project name for the deployment."
+            }
+        },
+        "eventHubNsResourceGroup": {
+            "type": "string",
+            "defaultValue": "common"
+        },
+        "eventHubNsName": {
+            "type": "string",
+            "defaultValue": "msiotlabs-iia-eventhub"
+        },
+        "eventHubName": {
+            "type": "string",
+            "defaultValue": "from-iothubs"
+        },
+        "eventHubSharedAccessPolicyName": {
+            "type": "string",
+            "defaultValue": "iothub"
+        }
+    },
+    "variables": {
+        "location": "[resourceGroup().location]",
+        "subscriptionId": "[subscription().subscriptionId]",
+        "prefix": "[toLower(concat(parameters('prefix'), '-', parameters('projectName')))]",
+        "storageAccountName": "[take(replace(concat(variables('prefix'), '-storage'), '-', ''), 24)]",
+        "storageAccountAsaContainerName": "streamanalyticsedge",
+        "iotHubName": "[concat(variables('prefix'), '-iothub')]",
+        "iotHubRouteName": "SendTelemetryToEventHub",
+        "iotHubDpsName": "[concat(variables('prefix'), '-dps')]",
+        "streamAnalyticsName": "[concat(variables('prefix'), '-streamanalytics')]"
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Storage/storageAccounts",
+            "name": "[variables('storageAccountName')]",
+            "apiVersion": "2018-07-01",
+            "location": "[variables('location')]",
+            "sku": {
+                "name": "Standard_LRS",
+                "tier": "Standard"
+            },
+            "kind": "Storage",
+            "properties": {},
+            "resources": [
+                {
+                    "type": "blobServices/containers",
+                    "apiVersion": "2018-07-01",
+                    "name": "[concat('default/', variables('storageAccountAsaContainerName'))]",
+                    "properties": {
+                        "publicAccess": "None"
+                    },
+                    "dependsOn": [
+                        "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
+                    ]
+                }
+            ]
+        },
+        {
+            "apiVersion": "2018-04-01",
+            "type": "Microsoft.Devices/IotHubs",
+            "name": "[variables('iotHubName')]",
+            "location": "[variables('location')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
+            ],
+            "properties": {
+                "eventHubEndpoints": {
+                    "events": {
+                        "retentionTimeInDays": 1,
+                        "partitionCount": 4
+                    },
+                    "operationsMonitoringEvents": {
+                        "retentionTimeInDays": 1,
+                        "partitionCount": 4
+                    }
+                },
+                "routing": {
+                    "endpoints": {
+                        "serviceBusQueues": [],
+                        "serviceBusTopics": [],
+                        "eventHubs": [
+                            {
+                                "connectionString": "[listkeys(resourceId(subscription().subscriptionId, parameters('eventHubNsResourceGroup'), 'Microsoft.EventHub/namespaces/eventhubs/authorizationRules', parameters('eventHubNsName'), parameters('eventHubName'), parameters('eventHubSharedAccessPolicyName')),'2017-04-01').primaryConnectionString]",
+                                "name": "[parameters('eventHubName')]",
+                                "subscriptionId": "[variables('subscriptionId')]",
+                                "resourceGroup": "[parameters('eventHubNsResourceGroup')]"
+                            }
+                        ],
+                        "storageContainers": []
+                    },
+                    "routes": [
+                        {
+                            "name": "[variables('iotHubRouteName')]",
+                            "source": "DeviceMessages",
+                            "condition": "true",
+                            "endpointNames": [
+                                "[parameters('eventHubName')]"
+                            ],
+                            "isEnabled": true
+                        }
+                    ],
+                    "fallbackRoute": {
+                        "name": "$fallback",
+                        "source": "DeviceMessages",
+                        "condition": "true",
+                        "endpointNames": [
+                            "events"
+                        ],
+                        "isEnabled": true
+                    }
+                },
+                "storageEndpoints": {
+                    "$default": {
+                        "sasTtlAsIso8601": "PT1H",
+                        "connectionString": "",
+                        "containerName": ""
+                    }
+                },
+                "messagingEndpoints": {
+                    "fileNotifications": {
+                        "lockDurationAsIso8601": "PT1M",
+                        "ttlAsIso8601": "PT1H",
+                        "maxDeliveryCount": 10
+                    }
+                },
+                "enableFileUploadNotifications": false,
+                "cloudToDevice": {
+                    "maxDeliveryCount": 10,
+                    "defaultTtlAsIso8601": "PT1H",
+                    "feedback": {
+                        "lockDurationAsIso8601": "PT1M",
+                        "ttlAsIso8601": "PT1H",
+                        "maxDeliveryCount": 10
+                    }
+                }
+            },
+            "sku": {
+                "name": "S1",
+                "capacity": 1
+            }
+        },
+        {
+            "apiVersion": "2017-04-01-preview",
+            "name": "[variables('streamAnalyticsName')]",
+            "location": "[variables('location')]",
+            "type": "Microsoft.StreamAnalytics/StreamingJobs",
+            "tags": {
+                "ms-suppressjobstatusmetrics": "true"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Storage/StorageAccounts', variables('storageAccountName'))]"
+            ],
+            "properties": {
+                "sku": {
+                    "name": "Standard"
+                },
+                "jobType": "edge",
+                "compatibilityLevel": "1.1",
+                "eventsLateArrivalMaxDelayInSeconds": 5,
+                "transformation": {
+                    "name": "Transformation",
+                    "properties": {
+                        "streamingUnits": 1,
+                        "query": "SELECT * INTO EdgeOutput FROM EdgeInput"
+                    }
+                },
+                "inputs": [
+                    {
+                        "name": "EdgeInput",
+                        "properties": {
+                            "type": "stream",
+                            "serialization": {
+                                "type": "JSON",
+                                "properties": {
+                                    "fieldDelimiter": ",",
+                                    "encoding": "UTF8"
+                                }
+                            },
+                            "datasource": {
+                                "type": "GatewayMessageBus",
+                                "properties": {}
+                            }
+                        }
+                    }
+                ],
+                "outputs": [
+                    {
+                        "name": "EdgeOutput",
+                        "properties": {
+                            "serialization": {
+                                "type": "JSON",
+                                "properties": {
+                                    "fieldDelimiter": ",",
+                                    "encoding": "UTF8"
+                                }
+                            },
+                            "datasource": {
+                                "type": "GatewayMessageBus",
+                                "properties": {}
+                            }
+                        }
+                    }
+                ],
+                "package": {
+                    "storageAccount": {
+                        "accountName": "[variables('storageAccountName')]",
+                        "accountKey": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), providers('Microsoft.Storage', 'storageAccounts').apiVersions[0]).keys[0].value]"
+                    },
+                    "container": "[variables('storageAccountAsaContainerName')]"
+                }
+            }
+        },
+        {
+            "type": "Microsoft.Devices/provisioningServices",
+            "sku": {
+                "name": "S1",
+                "capacity": 1
+            },
+            "name": "[variables('iotHubDpsName')]",
+            "apiVersion": "2017-11-15",
+            "location": "westus",
+            "tags": {},
+            "properties": {
+                "iotHubs": [
+                    {
+                        "connectionString": "[concat('HostName=', reference(variables('iotHubName')).hostName, ';SharedAccessKeyName=iothubowner', ';SharedAccessKey=', listkeys(resourceId('Microsoft.Devices/Iothubs/Iothubkeys', variables('iotHubName'), 'iothubowner'), '2017-07-01').primaryKey)]",
+                        "location": "[variables('location')]",
+                        "name": "[concat(variables('iotHubName'),'.azure-devices.net')]"
+                    }
+                ]
+            },
+            "dependsOn": [
+                "[variables('iotHubName')]"
+            ]
+        }
+    ],
+    "outputs": {}
+}

@@ -1,32 +1,21 @@
-# Lab 03 - Creating a custom Windows IoT FFU
+# Lab 03 - Configure your cloud solution platform
 
-## Pre-requisites
-### Hardware
-* Arrow Dragonboard 410c
-* Grove LED
-* Grove Button
-
-### Software
-* Visual Studio 2019 Community Edition (or above)
-* Dragonboard 410c - BSP Package
-* Windows Assessment and Deployment KiT (Windows ADK)
-* Windows 10 IoT Core packages
-* IoT Core ADK Add-Ons
-* IoT Core PowerShell environment
-* Dragonboard update tool
-
-## 1 - Build your image
+## 1 - Deploy and configure Azure IoT components
 
 ### 1.0 - Create your workspace
 
-Microsoft enables device manufacturers and OEMs to design their own IoT Core images. These images are built using an IoT Workspace and customized using Board Support Packages (BSPs) containing drivers, apps and other additions.
+The focal point of all Microsoft IoT solutions is the Azure IoT Hub service. IoT Hub provides secure messaging, device provisioning and device management capabilities.
 
-On your desktop, open the Labs shortcut and then navigate into the tools/iotadkaddon folder. This addonkit contains PowerShell scripts for package creation and image creation process.
+Azure Resource Manager Templates (ARM Templates) can be deployed into Azure that include IoT Hub. Click the button below to create the Azure IoT components required for the next labs:
 
-1. Open ```C:\labs\tools\IoTADKAddon``` and run the script named ```IoTCorePShell``` as Administrator
-2. ```New-IoTWorkspace -DirName "C:\labs\Lab03" -OemName "Lab03" -Arch "arm"```
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fawaregroup%2FIIALab%2Fmaster%2Fsrc%2FAzure.ARM%2Fiia-azuredeploy.json" target="_blank">
+<img src="https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.png"/>
+</a>
+<a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2Fawaregroup%2FIIALab%2Fmaster%2Fsrc%2FAzure.ARM%2Fiia-azuredeploy.json" target="_blank">
+<img src="https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/visualizebutton.png"/>
+</a>
 
-This will create a new workspace targetted in the ARM environment and switch you immedately to this workspace. If you exit this window you can open the workspace bootstraper in the new workspace to pick up where you left off. (C:\Labs\Lab03\IoTCorePshell.cmd)
+You can also visualize an ARM template to see the components that will be created.
 
 ### 1.2 Install Example OEM Packages
 Most required packages will automatically be imported to the workspace, but we can include sample packages by running the following command

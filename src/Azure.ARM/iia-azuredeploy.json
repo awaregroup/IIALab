@@ -248,7 +248,7 @@
                 ]
             },
             "dependsOn": [
-                "[variables('iotHubName')]"
+                "[resourceId('Microsoft.Devices/IotHubs', variables('iotHubName'))]"
             ]
         }
     ],

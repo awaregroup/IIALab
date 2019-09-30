@@ -78,9 +78,7 @@
             "type": "Microsoft.Devices/IotHubs",
             "name": "[variables('iotHubName')]",
             "location": "[variables('location')]",
-            "dependsOn": [
-                "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
-            ],
+            "dependsOn": [],
             "properties": {
                 "eventHubEndpoints": {
                     "events": {

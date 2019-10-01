@@ -1,51 +1,26 @@
 {
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
-    "parameters": {
-        "prefix": {
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 10,
-            "defaultValue": "msiotlabs",
-            "metadata": {
-                "description": "Specifies the organisation."
-            }
-        },
-        "projectName": {
-            "type": "string",
-            "minLength": 3,
-            "defaultValue": "iia-user01",
-            "metadata": {
-                "description": "Specifies the project name for the deployment."
-            }
-        },
-        "eventHubNsResourceGroup": {
-            "type": "string",
-            "defaultValue": "common"
-        },
-        "eventHubNsName": {
-            "type": "string",
-            "defaultValue": "msiotlabs-iia-eventhub"
-        },
-        "eventHubName": {
-            "type": "string",
-            "defaultValue": "from-iothubs"
-        },
-        "eventHubSharedAccessPolicyName": {
-            "type": "string",
-            "defaultValue": "iothub"
-        }
-    },
+    "parameters": {},
     "variables": {
+        "prefixSegment": "[split(resourceGroup().name, '-')[0]]",
+        "projectName": "[concat(split(resourceGroup().name, '-')[1], '-', split(resourceGroup().name, '-')[2])]",
+
         "location": "[resourceGroup().location]",
         "subscriptionId": "[subscription().subscriptionId]",
-        "prefix": "[toLower(concat(parameters('prefix'), '-', parameters('projectName')))]",
+        "prefix": "[toLower(concat(variables('prefixSegment'), '-', variables('projectName')))]",
         "storageAccountName": "[take(replace(concat(variables('prefix'), '-storage'), '-', ''), 24)]",
         "storageAccountAsaContainerName": "streamanalyticsedge",
         "iotHubName": "[concat(variables('prefix'), '-iothub')]",
         "iotHubRouteName": "SendTelemetryToEventHub",
         "iotHubDpsName": "[concat(variables('prefix'), '-dps')]",
-        "streamAnalyticsName": "[concat(variables('prefix'), '-streamanalytics')]"
+        "streamAnalyticsName": "[concat(variables('prefix'), '-streamanalytics')]",
+    
+        "eventHubNsResourceGroup": "common",
+        "eventHubNsName": "msiotlabs-iia-eventhub",
+        "eventHubName": "from-iothubs",
+        "eventHubSharedAccessPolicyName": "iothub"
+    
     },
     "resources": [
         {
@@ -96,10 +71,10 @@
                         "serviceBusTopics": [],
                         "eventHubs": [
                             {
-                                "connectionString": "[listkeys(resourceId(subscription().subscriptionId, parameters('eventHubNsResourceGroup'), 'Microsoft.EventHub/namespaces/eventhubs/authorizationRules', parameters('eventHubNsName'), parameters('eventHubName'), parameters('eventHubSharedAccessPolicyName')),'2017-04-01').primaryConnectionString]",
-                                "name": "[parameters('eventHubName')]",
+                                "connectionString": "[listkeys(resourceId(subscription().subscriptionId, variables('eventHubNsResourceGroup'), 'Microsoft.EventHub/namespaces/eventhubs/authorizationRules', variables('eventHubNsName'), variables('eventHubName'), variables('eventHubSharedAccessPolicyName')),'2017-04-01').primaryConnectionString]",
+                                "name": "[variables('eventHubName')]",
                                 "subscriptionId": "[variables('subscriptionId')]",
-                                "resourceGroup": "[parameters('eventHubNsResourceGroup')]"
+                                "resourceGroup": "[variables('eventHubNsResourceGroup')]"
                             }
                         ],
                         "storageContainers": []
@@ -110,7 +85,7 @@
                             "source": "DeviceMessages",
                             "condition": "true",
                             "endpointNames": [
-                                "[parameters('eventHubName')]"
+                                "[variables('eventHubName')]"
                             ],
                             "isEnabled": true
                         }

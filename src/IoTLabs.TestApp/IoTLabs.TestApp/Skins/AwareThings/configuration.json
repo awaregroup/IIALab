@@ -1,0 +1,713 @@
+{
+	"Id": "AwareThings",
+	"Title": "AwareThings Dashboard",
+	"Description": "Default Dashboard for AwareThings",
+	"CurrentSkin": {
+		"HeaderIcon": "!Logo.png",
+		"PageHeader": "AwareThings",
+		"PageSubHeader": "IoT Dashboard",
+		"ShowVersion": false,
+		"ShowIpAddress": false,
+		"ShowAppVersion": false,
+		"ShowDateTime": false,
+		"ShowPreviewSymbol": false,
+		"ShowPreviewBand": false,
+		"IsPreviewDisplayEnabled": false,
+		"IsVisible": true,
+		"LayoutColumns": 12,
+		"LayoutRows": 12,
+		"HorizontalResolution": 1920,
+		"VerticalResolution": 1080,
+		"TitleHeight": 140,
+		"Layouts": 3,
+		"LayoutMode": "Pivots",
+		"LayoutTabs": [{
+			"Index": 0,
+			"Title": "Monitor",
+			"Glyph": "\uE80F"
+		},
+		{
+			"Index": 1,
+			"Title": "Information",
+			"Glyph": "\uE946"
+		},
+		{
+			"Index": 2,
+			"Title": "More Panels",
+			"Glyph": "\uE946"
+		}],
+		"CustomHeaderXaml2" : "<Border Background=\"Red\" Padding=\"10\" xmlns=\"http://schemas.microsoft.com/winfx/2006/xaml/presentation\"><TextBlock Text=\"{Binding CurrentLayout.CurrentSkin.PageHeader}\" Style=\"{StaticResource PageHeaderTextBlockStyle}\"/></Border>",
+		"SkinOverride2" : "!SkinOverrides.xaml",
+		"SkinOverride" : "#DefaultTheme",
+		"PanelStylingFlags" : ["RoundedTop", "BorderNone", "BorderThick", "HeaderBackground", "TextCenter", "TextMedium"],
+		"TemplateOverride2" : "!TemplateOverrides.xaml",
+		"ShowPageHeaderTop" : true,
+		"PageHeaderPresetTemplateIndex" : 2
+	},
+	"SkinPanels": [{
+		"Id": "",
+		"SkinPanelTypeId": "ConnectionStatusPanel",
+		"IsVisible": true,
+		"IsTitleShown": true,
+		"Title": "Connectivity",
+		"Column": 0,
+		"Row": 0,
+		"ColumnSpan": 3,
+		"RowSpan": 6
+	},
+	{
+		"SkinPanelTypeId": "MachinePanel",
+		"IsVisible": true,
+		"Title": "Machine",
+		"Column": 0,
+		"Row": 6,
+		"ColumnSpan": 3,
+		"RowSpan": 6,
+		"Settings": {
+			"MachineName": "Solar Power Monitor",
+			"ModelNumber": "S-232-BIG",
+			"MachineImageUri": "!Machine.png"
+		}
+	},
+	{
+		"Id": "",
+		"SkinPanelTypeId": "LogItemsPanel",
+		"IsVisible": true,
+		"IsTitleShown": true,
+		"Title": "Event Log",
+		"Column": 4,
+		"Row": 0,
+		"ColumnSpan": 4,
+		"RowSpan": 12,
+		"LayoutIndex": 1,
+		"Settings": {
+			"MaxLogItems": 20,
+			"AddAtTop": true
+		}
+	},
+	{
+		"Id": "SensorStatus",
+		"SkinPanelTypeId": "SensorStatusPanel",
+		"IsVisible": true,
+		"IsTitleShown": true,
+		"Title": "Sensor Status",
+		"Column": 8,
+		"Row": 0,
+		"ColumnSpan": 4,
+		"RowSpan": 12,
+		"LayoutIndex": 1,
+		"Settings": {
+			"Items": [
+				{
+					"HostSensorId": "ImageClassificationSensor",
+					"SensorTitle": "Image Classification Sensor"
+				},
+				{
+					"HostSensorId": "Temperature",
+					"SensorTitle": "Temperature Sensor 1"
+				},
+				{
+					"HostSensorId": "Temperature2",
+					"SensorTitle": "Temperature Sensor 2"
+				},
+				{
+					"HostSensorId": "Humidity",
+					"SensorTitle": "Humidity Sensor 1"
+				},
+				{
+					"HostSensorId": "Humidity2",
+					"SensorTitle": "Humidity Sensor 2"
+				}
+			]
+		}
+	},
+	{
+		"Id": "",
+		"SkinPanelTypeId": "ImageClassification",
+		"IsVisible": true,
+		"IsTitleShown": true,
+		"Title": "Image Classification",
+		"Column": 3,
+		"Row": 0,
+		"ColumnSpan": 5,
+		"RowSpan": 8,
+		"Settings": {
+			"HostSensorId": "ImageClassificationSensor"
+		}
+	},
+	{
+		"Id": "ImageClassificationSpeed",
+		"SkinPanelTypeId": "ChartSensorPanel",
+		"IsVisible": true,
+		"IsTitleShown": true,
+		"Title": "Evaluation Speed",
+		"Column": 3,
+		"Row": 8,
+		"ColumnSpan": 3,
+		"RowSpan": 4,
+		"Settings": {
+			"Minimum": 0,
+			"Maximum": 100,
+			"AutoRangeMaximum": true,
+			"DisplayFormat" : "#####0",
+			"Symbol": "ms",
+			"SensorValueKey": "EvaluationTime",
+			"HostSensorId": "ImageClassificationSensor",
+			"SensorValueType": "Speed",
+			"Header": "",
+			"Footer": "",
+			"IsChartEnabled": true,
+			"ChartType": "Line",
+			"MaxValues": 20,
+			"AutoStretch": false
+		}
+	},
+	{
+		"Id": "ImageClassificationMatches",
+		"SkinPanelTypeId": "SingleValueSensorPanel",
+		"IsVisible": true,
+		"IsTitleShown": true,
+		"Title": "Matches Found",
+		"Column": 6,
+		"Row": 8,
+		"ColumnSpan": 2,
+		"RowSpan": 2,
+		"Settings": {
+			"Symbol": "boards",
+			"SensorValueKey": "Matches",
+			"DisplayFormat" : "#####0",
+			"HostSensorId": "ImageClassificationSensor",
+			"SensorValueType": "Percentage",
+			"Header": "",
+			"Footer": ""
+		}
+	},
+	{
+		"Id": "ImageClassificationConfidence",
+		"SkinPanelTypeId": "SingleValueSensorPanel",
+		"IsVisible": true,
+		"IsTitleShown": true,
+		"Title": "Confidence Level",
+		"Column": 6,
+		"Row": 10,
+		"ColumnSpan": 2,
+		"RowSpan": 2,
+		"Settings": {
+			"Symbol": "",
+			"SensorValueKey": "ConfidenceLevel",
+			"HostSensorId": "ImageClassificationSensor",
+			"SensorValueType": "Percentage",
+			"DisplayFormat" : "##0",
+			"Header": "",
+			"Footer": ""
+		}
+	},
+	{
+		"Id": "",
+		"SkinPanelTypeId": "DeviceInformationPanel",
+		"IsVisible": true,
+		"IsTitleShown": true,
+		"Title": "Device Info",
+		"Column": 0,
+		"Row": 0,
+		"ColumnSpan": 4,
+		"RowSpan": 12,
+		"LayoutIndex": 1,
+		"Settings": {
+			"Items": [{
+				"Title": "Device ID",
+				"SourceValueKey": "DeviceProperty.DeviceID"
+			},
+			{
+				"Title": "IP Address",
+				"SourceValueKey": "DeviceProperty.LocalIp"
+			},
+			{
+				"Title": "Machine Name",
+				"SourceValueKey": "DeviceProperty.HostName"
+			},
+			{
+				"Title": "FarmBeats Registration ID",
+				"SourceValueKey": "DeviceProperty.FarmBeatsRegistrationID"
+			},
+			{
+				"Title": "Operating System Version",
+				"SourceValueKey": "DeviceProperty.OSVersion"
+			},
+			{
+				"Title": "Processor",
+				"SourceValueKey": "DeviceProperty.Processor"
+			},
+			{
+				"Title": "Manufacturer",
+				"SourceValueKey": "DeviceProperty.Manufacturer"
+			},
+			{
+				"Title": "Model Number",
+				"SourceValueKey": "DeviceProperty.ModelNumber"
+			}]
+		}
+	},
+	{
+		"Id": "Temperature",
+		"SkinPanelTypeId": "ChartSensorPanel",
+		"IsVisible": true,
+		"IsTitleShown": true,
+		"Title": "Cell 1 Temperature",
+		"Column": 8,
+		"Row": 0,
+		"ColumnSpan": 2,
+		"RowSpan": 4,
+		"Settings": {
+			"Minimum": 25,
+			"Maximum": 45,
+			"Symbol": "°C",
+			"SensorValueKey": "*",
+			"HostSensorId": "Temperature",
+			"SensorValueType": "Temperature",
+			"Header": "",
+			"Footer": "",
+			"IsChartEnabled": true,
+			"ChartType": "Line",
+			"MaxValues": 20,
+			"AutoStretch": false
+		}
+	},
+	{
+		"Id": "Humidity",
+		"SkinPanelTypeId": "ChartSensorPanel",
+		"IsVisible": true,
+		"IsTitleShown": true,
+		"Title": "Cell 1 Efficiency",
+		"Column": 10,
+		"Row": 0,
+		"ColumnSpan": 2,
+		"RowSpan": 4,
+		"Settings": {
+			"Minimum": 40,
+			"Maximum": 50,
+			"Symbol": "%",
+			"SensorValueKey": "*",
+			"HostSensorId": "Humidity",
+			"SensorValueType": "Humidity",
+			"Header": "",
+			"Footer": "",
+			"IsChartEnabled": true,
+			"ChartType": "Bar",
+			"MaxValues": 20,
+			"AutoStretch": false
+		}
+	},
+	{
+		"Id": "Temperature2",
+		"SkinPanelTypeId": "SliderSensorPanel",
+		"IsVisible": true,
+		"IsTitleShown": true,
+		"Title": "Cell 2 Temperature",
+		"Column": 8,
+		"Row": 4,
+		"ColumnSpan": 4,
+		"RowSpan": 2,
+		"Settings": {
+			"Minimum": 15,
+			"Maximum": 50,
+			"IdealMinimum": 35,
+			"IdealMaximum": 40,
+			"AlertMinimum": 25,
+			"AlertMaximum": 45,
+			"Symbol": "°C",
+			"SensorValueKey": "*",
+			"HostSensorId": "Temperature2",
+			"SensorValueType": "Temperature"
+		}
+	},
+	{
+		"Id": "Humidity2",
+		"SkinPanelTypeId": "SliderSensorPanel",
+		"IsVisible": true,
+		"IsTitleShown": true,
+		"Title": "Cell 2 Efficiency",
+		"Column": 8,
+		"Row": 6,
+		"ColumnSpan": 4,
+		"RowSpan": 2,
+		"Settings": {
+			"Minimum": 0,
+			"Maximum": 100,
+			"IdealMinimum": 40,
+			"IdealMaximum": 60,
+			"AlertMinimum": 20,
+			"AlertMaximum": 80,
+			"Symbol": "%",
+			"SensorValueKey": "*",
+			"HostSensorId": "Humidity2",
+			"SensorValueType": "Humidity"
+		}
+	},
+	{
+		"Id": "",
+		"SkinPanelTypeId": "VibrationSensorPanel",
+		"IsVisible": true,
+		"IsTitleShown": true,
+		"Title": "Generator Vibration",
+		"Column": 8,
+		"Row": 8,
+		"ColumnSpan": 4,
+		"RowSpan": 4,
+		"Settings": {
+			"IsThresholdListener": true,
+			"ShowValuePanel": true,
+			"MaxVibrations": 25,
+			"AllowSimulatedVibrations": true,
+			"MinValue": -130,
+			"MaxValue": 130,
+			"TickOffset": -120,
+			"TickInterval": 60,
+			"HorizontalTicks": 25,
+			"ShowMaxThreshold": true,
+			"ShowMinThreshold": true,
+			"MaxThreshold": 110,
+			"MinThreshold": -110,
+			"TickLineMask": "###0",
+			"Symbol": "Hz",
+			"SensorValueKey": "*",
+			"HostSensorId": "Vibration"
+		}
+	},
+	{
+		"Id": "",
+		"SkinPanelTypeId": "MarkdownReaderPanel",
+		"IsVisible": true,
+		"Title": "Instructions",
+		"Column": 0,
+		"Row": 0,
+		"ColumnSpan": 6,
+		"RowSpan": 12,
+		"LayoutIndex": 2,
+		"Settings": {
+			"MarkdownUri" : "!README.md"
+		}
+	},
+	{
+		"Id": "SoilMoisture1",
+		"SkinPanelTypeId": "GaugeSensorPanel",
+		"IsVisible": true,
+		"Title": "Temperature 1",
+		"Column": 6,
+		"Row": 0,
+		"ColumnSpan": 3,
+		"RowSpan": 5,
+		"LayoutIndex": 2,
+		"Settings": {
+			"Minimum": 0.0,
+			"Maximum": 100.0,
+			"IdealMinimum": 40.0,
+			"IdealMaximum": 60.0,
+			"AlertMinimum": 20.0,
+			"AlertMaximum": 80.0,
+			"Symbol": "°C",
+			"SensorValueKey": "*",
+			"HostSensorId": "Temperature",
+			"SensorValueType": "Temperature"
+		}
+	},
+	{
+		"Id": "SoilMoisture2",
+		"SkinPanelTypeId": "GaugeSensorPanel",
+		"IsVisible": true,
+		"Title": "Temperature 2",
+		"Column": 9,
+		"Row": 0,
+		"ColumnSpan": 3,
+		"RowSpan": 5,
+		"LayoutIndex": 2,
+		"Settings": {
+			"Minimum": 0.0,
+			"Maximum": 100.0,
+			"IdealMinimum": 40.0,
+			"IdealMaximum": 60.0,
+			"AlertMinimum": 20.0,
+			"AlertMaximum": 80.0,
+			"Symbol": "°C",
+			"SensorValueKey": "*",
+			"HostSensorId": "Temperature2",
+			"SensorValueType": "Temperature",
+			"DisplayNeedle" : false
+		}
+	},
+	{
+		"Id": "SoilMoisture3",
+		"SkinPanelTypeId": "GaugeSensorPanel",
+		"IsVisible": true,
+		"Title": "Temperature 3",
+		"Column": 6,
+		"Row": 5,
+		"ColumnSpan": 3,
+		"RowSpan": 3,
+		"LayoutIndex": 2,
+		"Settings": {
+			"Minimum": 0.0,
+			"Maximum": 100.0,
+			"IdealMinimum": 40.0,
+			"IdealMaximum": 60.0,
+			"AlertMinimum": 20.0,
+			"AlertMaximum": 80.0,
+			"Symbol": "°C",
+			"SensorValueKey": "*",
+			"HostSensorId": "Temperature2",
+			"SensorValueType": "Temperature",
+			"LayoutDirection" : "Horizontal",
+			"IsCompressedMode" : true
+		}
+	},
+	{
+		"Id": "SoilMoisture4",
+		"SkinPanelTypeId": "GaugeSensorPanel",
+		"IsVisible": true,
+		"Title": "Temperature 4",
+		"Column": 9,
+		"Row": 5,
+		"ColumnSpan": 3,
+		"RowSpan": 3,
+		"LayoutIndex": 2,
+		"Settings": {
+			"Minimum": 0.0,
+			"Maximum": 100.0,
+			"IdealMinimum": 40.0,
+			"IdealMaximum": 60.0,
+			"AlertMinimum": 20.0,
+			"AlertMaximum": 80.0,
+			"Symbol": "°C",
+			"SensorValueKey": "*",
+			"HostSensorId": "Temperature2",
+			"SensorValueType": "Temperature",
+			"LayoutDirection" : "Horizontal",
+			"IsCompressedMode" : true,
+			"DisplayNeedle" : false
+		}
+	},
+	{
+		"Id": "TemperatureSpark",
+		"SkinPanelTypeId": "ChartSensorPanel",
+		"IsVisible": true,
+		"IsTitleShown": true,
+		"Title": "Cell 1 Temperature Spark",
+		"Column": 6,
+		"Row": 8,
+		"ColumnSpan": 6,
+		"RowSpan": 2,
+		"LayoutIndex": 2,
+		"Settings": {
+			"Minimum": 25,
+			"Maximum": 45,
+			"Symbol": "°C",
+			"SensorValueKey": "*",
+			"HostSensorId": "Temperature",
+			"SensorValueType": "Temperature",
+			"Header": "",
+			"Footer": "",
+			"IsChartEnabled": true,
+			"ChartType": "SparkLine",
+			"MaxValues": 20,
+			"AutoStretch": false,
+			"LayoutDirection" : "Horizontal"
+		}
+	},
+	{
+		"Id": "TemperatureSpark2",
+		"SkinPanelTypeId": "ChartSensorPanel",
+		"IsVisible": true,
+		"IsTitleShown": true,
+		"Title": "Cell 1 Temperature Bar",
+		"Column": 6,
+		"Row": 10,
+		"ColumnSpan": 6,
+		"RowSpan": 2,
+		"LayoutIndex": 2,
+		"Settings": {
+			"Minimum": 25,
+			"Maximum": 45,
+			"Symbol": "°C",
+			"SensorValueKey": "*",
+			"HostSensorId": "Temperature",
+			"SensorValueType": "Temperature",
+			"Header": "",
+			"Footer": "",
+			"IsChartEnabled": true,
+			"ChartType": "Line",
+			"MaxValues": 20,
+			"AutoStretch": false,
+			"LayoutDirection" : "Horizontal"
+		}
+	}],
+	"Other" : [
+		{
+		  "SkinPanelTypeId": "ImagePanel",
+		  "IsVisible": true,
+		  "Title": "Connectivity",
+		  "Column": 6,
+		  "Row": 6,
+		  "ColumnSpan": 6,
+		  "RowSpan": 6,
+		  "LayoutIndex": 2,
+		  "IsTitleShown" : true,
+		  "Settings" : 
+		  {
+			"ImageUri": "!Aware-white-logo.png",
+			"ClipImage": false,
+			"KeepAspectRatio": true
+		  }
+		}
+	
+	],
+	"Aggregators": [{
+		"TelemetryKey": "temp",
+		"Id": "Temperature",
+		"AggregatorTypeId": "DoubleSensorAggregator",
+		"Mode": "Average",
+		"ExpirySeconds": 10.0,
+		"MaxRangeSeconds": 2.0
+	},
+	{
+		"TelemetryKey": "hum",
+		"Id": "Humidity",
+		"AggregatorTypeId": "DoubleSensorAggregator",
+		"Mode": "Average",
+		"ExpirySeconds": 10.0,
+		"MaxRangeSeconds": 2.0
+	},
+	{
+		"TelemetryKey": "Vibration",
+		"Id": "Vibration",
+		"AggregatorTypeId": "DoubleSensorAggregator",
+		"Mode": "Maximum",
+		"ExpirySeconds": 10.0,
+		"MaxRangeSeconds": 2.0
+	},
+	{
+		"TelemetryKey": "Temperature2",
+		"Id": "Temperature2",
+		"AggregatorTypeId": "DoubleSensorAggregator",
+		"Mode": "Average",
+		"ExpirySeconds": 10.0,
+		"MaxRangeSeconds": 2.0
+	},
+	{
+		"TelemetryKey": "Humidity2",
+		"Id": "Humidity2",
+		"AggregatorTypeId": "DoubleSensorAggregator",
+		"Mode": "Average",
+		"ExpirySeconds": 10.0,
+		"MaxRangeSeconds": 2.0
+	}],
+	"Sensors": [{
+		"SensorTypeId": "SimulatedPollingDoubleSensor",
+		"Id": "Temperature",
+		"Settings": {
+			"BaseValue": 37,
+			"Variation": 1
+		},
+		"Aggregators": [{
+			"AggregatorId": "Temperature",
+			"SensorValueKey": "*"
+		}]
+	},
+	{
+		"SensorTypeId": "SimulatedPollingDoubleSensor",
+		"Id": "Humidity",
+		"Settings": {
+			"BaseValue": 45,
+			"Variation": 0.5
+		},
+		"Aggregators": [{
+			"AggregatorId": "Humidity",
+			"SensorValueKey": "*"
+		}]
+	},
+	{
+		"SensorTypeId": "SimulatedPollingDoubleSensor",
+		"Id": "Vibration",
+		"Settings": {
+			"BaseValue": 0,
+			"Variation": 5
+		},
+		"Aggregators": [{
+			"AggregatorId": "Vibration",
+			"SensorValueKey": "*"
+		}]
+	},
+	{
+		"SensorTypeId": "SimulatedPollingDoubleSensor",
+		"Id": "Temperature2",
+		"Settings": {
+			"BaseValue": 37,
+			"Variation": 1
+		},
+		"Aggregators": [{
+			"AggregatorId": "Temperature2",
+			"SensorValueKey": "*"
+		}]
+	},
+	{
+		"SensorTypeId": "SimulatedPollingDoubleSensor",
+		"Id": "Humidity2",
+		"Settings": {
+			"BaseValue": 45,
+			"Variation": 0.5
+		},
+		"Aggregators": [{
+			"AggregatorId": "Humidity2",
+			"SensorValueKey": "*"
+		}]
+	},
+	{
+		"SensorTypeId": "ImageClassificationSensor",
+		"Id": "ImageClassificationSensor",
+		"Settings": {
+			"OnnxModel": "!cat-or-dog.onnx",
+			"MinimumConfidence": 0.6,
+			"PollingIntervalMilliseconds": 2000
+		}
+	}],
+	"Assets": [{
+		"Key": "Logo.png",
+		"SourceUrl": "~/Logo.png",
+		"SizeMb": 0.1
+	},
+	{
+		"Key": "Machine.png",
+		"SourceUrl": "~/Machine.png",
+		"SizeMb": 0.1
+	},
+	{
+		"Key": "cat-or-dog.onnx",
+		"SourceUrl": "~/cat-or-dog.onnx",
+		"SizeMb": 4.9
+	},
+	{
+		"Key": "SkinOverrides.xaml",
+		"SourceUrl": "~/SkinOverrides.xaml",
+		"SizeMb": 0.1
+	},
+	{
+		"Key": "TemplateOverrides.xaml",
+		"SourceUrl": "~/TemplateOverrides.xaml",
+		"SizeMb": 0.1
+	},
+	{
+		"Key": "studentkit.png",
+		"SourceUrl": "~/studentkit.png",
+		"SizeMb": 0.1
+	},
+	{
+		"Key": "README.md",
+		"SourceUrl": "~/README.md",
+		"SizeMb": 0.1
+	},
+	{
+		"Key" : "Aware-white-logo.png",
+		"SourceUrl" : "~/Aware-white-logo.png",
+		"SizeMb" : 0.028
+	}],
+	"PollingIntervalMs": 500
+}

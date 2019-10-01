@@ -1,0 +1,507 @@
+{
+	"Id": "HOL",
+	"Title": "Hands On Lab",
+	"Description": "IoT Hackathon SensorTile.Box Dashboard",
+  "CurrentSkin": {
+    "HeaderIcon": "!Logo.png",
+    "PageHeader": "Contoso Engineering",
+    "PageSubHeader": "Environment Monitor",
+    "ShowVersion": false,
+    "ShowIpAddress": false,
+    "ShowAppVersion": false,
+    "ShowDateTime": false,
+    "ShowPreviewSymbol": false,
+    "ShowPreviewBand": false,
+    "IsPreviewDisplayEnabled": false,
+    "IsVisible": true,
+    "LayoutColumns": 12,
+    "LayoutRows": 12,
+    "HorizontalResolution": 1920,
+    "VerticalResolution": 1080,
+    "TitleHeight": 80,
+    "Layouts": 1,
+    "SkinOverride": "#DarkFarmbeats",
+    "LayoutMode": "Tabs",
+    "PageHeaderPresetTemplateIndex": 3,
+    "PanelStylingFlags": [ "RoundedNone", "Border", "BorderThick"],
+    "LayoutTabs": [
+      {
+        "Index": 0,
+        "Title": "Monitor",
+        "Glyph": "\uE80F"
+      },
+      {
+        "Index": 1,
+        "Title": "Information",
+        "Glyph": "\uE946"
+      }
+    ]
+  },
+	"SkinPanels": [{
+		"Id": "",
+		"SkinPanelTypeId": "ConnectionStatusPanel",
+		"IsVisible": true,
+		"Title": "Connectivity",
+		"Column": 0,
+		"Row": 0,
+		"ColumnSpan": 3,
+		"RowSpan": 6,
+		"Settings": null
+	},
+	{
+		"Id": "",
+		"SkinPanelTypeId": "LogItemsPanel",
+		"IsVisible": true,
+		"Title": "Event Log",
+		"Column": 0,
+		"Row": 6,
+		"ColumnSpan": 3,
+		"RowSpan": 6,
+		"Settings": {
+			"MaxLogItems": 10,
+			"AddAtTop": true
+		}
+	},
+	{
+		"Id": "Temperature",
+		"SkinPanelTypeId": "GaugeSensorPanel",
+		"IsVisible": true,
+		"Title": "Air Temperature",
+		"Column": 3,
+		"Row": 0,
+		"ColumnSpan": 3,
+		"RowSpan": 6,
+		"Settings": {
+			"Minimum": 15.0,
+			"Maximum": 50.0,
+			"IdealMinimum": 35.0,
+			"IdealMaximum": 40.0,
+			"AlertMinimum": 25.0,
+			"AlertMaximum": 45.0,
+			"Symbol": "°C",
+			"SensorValueKey": "Temperature",
+			"HostSensorId": "SensorTileBox",
+			"SensorValueType": "Temperature"
+		}
+	},
+	{
+		"Id": "Humidity",
+		"SkinPanelTypeId": "GaugeSensorPanel",
+		"IsVisible": true,
+		"Title": "Humidity",
+		"Column": 6,
+		"Row": 0,
+		"ColumnSpan": 3,
+		"RowSpan": 6,
+		"Settings": {
+			"Minimum": 0.0,
+			"Maximum": 100.0,
+			"IdealMinimum": 40.0,
+			"IdealMaximum": 60.0,
+			"AlertMinimum": 20.0,
+			"AlertMaximum": 80.0,
+			"Symbol": "%",
+			"SensorValueKey": "Humidity",
+			"HostSensorId": "SensorTileBox",
+			"SensorValueType": "Humidity"
+		}
+	},
+	{
+		"Id": "Pressure",
+		"SkinPanelTypeId": "GaugeSensorPanel",
+		"IsVisible": true,
+		"Title": "Pressure",
+		"Column": 9,
+		"Row": 0,
+		"ColumnSpan": 3,
+		"RowSpan": 6,
+		"Settings": {
+			"Minimum": 0.0,
+			"Maximum": 1500.0,
+			"IdealMinimum": 1000.0,
+			"IdealMaximum": 1100.0,
+			"AlertMinimum": 800.0,
+			"AlertMaximum": 1300.0,
+			"DisplayFormat" : "#####0",
+			"Symbol": "kPA",
+			"SensorValueKey": "Pressure",
+			"HostSensorId": "SensorTileBox",
+			"SensorValueType": "Pressure"
+		}
+	},
+	
+	{
+		"Id": "MagnetometerXVal",
+		"SkinPanelTypeId": "SingleValueSensorPanel",
+		"IsVisible": true,
+		"IsTitleShown": true,
+		"Title": "Magnetometer X",
+		"Column": 3,
+		"Row": 6,
+		"ColumnSpan": 3,
+		"RowSpan": 2,
+		"Settings": {
+			"Symbol": "X",
+			"SensorValueKey": "MagnetometerX",
+			"DisplayFormat" : "#####0.0###",
+			"HostSensorId": "SensorTileBox",
+			"SensorValueType": "Magnetometer",
+			"Header": "",
+			"Footer": ""
+		}
+	},
+	{
+		"Id": "MagnetometerYVal",
+		"SkinPanelTypeId": "SingleValueSensorPanel",
+		"IsVisible": true,
+		"IsTitleShown": true,
+		"Title": "Magnetometer Y",
+		"Column": 3,
+		"Row": 8,
+		"ColumnSpan": 3,
+		"RowSpan": 2,
+		"Settings": {
+			"Symbol": "X",
+			"SensorValueKey": "MagnetometerY",
+			"DisplayFormat" : "#####0.0###",
+			"HostSensorId": "SensorTileBox",
+			"SensorValueType": "Magnetometer",
+			"Header": "",
+			"Footer": ""
+		}
+	},
+	{
+		"Id": "MagnetometerZVal",
+		"SkinPanelTypeId": "SingleValueSensorPanel",
+		"IsVisible": true,
+		"IsTitleShown": true,
+		"Title": "Magnetometer Z",
+		"Column": 3,
+		"Row": 10,
+		"ColumnSpan": 3,
+		"RowSpan": 2,
+		"Settings": {
+			"Symbol": "X",
+			"SensorValueKey": "MagnetometerZ",
+			"DisplayFormat" : "#####0.0###",
+			"HostSensorId": "SensorTileBox",
+			"SensorValueType": "Magnetometer",
+			"Header": "",
+			"Footer": ""
+		}
+	},
+	
+	
+	{
+		"Id": "AccelerometerXVal",
+		"SkinPanelTypeId": "SingleValueSensorPanel",
+		"IsVisible": true,
+		"IsTitleShown": true,
+		"Title": "Accelerometer X",
+		"Column": 6,
+		"Row": 6,
+		"ColumnSpan": 3,
+		"RowSpan": 2,
+		"Settings": {
+			"Symbol": "X",
+			"SensorValueKey": "AccelerometerX",
+			"DisplayFormat" : "#####0.0###",
+			"HostSensorId": "SensorTileBox",
+			"SensorValueType": "Accelerometer",
+			"Header": "",
+			"Footer": ""
+		}
+	},
+	{
+		"Id": "AccelerometerYVal",
+		"SkinPanelTypeId": "SingleValueSensorPanel",
+		"IsVisible": true,
+		"IsTitleShown": true,
+		"Title": "Accelerometer Y",
+		"Column": 6,
+		"Row": 8,
+		"ColumnSpan": 3,
+		"RowSpan": 2,
+		"Settings": {
+			"Symbol": "X",
+			"SensorValueKey": "AccelerometerY",
+			"DisplayFormat" : "#####0.0###",
+			"HostSensorId": "SensorTileBox",
+			"SensorValueType": "Accelerometer",
+			"Header": "",
+			"Footer": ""
+		}
+	},
+	{
+		"Id": "AccelerometerZVal",
+		"SkinPanelTypeId": "SingleValueSensorPanel",
+		"IsVisible": true,
+		"IsTitleShown": true,
+		"Title": "Accelerometer Z",
+		"Column": 6,
+		"Row": 10,
+		"ColumnSpan": 3,
+		"RowSpan": 2,
+		"Settings": {
+			"Symbol": "X",
+			"SensorValueKey": "AccelerometerZ",
+			"DisplayFormat" : "#####0.0###",
+			"HostSensorId": "SensorTileBox",
+			"SensorValueType": "Accelerometer",
+			"Header": "",
+			"Footer": ""
+		}
+	},
+	
+	{
+		"Id": "GyroscopeXVal",
+		"SkinPanelTypeId": "SingleValueSensorPanel",
+		"IsVisible": true,
+		"IsTitleShown": true,
+		"Title": "Gyroscope X",
+		"Column": 9,
+		"Row": 6,
+		"ColumnSpan": 3,
+		"RowSpan": 2,
+		"Settings": {
+			"Symbol": "X",
+			"SensorValueKey": "GyroscopeX",
+			"DisplayFormat" : "#####0.0###",
+			"HostSensorId": "SensorTileBox",
+			"SensorValueType": "Gyroscope",
+			"Header": "",
+			"Footer": ""
+		}
+	},
+	{
+		"Id": "GyroscopeYVal",
+		"SkinPanelTypeId": "SingleValueSensorPanel",
+		"IsVisible": true,
+		"IsTitleShown": true,
+		"Title": "Gyroscope Y",
+		"Column": 9,
+		"Row": 8,
+		"ColumnSpan": 3,
+		"RowSpan": 2,
+		"Settings": {
+			"Symbol": "X",
+			"SensorValueKey": "GyroscopeY",
+			"DisplayFormat" : "#####0.0###",
+			"HostSensorId": "SensorTileBox",
+			"SensorValueType": "Gyroscope",
+			"Header": "",
+			"Footer": ""
+		}
+	},
+	{
+		"Id": "GyroscopeZVal",
+		"SkinPanelTypeId": "SingleValueSensorPanel",
+		"IsVisible": true,
+		"IsTitleShown": true,
+		"Title": "Gyroscope Z",
+		"Column": 9,
+		"Row": 10,
+		"ColumnSpan": 3,
+		"RowSpan": 2,
+		"Settings": {
+			"Symbol": "X",
+			"SensorValueKey": "GyroscopeZ",
+			"DisplayFormat" : "#####0.0###",
+			"HostSensorId": "SensorTileBox",
+			"SensorValueType": "Gyroscope",
+			"Header": "",
+			"Footer": ""
+		}
+	}],
+	"Aggregators": [{
+		"TelemetryKey": "temp",
+		"Id": "Temperature",
+		"AggregatorTypeId": "DoubleSensorAggregator",
+		"Mode": "Average",
+		"ExpirySeconds": 10.0,
+		"MaxRangeSeconds": 2.0
+	},
+	{
+		"TelemetryKey": "hum",
+		"Id": "Humidity",
+		"AggregatorTypeId": "DoubleSensorAggregator",
+		"Mode": "Average",
+		"ExpirySeconds": 10.0,
+		"MaxRangeSeconds": 2.0
+	},
+	{
+		"TelemetryKey": "Vibration",
+		"Id": "Vibration",
+		"AggregatorTypeId": "DoubleSensorAggregator",
+		"Mode": "Maximum",
+		"ExpirySeconds": 10.0,
+		"MaxRangeSeconds": 2.0
+	},
+	{
+		"TelemetryKey": "press",
+		"Id": "Pressure",
+		"AggregatorTypeId": "DoubleSensorAggregator",
+		"Mode": "Average",
+		"ExpirySeconds": 10.0,
+		"MaxRangeSeconds": 2.0
+	},
+	{
+		"TelemetryKey": "magx",
+		"Id": "MagnetometerX",
+		"AggregatorTypeId": "DoubleSensorAggregator",
+		"Mode": "Average",
+		"ExpirySeconds": 10.0,
+		"MaxRangeSeconds": 2.0
+	},
+	{
+		"TelemetryKey": "magy",
+		"Id": "MagnetometerY",
+		"AggregatorTypeId": "DoubleSensorAggregator",
+		"Mode": "Average",
+		"ExpirySeconds": 10.0,
+		"MaxRangeSeconds": 2.0
+	},
+	{
+		"TelemetryKey": "magz",
+		"Id": "MagnetometerZ",
+		"AggregatorTypeId": "DoubleSensorAggregator",
+		"Mode": "Average",
+		"ExpirySeconds": 10.0,
+		"MaxRangeSeconds": 2.0
+	},
+	{
+		"TelemetryKey": "accx",
+		"Id": "AccelerometerX",
+		"AggregatorTypeId": "DoubleSensorAggregator",
+		"Mode": "Average",
+		"ExpirySeconds": 10.0,
+		"MaxRangeSeconds": 2.0
+	},
+	{
+		"TelemetryKey": "accy",
+		"Id": "AccelerometerY",
+		"AggregatorTypeId": "DoubleSensorAggregator",
+		"Mode": "Average",
+		"ExpirySeconds": 10.0,
+		"MaxRangeSeconds": 2.0
+	},
+	{
+		"TelemetryKey": "accz",
+		"Id": "AccelerometerZ",
+		"AggregatorTypeId": "DoubleSensorAggregator",
+		"Mode": "Average",
+		"ExpirySeconds": 10.0,
+		"MaxRangeSeconds": 2.0
+	},
+	{
+		"TelemetryKey": "gyrox",
+		"Id": "GyroscopeX",
+		"AggregatorTypeId": "DoubleSensorAggregator",
+		"Mode": "Average",
+		"ExpirySeconds": 10.0,
+		"MaxRangeSeconds": 2.0
+	},
+	{
+		"TelemetryKey": "gyroy",
+		"Id": "GyroscopeY",
+		"AggregatorTypeId": "DoubleSensorAggregator",
+		"Mode": "Average",
+		"ExpirySeconds": 10.0,
+		"MaxRangeSeconds": 2.0
+	},
+	{
+		"TelemetryKey": "gyroz",
+		"Id": "GyroscopeZ",
+		"AggregatorTypeId": "DoubleSensorAggregator",
+		"Mode": "Average",
+		"ExpirySeconds": 10.0,
+		"MaxRangeSeconds": 2.0
+	}
+	
+	
+	],
+	"Sensors": [{
+		"SensorTypeId": "SensorTileService",
+		"Id": "SensorTileBox",
+		"Settings": null,
+		"Aggregators": [
+		{
+			"AggregatorId": "Temperature",
+			"SensorValueKey": "Temperature"
+		},
+		{
+			"AggregatorId": "Humidity",
+			"SensorValueKey": "Humidity"
+		},
+		{
+			"AggregatorId": "Pressure",
+			"SensorValueKey": "Pressure"
+		},
+		{
+			"AggregatorId": "MagnetometerX",
+			"SensorValueKey": "MagnetometerX"
+		},
+		{
+			"AggregatorId": "MagnetometerY",
+			"SensorValueKey": "MagnetometerY"
+		},
+		{
+			"AggregatorId": "MagnetometerZ",
+			"SensorValueKey": "MagnetometerZ"
+		},
+		{
+			"AggregatorId": "AccelerometerX",
+			"SensorValueKey": "AccelerometerX"
+		},
+		{
+			"AggregatorId": "AccelerometerY",
+			"SensorValueKey": "AccelerometerY"
+		},
+		{
+			"AggregatorId": "AccelerometerZ",
+			"SensorValueKey": "AccelerometerZ"
+		},
+		{
+			"AggregatorId": "GyroscopeX",
+			"SensorValueKey": "GyroscopeX"
+		},
+		{
+			"AggregatorId": "GyroscopeY",
+			"SensorValueKey": "GyroscopeY"
+		},
+		{
+			"AggregatorId": "GyroscopeZ",
+			"SensorValueKey": "GyroscopeZ"
+		}
+		]
+	},
+	{
+		"SensorTypeId": "SimulatedPollingDoubleSensor",
+		"Id": "Vibration",
+		"Settings": {
+			"BaseValue": 0.0,
+			"Variation": 5.0
+		},
+		"Aggregators": [{
+			"AggregatorId": "Vibration",
+			"SensorValueKey": "*"
+		}]
+	},
+	{
+		"SensorTypeId": "GroveAnalogPortsService",
+		"Id": "GroveAnalogPorts",
+		"Settings": null,
+		"Aggregators": null
+	}],
+	"Assets": [{
+		"Key": "Logo.png",
+		"SourceUrl": "~/Logo.png",
+		"SizeMb": 0.1
+	},
+	{
+		"Key": "Machine.png",
+		"SourceUrl": "~/Machine.png",
+		"SizeMb": 0.1
+	}],
+	"PollingIntervalMs": 500
+}

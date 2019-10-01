@@ -1,0 +1,315 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    >
+
+    <!-- CORE THEME USED BY IN-APP DIALOGS -->
+
+    <Color x:Key="CoreBackgroundColor">#FF1E2837</Color>
+    <Color x:Key="CoreForegroundColor">#FFFFFFFF</Color>
+    <Color x:Key="CoreForeground75Color">#BBFFFFFF</Color>
+    <Color x:Key="CoreForeground50Color">#66FFFFFF</Color>
+    <Color x:Key="CoreInverseForegroundColor">#FF000000</Color>
+    <Color x:Key="CoreInverseForeground75Color">#BB000000</Color>
+    <Color x:Key="CoreInverseForeground50Color">#66000000</Color>
+    <Color x:Key="CorePanelHeaderForegroundColor">#FFFFFFFF</Color>
+    <Color x:Key="CorePanelHeaderBackgroundColor">#FF444444</Color>
+    <Color x:Key="CorePanelBackgroundColor">#FF283246</Color>
+    <Color x:Key="CorePanelInverseHeaderColor">#FF000000</Color>
+    <Color x:Key="CorePanelInverseBackgroundColor">#FFFFFFFF</Color>
+    <Color x:Key="CorePanelOutlineColor">#FFB3B3B3</Color>
+    <Color x:Key="CorePrimaryAccentColor">#FFFFAA0A</Color>
+    <Color x:Key="CorePrimaryAccentLightColor">#FFFFF1D7</Color>
+    <Color x:Key="CorePrimaryAccentDarkColor">#FFAA8741</Color>
+    <Color x:Key="CoreSecondaryAccentColor">#FF8395B1</Color>
+    <Color x:Key="CoreSecondaryAccentLightColor">#FFA0AAB9</Color>
+    <Color x:Key="CoreSecondaryAccentDarkColor">#FF415069</Color>
+    <Color x:Key="CoreAlertAccentColor">#FF855F38</Color>
+    <Color x:Key="CoreErrorAccentColor">#FFFB540A</Color>
+    <Color x:Key="CoreOkAccentColor">#FF219C8A</Color>
+
+    <SolidColorBrush x:Key="CoreBackgroundBrush" Color="{StaticResource CoreBackgroundColor}"/>
+    <SolidColorBrush x:Key="CoreForegroundBrush" Color="{StaticResource CoreForegroundColor}"/>
+    <SolidColorBrush x:Key="CoreForeground75Brush" Color="{StaticResource CoreForeground75Color}"/>
+    <SolidColorBrush x:Key="CoreForeground50Brush" Color="{StaticResource CoreForeground50Color}"/>
+    <SolidColorBrush x:Key="CoreInverseForegroundBrush" Color="{StaticResource CoreInverseForegroundColor}"/>
+    <SolidColorBrush x:Key="CoreInverseForeground75Brush" Color="{StaticResource CoreInverseForeground75Color}"/>
+    <SolidColorBrush x:Key="CoreInverseForeground50Brush" Color="{StaticResource CoreInverseForeground50Color}"/>
+    <SolidColorBrush x:Key="CorePanelHeaderForegroundBrush" Color="{StaticResource CorePanelHeaderForegroundColor}"/>
+    <SolidColorBrush x:Key="CorePanelHeaderBackgroundBrush" Color="{StaticResource CorePanelHeaderBackgroundColor}"/>
+    <SolidColorBrush x:Key="CorePanelBackgroundBrush" Color="{StaticResource CorePanelBackgroundColor}"/>
+    <SolidColorBrush x:Key="CorePanelInverseHeaderBrush" Color="{StaticResource CorePanelInverseHeaderColor}"/>
+    <SolidColorBrush x:Key="CorePanelInverseBackgroundBrush" Color="{StaticResource CorePanelInverseBackgroundColor}"/>
+    <SolidColorBrush x:Key="CorePanelOutlineBrush" Color="{StaticResource CorePanelOutlineColor}"/>
+    <SolidColorBrush x:Key="CorePrimaryAccentBrush" Color="{StaticResource CorePrimaryAccentColor}"/>
+    <SolidColorBrush x:Key="CorePrimaryAccentLightBrush" Color="{StaticResource CorePrimaryAccentLightColor}"/>
+    <SolidColorBrush x:Key="CorePrimaryAccentDarkBrush" Color="{StaticResource CorePrimaryAccentDarkColor}"/>
+    <SolidColorBrush x:Key="CoreSecondaryAccentBrush" Color="{StaticResource CoreSecondaryAccentColor}"/>
+    <SolidColorBrush x:Key="CoreSecondaryAccentLightBrush" Color="{StaticResource CoreSecondaryAccentLightColor}"/>
+    <SolidColorBrush x:Key="CoreSecondaryAccentDarkBrush" Color="{StaticResource CoreSecondaryAccentDarkColor}"/>
+    <SolidColorBrush x:Key="CoreAlertAccentBrush" Color="{StaticResource CoreAlertAccentColor}"/>
+    <SolidColorBrush x:Key="CoreErrorAccentBrush" Color="{StaticResource CoreErrorAccentColor}"/>
+    <SolidColorBrush x:Key="CoreOkAccentBrush" Color="{StaticResource CoreOkAccentColor}"/>
+
+
+
+    <!-- SKIN THEME -->
+
+
+    <ElementTheme x:Key="SkinTheme">Dark</ElementTheme>
+
+    <Color x:Key="SkinBackgroundColor">#FF1E2837</Color>
+    <Color x:Key="SkinForegroundColor">#FFFFFFFF</Color>
+    <Color x:Key="SkinForeground75Color">#BBFFFFFF</Color>
+    <Color x:Key="SkinForeground50Color">#66FFFFFF</Color>
+    <Color x:Key="SkinInverseForegroundColor">#FF000000</Color>
+    <Color x:Key="SkinInverseForeground75Color">#BB000000</Color>
+    <Color x:Key="SkinInverseForeground50Color">#66000000</Color>
+    <Color x:Key="SkinPanelHeaderForegroundColor">#FFFFAA0A</Color>
+    <Color x:Key="SkinPanelHeaderBackgroundColor">#00FFAA0A</Color>
+    <Color x:Key="SkinPanelBackgroundColor">#FF283246</Color>
+    <Color x:Key="SkinPanelInverseHeaderColor">#FF000000</Color>
+    <Color x:Key="SkinPanelInverseBackgroundColor">#FFFFFFFF</Color>
+    <Color x:Key="SkinPanelOutlineColor">#FFB3B3B3</Color>
+    <Color x:Key="SkinPrimaryAccentColor">#FFFFAA0A</Color>
+    <Color x:Key="SkinPrimaryAccentLightColor">#FFFFF1D7</Color>
+    <Color x:Key="SkinPrimaryAccentDarkColor">#FFAA8741</Color>
+    <Color x:Key="SkinSecondaryAccentColor">#FF8395B1</Color>
+    <Color x:Key="SkinSecondaryAccentLightColor">#FFA0AAB9</Color>
+    <Color x:Key="SkinSecondaryAccentDarkColor">#FF415069</Color>
+    <Color x:Key="SkinAlertAccentColor">#FF855F38</Color>
+    <Color x:Key="SkinErrorAccentColor">#FFFB540A</Color>
+    <Color x:Key="SkinOkAccentColor">#FF219C8A</Color>
+
+    <SolidColorBrush x:Key="SkinBackgroundBrush" Color="{StaticResource SkinBackgroundColor}"/>
+    <SolidColorBrush x:Key="SkinForegroundBrush" Color="{StaticResource SkinForegroundColor}"/>
+    <SolidColorBrush x:Key="SkinForeground75Brush" Color="{StaticResource SkinForeground75Color}"/>
+    <SolidColorBrush x:Key="SkinForeground50Brush" Color="{StaticResource SkinForeground50Color}"/>
+    <SolidColorBrush x:Key="SkinInverseForegroundBrush" Color="{StaticResource SkinInverseForegroundColor}"/>
+    <SolidColorBrush x:Key="SkinInverseForeground75Brush" Color="{StaticResource SkinInverseForeground75Color}"/>
+    <SolidColorBrush x:Key="SkinInverseForeground50Brush" Color="{StaticResource SkinInverseForeground50Color}"/>
+    <SolidColorBrush x:Key="SkinPanelHeaderForegroundBrush" Color="{StaticResource SkinPanelHeaderForegroundColor}"/>
+    <SolidColorBrush x:Key="SkinPanelHeaderBackgroundBrush" Color="{StaticResource SkinPanelHeaderBackgroundColor}"/>
+    <SolidColorBrush x:Key="SkinPanelBackgroundBrush" Color="{StaticResource SkinPanelBackgroundColor}"/>
+    <SolidColorBrush x:Key="SkinPanelInverseHeaderBrush" Color="{StaticResource SkinPanelInverseHeaderColor}"/>
+    <SolidColorBrush x:Key="SkinPanelInverseBackgroundBrush" Color="{StaticResource SkinPanelInverseBackgroundColor}"/>
+    <SolidColorBrush x:Key="SkinPanelOutlineBrush" Color="{StaticResource SkinPanelOutlineColor}"/>
+    <SolidColorBrush x:Key="SkinPrimaryAccentBrush" Color="{StaticResource SkinPrimaryAccentColor}"/>
+    <SolidColorBrush x:Key="SkinPrimaryAccentLightBrush" Color="{StaticResource SkinPrimaryAccentLightColor}"/>
+    <SolidColorBrush x:Key="SkinPrimaryAccentDarkBrush" Color="{StaticResource SkinPrimaryAccentDarkColor}"/>
+    <SolidColorBrush x:Key="SkinSecondaryAccentBrush" Color="{StaticResource SkinSecondaryAccentColor}"/>
+    <SolidColorBrush x:Key="SkinSecondaryAccentLightBrush" Color="{StaticResource SkinSecondaryAccentLightColor}"/>
+    <SolidColorBrush x:Key="SkinSecondaryAccentDarkBrush" Color="{StaticResource SkinSecondaryAccentDarkColor}"/>
+    <SolidColorBrush x:Key="SkinAlertAccentBrush" Color="{StaticResource SkinAlertAccentColor}"/>
+    <SolidColorBrush x:Key="SkinErrorAccentBrush" Color="{StaticResource SkinErrorAccentColor}"/>
+    <SolidColorBrush x:Key="SkinOkAccentBrush" Color="{StaticResource SkinOkAccentColor}"/>
+
+    <SolidColorBrush x:Key="SkinPageHeaderBackgroundBrush" Color="{StaticResource SkinInverseForegroundColor}"/>
+    <SolidColorBrush x:Key="SkinPageHeaderForegroundBrush" Color="{StaticResource SkinForegroundColor}"/>
+
+    <Color x:Key="BackgroundColor">#ff00b9f6</Color>
+    <Color x:Key="SolidWhiteColor">White</Color>
+    <Color x:Key="DarkGrayColor">#FFB3B3B3</Color>
+    <Color x:Key="PanelBorderColor">#7F555555</Color>
+    <Color x:Key="PanelBackgroundColor">#FF121416</Color>
+    <Color x:Key="PanelHeaderColor">#FF242628</Color>
+
+    <Color x:Key="VioletAccentColor">#FF7065FD</Color>
+    <Color x:Key="PurpleAccentColor">#A3609C</Color>
+    <Color x:Key="TealAccentColor">#FF219C8A</Color>
+    <Color x:Key="BrownAccentColor">#FF855F38</Color>
+    <Color x:Key="RedAccentColor">#FFFB540A</Color>
+    <Color x:Key="YellowColor">#FFFDED91</Color>
+    <Color x:Key="CyanAccentColor">#FF42C7E6</Color>
+    <Color x:Key="DarkBlueAccentColor">#FF0F375D</Color>
+
+    <Color x:Key="Gray0Color">#FF1B1D1F</Color>
+    <Color x:Key="Gray1Color">#FFB3B3B3</Color>
+    <Color x:Key="Gray2Color">#FF7C7C7C</Color>
+    <Color x:Key="Gray3Color">#FF4D4D4D</Color>
+    <Color x:Key="Gray4Color">#FF323232</Color>
+
+    <SolidColorBrush x:Key="BackgroundColorBrush" Color="#ff00b9f6"/>
+    <SolidColorBrush x:Key="SolidWhiteBrush" Color="White"/>
+    <SolidColorBrush x:Key="DarkGrayBrush" Color="#FFB3B3B3"/>
+    <SolidColorBrush x:Key="PanelBorderBrush" Color="#7F555555"/>
+    <SolidColorBrush x:Key="PanelBackgroundBrush" Color="#FF121416"/>
+    <SolidColorBrush x:Key="PanelHeaderBrush" Color="#FF242628"/>
+    <SolidColorBrush x:Key="CyanAccentBrush" Color="{StaticResource CyanAccentColor}"/>
+    <SolidColorBrush x:Key="DarkBlueAccentBrush" Color="{StaticResource DarkBlueAccentColor}"/>
+
+    <SolidColorBrush x:Key="VioletAccentBrush" Color="#FF7065FD"/>
+    <SolidColorBrush x:Key="PurpleAccentBrush" Color="#A3609C"/>
+    <SolidColorBrush x:Key="TealAccentBrush" Color="#FF219C8A"/>
+    <SolidColorBrush x:Key="BrownAccentBrush" Color="#FF855F38"/>
+    <SolidColorBrush x:Key="RedAccentBrush" Color="#FFFB540A"/>
+    <SolidColorBrush x:Key="YellowBrush" Color="#FFFDED91"/>
+
+    <SolidColorBrush x:Key="Gray0Brush" Color="#FF1B1D1F"/>
+    <SolidColorBrush x:Key="Gray1Brush" Color="#FFB3B3B3"/>
+    <SolidColorBrush x:Key="Gray2Brush" Color="#FF7C7C7C"/>
+    <SolidColorBrush x:Key="Gray3Brush" Color="#FF4D4D4D"/>
+    <SolidColorBrush x:Key="Gray4Brush" Color="#FF323232"/>
+
+
+    <FontFamily x:Key="BaseTextRegularFamily">Segoe UI</FontFamily>
+    <FontFamily x:Key="BaseTextBoldFamily">Segoe UI Semibold</FontFamily>
+    <FontFamily x:Key="BaseTextLightFamily">Segoe UI Semilight</FontFamily>
+
+    <!--<FontFamily x:Key="BaseTextRegularFamily">ms-appx:///Assets/Fonts/RobotoCondensed-Regular.ttf#Roboto</FontFamily>
+    <FontFamily x:Key="BaseTextBoldFamily">ms-appx:///Assets/Fonts/RobotoCondensed-Bold.ttf#Roboto</FontFamily>
+    <FontFamily x:Key="BaseTextLightFamily">ms-appx:///Assets/Fonts/RobotoCondensed-Light.ttf#Roboto</FontFamily>-->
+
+    <Style x:Key="PageBackgroundStyle" TargetType="Grid">
+        <Setter Property="Background" Value="{StaticResource SkinBackgroundBrush}"/>
+    </Style>
+
+    <Style x:Key="SkinPanelOuterHostBaseStyle" TargetType="Border">
+        <Setter Property="Margin" Value="8"/>
+        <Setter Property="Background" Value="{StaticResource SkinPanelBackgroundBrush}"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="CornerRadius" Value="6"/>
+        <Setter Property="BorderBrush" Value="{StaticResource SkinPanelOutlineBrush}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+    </Style>
+
+    <Style x:Key="SkinPanelHostBaseStyle" TargetType="Grid">
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Padding" Value="0"/>
+    </Style>
+
+    <Style x:Key="PanelHeaderTextBlockBaseStyle" BasedOn="{StaticResource SubtitleTextBlockStyle}" TargetType="TextBlock">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Foreground" Value="{StaticResource SkinPanelHeaderForegroundBrush}"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="TextWrapping" Value="NoWrap"/>
+        <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+    </Style>
+
+    <Style x:Key="PanelHeaderBorderBaseStyle" TargetType="Border">
+        <!--<Setter Property="Background" Value="{StaticResource SkinPanelHeaderBackgroundBrush}"/>-->
+        <Setter Property="Padding" Value="20,0"/>
+    </Style>
+
+    <Style x:Key="SkinPanelHostStyle" TargetType="Grid" BasedOn="{StaticResource SkinPanelHostBaseStyle}"/>
+    <Style x:Key="SkinPanelOuterHostStyle" TargetType="Border" BasedOn="{StaticResource SkinPanelOuterHostBaseStyle}"/>
+    <Style x:Key="PanelHeaderBorderStyle" TargetType="Border" BasedOn="{StaticResource PanelHeaderBorderBaseStyle}"/>
+    <Style x:Key="PanelHeaderTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource PanelHeaderTextBlockBaseStyle}"/>
+
+
+
+    <!--<Style x:Key="SkinPanelOuterHostStyle" TargetType="Border">
+        <Setter Property="Margin" Value="8"/>
+        <Setter Property="Background" Value="{StaticResource SkinPanelBackgroundBrush}"/>
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="CornerRadius" Value="6"/>
+        <Setter Property="BorderBrush" Value="{StaticResource SkinPanelOutlineBrush}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+    </Style>
+
+    <Style x:Key="SkinPanelHostStyle" TargetType="Grid">
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Padding" Value="0"/>
+    </Style>-->
+
+    <DataTemplate x:Key="PanelTemplateHeader">
+
+        <Border Style="{StaticResource PanelHeaderBorderStyle}">
+            <TextBlock Style="{StaticResource PanelHeaderTextBlockStyle}" Text="{Binding}" HorizontalAlignment="Left" Margin="0,8"/>
+        </Border>
+    </DataTemplate>
+
+    <Style x:Key="PageHeaderTextBlockStyle" BasedOn="{StaticResource HeaderTextBlockStyle}" TargetType="TextBlock">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Foreground" Value="{StaticResource SkinForegroundBrush}"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="FontSize" Value="28"/>
+    </Style>
+
+    <Style x:Key="PageSubHeaderTextBlockStyle" BasedOn="{StaticResource SubheaderTextBlockStyle}" TargetType="TextBlock">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Foreground" Value="{StaticResource SkinForegroundBrush}"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="FontSize" Value="36"/>
+    </Style>
+
+    <!--<Style x:Key="PanelHeaderTextBlockStyle" BasedOn="{StaticResource SubtitleTextBlockStyle}" TargetType="TextBlock">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Foreground" Value="{StaticResource SkinPanelHeaderForegroundBrush}"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="FontSize" Value="16"/>
+    </Style>-->
+
+    <Style x:Key="DetailsHeaderTextBlockStyle" BasedOn="{StaticResource SubtitleTextBlockStyle}" TargetType="TextBlock">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Foreground" Value="{StaticResource SkinForeground75Brush}"/>
+        <Setter Property="Margin" Value="0,5,0,0"/>
+    </Style>
+
+    <Style x:Key="DetailsValueLargeTextBlockStyle" BasedOn="{StaticResource TitleTextBlockStyle}" TargetType="TextBlock">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Foreground" Value="{StaticResource SkinForegroundBrush}"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+    </Style>
+
+    <Style x:Key="DetailsValueMediumTextBlockStyle" BasedOn="{StaticResource SubtitleTextBlockStyle}" TargetType="TextBlock">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Foreground" Value="{StaticResource SkinForegroundBrush}"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+    </Style>
+
+    <Style x:Key="DetailsValueSmallTextBlockStyle" BasedOn="{StaticResource SubtitleTextBlockStyle}" TargetType="TextBlock">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Foreground" Value="{StaticResource SkinForeground75Brush}"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+    </Style>
+
+    <Style x:Key="DetailsValueExtraSmallTextBlockStyle" BasedOn="{StaticResource CaptionTextBlockStyle}" TargetType="TextBlock">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Foreground" Value="{StaticResource Gray1Brush}"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+    </Style>
+
+    <!--<Style x:Key="PanelHeaderBorderStyle" TargetType="Border">
+        <Setter Property="Background" Value="{StaticResource SkinPanelHeaderBackgroundBrush}"/>
+        <Setter Property="Padding" Value="20,5"/>
+    </Style>-->
+
+    <Style x:Key="SkinLargeValueTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource HeaderTextBlockStyle}">
+        <Setter Property="FontWeight" Value="Normal"/>
+    </Style>
+
+    <Style x:Key="SkinMediumTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource HeaderTextBlockStyle}">
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="FontSize" Value="20"/>
+    </Style>
+
+    <Style x:Key="SkinSmallTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource HeaderTextBlockStyle}">
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="FontSize" Value="16"/>
+    </Style>
+
+    <Style x:Key="SkinExtraSmallTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource HeaderTextBlockStyle}">
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="FontSize" Value="12"/>
+    </Style>
+
+    <Style x:Key="SkinLargeHeaderTextBlockStyle" BasedOn="{StaticResource TitleTextBlockStyle}" TargetType="TextBlock">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Foreground" Value="{StaticResource SkinForegroundBrush}"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="FontSize" Value="32"/>
+    </Style>
+
+    <!--<SolidColorBrush x:Key="TabViewItemHeaderBackground" Color="{StaticResource SkinPanelBackgroundColor}"/>
+    <SolidColorBrush x:Key="TabViewItemHeaderBackgroundSelected" Color="{StaticResource SkinPrimaryAccentLightColor}"/>
+    <SolidColorBrush x:Key="TabViewItemHeaderBackgroundPressed" Color="{StaticResource SkinPrimaryAccentDarkColor}"/>
+    <SolidColorBrush x:Key="TabViewItemHeaderBackgroundPointerOver" Color="{StaticResource SkinPrimaryAccentLightColor}"/>
+    <SolidColorBrush x:Key="TabViewSelectionIndicatorForeground" Color="{StaticResource SkinForegroundColor}"/>
+    <SolidColorBrush x:Key="TabViewItemHeaderForeground" Color="{StaticResource SkinForegroundColor}"/>
+    <SolidColorBrush x:Key="TabViewItemHeaderForegroundPressed" Color="{StaticResource SkinForegroundColor}"/>
+    <SolidColorBrush x:Key="TabViewItemHeaderForegroundSelected" Color="{StaticResource SkinForegroundColor}"/>
+    <SolidColorBrush x:Key="TabViewItemHeaderForegroundPointerOver" Color="{StaticResource SkinForegroundColor}"/>-->
+
+</ResourceDictionary>

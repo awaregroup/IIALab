@@ -152,46 +152,11 @@
                     "name": "Transformation",
                     "properties": {
                         "streamingUnits": 1,
-                        "query": "SELECT * INTO EdgeOutput FROM EdgeInput"
+                        "query": ""
                     }
                 },
-                "inputs": [
-                    {
-                        "name": "EdgeInput",
-                        "properties": {
-                            "type": "stream",
-                            "serialization": {
-                                "type": "JSON",
-                                "properties": {
-                                    "fieldDelimiter": ",",
-                                    "encoding": "UTF8"
-                                }
-                            },
-                            "datasource": {
-                                "type": "GatewayMessageBus",
-                                "properties": {}
-                            }
-                        }
-                    }
-                ],
-                "outputs": [
-                    {
-                        "name": "EdgeOutput",
-                        "properties": {
-                            "serialization": {
-                                "type": "JSON",
-                                "properties": {
-                                    "fieldDelimiter": ",",
-                                    "encoding": "UTF8"
-                                }
-                            },
-                            "datasource": {
-                                "type": "GatewayMessageBus",
-                                "properties": {}
-                            }
-                        }
-                    }
-                ],
+                "inputs": [],
+                "outputs": [],
                 "package": {
                     "storageAccount": {
                         "accountName": "[variables('storageAccountName')]",

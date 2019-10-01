@@ -20,7 +20,7 @@ This lab introduces Azure Stream Analytics with Azure IoT Edge on Windows 10 IoT
 
 ### 1.2 - IoT Device setup using Azure CLI
 1. Open PowerShell as Administrator
-![](/media/lab04/powershell.jpg)
+![](./media/lab04/powershell.jpg)
 2. Install the Azure IoT Edge runtime on the device by running the following command and waiting for the device to reboot:
 ```powershell
 . {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Deploy-IoTEdge
@@ -58,7 +58,7 @@ az iot edge set-modules --device-id [device id] --hub-name [hub name] --content 
 ```
 
 ### 2.2 - Verify Deployment on IoT Edge Device
-The module deployment is instant, however changes to the device can take around 5-7 minutes to take effect. Let's check to see if our device has loaded the SimulatedTemperatureSensor module.
+The module deployment is instant, however changes to the device can take around 5-7 minutes to take effect. This means it can take a while for the new container to be loaded. The following commands can be used to check the status of the SimulatedTemperatureSensor container:
 
 1. Run the following PowerShell command to see the current modules:
 ```powershell
@@ -76,16 +76,20 @@ Your device should be receiving simulated temperature data every 5 seconds with 
 1. Enter the following command to monitor Device-to-Cloud (D2C) messages being published to the IoT Hub:
 ```powershell
 az iot hub monitor-events --device-id [device id] --hub-name  [hub name]
+
+#NOTE - make sure to remove the square brackets above, for example:
+#az iot hub monitor-events --device-id device1 --hub-name  msiotlabs-iia-user06-iothub
 ```
 2. The first time that you run this command, you are required to update a dependency by pressing **y** then **enter**
 
+This command will monitor the data being published into IoT Hub from the SimulatedTemperatureSensor container. It may take a while for data to start showing.
 
 ## 3.0 - Configure Azure Stream Analytics Edge Job
 
 ### 3.1 - Navigate to your Azure Stream Analytics Edge Job
 1. In the [Azure Portal (https://portal.azure.com)](https://portal.azure.com) open the **msiotlabs-iia-user##** resource group
 2. Open the **Stream Analytics job** resource
-![Stream Analytics Job](/media/lab04/asa-overview.jpg)
+![Stream Analytics Job](./media/lab04/asa-overview.jpg)
 
 ### 3.2 - Adding Inputs
 1. Under the **Job topology** heading in the left hand menu, select **Inputs**
@@ -101,7 +105,7 @@ az iot hub monitor-events --device-id [device id] --hub-name  [hub name]
 
 ### 3.4 - Adding Query
 1. Under the **Job topology** heading in the left hand menu, select **Query**
-2. Replace the current query with the following:
+2. Enter the following query:
 ```sql
 SELECT  
     'reset' AS command,
@@ -113,6 +117,10 @@ FROM
 GROUP BY TumblingWindow(second,30) 
 HAVING Avg(machine.temperature) > 24
 ```
+
+Stream Analytics can be used to enable complex logic on streams of data. This query is enabling our device to send a 'reset' message when the average temperature exceeds 24 degrees over 30 seconds.
+
+
 3. Click **Save query**
 
 
@@ -121,11 +129,11 @@ HAVING Avg(machine.temperature) > 24
 ### 4.1 - Module deployment using Azure Portal
 1. In the [Azure Portal (https://portal.azure.com)](https://portal.azure.com) open the **msiotlabs-iia-user##** resource group
 2. Open the **IoT Hub** resource, navigate to **IoT Edge** and then select the device created in [step 1.1](#11---cloud-setup)
-![IoT Edge Devices](/media/lab04/iot-edge-devices.jpg)
+![IoT Edge Devices](./media/lab04/iot-edge-devices.jpg)
 3. Click **Set modules**
-![Set Modules](/media/lab04/set-modules.jpg)
+![Set Modules](./media/lab04/set-modules.jpg)
 4. Under the **Deployment Modules** heading click **+ Add** and choose **Azure Stream Analytics Module**
-![Adding ASA Module](/media/lab04/add-asa-module.jpg)
+![Adding ASA Module](./media/lab04/add-asa-module.jpg)
 5. Set the Subscription as **MSIoTLabs-IIA** and Edge Job as **msiotlabs-iia-user##-streamanalytics**, then click **Save**
 6. *Note: You may have to click on the **Edge job** dropdown for the save button to show.*
 7. When the module has loaded, select **Configure** and take note of the **Name** field. You will be using this module name in the next step.
@@ -154,14 +162,14 @@ The module deployment is instant, however changes to the device can take around 
 ```powershell
 iotedge list
 ```
-![List Modules](/media/lab04/list-modules.jpg)
+![List Modules](./media/lab04/list-modules.jpg)
 
 3. Try running the following to see the logs from our simulated temperature sensor:
 ```powershell
 iotedge logs SimulatedTemperatureSensor
 ```
 You should see that the machine temperature increases until it reaches a temperature higher than the 24 degree threshold for at least 30 seconds.
-![Temperature Reset](/media/lab04/temperature-reset.jpg)
+![Temperature Reset](./media/lab04/temperature-reset.jpg)
 
 
 ## 5.0 - Updating Existing IoT Edge Device Modules
@@ -192,6 +200,7 @@ FROM
      temperature TIMESTAMP BY timeCreated 
 GROUP BY TumblingWindow(second,15) 
 ```
+
 5. Click **Save query**
 
 ### 5.3 - Push the Updated Module
@@ -199,14 +208,13 @@ GROUP BY TumblingWindow(second,15)
 2. Open the **IoT Hub** resource, navigate to **IoT Edge** and then select the device created in [step 1.1](#11---cloud-setup)
 3. Click **Set modules**
 4. You will notice that the **SimulatedTemperatureSensor** module has a warning saying: "Module outdated - click here to update"
-![](/media/lab04/outdated-module.jpg)
+![](./media/lab04/outdated-module.jpg)
 5. Click **Configure** next to the **SimulatedTemperatureSensor** module
 6. Click the **Update ASA module**, then click **Save** and finally **Next**.
-![](/media/lab04/update-asa-module.jpg)
+![](./media/lab04/update-asa-module.jpg)
 7. Replace the current JSON with the following, substituting **[module name]** with the module name found in the previous step:
 ```javascript
 {
-   {
   "routes": {
     "AsaToIotHub": "FROM /messages/modules/[module name]/* INTO $upstream",
     "telemetryToAsa": "FROM /messages/modules/SimulatedTemperatureSensor/* INTO BrokeredEndpoint(\"/modules/[module name]/inputs/temperature\")"

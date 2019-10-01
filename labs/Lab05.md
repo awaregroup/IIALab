@@ -11,42 +11,18 @@ When starting the lab, you should have these things open on your development mac
 1. [Custom Vision Portal](https://www.customvision.ai/) open in a browser tab, and log in with your Azure Subscription. Select the Directory associated with your Azure custom vision resource. 
 1. [Time Series Insights explorer](https://insights.timeseries.azure.com/) in another browser tab, also logged in
 
-# Part 1: Custom Vision
+## 1 - Custom Vision
 
-## Prepare your Custom Vision Environment
-
-1. Log into the Azure Portal
-1. Type "Custom Vision" into the search bar at the top, and click on the "Custom Vision" entry below "Marketplace"
-1. Click Create.
-1. Configure as follows:
-
-   | Field | Value |
-   | --- | --- |
-   | Name | lab05-yourname |
-   | Subscription | MSIoTLabs-IIA |
-   | Location | Select the closest one to you |
-   | Prediction pricing tier | S0 |
-   | Training pricing tier | S0 |
-   | Resource group | Select the same resource group you have been using prior to this lab |
-  
-1. Verify that all the details you have entered are correct.
-   ![Create Custom Vision resources](/media/lab05/create-custom-vision-resource.jpg)
-1. Click Create
-1. Wait for the deployment to complete.
-
-## Step 1: Train a model
-
-### 1.0 - Take training images
+### 1.1 - Capture training images
 
 1. Plug the USB camera into your development PC.
 1. Using the Camera app on your development PC, take at least 5 pictures each of your objects. 
     * Store these pictures on your computer. 
     * Organize all the photos for each object into a folder named for this object - this will make them easier to upload.
     
-### 1.1 - Create a Custom Vision Image Classification project
+### 1.2 - Create a Custom Vision Image Classification project
 
 1. Log into the [Custom Vision Portal](https://www.customvision.ai/).
-1. Choose the Directory associated with your Azure account.
 1. Create a New Project. 
 1. Configure your project as follows:
 
@@ -61,32 +37,32 @@ When starting the lab, you should have these things open on your development mac
     | Export Capabilities | Basic platforms (Tensorflow, CoreML, ONNX, ...) |
     
 1. Verify that all the details you have entered are correct.
-   ![Create Custom Vision project](/media/lab05/create-custom-vision-project.jpg)
+   ![Create Custom Vision project](./media/lab05/create-custom-vision-project.jpg)
 1. Click Create project.
 
-### 1.2 - Upload and tag training data
+### 1.3 - Upload and tag training data
 
 1. Click the Add image button and bulk upload your images based on the object type.
     * Upload all of object1 first and add the object1 tag, then all of object2 and add the object2 tag etc.
     * Each time you upload all the images for a given object, specify the tag at that time.
  1. Example of bulk uploading and tagging images.
-   ![Upload and tag images](/media/lab05/upload-and-tag-images.jpg)
+   ![Upload and tag images](./media/lab05/upload-and-tag-images.jpg)
     
-### 1.3 - Train your model
+### 1.4 - Train your model
 
 1. Click on the Training button (green one in the top right).
 1. Select the Quick Training option.
 1. Click Train.
  1. Example of testing your model.
-   ![Train model](/media/lab05/train-your-model.jpg)
+   ![Train model](./media/lab05/train-your-model.jpg)
 
-### 1.4 - Test your model
+### 1.5 - Test your model
 
 1. Select "Quick Test" to test the model.
 1. Using the camera app on your PC, take one more picture of one of the objects
 1. Upload the picture you took, verify that it was predicted correctly.
 
-### 1.5 - Export your model
+### 1.6 - Export your model
 
 1. Switch to the Performance tab in the portal.
 1. Click on Publish.
@@ -95,14 +71,10 @@ When starting the lab, you should have these things open on your development mac
 1. Select ONNX1.2 for the version.
 1. Click Export.
 1. An example of exporting your model.
-   ![Export model](/media/lab05/export-your-model.jpg)
+   ![Export model](./media/lab05/export-your-model.jpg)
 1. After downloading, rename the file "CustomVision.onnx"
 
-## Step 2: Package the model into a C# .NET Application
-
-### 2.0 - Get the code
-
-If you are running this lab in an environment where this has already been set up, the initial sample will already be present in the directory "C:\Labs\Content\src\IoTLabs.CustomVision". Otherwise, refer to the code distributed with this documentation.
+## 2 - Package the model into a C# .NET Application
 
 ### 2.1 - Get your model file
 
@@ -110,7 +82,10 @@ Copy the CustomVision.onnx model file from your downloads directory into the lab
 
 ### 2.2 - Build & Test the sample
 
+1. Open a Command Prompt window and enter the following:
+
 ```
+cd C:\Labs\Content\src\IoTLabs.CustomVision
 dotnet restore -r win-x64
 dotnet publish -c Release -o ./release -r win-x64 --self-contained true
 ```
@@ -221,18 +196,18 @@ Now we need to create a device registration for an IoT Edge Device in IoT Hub th
 1. Login to the Azure Portal.
 1. Find your IoT Hub.
 1. Go to Automatic Device Management > IoT Edge.
-   ![Create IoT Edge Device 1](/media/lab05/add-iot-edge-device-in-azure1.jpg)
+   ![Create IoT Edge Device 1](./media/lab05/add-iot-edge-device-in-azure1.jpg)
 1. Click + Add an IoT Edge device.
-   ![Create IoT Edge Device 2](/media/lab05/add-iot-edge-device-in-azure2.jpg)
+   ![Create IoT Edge Device 2](./media/lab05/add-iot-edge-device-in-azure2.jpg)
 1. Enter a name for you IoT Edge device
 1. Leave the rest of the settings as the default values.
 1. Verify that all the details you have entered are correct.
-   ![Create IoT Edge Device 3](/media/lab05/add-iot-edge-device-in-azure3.jpg)
+   ![Create IoT Edge Device 3](./media/lab05/add-iot-edge-device-in-azure3.jpg)
 1. Click Save.
 1. Click Refresh to update the list of devices.
 1. Click on your device to view it's details.
 1. An example of the device details page
-   ![Create IoT Edge Device 4](/media/lab05/add-iot-edge-device-in-azure4.jpg)
+   ![Create IoT Edge Device 4](./media/lab05/add-iot-edge-device-in-azure4.jpg)
 
 ### 5.1 - Author a deployment.json file
 
@@ -264,11 +239,11 @@ az iot hub module-identity list --device-id [device name] --hub-name [hub name]
 1. Navigate to your IoT Edge Device in your IoT Hub.
 1. Go to the device details page.
 1. Under the Modules tab click on the customvision module.
-   ![Verify Azure module deployment 1](/media/lab05/verify-azure-deployment-of-customvision-module1.jpg)
+   ![Verify Azure module deployment 1](./media/lab05/verify-azure-deployment-of-customvision-module1.jpg)
 1. Under the IoT Edge Module Settings tab.
 1. Verify that the Desired Value for the Image URI matches the one that you entered in your deployment template.
 1. An example of IoT Edge Module Settings.
-   ![Verify Azure module deployment 2](/media/lab05/verify-azure-deployment-of-customvision-module2.jpg)
+   ![Verify Azure module deployment 2](./media/lab05/verify-azure-deployment-of-customvision-module2.jpg)
 
 **Hint: The Desired Value column matches what is specified in the deploment template, the Reported Value column matches what the devices believes it is running.**
 

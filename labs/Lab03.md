@@ -2,20 +2,22 @@
 
 ## 1 - Deploy and configure Azure IoT components
 
-### 1.0 - Create your workspace
+### 1.0 - Provision Azure Resources
 
 The focal point of all Microsoft IoT solutions is the Azure IoT Hub service. IoT Hub provides secure messaging, device provisioning and device management capabilities.
 
-Azure Resource Manager Templates (ARM Templates) can be deployed into Azure that include IoT Hub. Click the button below to create the Azure IoT components required for the next labs:
+Azure Resource Manager Templates (ARM Templates) can be deployed into Azure that include IoT Hub. 
 
+1. Click the button below to create the Azure IoT components required for the next labs:<br/><br/>
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fawaregroup%2FIIALab%2Fmaster%2Fsrc%2FAzure.ARM%2Fiia-azuredeploy.json" target="_blank" rel="noopener noreferrer">
 <img src="https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.png"/>
 </a>
 <a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2Fawaregroup%2FIIALab%2Fmaster%2Fsrc%2FAzure.ARM%2Fiia-azuredeploy.json" target="_blank" rel="noopener noreferrer">
 <img src="https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/visualizebutton.png"/>
-</a>
-
+</a><br/><br/>
 You can also visualize an ARM template to see the components that will be created.
+
+2. 
 
 ### 1.2 Install Example OEM Packages
 Most required packages will automatically be imported to the workspace, but we can include sample packages by running the following command

@@ -5,7 +5,6 @@
     "variables": {
         "prefixSegment": "[split(resourceGroup().name, '-')[0]]",
         "projectName": "[concat(split(resourceGroup().name, '-')[1], '-', split(resourceGroup().name, '-')[2])]",
-
         "location": "[resourceGroup().location]",
         "subscriptionId": "[subscription().subscriptionId]",
         "prefix": "[toLower(concat(variables('prefixSegment'), '-', variables('projectName')))]",
@@ -15,12 +14,11 @@
         "iotHubRouteName": "SendTelemetryToEventHub",
         "iotHubDpsName": "[concat(variables('prefix'), '-dps')]",
         "streamAnalyticsName": "[concat(variables('prefix'), '-streamanalytics')]",
-    
         "eventHubNsResourceGroup": "common",
         "eventHubNsName": "msiotlabs-iia-eventhub",
         "eventHubName": "from-iothubs",
-        "eventHubSharedAccessPolicyName": "iothub"
-    
+        "eventHubSharedAccessPolicyName": "iothub",
+        "acrName": "[replace(concat(variables('prefix'), '-', 'acr'), '-', '')]"
     },
     "resources": [
         {
@@ -223,7 +221,30 @@
             "dependsOn": [
                 "[resourceId('Microsoft.Devices/IotHubs', variables('iotHubName'))]"
             ]
+        },
+        {
+            "name": "[variables('acrName')]",
+            "type": "Microsoft.ContainerRegistry/registries",
+            "apiVersion": "2017-10-01",
+            "location": "[variables('location')]",
+            "comments": "",
+            "tags": {
+                "displayName": "Container Registry",
+                "container.registry": "[variables('acrName')]"
+            },
+            "sku": {
+                "name": "Premium",
+                "tier": "Premium"
+            },
+            "properties": {
+                "adminUserEnabled": true
+            }
         }
     ],
-    "outputs": {}
+    "outputs": {
+        "acrLoginServer": {
+            "value": "[reference(resourceId('Microsoft.ContainerRegistry/registries', variables('acrName')), '2017-10-01').loginServer]",
+            "type": "string"
+        }
+    }
 }

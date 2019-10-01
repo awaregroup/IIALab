@@ -63,4 +63,9 @@
 2. Enter the `Scope ID`, `Device ID` and `Primary Key` collected earlier and click 'Generate'. 
 
 3. Open a Command Prompt as Administrator.
-4. 
+4. Replace the IP address in the following commands with the IP Address of your device, then run the commands in your command prompt window:
+```batch
+net use \\<device ip address here>\c$ /USER:administrator
+copy "%userprofile%\Downloads\tpm_override.json" \\<device ip address here>\users\administrator\appdata\....
+```
+5. Restart your application and you should see the IoT Hub connection show successful and data inside IoT Central

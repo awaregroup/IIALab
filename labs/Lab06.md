@@ -32,19 +32,6 @@ $ShellLauncherClass.SetEnabled($TRUE)
 $RegKey ="HKLM:\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System"
 New-ItemProperty -Path $RegKey -Name DisableTaskMgr -value 1 -Force 
 
-$hostName = (Get-WmiObject win32_computersystem).DNSHostName
-
-#sets up the autologin
-$RegKey ="HKLM:\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon"
-Get-ItemProperty -Path $RegKey 
-
-
-New-ItemProperty -Path $RegKey -Name AutoLogonSID -value $kiosk_SID -Force 
-New-ItemProperty -Path $RegKey -Name DefaultUserName -value Kiosk -Force 
-New-ItemProperty -Path $RegKey -Name DefaultDomainName -value $hostName -Force 
-New-ItemProperty -Path $RegKey -Name AutoAdminLogon -value 1 -Force 
-New-ItemProperty -Path $RegKey -Name DefaultPassword -value (new-object System.Security.SecureString) -Force 
-
 ```
 3. Restart your computer for the changes to take effect
 
@@ -74,12 +61,10 @@ $ShellLauncherClass.SetEnabled($FALSE)
 $RegKey ="HKLM:\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System"
 New-ItemProperty -Path $RegKey -Name DisableTaskMgr -value 0 -Force 
 
-if($ShellLauncherClass.IsEnabled().Enabled)
-{
+if($ShellLauncherClass.IsEnabled().Enabled){
 	Write-Warning("Shell Launcher is still Enabled...")
 }
-else 
-{
+else{
 	Write-Host "Shell Launcher has been disabled..."
 	Write-Host "Restarting Computer in 3 seconds..."
 	Start-Sleep 3

@@ -23,8 +23,8 @@ Devices running Windows 10 IoT Core can be installed and configured using the Io
 
 ### 1.1 - Installing Windows 10 IoT Core
 
-1. Download the HummingBoard Edge i.MX6 Quad IoT Core FFU from [https://images.solid-build.xyz/IMX6/Windows%2010%20IoT/HB_Edge_Quad.ffu](https://images.solid-build.xyz/IMX6/Windows%2010%20IoT/HB_Edge_Quad.ffu)
 1. Insert Micro SD card into host PC 
+![MicroSD](./media/5_microsd.jpg)
 1. Open IoT Dashboard and click 'Setup a new device'
 1. Change the device type to 'NXP [i.MX6/i.MX7/i.MX8]' and set the OS Build to 'Custom'
 1. Browse to the FFU file downloaded earlier

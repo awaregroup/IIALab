@@ -4,7 +4,7 @@
 ### Create your kiosk user 
 1. Open PowerShell as Administrator and run the following commands to create a non-admin local user:
 ```powershell
-New-LocalUser "Kiosk"
+New-LocalUser "Kiosk" -Password (new-object System.Security.SecureString)
 Add-LocalGroupMember -Group "Users" -Member "Kiosk"
 ```
 
@@ -35,7 +35,8 @@ New-ItemProperty -Path $RegKey -Name DisableTaskMgr -value 1 -Force
 3. Restart your computer for the changes to take effect
 
 ### Disabling Shell Launcher
-1. Log in with your Admin user, a PowerShell session should automatically open.
+1. Press **ctrl + alt + delete** and select **Sign out**
+2. On the lock screen, log in with your Admin user.
 2. Run the following command to open an Administrator PowerShell session:
 ```powershell
 #opens powershell as administrator
@@ -81,7 +82,7 @@ A custom shell is launched with the same level of user rights as the account tha
 ### Create your kiosk user 
 1. Open PowerShell as Administrator and run the following commands to create a non-admin local user:
 ```powershell
-New-LocalUser "Kiosk"
+New-LocalUser "Kiosk" -Password (new-object System.Security.SecureString)
 Add-LocalGroupMember -Group "Users" -Member "Kiosk"
 ```
 

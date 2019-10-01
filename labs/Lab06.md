@@ -19,18 +19,32 @@ Enable-WindowsOptionalFeature -online -FeatureName Client-EmbeddedShellLauncher 
 $ShellLauncherClass = [wmiclass]"\\localhost\root\standardcimv2\embedded:WESL_UserSetting"
 
 #gets the SIDs
-$Admins_SID = "S-1-5-32-544"
+$admins_SID = "S-1-5-32-544"
 $kiosk_SID = (New-Object System.Security.Principal.NTAccount("Kiosk")).Translate([System.Security.Principal.SecurityIdentifier]).value
 
 #sets up apps for kiosk and admin users
 #TODO: replace notepad.exe with a path to the new app
 $ShellLauncherClass.SetCustomShell($kiosk_SID, "notepad.exe", ($null), ($null), 1)
-$ShellLauncherClass.SetCustomShell($Admins_SID, "powershell.exe")
+$ShellLauncherClass.SetCustomShell($admins_SID, "powershell.exe")
 $ShellLauncherClass.SetEnabled($TRUE)
 
 #disables task manager
 $RegKey ="HKLM:\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System"
 New-ItemProperty -Path $RegKey -Name DisableTaskMgr -value 1 -Force 
+
+$hostName = (Get-WmiObject win32_computersystem).DNSHostName
+
+#sets up the autologin
+$RegKey ="HKLM:\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon"
+Get-ItemProperty -Path $RegKey 
+
+
+New-ItemProperty -Path $RegKey -Name AutoLogonSID -value $kiosk_SID -Force 
+New-ItemProperty -Path $RegKey -Name DefaultUserName -value Kiosk -Force 
+New-ItemProperty -Path $RegKey -Name DefaultDomainName -value $hostName -Force 
+New-ItemProperty -Path $RegKey -Name AutoAdminLogon -value 1 -Force 
+New-ItemProperty -Path $RegKey -Name DefaultPassword -value (new-object System.Security.SecureString) -Force 
+
 ```
 3. Restart your computer for the changes to take effect
 

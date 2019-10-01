@@ -42,35 +42,25 @@
 1. Click 'Publish' and confirm the process by clicking 'Publish' again.
 ![](./media/2_iotc6.png)
 
-### 1.3 - Create Device Template
+### 1.3 - Create Device from Template
 
 1. Click 'Devices', choose your newly created Device Template and click 'New'.
 ![](./media/2_iotc8.png)
 
-1. Confirm that the 'Simulated' toggle is **unchecked**, then click 'Create'.
+2. Confirm that the 'Simulated' toggle is **unchecked**, then click 'Create'.
 
-1. Click on your new device to see the device dashboard. There should be no data showing yet.
+3. Click on your new device to see the device dashboard. There should be no data showing yet.
 ![](./media/2_iotc9.png)
 
-1. Click the 'Connect' button and record the `Scope ID`, `Device ID` and `Primary Key`. These are the Azure IoT Hub Device Provisioning Service (DPS) details. You will need these to set up your device.
+4. Click the 'Connect' button and record the `Scope ID`, `Device ID` and `Primary Key`. These are the Azure IoT Hub Device Provisioning Service (DPS) details. You will need these to set up your device.
 ![](./media/2_iotc10.png)
 
-### 1.4 - Monitor IOTC Application
+## 2 - Configure device to connect to IoT Central
 
-1. Go to settings and generate API Token
-1. Connect to IOTC event stream with iotc-explorer tool
-1. See simulated events being pushed to IOTC
+### 2.1 - Prepare Azure IoT Hub Device Details
+1. Open a browser tab and navigate to [www.dpsgen.com/iia](https://www.dpsgen.com/iia).
 
-### 1.4 - Connect HummingBoard to IOTC
+2. Enter the `Scope ID`, `Device ID` and `Primary Key` collected earlier and click 'Generate'. 
 
-1. Add connection string
-1. Re-deploy app
-1. See telemetry in IOTC
-
-
-## 4 - Republish appx files
-
-1. Refer to Step 3 in Lab 1 to run through the steps in Visual Studio for publishing packages
-
-
-With your new appx files you can move on to [Lab 3 - Creating a custom Windows IoT FFU](./Lab03.md)
+3. Open a Command Prompt as Administrator.
+4. 

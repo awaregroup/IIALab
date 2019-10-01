@@ -17,7 +17,10 @@ Azure Resource Manager Templates (ARM Templates) can be deployed into Azure that
 </a><br/><br/>
 You can also visualize an ARM template to see the components that will be created.
 
-2. 
+2. Choose the Resource Group that matches your lab user number, click 'Accept' on the terms and 'Purchase' to begin the provisioning process.
+![](./media/3_1.png)
+
+3. Wait for the provisioning process to complete.
 
 ### 1.2 Install Example OEM Packages
 Most required packages will automatically be imported to the workspace, but we can include sample packages by running the following command

@@ -21,21 +21,31 @@ Devices running Windows 10 IoT Core can be installed and configured using the Io
 
 ![IoT Dashboard](./media/1_iotdashboard.png)
 
-### 1.1 - Installing Windows 10 IoT Core
+### 1.2 - Installing Windows 10 IoT Core
 
 1. Insert Micro SD card into host PC 
 ![MicroSD](./media/5_microsd.jpg)
+1. Dismiss any messages to format the drive. Close those windows.  
 1. Open IoT Dashboard and click 'Setup a new device'
 1. Change the device type to 'NXP [i.MX6/i.MX7/i.MX8]' and set the OS Build to 'Custom'
 1. Browse to the FFU file downloaded earlier
+1. Add a password. We recommend "p@ssw0rd" as it is used later in the labs. 
 1. Accept the license agreement and click 'Install'
+1. When completed Windows Explorer will open the many windows. Dismiss any messages and close those windows. 
 
 ![IoT Dashboard](./media/1_iotdashboard2.png)
 
+### 1.3 - Plugging in your hardware
+1. Plug the HDMI adapter into your Hummingboard and the USB end into the USB Hub attached to your PC. 
+1. Plug the blue USB cable into your SensorTile and the other end into the USB Hub.
+1. Plug in the ethernet cable to your Hummingboard.
+1. Insert the SD Card into your Hummingboard.
+1. Insert the Power Cable into your Hummingboard.
+1. On your Lab PC, open the Camera application to view the output of your Hummingboard as it boots. Select the camera cycle button to view the capture card. 
 
-### 1.2 - Validating your install
+### 1.4 - Validating your install
 
-1. Once the HummingBoard has completed installing, a line entry will show in the IoT Dashboard as above
+1. Once the HummingBoard has completed booting, a line entry will show in the IoT Dashboard as above
 2. Right click on your device and select 'Device Portal' - **Note: if your device doesn't show, in the list, read the IP Address from the display and enter that in your browser on port 8080. For example: http://192.168.88.200:8080**
 3. In your browser enter the default username and password:
 
@@ -46,7 +56,10 @@ Devices running Windows 10 IoT Core can be installed and configured using the Io
 
 ![Device Portal](./media/1_deviceportal1.png)
 
-4. Enter a name in the 'Change your device name' text box and click 'Save'. Click yes to reboot to display the new name 
+4. Open the Processes Menu, Select Run command
+5. Type "devcon status USB\VID_0483*" and hit enter to see if the device can see the connected SensorTile
+6. You should see Name: USB Serial Device with status of Running
+![SensorTile Connected](./media/1_detect_sensortile.png)
 
 
 

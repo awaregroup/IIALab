@@ -1,0 +1,38 @@
+﻿<UserControl
+    x:Class="AwareThings.WinIoTCoreServices.ImageClassificationSensors.VideoSourceSettingsPanelControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AwareThings.WinIoTCoreServices.ImageClassificationSensors"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" MinHeight="40"/>
+            <RowDefinition Height="Auto" MinHeight="40"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" MinHeight="40"/>
+            
+        </Grid.RowDefinitions>
+        <ComboBox x:ConnectionId='2' x:Name="cmbProvidor" HorizontalAlignment="Stretch" SelectedIndex="0">
+            <ComboBoxItem Content="Simulated Images"/>
+            <ComboBoxItem Content="Webcam"/>
+            <ComboBoxItem Content="URL Image Providor (IP Camera)"/>
+        </ComboBox>
+        <ComboBox x:ConnectionId='3' x:Name="cmbWebcam" HorizontalAlignment="Stretch" SelectedIndex="0" Grid.Row="1" Visibility="Collapsed" >
+        </ComboBox>
+        <TextBox x:ConnectionId='4' x:Name="txtURLSource" HorizontalAlignment="Stretch" Grid.Row="1" PlaceholderText="(Enter URL)" Visibility="Collapsed" VerticalAlignment="Top"/>
+        <TextBlock x:ConnectionId='5' x:Name="txtSimulated" HorizontalAlignment="Stretch" Grid.Row="1" Text="(Embedded Images will be used)" Visibility="Collapsed" Opacity="0.6"/>
+        
+        <TextBlock Style="{StaticResource CaptionTextBlockStyle}" FontWeight="SemiBold" Foreground="White" Grid.Row="2" Text="Evaluation Settings" Margin="0,5,0,5"/>
+        <StackPanel Orientation="Vertical" Grid.Row="3" >
+                <ToggleSwitch x:ConnectionId='6' x:Name="tgUseCustomVisionApi" OnContent="Cloud Evaluations (Custom Vision API)" OffContent="Local Evaluations (WindowsML)" />
+            <TextBox x:ConnectionId='7' x:Name="txtPredictionApiEndpoint" HorizontalAlignment="Stretch" PlaceholderText="(Enter Prediction API Endpoint)" Visibility="Visible" VerticalAlignment="Top" IsEnabled="{Binding ElementName=tgUseCustomVisionApi,Path=IsOn}" Margin="0,5,20,5"/>
+            <PasswordBox x:ConnectionId='8' x:Name="txtPredictionApiKey" HorizontalAlignment="Stretch" PlaceholderText="(Enter Prediction Key)" Visibility="Visible" VerticalAlignment="Top" IsEnabled="{Binding ElementName=tgUseCustomVisionApi,Path=IsOn}" Margin="0,5,20,15"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
+

@@ -1,0 +1,58 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    
+    >
+
+    <ElementTheme x:Key="SkinTheme">Dark</ElementTheme>
+
+    <Color x:Key="SkinBackgroundColor">#FF141419</Color>
+    <Color x:Key="SkinForegroundColor">#FFFFFFFF</Color>
+    <Color x:Key="SkinForeground75Color">#BBFFFFFF</Color>
+    <Color x:Key="SkinForeground50Color">#66FFFFFF</Color>
+    <Color x:Key="SkinInverseForegroundColor">#FF000000</Color>
+    <Color x:Key="SkinInverseForeground75Color">#BB000000</Color>
+    <Color x:Key="SkinInverseForeground50Color">#66000000</Color>
+    <Color x:Key="SkinPanelHeaderForegroundColor">#FFFFFFFF</Color>
+    <Color x:Key="SkinPanelHeaderBackgroundColor">#FF008575</Color>
+    <Color x:Key="SkinPanelBackgroundColor">#FF282828</Color>
+    <Color x:Key="SkinPanelInverseHeaderColor">#FF000000</Color>
+    <Color x:Key="SkinPanelInverseBackgroundColor">#FFFFFFFF</Color>
+    <Color x:Key="SkinPanelOutlineColor">#FF323235</Color>
+    <Color x:Key="SkinPrimaryAccentColor">#FF008575</Color>
+    <Color x:Key="SkinPrimaryAccentLightColor">#FFFFF1D7</Color>
+    <Color x:Key="SkinPrimaryAccentDarkColor">#FF143B40</Color>
+    <Color x:Key="SkinSecondaryAccentColor">#FF505050</Color>
+    <Color x:Key="SkinSecondaryAccentLightColor">#FFA0AAB9</Color>
+    <Color x:Key="SkinSecondaryAccentDarkColor">#FF000000</Color>
+    <Color x:Key="SkinAlertAccentColor">#FF855F38</Color>
+    <Color x:Key="SkinErrorAccentColor">#FFFB540A</Color>
+    <Color x:Key="SkinOkAccentColor">#FF219C8A</Color>
+
+    <SolidColorBrush x:Key="SkinBackgroundBrush" Color="{StaticResource SkinBackgroundColor}"/>
+    <SolidColorBrush x:Key="SkinForegroundBrush" Color="{StaticResource SkinForegroundColor}"/>
+    <SolidColorBrush x:Key="SkinForeground75Brush" Color="{StaticResource SkinForeground75Color}"/>
+    <SolidColorBrush x:Key="SkinForeground50Brush" Color="{StaticResource SkinForeground50Color}"/>
+    <SolidColorBrush x:Key="SkinInverseForegroundBrush" Color="{StaticResource SkinInverseForegroundColor}"/>
+    <SolidColorBrush x:Key="SkinInverseForeground75Brush" Color="{StaticResource SkinInverseForeground75Color}"/>
+    <SolidColorBrush x:Key="SkinInverseForeground50Brush" Color="{StaticResource SkinInverseForeground50Color}"/>
+    <SolidColorBrush x:Key="SkinPanelHeaderForegroundBrush" Color="{StaticResource SkinPanelHeaderForegroundColor}"/>
+    <SolidColorBrush x:Key="SkinPanelHeaderBackgroundBrush" Color="{StaticResource SkinPanelHeaderBackgroundColor}"/>
+    <SolidColorBrush x:Key="SkinPanelBackgroundBrush" Color="{StaticResource SkinPanelBackgroundColor}"/>
+    <SolidColorBrush x:Key="SkinPanelInverseHeaderBrush" Color="{StaticResource SkinPanelInverseHeaderColor}"/>
+    <SolidColorBrush x:Key="SkinPanelInverseBackgroundBrush" Color="{StaticResource SkinPanelInverseBackgroundColor}"/>
+    <SolidColorBrush x:Key="SkinPanelOutlineBrush" Color="{StaticResource SkinPanelOutlineColor}"/>
+    <SolidColorBrush x:Key="SkinPrimaryAccentBrush" Color="{StaticResource SkinPrimaryAccentColor}"/>
+    <SolidColorBrush x:Key="SkinPrimaryAccentLightBrush" Color="{StaticResource SkinPrimaryAccentLightColor}"/>
+    <SolidColorBrush x:Key="SkinPrimaryAccentDarkBrush" Color="{StaticResource SkinPrimaryAccentDarkColor}"/>
+    <SolidColorBrush x:Key="SkinSecondaryAccentBrush" Color="{StaticResource SkinSecondaryAccentColor}"/>
+    <SolidColorBrush x:Key="SkinSecondaryAccentLightBrush" Color="{StaticResource SkinSecondaryAccentLightColor}"/>
+    <SolidColorBrush x:Key="SkinSecondaryAccentDarkBrush" Color="{StaticResource SkinSecondaryAccentDarkColor}"/>
+    <SolidColorBrush x:Key="SkinAlertAccentBrush" Color="{StaticResource SkinAlertAccentColor}"/>
+    <SolidColorBrush x:Key="SkinErrorAccentBrush" Color="{StaticResource SkinErrorAccentColor}"/>
+    <SolidColorBrush x:Key="SkinOkAccentBrush" Color="{StaticResource SkinOkAccentColor}"/>
+
+    <SolidColorBrush x:Key="SkinPageHeaderBackgroundBrush" Color="{StaticResource SkinBackgroundColor}"/>
+    <SolidColorBrush x:Key="SkinPageHeaderForegroundBrush" Color="{StaticResource SkinForegroundColor}"/>
+
+</ResourceDictionary>

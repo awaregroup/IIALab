@@ -1,0 +1,40 @@
+﻿<UserControl
+    x:Class="AwareThings.WinIoTCoreServices.Core.Panels.Controls.SpeedAlertDialogControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+     d:DesignHeight="650"
+    d:DesignWidth="800"
+    RequestedTheme="Dark">
+
+    <Grid Background="{StaticResource Gray4Brush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Background="#FFFE2C2D" IsHitTestVisible="False">
+            <TextBlock Style="{StaticResource TitleTextBlockStyle}" Foreground="White" FontSize="48" FontWeight="SemiBold" Margin="48,32"  Text="Speed Control Threshold Alert" TextLineBounds="Tight"/>
+        </Grid>
+        <Grid Grid.Row="1" Margin="48,32,48,0"  IsHitTestVisible="False">
+            <TextBlock x:ConnectionId='2' x:Name="txtHeading" Style="{StaticResource TitleTextBlockStyle}" Foreground="#FFDDDDDD" FontSize="32" FontWeight="SemiBold" Margin="0,0"  Text="Please authenticate yourself with RFID" TextLineBounds="Tight" d:IsHidden="True"/>
+            <Grid x:ConnectionId='3' x:Name="grdShield" Width="300" Height="291" VerticalAlignment="Top" Margin="0,64,0,0" d:IsHidden="True">
+                <Image Source="ms-appx:///Images/icon_sheild.png"/>
+
+                <TextBlock x:ConnectionId='8' x:Name="txtTimeRemaining" Style="{StaticResource SubtitleTextBlockStyle}" Foreground="#FFDDDDDD" FontSize="130" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="SemiBold" Margin="0,0,0,40"  Text="55" TextLineBounds="Tight"/>
+                <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Foreground="#FFDDDDDD" FontSize="58" FontWeight="SemiBold" Margin="0,0,0,60"  Text="sec" TextLineBounds="Tight" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+            </Grid>
+            <Path x:ConnectionId='4' x:Name="pFailed" Data="M13.950004,24.5L13.950004,28.299988 17.950004,28.299988 17.950004,24.5z M13.950004,10.399963L13.950004,21.699951 17.950004,21.699951 17.950004,10.399963z M15.950004,0C16.349998,0,16.750007,0.19995117,16.950004,0.69995117L31.750011,30.099976C31.949993,30.5 31.949993,31 31.750011,31.399963 31.549999,31.799988 31.150005,32 30.750011,32L1.1499981,32C0.75000406,32 0.34999478,31.799988 0.14999761,31.399963 -0.049999204,31 -0.049999204,30.5 0.14999761,30.099976L14.950004,0.69995117C15.150001,0.19995117,15.549995,0,15.950004,0z" 
+                  Stretch="Uniform" Fill="#FFFE2C2D" Width="250" Height="250" Margin="0,40,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5"/>
+            <!--<Path x:Name="pSuccess" Data="M20.274001,10.542006L21.570001,12.055005 11.479,20.674995 7.5810001,15.146002 9.207,13.998003 11.849,17.740999z M13.866527,2.2019958C10.048523,6.8069916 4.1854995,8.7969971 2.1014939,9.3860016 1.776496,12.313995 1.3194939,24.153 13.981532,29.865997 26.234559,24.259995 26.195571,13.018005 25.890563,9.673996 25.876571,9.5139923 25.767562,9.3919983 25.60057,9.348999 24.861568,9.1640015 18.342538,7.4129944 13.866527,2.2019958z M13.845531,0L13.86053,0C14.351528,0 14.821532,0.23100281 15.152541,0.63600159 19.22755,5.5890045 25.396558,7.2460022 26.085571,7.4169922 27.079562,7.6679993 27.781575,8.4810028 27.874578,9.4909973 28.215568,13.209 28.254569,25.806 14.485532,31.820999L14.078533,32 13.569529,31.863998C-1.1805132,25.416992 -0.19151202,11.595993 0.15449728,8.8899994 0.23849713,8.2339935 0.70448663,7.6990051 1.3444878,7.5279999 2.5705045,7.197998 8.8755152,5.3159943 12.549522,0.66299438 12.876534,0.24699402 13.349527,0.0059967041 13.845531,0z" 
+                  Stretch="Uniform" Fill="{StaticResource CyanAccentBrush}" Width="250" Height="250" Margin="0,40,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5"/>-->
+            <Image x:ConnectionId='5' x:Name="pSuccess"  Source="ms-appx:///Images/icon_success.png" Width="250" Height="250" Margin="0,40,0,0" VerticalAlignment="Top" />
+            <Image Source="ms-appx:///Images/icon_rfid.png" Width="141" Height="133" VerticalAlignment="Top" Margin="0,96,0,0" HorizontalAlignment="Right"/>
+            <TextBlock x:ConnectionId='6' x:Name="txtStatus" Style="{StaticResource SubtitleTextBlockStyle}" Foreground="#FFDDDDDD" FontSize="32" FontWeight="SemiBold" Margin="0,370,0,0" VerticalAlignment="Top"  Text="Authentication has timed out. Request has been applied." TextWrapping="WrapWholeWords" />
+            <TextBox x:ConnectionId='7' x:Name="smtext" Opacity="0"></TextBox>
+
+        </Grid>
+    </Grid>
+</UserControl>
+

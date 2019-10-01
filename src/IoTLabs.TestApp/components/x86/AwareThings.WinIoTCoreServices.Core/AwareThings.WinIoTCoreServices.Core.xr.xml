@@ -1,0 +1,683 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Roots >
+  <Roots.Interfaces>
+    <RootInterface FullName="Windows.UI.Xaml.Data.IValueConverter" />
+  </Roots.Interfaces>
+  <Roots.PropertyPathNames>
+    <RootPropertyPathName Name="SelectedItem" />
+    <RootPropertyPathName Name="CanSetAsCurrent" />
+    <RootPropertyPathName Name="HasInstalledSkin" />
+    <RootPropertyPathName Name="NewVersionAvailable" />
+    <RootPropertyPathName Name="IsCurrentSkin" />
+    <RootPropertyPathName Name="Specifications" />
+    <RootPropertyPathName Name="Description" />
+    <RootPropertyPathName Name="Title" />
+    <RootPropertyPathName Name="IconImageUri" />
+    <RootPropertyPathName Name="IsSelected" />
+    <RootPropertyPathName Name="Value" />
+    <RootPropertyPathName Name="SkinPanelOuterHostStyle" />
+    <RootPropertyPathName Name="SkinPanelHostStyle" />
+    <RootPropertyPathName Name="IsRebootRequired" />
+    <RootPropertyPathName Name="IsInstalling" />
+    <RootPropertyPathName Name="IsDownloading" />
+    <RootPropertyPathName Name="IsUpToDate" />
+    <RootPropertyPathName Name="IsChecking" />
+    <RootPropertyPathName Name="IsIdle" />
+    <RootPropertyPathName Name="LastInstalled" />
+    <RootPropertyPathName Name="FlightRingName" />
+    <RootPropertyPathName Name="IsTitleShown" />
+    <RootPropertyPathName Name="ItemHeaderDataTemplate" />
+    <RootPropertyPathName Name="ImageUri" />
+    <RootPropertyPathName Name="Stretch" />
+    <RootPropertyPathName Name="CustomElement" />
+    <RootPropertyPathName Name="MarkdownText" />
+    <RootPropertyPathName Name="BasePathUri" />
+    <RootPropertyPathName Name="RequestedTheme" />
+    <RootPropertyPathName Name="StatusItems" />
+    <RootPropertyPathName Name="IsConnecting" />
+    <RootPropertyPathName Name="IsWarning" />
+    <RootPropertyPathName Name="IsConnectionFailed" />
+    <RootPropertyPathName Name="IsConnected" />
+    <RootPropertyPathName Name="Detail" />
+    <RootPropertyPathName Name="StepDescription" />
+    <RootPropertyPathName Name="StepTitle" />
+    <RootPropertyPathName Name="DisplayItems" />
+    <RootPropertyPathName Name="DisplayValue" />
+    <RootPropertyPathName Name="Label" />
+    <RootPropertyPathName Name="IsRunning" />
+    <RootPropertyPathName Name="Symbol" />
+    <RootPropertyPathName Name="IsFailed" />
+    <RootPropertyPathName Name="IsInitializing" />
+    <RootPropertyPathName Name="ChartRow" />
+    <RootPropertyPathName Name="ChartColumn" />
+    <RootPropertyPathName Name="ChartColumnSpan" />
+    <RootPropertyPathName Name="ChartValues" />
+    <RootPropertyPathName Name="Settings" />
+    <RootPropertyPathName Name="Footer" />
+    <RootPropertyPathName Name="HasFooter" />
+    <RootPropertyPathName Name="Header" />
+    <RootPropertyPathName Name="HasHeader" />
+    <RootPropertyPathName Name="FormattedSymbol" />
+    <RootPropertyPathName Name="FormattedDisplayValue" />
+    <RootPropertyPathName Name="MachineImageUri" />
+    <RootPropertyPathName Name="ModelNumber" />
+    <RootPropertyPathName Name="MachineName" />
+    <RootPropertyPathName Name="PanelId" />
+    <RootPropertyPathName Name="Items" />
+    <RootPropertyPathName Name="VibrationReadings" />
+    <RootPropertyPathName Name="ShowValuePanel" />
+    <RootPropertyPathName Name="VisibilityConverter" />
+    <RootPropertyPathName Name="GaugeColumnSpan" />
+    <RootPropertyPathName Name="GaugeRow" />
+    <RootPropertyPathName Name="GaugeColumn" />
+    <RootPropertyPathName Name="IsNeedleMode" />
+    <RootPropertyPathName Name="IsCompressedMode" />
+    <RootPropertyPathName Name="EntryDateDisplay" />
+    <RootPropertyPathName Name="IsWaiting" />
+    <RootPropertyPathName Name="IsError" />
+    <RootPropertyPathName Name="IsOk" />
+    <RootPropertyPathName Name="StatusDescription" />
+    <RootPropertyPathName Name="PageSubHeader" />
+    <RootPropertyPathName Name="HeaderIcon" />
+    <RootPropertyPathName Name="PageHeader" />
+    <RootPropertyPathName Name="MainPage" />
+    <RootPropertyPathName Name="LayoutLoaded" />
+    <RootPropertyPathName Name="CurrentLayout" />
+    <RootPropertyPathName Name="CurrentSkin" />
+    <RootPropertyPathName Name="HeaderRow" />
+    <RootPropertyPathName Name="ReloadSkinCommand" />
+    <RootPropertyPathName Name="IsProvisioningSkin" />
+    <RootPropertyPathName Name="SelectSkinCommand" />
+    <RootPropertyPathName Name="ShowSettingsCommand" />
+    <RootPropertyPathName Name="ShowDeviceSettingsCommand" />
+    <RootPropertyPathName Name="ShowTpmOverrideInformationCommand" />
+    <RootPropertyPathName Name="ShowDeviceTwinPropertiesCommand" />
+    <RootPropertyPathName Name="ShowDeviceInformationCommand" />
+    <RootPropertyPathName Name="IoTServiceStatus" />
+    <RootPropertyPathName Name="RestartAvailable" />
+    <RootPropertyPathName Name="RestartIoTHubCommand" />
+    <RootPropertyPathName Name="StopAvailable" />
+    <RootPropertyPathName Name="DisconnectIoTHubCommand" />
+    <RootPropertyPathName Name="StartAvailable" />
+    <RootPropertyPathName Name="ConnectIoTHubCommand" />
+    <RootPropertyPathName Name="CurrentStatus" />
+    <RootPropertyPathName Name="FakeFactoryResetCommand" />
+    <RootPropertyPathName Name="FakeRebootCommand" />
+    <RootPropertyPathName Name="FlightRingCommand" />
+    <RootPropertyPathName Name="CurrentFlightRing" />
+    <RootPropertyPathName Name="IsVisible" />
+  </Roots.PropertyPathNames>
+  <Roots.RootTypes>
+    <RootType FullName="Windows.UI.Xaml.Controls.UserControl">
+      <RootProperty Name="Resources" />
+      <RootProperty Name="Content" />
+      <RootProperty Name="RequestedTheme" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Media.Animation.Storyboard">
+      <RootProperty Name="SpeedRatio" />
+      <RootProperty Name="Children" />
+      <RootProperty Name="Duration" />
+      <RootMethod Name="GetTargetName" />
+      <RootMethod Name="SetTargetName" />
+      <RootMethod Name="GetTargetProperty" />
+      <RootMethod Name="SetTargetProperty" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Media.Animation.DoubleAnimationUsingKeyFrames">
+      <RootProperty Name="KeyFrames" />
+      <RootProperty Name="EnableDependentAnimation" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Media.Animation.DiscreteDoubleKeyFrame">
+      <RootProperty Name="KeyTime" />
+      <RootProperty Name="Value" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Media.Animation.EasingDoubleKeyFrame">
+      <RootProperty Name="KeyTime" />
+      <RootProperty Name="Value" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.Grid">
+      <RootProperty Name="Background" />
+      <RootProperty Name="Children" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="RenderTransformOrigin" />
+      <RootProperty Name="RenderTransform" />
+      <RootProperty Name="BorderBrush" />
+      <RootProperty Name="BorderThickness" />
+      <RootProperty Name="RowDefinitions" />
+      <RootProperty Name="ColumnDefinitions" />
+      <RootProperty Name="Visibility" />
+      <RootProperty Name="Padding" />
+      <RootProperty Name="DataContext" />
+      <RootProperty Name="IsHitTestVisible" />
+      <RootProperty Name="Style" />
+      <RootEvent Name="Tapped" />
+      <RootMethod Name="GetRow" />
+      <RootMethod Name="SetRow" />
+      <RootMethod Name="GetColumnSpan" />
+      <RootMethod Name="SetColumnSpan" />
+      <RootMethod Name="GetColumn" />
+      <RootMethod Name="SetColumn" />
+      <RootMethod Name="GetRowSpan" />
+      <RootMethod Name="SetRowSpan" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.Viewbox">
+      <RootProperty Name="Stretch" />
+      <RootProperty Name="Child" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Margin" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.Image">
+      <RootProperty Name="Source" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Stretch" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.ProgressRing">
+      <RootProperty Name="Foreground" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="IsActive" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Visibility" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.ProgressBar">
+      <RootProperty Name="Height" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Background" />
+      <RootProperty Name="Value" />
+      <RootProperty Name="Maximum" />
+      <RootProperty Name="Foreground" />
+      <RootProperty Name="IsIndeterminate" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Visibility" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Media.CompositeTransform">
+      <RootProperty Name="Rotation" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Shapes.Path">
+      <RootProperty Name="Data" />
+      <RootProperty Name="Stretch" />
+      <RootProperty Name="Fill" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="RenderTransformOrigin" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="UseLayoutRounding" />
+      <RootProperty Name="RenderTransform" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="IsHitTestVisible" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="Visibility" />
+      <RootProperty Name="Name" />
+      <RootProperty Name="Stroke" />
+      <RootProperty Name="StrokeThickness" />
+      <RootProperty Name="StrokeStartLineCap" />
+      <RootProperty Name="StrokeEndLineCap" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Shapes.Ellipse">
+      <RootProperty Name="Margin" />
+      <RootProperty Name="Fill" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="IsHitTestVisible" />
+      <RootProperty Name="Visibility" />
+      <RootProperty Name="Opacity" />
+      <RootProperty Name="Stroke" />
+      <RootProperty Name="StrokeThickness" />
+    </RootType>
+    <RootType FullName="AwareThings.WinIoTCoreServices.Core.Controls.FakeUpdateControl" />
+    <RootType FullName="Microsoft.Xaml.DirectUI.ProxyTypes.StaticResourceExtension" />
+    <RootType FullName="Windows.UI.Xaml.Controls.StackPanel">
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="Orientation" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="IsHitTestVisible" />
+      <RootProperty Name="Children" />
+      <RootProperty Name="Visibility" />
+      <RootProperty Name="Width" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.TextBlock">
+      <RootProperty Name="Style" />
+      <RootProperty Name="Text" />
+      <RootProperty Name="FontSize" />
+      <RootProperty Name="Foreground" />
+      <RootProperty Name="FontWeight" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="TextLineBounds" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="Opacity" />
+      <RootProperty Name="TextWrapping" />
+      <RootProperty Name="TextTrimming" />
+      <RootProperty Name="Visibility" />
+      <RootProperty Name="Padding" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="FontFamily" />
+    </RootType>
+    <RootType FullName="AwareThings.WinIoTCoreServices.Core.Controls.IncomingCommandNotificationControl" />
+    <RootType FullName="Windows.UI.Xaml.Controls.ContentDialog">
+      <RootProperty Name="RequestedTheme" />
+      <RootProperty Name="Content" />
+      <RootProperty Name="Resources" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.RowDefinition">
+      <RootProperty Name="Height" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Shapes.Rectangle">
+      <RootProperty Name="Fill" />
+      <RootProperty Name="Opacity" />
+      <RootProperty Name="StrokeThickness" />
+      <RootProperty Name="Stroke" />
+      <RootProperty Name="Visibility" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Height" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.Pivot">
+      <RootProperty Name="Margin" />
+      <RootProperty Name="Items" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.Button">
+      <RootProperty Name="Style" />
+      <RootProperty Name="Content" />
+      <RootProperty Name="Padding" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Background" />
+      <RootProperty Name="FontWeight" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Visibility" />
+      <RootProperty Name="DataContext" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="FontSize" />
+      <RootProperty Name="VerticalContentAlignment" />
+      <RootProperty Name="RequestedTheme" />
+      <RootProperty Name="FocusVisualMargin" />
+      <RootProperty Name="FocusVisualPrimaryBrush" />
+      <RootProperty Name="FocusVisualSecondaryBrush" />
+      <RootProperty Name="IsFocusEngagementEnabled" />
+      <RootProperty Name="UseSystemFocusVisuals" />
+      <RootProperty Name="Flyout" />
+      <RootProperty Name="Command" />
+      <RootProperty Name="Foreground" />
+      <RootProperty Name="FontFamily" />
+      <RootProperty Name="IsEnabled" />
+      <RootProperty Name="CommandParameter" />
+      <RootEvent Name="Click" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.Border">
+      <RootProperty Name="Background" />
+      <RootProperty Name="CornerRadius" />
+      <RootProperty Name="Padding" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Child" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Visibility" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Clip" />
+      <RootProperty Name="BorderBrush" />
+      <RootProperty Name="BorderThickness" />
+      <RootProperty Name="Style" />
+      <RootProperty Name="Opacity" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.PivotItem">
+      <RootProperty Name="Header" />
+      <RootProperty Name="Content" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.CheckBox">
+      <RootProperty Name="IsChecked" />
+      <RootProperty Name="Content" />
+      <RootProperty Name="Margin" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.RadioButton">
+      <RootProperty Name="GroupName" />
+      <RootProperty Name="Content" />
+      <RootProperty Name="IsChecked" />
+      <RootProperty Name="FontWeight" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.TextBox">
+      <RootProperty Name="Header" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Opacity" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="AcceptsReturn" />
+      <RootProperty Name="TextWrapping" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.ComboBox">
+      <RootProperty Name="Header" />
+      <RootProperty Name="Width" />
+    </RootType>
+    <RootType FullName="AwareThings.WinIoTCoreServices.Core.Dialogs.DeviceSettingsDialog" />
+    <RootType FullName="Windows.UI.Xaml.Media.AcrylicBrush">
+      <RootProperty Name="TintColor" />
+      <RootProperty Name="TintOpacity" />
+      <RootProperty Name="Opacity" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.ColumnDefinition">
+      <RootProperty Name="Width" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.ListView">
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="SelectionMode" />
+      <RootProperty Name="ItemContainerStyle" />
+      <RootProperty Name="ItemTemplate" />
+      <RootProperty Name="Padding" />
+      <RootProperty Name="IsItemClickEnabled" />
+      <RootEvent Name="ItemClick" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Data.Binding">
+      <RootProperty Name="ElementName" />
+      <RootProperty Name="Path" />
+      <RootProperty Name="Converter" />
+      <RootProperty Name="Mode" />
+      <RootProperty Name="FallbackValue" />
+      <RootProperty Name="Source" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.ListViewItem" />
+    <RootType FullName="Windows.UI.Xaml.Controls.Control">
+      <RootProperty Name="HorizontalContentAlignment" />
+      <RootProperty Name="Padding" />
+      <RootProperty Name="Background" />
+      <RootProperty Name="Foreground" />
+      <RootProperty Name="BorderBrush" />
+      <RootProperty Name="BorderThickness" />
+      <RootProperty Name="FontFamily" />
+      <RootProperty Name="FontWeight" />
+      <RootProperty Name="FontSize" />
+      <RootProperty Name="UseSystemFocusVisuals" />
+      <RootProperty Name="Template" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Setter">
+      <RootProperty Name="Property" />
+      <RootProperty Name="Value" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.DataTemplate">
+      <RootProperty Name="Template" />
+    </RootType>
+    <RootType FullName="AwareThings.WinIoTCoreServices.Core.Dialogs.OnlineSkinCatalogDialog" />
+    <RootType FullName="Windows.UI.Xaml.FrameworkElement">
+      <RootProperty Name="Margin" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="VerticalAlignment" />
+    </RootType>
+    <RootType FullName="AwareThings.WinIoTCoreServices.Core.Common.ImageExtensions">
+      <RootMethod Name="GetImageUrl" />
+      <RootMethod Name="SetImageUrl" />
+    </RootType>
+    <RootType FullName="AwareThings.WinIoTCoreServices.Core.Dialogs.SelectSkinDialog" />
+    <RootType FullName="Windows.UI.Xaml.ResourceDictionary">
+      <RootProperty Name="MergedDictionaries" />
+      <RootProperty Name="Source" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.ScrollViewer">
+      <RootProperty Name="VerticalScrollBarVisibility" />
+      <RootProperty Name="VerticalScrollMode" />
+      <RootProperty Name="HorizontalScrollMode" />
+      <RootProperty Name="HorizontalScrollBarVisibility" />
+      <RootProperty Name="Content" />
+      <RootProperty Name="Padding" />
+    </RootType>
+    <RootType FullName="AwareThings.WinIoTCoreServices.Core.Settings.Controls.TextboxSettingsPanelControl" />
+    <RootType FullName="AwareThings.WinIoTCoreServices.Core.Dialogs.SkinSettingsDialog" />
+    <RootType FullName="Windows.UI.Xaml.Media.RectangleGeometry">
+      <RootProperty Name="Rect" />
+    </RootType>
+    <RootType FullName="AwareThings.WinIoTCoreServices.Core.Panels.Controls.PercentageRingControl">
+      <RootProperty Name="MinAngle" />
+      <RootProperty Name="MaxAngle" />
+      <RootProperty Name="ScaleEndCap" />
+      <RootProperty Name="ScaleStartCap" />
+      <RootProperty Name="ScaleWidth" />
+      <RootProperty Name="ScaleBrush" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="RenderTransformOrigin" />
+    </RootType>
+    <RootType FullName="Microsoft.Toolkit.Uwp.UI.Controls.RadialGauge">
+      <RootProperty Name="NeedleLength" />
+      <RootProperty Name="TickWidth" />
+      <RootProperty Name="IsInteractive" />
+      <RootProperty Name="MinAngle" />
+      <RootProperty Name="MaxAngle" />
+      <RootProperty Name="TickLength" />
+      <RootProperty Name="ScaleTickWidth" />
+      <RootProperty Name="TickSpacing" />
+      <RootProperty Name="NeedleBrush" />
+      <RootProperty Name="Minimum" />
+      <RootProperty Name="Maximum" />
+      <RootProperty Name="Value" />
+      <RootProperty Name="TrailBrush" />
+      <RootProperty Name="TickBrush" />
+      <RootProperty Name="ScaleTickBrush" />
+      <RootProperty Name="ScaleBrush" />
+      <RootProperty Name="Foreground" />
+      <RootProperty Name="RequestedTheme" />
+    </RootType>
+    <RootType FullName="AwareThings.WinIoTCoreServices.Core.Panels.Controls.GaugeSensorControl">
+      <RootProperty Name="Value" />
+      <RootProperty Name="Symbol" />
+      <RootProperty Name="DoubleSettings" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="IsRunning" />
+      <RootProperty Name="AlertRangeColor" />
+      <RootProperty Name="RangeColor" />
+      <RootProperty Name="IdealRangeColor" />
+      <RootProperty Name="NeedleColor" />
+      <RootProperty Name="TickColor" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="IsNeedleMode" />
+      <RootProperty Name="IsCompressedMode" />
+    </RootType>
+    <RootType FullName="AwareThings.WinIoTCoreServices.Core.Panels.Controls.SensorSpeedControl">
+      <RootProperty Name="Value" />
+      <RootProperty Name="SpeedSettings" />
+      <RootProperty Name="PanelId" />
+      <RootProperty Name="Margin" />
+    </RootType>
+    <RootType FullName="AwareThings.WinIoTCoreServices.Core.Panels.Controls.SpeedAlertDialogControl" />
+    <RootType FullName="Windows.UI.Xaml.Controls.ToggleSwitch">
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="OnContent" />
+      <RootProperty Name="OffContent" />
+    </RootType>
+    <RootType FullName="AwareThings.WinIoTCoreServices.Core.Settings.Controls.ToggleSettingsPanelControl" />
+    <RootType FullName="Windows.UI.Xaml.Controls.Panel">
+      <RootProperty Name="Background" />
+    </RootType>
+    <RootType FullName="AwareThings.WinIoTCoreServices.Core.Common.VisibilityConverter" />
+    <RootType FullName="AwareThings.WinIoTCoreServices.Core.Common.InverseVisibilityConverter" />
+    <RootType FullName="System.Double" />
+    <RootType FullName="Windows.UI.Xaml.Thickness" />
+    <RootType FullName="Windows.UI.Xaml.Controls.ControlTemplate">
+      <RootProperty Name="TargetType" />
+      <RootProperty Name="Template" />
+    </RootType>
+    <RootType FullName="Microsoft.Xaml.DirectUI.ProxyTypes.TemplateBindingExtension" />
+    <RootType FullName="Windows.UI.Xaml.VisualStateManager">
+      <RootMethod Name="GetVisualStateGroups" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.VisualStateGroup">
+      <RootProperty Name="States" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.VisualState">
+      <RootProperty Name="Storyboard" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Media.Animation.ObjectAnimationUsingKeyFrames">
+      <RootProperty Name="KeyFrames" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Media.Animation.DiscreteObjectKeyFrame">
+      <RootProperty Name="KeyTime" />
+      <RootProperty Name="Value" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Media.Animation.PointerDownThemeAnimation" />
+    <RootType FullName="Windows.UI.Xaml.Media.Animation.PointerUpThemeAnimation" />
+    <RootType FullName="Windows.UI.Xaml.Controls.ContentPresenter">
+      <RootProperty Name="BorderBrush" />
+      <RootProperty Name="BorderThickness" />
+      <RootProperty Name="ContentTemplate" />
+      <RootProperty Name="ContentTransitions" />
+      <RootProperty Name="Content" />
+      <RootProperty Name="HorizontalContentAlignment" />
+      <RootProperty Name="Padding" />
+      <RootProperty Name="VerticalContentAlignment" />
+      <RootProperty Name="Visibility" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Automation.AutomationProperties">
+      <RootMethod Name="GetAccessibilityView" />
+      <RootMethod Name="SetAccessibilityView" />
+    </RootType>
+    <RootType FullName="Microsoft.Xaml.DirectUI.ProxyTypes.ThemeResourceExtension" />
+    <RootType FullName="AwareThings.WinIoTCoreServices.Core.Controls.FlexibleLayoutContentTemplateSelector">
+      <RootProperty Name="ConnectionStatusPanelTemplate" />
+      <RootProperty Name="FlightRingPanelTemplate" />
+      <RootProperty Name="GaugeSensorPanelTemplate" />
+      <RootProperty Name="LogItemsPanelTemplate" />
+      <RootProperty Name="MachinePanelTemplate" />
+      <RootProperty Name="SpeedControlPanelTemplate" />
+      <RootProperty Name="VibrationSensorPanelTemplate" />
+      <RootProperty Name="DeviceInformationPanelTemplate" />
+      <RootProperty Name="SingleValueSensorPanelTemplate" />
+      <RootProperty Name="MultiValueSensorPanelTemplate" />
+      <RootProperty Name="ChartSensorPanelTemplate" />
+      <RootProperty Name="SensorStatusPanelTemplate" />
+      <RootProperty Name="CustomContentPanelTemplate" />
+      <RootProperty Name="ImagePanelTemplate" />
+      <RootProperty Name="MarkdownReaderPanelTemplate" />
+      <RootProperty Name="ProvisioningInfoPanelTemplate" />
+      <RootProperty Name="ProvisioningLogPanelTemplate" />
+      <RootProperty Name="ProvisioningProgressPanelTemplate" />
+      <RootProperty Name="ProvisioningActionPanel" />
+      <RootProperty Name="ProvisioningDetailsPanel" />
+      <RootProperty Name="SliderSensorPanelTemplate" />
+    </RootType>
+    <RootType FullName="AwareThings.WinIoTCoreServices.Core.Controls.FlexibleHeaderTemplateSelector">
+      <RootProperty Name="DefaultTemplate" />
+      <RootProperty Name="DefaultTemplate1" />
+      <RootProperty Name="DefaultTemplate2" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.ContentControl">
+      <RootProperty Name="Visibility" />
+      <RootProperty Name="ContentTemplate" />
+      <RootProperty Name="Content" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="HorizontalContentAlignment" />
+      <RootProperty Name="MinWidth" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="VerticalAlignment" />
+    </RootType>
+    <RootType FullName="Microsoft.Toolkit.Uwp.UI.Controls.MarkdownTextBlock">
+      <RootProperty Name="Text" />
+      <RootProperty Name="UriPrefix" />
+      <RootProperty Name="Background" />
+      <RootProperty Name="RequestedTheme" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.ItemsControl">
+      <RootProperty Name="ItemsSource" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="ItemTemplate" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.GridView">
+      <RootProperty Name="ItemsSource" />
+      <RootProperty Name="ItemTemplate" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="VerticalAlignment" />
+    </RootType>
+    <RootType FullName="AwareThings.WinIoTCoreServices.Core.Panels.Controls.SimpleGraphControl">
+      <RootProperty Name="ChartValues" />
+      <RootProperty Name="ChartSettings" />
+      <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="GraphBarBrush" />
+      <RootProperty Name="GraphFillBrush" />
+      <RootProperty Name="GraphLineBrush" />
+    </RootType>
+    <RootType FullName="AwareThings.WinIoTCoreServices.Core.Panels.Controls.SparkLineControl">
+      <RootProperty Name="Range" />
+      <RootProperty Name="PointsToPlot" />
+      <RootProperty Name="IsFluctuatingValues" />
+      <RootProperty Name="LineBrush" />
+      <RootProperty Name="CanvasBrush" />
+      <RootProperty Name="LineThickness" />
+      <RootProperty Name="LegendWidth" />
+      <RootProperty Name="LegendFontBrush" />
+      <RootProperty Name="LegendFontSize" />
+      <RootProperty Name="VibrationLineBrush" />
+      <RootProperty Name="SafeRangeBrush" />
+      <RootProperty Name="PanelId" />
+      <RootProperty Name="Margin" />
+    </RootType>
+    <RootType FullName="AwareThings.WinIoTCoreServices.Core.Panels.Controls.SliderSensorControl">
+      <RootProperty Name="Value" />
+      <RootProperty Name="Settings" />
+      <RootProperty Name="Margin" />
+      <RootProperty Name="Height" />
+      <RootProperty Name="VerticalAlignment" />
+      <RootProperty Name="RangeColor" />
+      <RootProperty Name="GaugeColor" />
+      <RootProperty Name="IdealColor" />
+    </RootType>
+    <RootType FullName="Windows.UI.Color" />
+    <RootType FullName="Windows.UI.Xaml.Media.SolidColorBrush">
+      <RootProperty Name="Color" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.ElementTheme" />
+    <RootType FullName="Windows.UI.Xaml.Media.FontFamily" />
+    <RootType FullName="Windows.UI.Xaml.Controls.Page">
+      <RootProperty Name="Background" />
+      <RootProperty Name="RequestedTheme" />
+      <RootProperty Name="Content" />
+      <RootProperty Name="DataContext" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Media.LinearGradientBrush">
+      <RootProperty Name="StartPoint" />
+      <RootProperty Name="EndPoint" />
+      <RootProperty Name="GradientStops" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Media.GradientStopCollection" />
+    <RootType FullName="Windows.UI.Xaml.Media.GradientStop">
+      <RootProperty Name="Color" />
+      <RootProperty Name="Offset" />
+    </RootType>
+    <RootType FullName="AwareThings.WinIoTCoreServices.Core.Views.FirstRunPage" />
+    <RootType FullName="AwareThings.WinIoTCoreServices.Core.Controls.FlexibleLayoutGridControl">
+      <RootProperty Name="Padding" />
+      <RootProperty Name="Background" />
+      <RootProperty Name="SourceLayout" />
+    </RootType>
+    <RootType FullName="Microsoft.Xaml.Interactivity.Interaction">
+      <RootMethod Name="GetBehaviors" />
+      <RootMethod Name="SetBehaviors" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.Flyout">
+      <RootProperty Name="Content" />
+    </RootType>
+    <RootType FullName="Microsoft.Xaml.Interactions.Core.EventTriggerBehavior">
+      <RootProperty Name="EventName" />
+      <RootProperty Name="Actions" />
+    </RootType>
+    <RootType FullName="Microsoft.Xaml.Interactions.Core.InvokeCommandAction">
+      <RootProperty Name="Command" />
+    </RootType>
+    <RootType FullName="AwareThings.WinIoTCoreServices.Core.Views.MainPage" />
+  </Roots.RootTypes>
+</Roots>

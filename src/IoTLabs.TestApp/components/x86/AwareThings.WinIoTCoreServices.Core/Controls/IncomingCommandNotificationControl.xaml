@@ -1,0 +1,25 @@
+﻿<UserControl
+    x:Class="AwareThings.WinIoTCoreServices.Core.Controls.IncomingCommandNotificationControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+     mc:Ignorable="d"
+    d:DesignHeight="240"
+    d:DesignWidth="1000"
+    >
+
+    <Grid>
+        <Grid x:ConnectionId='2' Background="{StaticResource CyanAccentBrush}" BorderBrush="White" BorderThickness="6"                            >
+            <Ellipse Width="100" Height="100" Fill="{StaticResource DarkBlueAccentBrush}" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center" IsHitTestVisible="False"/>
+            <Path Data="M15.294634,20.381976C18.491619,20.381976 20.989631,22.98 20.989631,26.076987 20.989631,29.27401 18.391612,31.771998 15.294634,31.771998 12.197625,31.771998 9.5996384,29.174035 9.5996384,26.076987 9.5996384,22.98 12.197625,20.381976 15.294634,20.381976z M15.294634,12.989025C18.791606,12.989025 21.988622,14.386975 24.286622,16.584975 24.786621,17.084975 24.886596,17.984023 24.286622,18.484025 23.986604,18.782975 23.687623,18.883011 23.287601,18.883011 22.987613,18.883011 22.588626,18.782975 22.388614,18.484025 20.489631,16.685011 17.992628,15.586012 15.194628,15.586012 12.696647,15.586012 10.398648,16.484999 8.5006413,17.984023 7.9016432,18.484025 7.1016568,18.383988 6.6026344,17.784011 6.302647,17.385024 6.4026532,16.484999 7.0016507,15.985975 9.1996445,14.187024 12.197625,12.989025 15.294634,12.989025z M15.294634,6.0949756C20.090616,6.0949756 24.486602,7.7929751 27.983606,10.591012 28.582603,11.089975 28.682609,11.890025 28.183618,12.489024 27.8836,12.789012 27.483606,12.989025 27.18362,12.989025 26.884609,12.989025 26.58459,12.888987 26.284604,12.688975 23.287601,10.291024 19.49061,8.7919994 15.294634,8.7919994 11.59762,8.7919994 8.2006535,9.8909994 5.4036316,11.890025 4.803657,12.289012 3.9046416,12.188975 3.5046481,11.589975 3.1056623,10.989999 3.2056376,10.091012 3.8046355,9.6909872 7.1016568,7.3930112 11.098628,6.0949756 15.294634,6.0949756z M15.294634,0C21.389623,-1.9651998E-07 26.984615,2.097963 31.480607,5.5949751 32.079605,6.0949756 32.17958,6.8939873 31.680589,7.4929868 31.380601,7.7929751 31.080585,7.9929873 30.680591,7.9929873 30.38161,7.9929873 30.081594,7.8930117 29.881612,7.6929995 25.885618,4.5960117 20.889625,2.6980001 15.39464,2.6980001 10.498623,2.6980001 5.9026541,4.1959873 2.2066466,6.7940117 1.5066664,7.1939756 0.70765662,6.9940244 0.20765736,6.3939873 -0.19132849,5.7949878 0.007645742,4.9959756 0.60765075,4.5960117 4.803657,1.6989758 9.8996252,-1.9651998E-07 15.294634,0z" 
+                  Stretch="Uniform" Fill="White" Width="60" RenderTransformOrigin="0.5,0.5"
+                 HorizontalAlignment="Left" Margin="42,0,0,0" VerticalAlignment="Center" IsHitTestVisible="False"/>
+            <StackPanel HorizontalAlignment="Stretch" Margin="150,5,0,0" Orientation="Vertical" VerticalAlignment="Center" IsHitTestVisible="False">
+                <TextBlock x:ConnectionId='3' x:Name="txtTitle" Style="{StaticResource DetailsHeaderTextBlockStyle}" Text="Remote Command Received" FontSize="46" Foreground="Black" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Left" TextLineBounds="TrimToCapHeight"/>
+                <TextBlock x:ConnectionId='4' x:Name="txtMessage" Style="{StaticResource SubtitleTextBlockStyle}" Text="You are now ready to proceed to the next step." FontSize="32" Foreground="Black" FontWeight="SemiLight" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="2,5,0,0" TextLineBounds="TrimToCapHeight"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>
+

@@ -15,7 +15,6 @@ When starting the lab, you should have these things open on your development mac
 
 ### 1.1 - Capture training images
 
-1. Plug the USB camera into your development PC.
 1. Using the Camera app on your development PC, take at least 5 pictures each of your objects. 
     * Store these pictures on your computer. 
     * Organize all the photos for each object into a folder named for this object - this will make them easier to upload.
@@ -53,7 +52,7 @@ When starting the lab, you should have these things open on your development mac
 1. Click on the Training button (green one in the top right).
 1. Select the Quick Training option.
 1. Click Train.
- 1. Example of testing your model.
+4. Example of training your model.
    ![Train model](./media/lab05/train-your-model.jpg)
 
 ### 1.5 - Test your model
@@ -78,7 +77,7 @@ When starting the lab, you should have these things open on your development mac
 
 ### 2.1 - Get your model file
 
-Copy the CustomVision.onnx model file from your downloads directory into the lab directory "C:\Labs\Content\src\IoTLabs.CustomVision", overwrite the existing onnx file.
+1. Copy the CustomVision.onnx model file from your downloads directory into the lab directory "C:\Labs\Content\src\IoTLabs.CustomVision", overwrite the existing onnx file.
 
 ### 2.2 - Build & Test the sample
 
@@ -90,7 +89,7 @@ dotnet restore -r win-x64
 dotnet publish -c Release -o ./release -r win-x64 --self-contained true
 ```
 
-Point the camera at one of your objects, still connected to your development PC.
+2. Hold you objects up in front of the camera, still connected to your development PC.
 
 Run the sample locally to classify the object. This will test that the app is running correctly locally. We specify "Front" for this model of camera. Here we can see that a "Mug" has been recognized.
 

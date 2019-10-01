@@ -54,3 +54,30 @@ IoT Hub is the core of all IoT projects in Azure. Click on your IoT Hub resource
 |IoT Edge|This is an important component for the labs further on. This allows you to manage your IoT Edge devices in a similar fashion to the IoT Devices.|
 |Message Routing|Core to IoT Hub is a messaging platform - the ability to send messages from the Device-to-Cloud and Cloud-to-Device. Message routes allow you to forward device messages to other Azure services. There is a route configured in this solution that allows the telemetry to flow through to Time Series Insights.
 
+### 2.2 - Device Provisioning Service (DPS)
+
+DPS allows devices to be embedded with an organization specific key, that allows them to register against a specific IoT Hub on first boot. This enables device builders to easily manufacture a fleet of devices and have them register against centrally managed IoT Hubs.
+
+![](./media/3_5.png)
+
+Click on 'Linked IoT Hubs' to see that the IoT Hub viewed earlier has been linked to this DPS instance. We will use this service in a later lab.
+
+### 2.3 - Stream Analytics (Edge)
+
+Stream Analytics is a service for running queries and processing streams of data in real-time. This service is often used to aggregate, transform or forward data to multiple destinations based on certain conditions. 
+
+![](./media/3_6.png)
+
+The Edge version of Stream Analytics allows us to run this service inside a container on our Edge Device. 
+
+
+## 3 - Validate Common Resource Configuration
+As part of this lab a set of common resources has been provisioned for all lab users to share. Return to your list of Resource Groups and click on the 'common' resource group.
+
+![](./media/3_7.png)
+
+The resources here allow data to flow from all the separate lab IoT Hub instances into a single stream of IoT data which is then consumed and displayed through Time Series Insights.
+
+Click on Time Series Insights and then 'Go To Environment' to view the user interface. The data can then be displayed here. You will return to this page to view the results of future lab exercises.
+
+![](./media/3_8.png)

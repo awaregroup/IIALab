@@ -29,6 +29,7 @@ You can also visualize an ARM template to see the components that will be create
 2. Click on the resource group that corresponds to your username
 ![](./media/3_3.png)
 3. Validate that you can see the following types of resources:<br/>
+* Container Registry
 * Device Provisioning Service
 * IoT Hub
 * Storage Account
@@ -60,7 +61,11 @@ DPS allows devices to be embedded with an organization specific key, that allows
 
 ![](./media/3_5.png)
 
-Click on 'Linked IoT Hubs' to see that the IoT Hub viewed earlier has been linked to this DPS instance. We will use this service in a later lab.
+|Component Name    |Notes|
+|--------|-----|
+|Linked IoT Hubs|DPS has the ability to enrol a device in a specific IoT Hub. You'll notice that the deployed template has connected DPS to the existing IoT Hub.|
+|Manage Enrollments|Devices that have enrolled show up in this list. You can check this area again in a future lab.|
+
 
 ### 2.3 - Stream Analytics (Edge)
 
@@ -68,7 +73,23 @@ Stream Analytics is a service for running queries and processing streams of data
 
 ![](./media/3_6.png)
 
+|Component Name    |Notes|
+|--------|-----|
+|Query|Stream analytics allows you to write a query that is applied to the data streaming through. In a future lab we will modify this query.|
+
 The Edge version of Stream Analytics allows us to run this service inside a container on our Edge Device. 
+
+### 2.4 - Container Registry
+
+Container Registry is a private docker container registry that you can push containers to. When combined with IoT Edge, you can store the containers to be used by your edge devices. Your proprietary code can stay protected in your own container registry rather than a public registry.
+
+![](./media/3_9.png)
+
+|Component Name    |Notes|
+|--------|-----|
+|Repositories|Contains all the repositories with containers and tags currently pushed to the Container Registry.|
+|Access Keys|Contains the security keys used for connecting to your Container Registry. We'll return here later.|
+
 
 
 ## 3 - Validate Common Resource Configuration
@@ -77,6 +98,11 @@ As part of this lab a set of common resources has been provisioned for all lab u
 ![](./media/3_7.png)
 
 The resources here allow data to flow from all the separate lab IoT Hub instances into a single stream of IoT data which is then consumed and displayed through Time Series Insights.
+
+
+
+
+### 2.5 - Time Series Insights
 
 Click on Time Series Insights and then 'Go To Environment' to view the user interface. The data can then be displayed here. You will return to this page to view the results of future lab exercises.
 

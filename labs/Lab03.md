@@ -69,7 +69,7 @@ DPS allows devices to be embedded with an organization specific key, that allows
 
 ### 2.3 - Stream Analytics (Edge)
 
-Stream Analytics is a service for running queries and processing streams of data in real-time. This service is often used to aggregate, transform or forward data to multiple destinations based on certain conditions. 
+Stream Analytics is a fully managed PaaS offering on Azure designed to analyze and process high volumes of fast streaming data from multiple sources simultaenously. It is available both in Cloud and at the Edge.
 
 ![](./media/3_6.png)
 

@@ -38,7 +38,7 @@ You can also visualize an ARM template to see the components that will be create
 These components represent the IoT platform your device connects to.
 
 
-## 2 - Validate Resource Configuration
+## 2 - Explore Resources
 
 ### 2.1 - IoT Hub
 
@@ -92,17 +92,23 @@ Container Registry is a private docker container registry that you can push cont
 
 
 
-## 3 - Validate Common Resource Configuration
-As part of this lab a set of common resources has been provisioned for all lab users to share. Return to your list of Resource Groups and click on the 'common' resource group.
+## 3 - Explore Common Resources
+As part of this lab a set of common resources have been provisioned for all lab users to share. Return to your list of Resource Groups and click on the 'common' resource group.
 
 ![](./media/3_7.png)
 
 The resources here allow data to flow from all the separate lab IoT Hub instances into a single stream of IoT data which is then consumed and displayed through Time Series Insights.
 
+### 3.1 - Cognitive Services
+
+The Cognitive Services are a collection of pre-trained ML models that can be built into your own applications and services easily. Custom Vision is one of these services.
+
+Custom Vision allows you to leverage the compute infrastructure in Azure to train your own Computer Vision model quickly and easily.
 
 
 
-### 2.5 - Time Series Insights
+
+### 3.5 - Time Series Insights
 
 Click on Time Series Insights and then 'Go To Environment' to view the user interface. The data can then be displayed here. You will return to this page to view the results of future lab exercises.
 

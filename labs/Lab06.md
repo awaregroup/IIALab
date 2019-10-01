@@ -16,7 +16,8 @@ Enable-WindowsOptionalFeature -online -FeatureName Client-EmbeddedShellLauncher 
 ```powershell
 #sets up shell launcher
 $ShellLauncherClass = [wmiclass]"\\localhost\root\standardcimv2\embedded:WESL_UserSetting"
-$ShellLauncherClass.SetDefaultShell("notepad.exe", 1)
+
+#gets the SIDs
 $Admins_SID = "S-1-5-32-544"
 $kiosk_SID = (New-Object System.Security.Principal.NTAccount("Kiosk")).Translate([System.Security.Principal.SecurityIdentifier]).value
 
@@ -39,12 +40,13 @@ Start-Process powershell -Verb runAs
 3. In the new Admin PowerShell session run the following commands to disable the Shell Launcher:
 ```powershell
 #clears the custom shell settings
-$userSettings = @{"namespace"="root\standardcimv2\embedded"}
-Get-WMIObject -class WESL_UserSetting $userSettings |
+$CommonArgs = @{"namespace"="root\standardcimv2\embedded"}
+Get-WMIObject -class WESL_UserSetting @CommonArgs |
 foreach {
     $_.Delete() | Out-Null;
     Write-Host "Deleted $_.Id"
 }
+
 
 #disables shell launcher
 $ShellLauncherClass = [wmiclass]"\\localhost\root\standardcimv2\embedded:WESL_UserSetting"
@@ -61,7 +63,7 @@ if($ShellLauncherClass.IsEnabled().Enabled)
 else 
 {
 	Write-Host "Shell Launcher has been disabled..."
-	Write-Host "Restarting Computer now..."
+	Write-Host "Restarting Computer in 3 seconds..."
 	Start-Sleep 3
 	Restart-Computer -force
 }
@@ -69,7 +71,6 @@ else
 
 ### Warning
 If your shell application requires administrator rights and needs to be elevated, and User Account Control (UAC) is present on your device, you must disable UAC in order for Shell Launcher to launch the shell application.
-Shell Launcher user rights
 A custom shell is launched with the same level of user rights as the account that is signed in. This means that a user with administrator rights can perform any system action that requires administrator rights, including launching other applications with administrator rights, while a user without administrator rights cannot.
 
 ## Option 2 - Using Assigned Access Provisioning Package
@@ -86,9 +87,12 @@ New-LocalUser "Kiosk"
 Add-ProvisiongPackage "C:\Labs\Content\src\IoTLabs.AssignedAccess\lab06.ppkg" -force
 ```
 2. Restart your computer
+3. Your device should auto login as the locked down Kiosk user
 
 ### Removing the provisioning package 
-1. Open PowerShell as Administrator and run the following command:
+1. Go to the lock screen by pressing **ctrl + alt + delete**
+2. Log in with your Admin account
+2. Open PowerShell as Administrator and run the following command:
 ```powershell
 $packageId = (Get-ProvisioningPackage | Where-Object {$_.packageName -eq 'lab_06' }).PackageID.Guid
 
@@ -97,6 +101,4 @@ if($packageId)
 	Write-Host "Removing Lab_06 provisioning package..."
 	Remove-ProvisioningPackage $packageId
 }
-
-
 ```

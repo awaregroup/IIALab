@@ -22,92 +22,94 @@ You can also visualize an ARM template to see the components that will be create
 
 3. Wait for the provisioning process to complete.
 
-### 1.2 Install Example OEM Packages
-Most required packages will automatically be imported to the workspace, but we can include sample packages by running the following command
-```Import-IoTOEMPackage *```
+### 1.1 - Validate Resources
 
-### 1.3 - Install Board Support Package (BSP)
+1. On the left hand icon menu, click 'Resource Groups'
+![](./media/3_2.png)
+2. Click on the resource group that corresponds to your username
+![](./media/3_3.png)
+3. Validate that you can see the following types of resources:<br/>
+* Container Registry
+* Device Provisioning Service
+* IoT Hub
+* Storage Account
+* Stream Analytics Job
 
-Next include the board support package (BSP) provided by the component/silicon vendor containing drivers compatable with Windows IoT Core.
-
-Run the following PowerShell commands in the console from the previous step to install the BSP for the Dragonboard 410c.
-
-```
-$bspName = "QCDB410C"
-Import-IoTBSP -BSPName $bspName -Source "C:\labs\tools\Dragonboard\db410c_bsp.zip"
-```
-
-### 1.4 - Create product
-
-A product is a specific configuration of a device based upon a BSP that contains what custom applications and customisations are intended to be deployed to a range of devices.
-
-```
-$productName = "Lab03Product"
-Add-IoTProduct -ProductName $productName -BSPName $bspName 
-```
-You will be asked for further SMBIOS information such as Manufacturer name, Product Family, SKU, BaseboardManufacturer and BaseboardProduct, enter the example values as below.
-
-- System OEM Name: ContosoElectronics
-- System Family Name: SensorArray
-- System SKU Number: BLINK-V1
-- Baseboard Manufacturer Qualcomm
-- Baseboard Product: Dragonboard 410c
-
-### 1.5 - Add Universal Windows App
-
-1. Change the path to the full path of the appx file you generated in lab01 (including the file name), then run these powershell scripts to bundle the application with your image.
-
-**Note: Do not change the $configName or the $appName. The following scripts assume the application name is fixed and the configuration environment is set to be the test environment.**
-
-```
-$appName = "Appx.DragonboardTest"
-$configName = "Test"
-
-Add-IoTAppxPackage -AppxFile "[full-path-to-appx-file-from-lab01]" -StartupType "fga" -OutputName $appName
-New-IoTCabPackage -PkgFile $appName
-Add-IoTProductFeature -Product $productName -Config $configName -FeatureID "APPX_DRAGONBOARDTEST" -OEM
-```
-
-### 1.6 - Compile FFU image
-
-By running the previous commands we have created packages that describe what content should be included in this product. Next we process these packages into cabinet files for inclusion in the final image.
-```
-New-IoTCabPackage -PkgFile "All"
-```
-
-With all the cab packages compiled the FFU image can be created by running the following command, this can take up to ten minutes to complete.
-
-```
-New-IoTFFUImage -Product $productName -Config $configName
-```
+These components represent the IoT platform your device connects to.
 
 
-## 2 - Install custom image
+## 2 - Explore Resources
 
-### 2.2 - Installing custom image
+### 2.1 - IoT Hub
 
-1. Connect Dragonboard to host PC with a Micro-USB cable
-1. Hold down the 'Volume Up (+)' button while plugging in the power adapter into the Dragonboard
-1. Open IoT Dashboard and click 'Setup a new device'
-1. Change the device type to 'Qualcomm \[Dragonboard 410c\]' and set the OS Build to 'Custom'
-1. Browse to the custom FFU file generated in the previous steps
-1. Accept the license agreement and click 'Install'
+IoT Hub is the core of all IoT projects in Azure. Click on your IoT Hub resource and explore the different pages. 
 
-![IoT Dashboard](./media/2_iotdashboard.png)
 
-### 2.3 - Validating your install
+![](./media/3_4.png)
 
-1. Once the Dragonboard has completed installing, a line entry will show in the IoT Dashboard as above
-2. Right click on your device and select 'Device Portal'
-3. In your browser enter the default username and password:
 
-|Name    |Value|
+|Component Name    |Notes|
 |--------|-----|
-|Username|Administrator|
-|Password|p@ssw0rd|
+|Access Policies|IoT Hub has a specific focus on security and this is one of the areas to configure access to the management of the IoT Hub. |
+|IoT Devices|This device list allows you to see all the devices that are currently registered against the IoT hub and manage them. You can also check the metadata for each device including their Device Twin.|
+|IoT Edge|This is an important component for the labs further on. This allows you to manage your IoT Edge devices in a similar fashion to the IoT Devices.|
+|Message Routing|Core to IoT Hub is a messaging platform - the ability to send messages from the Device-to-Cloud and Cloud-to-Device. Message routes allow you to forward device messages to other Azure services. There is a route configured in this solution that allows the telemetry to flow through to Time Series Insights.
 
-![Device Portal](./media/1_deviceportal1.png)
+### 2.2 - Device Provisioning Service (DPS)
 
-4. Enter a name in the 'Change your device name' text box and click 'Save'. Your device should reboot and display the new name 
+DPS allows devices to be embedded with an organization specific key, that allows them to register against a specific IoT Hub on first boot. This enables device builders to easily manufacture a fleet of devices and have them register against centrally managed IoT Hubs.
 
-5. Check the sensors and the bundled application works as expected.
+![](./media/3_5.png)
+
+|Component Name    |Notes|
+|--------|-----|
+|Linked IoT Hubs|DPS has the ability to enrol a device in a specific IoT Hub. You'll notice that the deployed template has connected DPS to the existing IoT Hub.|
+|Manage Enrollments|Devices that have enrolled show up in this list. You can check this area again in a future lab.|
+
+
+### 2.3 - Stream Analytics (Edge)
+
+Stream Analytics is a fully managed PaaS offering on Azure, designed to analyze and process high volumes of fast streaming data from multiple sources simultaneously. It is available both in the Cloud and at the Edge.
+
+![](./media/3_6.png)
+
+|Component Name    |Notes|
+|--------|-----|
+|Query|Stream analytics allows you to write a query that is applied to the data streaming through. In a future lab we will modify this query.|
+
+The Edge version of Stream Analytics allows us to run this service inside a container on our Edge Device. 
+
+### 2.4 - Container Registry
+
+Container Registry is a private docker container registry that you can push containers to. When combined with IoT Edge, you can store the containers to be used by your edge devices. Your proprietary code can stay protected in your own container registry rather than a public registry.
+
+![](./media/3_9.png)
+
+|Component Name    |Notes|
+|--------|-----|
+|Repositories|Contains all the repositories with containers and tags currently pushed to the Container Registry.|
+|Access Keys|Contains the security keys used for connecting to your Container Registry. We'll return here later.|
+
+
+
+## 3 - Explore Common Resources
+As part of this lab a set of common resources have been provisioned for all lab users to share. Return to your list of Resource Groups and click on the 'common' resource group.
+
+![](./media/3_7.png)
+
+The resources here allow data to flow from all the separate lab IoT Hub instances into a single stream of IoT data which is then consumed and displayed through Time Series Insights.
+
+### 3.1 - Cognitive Services
+
+The Cognitive Services are a collection of pre-trained ML models that can be built into your own applications and services easily. Custom Vision is one of these services.
+
+Custom Vision allows you to leverage the compute infrastructure in Azure to train your own Computer Vision model quickly and easily.
+
+
+
+
+### 3.5 - Time Series Insights
+
+Click on Time Series Insights and then 'Go To Environment' to view the user interface. The data can then be displayed here. You will return to this page to view the results of future lab exercises.
+
+![](./media/3_8.png)

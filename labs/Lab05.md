@@ -1,15 +1,15 @@
 # Lab 05 - Machine Learning at the Edge
 
 
-For this lab, we will use the Azure Custom Vision service to train a machine learning model for image classification. We will use that model to create a .NET application to pull frames from a connected USB camera, use Windows ML to classify the image, then send the result to Azure IoT Hub. We will deploy that application to a Windows IoT Core device using Azure IoT Edge. Finally, we will visualize the results using Time Series Insights.
+For this lab, we will use the Azure Custom Vision service to train a machine learning model for image classification. We will use that model to create a .NET Core application to pull frames from the cammera attached to your lab PC. It will then use Windows ML to classify the image, then send the result to Azure IoT Hub. We will deploy that application to a Azure IoT Edge container and deploy back to your Lab PC using Azure IoT Edge. Finally, we will visualize the results using Time Series Insights.
 
 ## Ready to go
 
 When starting the lab, you should have these things open on your development machine:
-1. These instructions
-1. Visual Studio Code
-1. [Custom Vision Portal](https://www.customvision.ai/) open in a browser tab, and log in with your Azure Subscription. Select the Directory associated with your Azure custom vision resource. 
-1. [Time Series Insights explorer](https://insights.timeseries.azure.com/) in another browser tab, also logged in
+1. These instructions.
+1. Visual Studio Code.
+1. [Custom Vision Portal](https://www.customvision.ai/) open in a browser tab, logged in.  
+1. [Time Series Insights explorer](https://insights.timeseries.azure.com/) in another browser tab, also logged in.
 
 ## 1 - Custom Vision
 

@@ -31,14 +31,16 @@ New-ItemProperty -Path $RegKey -Name DisableTaskMgr -value 1 -Force
 ```
 
 ### Disabling Shell Launcher
-1. Log in with your admin user
-2. Open PowerShell as Administrator and enter the following commands:
+1. Log in with your Admin user, a PowerShell session should automatically open.
+2. Run the following command to open an Administrator PowerShell session:
 ```powershell
 Start-Process powershell -Verb runAs
-
+```
+3. In the new Admin PowerShell session run the following commands to disable the Shell Launcher:
+```powershell
 #clears the custom shell settings
-$CommonArgs = @{"namespace"="root\standardcimv2\embedded"}
-Get-WMIObject -class WESL_UserSetting @CommonArgs |
+$userSettings = @{"namespace"="root\standardcimv2\embedded"}
+Get-WMIObject -class WESL_UserSetting $userSettings |
 foreach {
     $_.Delete() | Out-Null;
     Write-Host "Deleted $_.Id"
@@ -52,11 +54,11 @@ $ShellLauncherClass.SetEnabled($FALSE)
 $RegKey ="HKLM:\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System"
 New-ItemProperty -Path $RegKey -Name DisableTaskMgr -value 0 -Force 
 
-If($ShellLauncherClass.IsEnabled().Enabled)
+if($ShellLauncherClass.IsEnabled().Enabled)
 {
 	Write-Warning("Shell Launcher is still Enabled...")
 }
-Else 
+else 
 {
 	Write-Host "Shell Launcher has been disabled..."
 	Write-Host "Restarting Computer now..."
@@ -81,6 +83,20 @@ New-LocalUser "Kiosk"
 ### Install the provisioning package 
 1. Open PowerShell as Administrator and run the following command:
 ```powershell
-Add-ProvisiongPackage "C:\Labs\Content\src\IoTLabs.AssignedAccess\lab06.ppkg"
+Add-ProvisiongPackage "C:\Labs\Content\src\IoTLabs.AssignedAccess\lab06.ppkg" -force
 ```
 2. Restart your computer
+
+### Removing the provisioning package 
+1. Open PowerShell as Administrator and run the following command:
+```powershell
+$packageId = (Get-ProvisioningPackage | Where-Object {$_.packageName -eq 'lab_06' }).PackageID.Guid
+
+if($packageId)
+{
+	Write-Host "Removing Lab_06 provisioning package..."
+	Remove-ProvisioningPackage $packageId
+}
+
+
+```

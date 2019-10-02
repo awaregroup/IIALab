@@ -222,3 +222,9 @@ GROUP BY TumblingWindow(second,15)
 }
 ```
 8. Click **Next**, then **Submit**
+
+
+
+### 5.4 - Enable IoT Hub Routes
+
+TODO: fill in.

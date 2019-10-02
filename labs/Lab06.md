@@ -15,7 +15,7 @@
 6. Leave the settings as default and click **Next**\
 ![](./media/lab06/cert-protection.jpg)
 7. Select **Place all certificates in the following store**, then click **Browse...**\
-![](./media/lab06/store-select.jpg)
+![](./media/lab06/place-cert.jpg)![](./media/lab06/store-select.jpg)
 8. Select **Trusted Root Certification Authorities** and click **Ok**\
 ![](./media/lab06/certificate-installation.jpg)
 9. Click **Next**, then click **Finish**\

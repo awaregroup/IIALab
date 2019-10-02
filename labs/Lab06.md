@@ -6,12 +6,13 @@ You can use **Settings** on the local device to quickly configure one or a few d
 
 ### Build the UWP Application that we will be using for assigned access
 
-1. Open up the lab project found in `C:\Labs\content\src\IoTLabs.TestApp\IoTLabs.TestApp.sln`
-2. Ensure the Target Architecture is set to **x86** and push the green debug button labeled **Local Machine**
-   ![](./media/lab06/x86.jpg)
-3. You may be prompted to enable **Developer mode**. Select the **Developer mode** toggle when prompted
-   ![](./media/lab06/enable-developer.jpg)
-4. Ensure the application is running correctly then close out of the Application and Visual Studio
+1.	Open up the lab project found in `C:\Labs\content\src\IoTLabs.TestApp\IoTLabs.TestApp.sln`
+2.	Right click on the project **IoTLabs.TestApp (Universal Windows)** and click **Publish**, then **Create App Packages...**
+3.	Select **Sideloading**, then click **Next**
+4.	Click **Remove**, then **Select From File** and select **IoTLabs.pfx**, then click **Next**
+5.	Make sure only **x86** and **ARM** are selected then click **Create**
+6.	Wait for the publish to finish, then click on the **Output location** link
+7.	Open **IoTLabs.TestApp_1.0.2.0_Debug_Test** folder, right click on **install.ps1** and click **Run with PowerShell**
 
 ### Configure Assigned Access
 1.  Go to **Start** > **Settings** > **Accounts** > **Other users**
@@ -21,9 +22,9 @@ You can use **Settings** on the local device to quickly configure one or a few d
    ![](./media/lab06/setting-up-kiosk.jpg)
 4.  When prompted to select an Application, select **IoTLabs.TestApp**
    ![](./media/lab06/select-app.jpg)
-5.  Select **Close**.
-
-![](./media/lab06/kiosk-done.jpg)
+5.  Select **Close**
+   ![](./media/lab06/kiosk-done.jpg)
+6.  Restart the device
 
 ### Remove Assigned Access
 1. Push **Ctrl + Alt + Delete**

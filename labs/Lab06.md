@@ -1,7 +1,7 @@
 # Lab 06 - Turn your device into a locked down kiosk
 
 ## Deploy an app to use in Kiosk Mode
-There are a few steps required to prepare an application, so that it's ready to be deployed on a Kiosk device. The following instructions detail how you can use a testing certificate to deploy the example application. When deploying your own application you can follow the following guide to [create your own certificate for deployment](https://docs.microsoft.com/en-us/windows/msix/package/create-certificate-package-signing).
+There are a few steps required to prepare an application so that it's ready to be deployed on a Kiosk device. The following instructions detail how you can use a testing certificate to deploy the example application. When deploying your own application you can follow the following guide to [create your own certificate for deployment](https://docs.microsoft.com/en-us/windows/msix/package/create-certificate-package-signing).
 
 ### Install the certificate
 

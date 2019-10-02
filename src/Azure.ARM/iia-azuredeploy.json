@@ -150,7 +150,7 @@
                     "name": "Transformation",
                     "properties": {
                         "streamingUnits": 1,
-                        "query": ""
+                        "query": "SELECT * INTO EdgeOutput FROM EdgeInput"
                     }
                 },
                 "inputs": [],

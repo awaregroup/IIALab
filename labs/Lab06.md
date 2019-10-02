@@ -1,10 +1,10 @@
 # Lab 06 - Turn your device into a locked down kiosk
 
-## Common setup steps
+## Common Setup Steps
 
 ### Install the certificate
 
-1. Navigate to 'C:\Labs\content\src\IoTLabs.TestApp\IoTLabs.TestApp'
+1. Navigate to `C:\Labs\content\src\IoTLabs.TestApp\IoTLabs.TestApp`
 2. Open the file named **IoTLabs.pfx**
 3. Select **Local Machine**, then click **Next**
 4. When prompted by UAC, select **Yes**
@@ -12,7 +12,7 @@
 6. Leave the settings as default and click **Next**
 7. Select **Place all certificates in the following store**, then click **Browse...**
 8. Select **Trusted Root Certification Authorities** and click **Ok**
-9. Click Next, then click **Finish**
+9. Click **Next**, then click **Finish**
 
 ### Build the UWP Application that we will be using for assigned access
 
@@ -44,7 +44,7 @@ You can use **Settings** on the local device to quickly configure one or a few d
 1. Push **Ctrl + Alt + Delete**
 2. Switch user into your administrative account
 3. Go to **Start** > **Settings** > **Accounts** > **Other users**
-4. Select **Set up a kiosk**,
+4. Select **Set up a kiosk**
 3. Select the **Kiosk** users tile and then select **Remove kiosk**
 
 ## Option 2 - Using a Provisioning Package to set up Assigned Access

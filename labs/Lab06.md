@@ -30,7 +30,7 @@
 3.	Select **Sideloading**, then click **Next**\
 ![](./media/lab06/sideload.png)
 4.	Click **Remove**, then **Select From File** \
-![](./media/lab06/remove-cert.png)![](./media/lab06/select-cert.png)
+![](./media/lab06/remove-cert.jpg)![](./media/lab06/select-cert.png)
 5.  Select **IoTLabs.pfx**\
 ![](./media/lab06/IoTLabs-cert.jpg)
 6.  Then click **Next**\

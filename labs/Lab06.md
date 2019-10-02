@@ -6,22 +6,19 @@
 
 1. Navigate to `C:\Labs\content\src\IoTLabs.TestApp\IoTLabs.TestApp`
 2. Open the file named **IoTLabs.pfx**
-3. Select **Local Machine**, then click **Next**
-   ![](./media/lab06/import-certificate.jpg)
-4. When prompted by UAC, select **Yes**
-
+3. Select **Local Machine**, then click **Next**\
+![](./media/lab06/import-certificate.jpg)
+4. When prompted by UAC, select **Yes**\
 ![](./media/lab06/uac.jpg)
-5. Leave the settings as default and click **Next**
-   ![](./media/lab06/cert-location.jpg)
-6. Leave the settings as default and click **Next**
-   ![](./media/lab06/cert-protection.jpg)
-7. Select **Place all certificates in the following store**, then click **Browse...**
-
+5. Leave the settings as default and click **Next**\
+![](./media/lab06/cert-location.jpg)
+6. Leave the settings as default and click **Next**\
+![](./media/lab06/cert-protection.jpg)
+7. Select **Place all certificates in the following store**, then click **Browse...**\
 ![](./media/lab06/store-select.jpg)
-8. Select **Trusted Root Certification Authorities** and click **Ok**
-   ![](./media/lab06/certificate-installation.jpg)
-9. Click **Next**, then click **Finish**
-
+8. Select **Trusted Root Certification Authorities** and click **Ok**\
+![](./media/lab06/certificate-installation.jpg)
+9. Click **Next**, then click **Finish**\
 ![](./media/lab06/cert-final.jpg)
 
 ### Build the UWP Application that we will be using for assigned access

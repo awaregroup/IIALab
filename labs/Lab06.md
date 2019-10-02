@@ -50,4 +50,7 @@ You can use **Provisoning Packages** to quickly and consistently deploy settings
 1. Push **Ctrl + Alt + Delete**
 2. Switch user into your administrative account
 3. Go to **Start** > **Settings** > **Accounts** > **Access work or school** > **Add or remove a provisioning package**
+   ![](./media/lab06/add-remove-package.jpg)
 4. Select the provisoning package and then select **Remove**
+   
+![](./media/lab06/remove-package.jpg)

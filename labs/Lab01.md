@@ -5,7 +5,8 @@ This lab covers setting up Windows 10 IoT Core on a SolidRun HummingBoard Edge b
 ## Pre-requisites
 ### Hardware
 * SolidRun HummingBoard Edge
-* ?
+* STM SensorTile.Box
+* USB HDMI Capture Card 
 
 ### Software
 * Visual Studio 2019 Community Edition (or above)
@@ -27,17 +28,17 @@ Devices running Windows 10 IoT Core can be installed and configured using the Io
 ![MicroSD](./media/5_microsd.jpg)
 1. Dismiss any messages to format the drive. Close those windows.  
 1. Open IoT Dashboard and click 'Setup a new device'
-1. Change the device type to 'NXP [i.MX6/i.MX7/i.MX8]' and set the OS Build to 'Custom'
+1. Change the device type to 'NXP [i.MX6/i.MX7/i.MX8]' and set the OS Build to 'Custom'.
 1. Browse to the FFU file downloaded earlier
 1. Add a password. We recommend "p@ssw0rd" as it is used later in the labs. 
-1. Accept the license agreement and click 'Install'
-1. When completed Windows Explorer will open the many windows. Dismiss any messages and close those windows. 
+1. Accept the license agreement and click 'Install'.
+1. Windows Explorer may prompt you to format the drive, this message can safely be ignored.
 
 ![IoT Dashboard](./media/1_iotdashboard2.png)
 
 ### 1.3 - Plugging in your hardware
 1. Plug the HDMI adapter into your Hummingboard and the USB end into the USB Hub attached to your PC. 
-1. Plug the blue USB cable into your SensorTile and the other end into the USB Hub.
+1. Plug the Micro USB cable into your SensorTile and the other end into the Hummingboard.
 1. Plug in the ethernet cable to your Hummingboard.
 1. Insert the SD Card into your Hummingboard.
 1. Insert the Power Cable into your Hummingboard.
@@ -67,7 +68,7 @@ Devices running Windows 10 IoT Core can be installed and configured using the Io
 
 ### 2.1 - Hello world
 
-1. Open up the first lab project found in [C:\Labs\content\src\IoTLabs.HummingBoard\IoTLabs.HummingBoard.sln](file:///C:\Labs\content\src\IoTLabs.HummingBoard.sln) 
+1. Open up the first lab project found in [C:\Labs\content\src\IoTLabs.TestApp\IoTLabs.TestApp.sln](file:///C:\Labs\content\src\IoTLabs.TestApp\IoTLabs.TestApp.sln) 
 2. Update the target system architecture to say 'ARM' as shown in the image below
 ![](./media/1_vs3.png)
 3. Change target system from 'Local' to 'Remote Machine' and enter the IP address of your device. This can be found on the screen of your device
@@ -77,7 +78,7 @@ Devices running Windows 10 IoT Core can be installed and configured using the Io
 
 ## 3 - Publishing your app _(optional)_
 
-1. In Visual Studio, in the Solution Explorer tab on the right, click on MainPage.xaml 
+1. In Visual Studio, in the Solution Explorer tab on the right, click on Dashboard.xaml 
 2. Click ```Project > Store > Create App Packages...```
 ![](./media/1_createapppackages.png)
 3. Choose "I want to create packages for sideloading" and uncheck "Enable automatic updates"
@@ -87,7 +88,7 @@ Devices running Windows 10 IoT Core can be installed and configured using the Io
 5. After package creation, click on the link to verify the .appx files have been created
 ![](./media/1_createapppackages5.png)
 
-## 4 - Sideload custom MSIX packages _(optional)_
+## 4 - Sideload custom APPX packages _(optional)_
 
 1. TODO: Flesh these out properly
 1. Use portal to delete existing app

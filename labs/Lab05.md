@@ -29,11 +29,14 @@ When starting the lab, you should have these things open on your development mac
     | --- | --- |
     | Name | Enter a unique name |
     | Description | Leave blank |
-    | Resource | Select the resource you created before |
+    | Resource | Select the existing item in the list  |
     | Project Types | Classification |
     | Classification Types | Multiclass (Single tag per image) |
-    | Domains | General (compact) |
-    | Export Capabilities | Basic platforms (Tensorflow, CoreML, ONNX, ...) |
+    | Domains | General **(compact)** |
+    |Export Capabilities|Basic platforms|
+
+    **Note:** If you can't see the Export Capabilities, make sure that the Domain is set to General (compact).
+   
     
 1. Verify that all the details you have entered are correct.
    ![Create Custom Vision project](./media/lab05/create-custom-vision-project.jpg)
@@ -64,14 +67,14 @@ When starting the lab, you should have these things open on your development mac
 ### 1.6 - Export your model
 
 1. Switch to the Performance tab in the portal.
-1. Click on Publish.
 1. Click on Export.
 1. Select ONNX for the type.
 1. Select ONNX1.2 for the version.
 1. Click Export.
-1. An example of exporting your model.
    ![Export model](./media/lab05/export-your-model.jpg)
-1. After downloading, rename the file "CustomVision.onnx"
+1. After Custom Vision has prepared the Export, click Download.
+1. Extract the downloaded zip file and rename `model.onnx` to `CustomVision.onnx`.
+
 
 ## 2 - Package the model into a C# .NET Application
 
@@ -93,8 +96,10 @@ dotnet publish -c Release -o ./release -r win-x64 --self-contained true
 
 Run the sample locally to classify the object. This will test that the app is running correctly locally. We specify "Front" for this model of camera. Here we can see that a "Mug" has been recognized.
 
+**Note:** You must close the camera app if it is open
 ```
 dotnet run --model=CustomVision.onnx --device=Front
+
 4/24/2019 4:09:04 PM: Loading modelfile 'CustomVision.onnx' on the CPU...
 4/24/2019 4:09:04 PM: ...OK 594 ticks
 4/24/2019 4:09:05 PM: Running the model...
@@ -102,56 +107,29 @@ dotnet run --model=CustomVision.onnx --device=Front
 4/24/2019 4:09:05 PM: Recognized {"results":[{"label":"Mug","confidence":1.0}],"metrics":{"evaltimeinms":47,"cycletimeinms":0}}
 ```
 
-### 2.3 - Checking the available devices
-* Run `dotnet run --model=CustomVision.onnx --list`.
-* Devices with spaces in the name will need to be surrounded in quotes.
+## Step 3 : Build and push a container
 
-## Step 3: Run the code on our IoT Core Device
+### 3.0 - Containerize the sample app
 
-### 3.0 - Copy published files to target device
-
-1. Zip up the release folder.
-1. Copy this folder onto your IoT Core Device using a USB drive or Azure Blob storage.
-1. Unzip the relase folder.
-
-### 3.1 - Test the sample on the target device
-
-Following the same approach as above, we will run the app on the target device to ensure we have the correct camera there, and it's working on that device.
-
-1. Connect the camera to the IoT Core device.
-1. Open a Windows Explorer window.
-1. Navigate to where you unzipped the release folder.
-1. Go into the release folder.
-1. In the address bar type "powershell" then press enter.
-1. Run the following command: `.\WindowsAiEdgeLabCV.exe --model=CustomVision.onnx --device=Front`
-    * We are running the self-contained executable published by the `dotnet publish` command.
-
-```
-PS C:\data\modules\customvision> .\WindowsAiEdgeLabCV.exe --model=CustomVision.onnx --device=Front
-4/27/2019 8:31:31 AM: Loading modelfile 'CustomVision.onnx' on the CPU...
-4/27/2019 8:31:32 AM: ...OK 1516 ticks
-4/27/2019 8:31:36 AM: Running the model...
-4/27/2019 8:31:38 AM: ...OK 1953 ticks
-4/27/2019 8:31:42 AM: Recognized {"results":[{"label":"Mug","confidence":1.0}],"metrics":{"evaltimeinms":1953,"cycletimeinms":0}}
-```
-
-## Step 4 : Build and push a container
-
-### 4.0 - Containerize the sample app
-
-The following steps assume that you have created a Azure Container Registry in the previous lab.
+The following steps assume that you have created a Azure Container Registry in Lab 3.
 
 1. Ensure that docker is running or that it is in your PATH variables.
     * If you are using Docker Desktop then ensure it is running in Windows mode.
-1.  Publish the executables into a folder named release by running the following command:
+2.  Open a PowerShell window **as Administrator** and run the following commands:
 
-```
-dotnet publish -c Release -o ./release -r win-x64 --self-contained true
-```
-
-1. Then enter the name of your container image (note: the number value after the colon denotes the version, increment this every time you make a change)
 ```powershell
-#SAMPLE: aiedgelabcr (this is the same container registry created in lab 04)
+cd C:\Labs\Content\src\IoTLabs.CustomVision
+
+#this command sets the default docker host to the IoT Edge Moby host
+[System.Environment]::SetEnvironmentVariable("DOCKER_HOST", "npipe:////./pipe/iotedge_moby_engine", [System.EnvironmentVariableTarget]::Machine)
+```
+
+3. Update the `$registryName` variable below, then run the commands.
+
+**Note:** each time you rebuild the container, you should increment the `$version` variable.
+
+```powershell
+#SAMPLE: msiotlabsuser06acr (this is the container registry created in lab 03)
 $registryName = "[azure-container-registry-name]"
 $version = "1.0"
 $imageName = "customvision"
@@ -160,7 +138,7 @@ $containerTag = "$registryName.azurecr.io/$($imageName):$version-x64-win1809"
 docker build . -t $containerTag
 ```
 
-**Hint: you can type $containerTag to get the full container string from PowerShell.**
+**Hint: you can type $containerTag to show the full container string**
 
 ### 4.1 - Push container to ACR
 

@@ -29,11 +29,14 @@ When starting the lab, you should have these things open on your development mac
     | --- | --- |
     | Name | Enter a unique name |
     | Description | Leave blank |
-    | Resource | Select the resource you created before |
+    | Resource | Select the existing item in the list  |
     | Project Types | Classification |
     | Classification Types | Multiclass (Single tag per image) |
-    | Domains | General (compact) |
-    | Export Capabilities | Basic platforms (Tensorflow, CoreML, ONNX, ...) |
+    | Domains | General **(compact)** |
+    |Export Capabilities|Basic platforms|
+
+    **Note:** If you can't see the Export Capabilities, make sure that the Domain is set to General (compact).
+   
     
 1. Verify that all the details you have entered are correct.
    ![Create Custom Vision project](./media/lab05/create-custom-vision-project.jpg)
@@ -64,14 +67,14 @@ When starting the lab, you should have these things open on your development mac
 ### 1.6 - Export your model
 
 1. Switch to the Performance tab in the portal.
-1. Click on Publish.
 1. Click on Export.
 1. Select ONNX for the type.
 1. Select ONNX1.2 for the version.
 1. Click Export.
-1. An example of exporting your model.
    ![Export model](./media/lab05/export-your-model.jpg)
-1. After downloading, rename the file "CustomVision.onnx"
+1. After Custom Vision has prepared the Export, click Download.
+1. Extract the downloaded zip file and rename `model.onnx` to `CustomVision.onnx`.
+
 
 ## 2 - Package the model into a C# .NET Application
 

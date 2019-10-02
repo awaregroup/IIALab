@@ -70,4 +70,10 @@ copy "%userprofile%\Downloads\tpm_override.json" \\<device ip address here>\c$\D
 ```
 ![](./media/2_13.png)
 
-5. Restart your application and you should see the IoT Hub connection show successful and data inside IoT Central
+5. Restart your device and you should see Azure IoT now showing as connected.
+
+![](./media/2_14.png)
+
+6. Switching back to IoT Central, you should also be able to see data in the dashboard also.
+
+![](./media/2_15.png)

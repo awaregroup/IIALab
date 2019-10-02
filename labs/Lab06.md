@@ -15,8 +15,8 @@ You can use **Settings** on the local device to quickly configure one or a few d
 
 ### Configure Assigned Access
 1.  Go to **Start** > **Settings** > **Accounts** > **Other users**
-2.  Select **Set up a kiosk > Assigned access**, and then select **Get started**
    ![](./media/lab06/assigned-access.jpg)
+2.  Select **Set up a kiosk > Assigned access**, and then select **Get started**
 3.  When prompted set the Kiosk users name to **Kiosk**
    ![](./media/lab06/setting-up-kiosk.jpg)
 4.  When prompted to select an Application, select **IoTLabs.TestApp**

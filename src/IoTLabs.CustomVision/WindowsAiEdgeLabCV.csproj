@@ -22,6 +22,8 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.0.0" />
+    <PackageReference Include="SkiaSharp" Version="1.68.0" />
+    <PackageReference Include="WebSocketSharp-netstandard" Version="1.0.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -54,6 +56,7 @@
 
   <Target Name="CopyCustomContentOnPublish" AfterTargets="Publish">
     <Copy SourceFiles="CustomVision.onnx" DestinationFolder="$(PublishDir)" />
+	<Copy SourceFiles="Dockerfile" DestinationFolder="$(PublishDir)" />
   </Target>
 
 </Project>

@@ -1,116 +1,71 @@
 # Lab 06 - Turn your device into a locked down kiosk
 
-## Option 1 - Using Shell Launcher
-### Create your kiosk user 
-1. Open PowerShell as Administrator and run the following commands to create a non-admin local user:
-```powershell
-New-LocalUser "Kiosk" -Password (new-object System.Security.SecureString)
-Add-LocalGroupMember -Group "Users" -Member "Kiosk"
-```
+## Common Setup Steps
 
-### Enable Shell Launcher
-1. Open PowerShell as Administrator and run the following commands to enable Shell Launcher:
-```powershell
-Enable-WindowsOptionalFeature -online -FeatureName Client-EmbeddedShellLauncher -all
-```
-2. Run the following command to lock down your machine to a single program:
-```powershell
-#sets up shell launcher
-$ShellLauncherClass = [wmiclass]"\\localhost\root\standardcimv2\embedded:WESL_UserSetting"
+### Install the certificate
 
-#gets the SIDs
-$admins_SID = "S-1-5-32-544"
-$kiosk_SID = (New-Object System.Security.Principal.NTAccount("Kiosk")).Translate([System.Security.Principal.SecurityIdentifier]).value
+1. Navigate to `C:\Labs\content\src\IoTLabs.TestApp\IoTLabs.TestApp`
+2. Open the file named **IoTLabs.pfx**
+3. Select **Local Machine**, then click **Next**
+4. When prompted by UAC, select **Yes**
+5. Leave the settings as default and click **Next**
+6. Leave the settings as default and click **Next**
+7. Select **Place all certificates in the following store**, then click **Browse...**
+8. Select **Trusted Root Certification Authorities** and click **Ok**
+9. Click **Next**, then click **Finish**
 
-#sets up apps for kiosk and admin users
-#TODO: replace notepad.exe with a path to the new app
-$ShellLauncherClass.SetCustomShell($kiosk_SID, "notepad.exe", ($null), ($null), 1)
-$ShellLauncherClass.SetCustomShell($admins_SID, "powershell.exe")
-$ShellLauncherClass.SetEnabled($TRUE)
+### Build the UWP Application that we will be using for assigned access
 
-#disables task manager
-$RegKey ="HKLM:\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System"
-New-ItemProperty -Path $RegKey -Name DisableTaskMgr -value 1 -Force 
+1.	Open up the lab project found in `C:\Labs\content\src\IoTLabs.TestApp\IoTLabs.TestApp.sln`
+2.	Right click on the project **IoTLabs.TestApp (Universal Windows)** and click **Publish**, then **Create App Packages...**
+3.	Select **Sideloading**, then click **Next**
+4.	Click **Remove**, then **Select From File** and select **IoTLabs.pfx**, then click **Next**
+5.	Make sure only **x86** and **ARM** are selected then click **Create**
+6.	Wait for the publish to finish, then click on the **Output location** link
+7.	Open **IoTLabs.TestApp_1.0.2.0_Debug_Test** folder, right click on **install.ps1** and click **Run with PowerShell**
 
-```
-3. Restart your computer for the changes to take effect
+## Option 1 - Using Settings to set up Assigned Access
 
-### Disabling Shell Launcher
-1. Press **ctrl + alt + delete** and select **Sign out**
-2. On the lock screen, log in with your Admin user.
-2. Run the following command to open an Administrator PowerShell session:
-```powershell
-#opens powershell as administrator
-Start-Process powershell -Verb runAs
-```
-3. In the new Admin PowerShell session run the following commands to disable the Shell Launcher:
-```powershell
-#clears the custom shell settings
-$CommonArgs = @{"namespace"="root\standardcimv2\embedded"}
-Get-WMIObject -class WESL_UserSetting @CommonArgs |
-foreach {
-    $_.Delete() | Out-Null;
-    Write-Host "Deleted $_.Id"
-}
+You can use **Settings** on the local device to quickly configure one or a few devices as a kiosk. 
 
-#disables shell launcher
-$ShellLauncherClass = [wmiclass]"\\localhost\root\standardcimv2\embedded:WESL_UserSetting"
-$ShellLauncherClass.SetEnabled($FALSE)
+### Configure Assigned Access
+1.  Go to **Start** > **Settings** > **Accounts** > **Other users**
+   ![](./media/lab06/assigned-access.jpg)
+2.  Select **Set up a kiosk > Assigned access**, and then select **Get started**
+3.  When prompted set the Kiosk users name to **Kiosk**
+   ![](./media/lab06/setting-up-kiosk.jpg)
+4.  When prompted to select an Application, select **IoTLabs.TestApp**
+   ![](./media/lab06/select-app.jpg)
+5.  Select **Close**
+   ![](./media/lab06/kiosk-done.jpg)
+6.  Restart the device
 
-#enables task manager again
-$RegKey ="HKLM:\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System"
-New-ItemProperty -Path $RegKey -Name DisableTaskMgr -value 0 -Force 
+### Remove Assigned Access
+1. Push **Ctrl + Alt + Delete**
+2. Switch user into your administrative account
+3. Go to **Start** > **Settings** > **Accounts** > **Other users**
+4. Select **Set up a kiosk**
+3. Select the **Kiosk** users tile and then select **Remove kiosk**
 
-if($ShellLauncherClass.IsEnabled().Enabled){
-	Write-Warning("Shell Launcher is still Enabled...")
-}
-else{
-	Write-Host "Shell Launcher has been disabled..."
-	Write-Host "Restarting Computer in 3 seconds..."
-	Start-Sleep 3
-	Restart-Computer -force
-}
-```
+## Option 2 - Using a Provisioning Package to set up Assigned Access
 
-### Warning
-If your shell application requires administrator rights and needs to be elevated, and User Account Control (UAC) is present on your device, you must disable UAC in order for Shell Launcher to launch the shell application.
-A custom shell is launched with the same level of user rights as the account that is signed in. This means that a user with administrator rights can perform any system action that requires administrator rights, including launching other applications with administrator rights, while a user without administrator rights cannot.
+You can use **Provisoning Packages** to quickly and consistently deploy settings to a fleet of devices. This can be done either during OOBE or after the device has been set up.
 
-## Option 2 - Using Assigned Access Provisioning Package
+### Install
 
-### Create your kiosk user 
-1. Open PowerShell as Administrator and run the following commands to create a non-admin local user:
-```powershell
-New-LocalUser "Kiosk" -Password (new-object System.Security.SecureString)
-Add-LocalGroupMember -Group "Users" -Member "Kiosk"
-```
-
-### Install the provisioning package 
-1. Open PowerShell as Administrator and run the following command:
-```powershell
-#installs the provisioning package from a local path
-Add-ProvisioningPackage "C:\Labs\Content\src\IoTLabs.AssignedAccess\lab06.ppkg" -force
-```
-2. When prompted click **Yes, add it**
-2. Restart your computer
-3. Your device should auto login as the locked down Kiosk user
+1. Go to `C:\Labs\Content\src\IoTLabs.AssignedAccess\`
+2. Open the ppkg file `lab06.ppkg`, this is the provisoning package that holds all the settings and files required to deploy
+3. When prompted click **Yes, add it**
+![](./media/lab06/add-package.jpg)
+4. Restart your computer
+5. Your device should auto login as the locked down Kiosk user
 
 ### Removing the provisioning package 
-1. Go to the lock screen by pressing **ctrl + alt + delete**
-2. Log in with your Admin account
-2. Open PowerShell as Administrator and run the following command:
-```powershell
-#gets the packageID from the installed lab_06 package
-$packageId = (Get-ProvisioningPackage | Where-Object {$_.packageName -eq 'lab_06' }).PackageID.Guid
 
-#removes the package
-if($packageId)
-{
-	Write-Host "Removing Lab_06 provisioning package..."
-	Remove-ProvisioningPackage $packageId
-}
-else
-{
-	Write-Host "Provisioning package was already removed..."
-}
-```
+1. Push **Ctrl + Alt + Delete**
+2. Switch user into your administrative account
+3. Go to **Start** > **Settings** > **Accounts** > **Access work or school** > **Add or remove a provisioning package**
+   ![](./media/lab06/add-remove-package.jpg)
+4. Select the provisoning package and then select **Remove**
+   
+![](./media/lab06/remove-package.jpg)

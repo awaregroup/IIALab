@@ -2,7 +2,7 @@
   "profiles": {
     "WindowsAiEdgeLabCV": {
       "commandName": "Project",
-      "commandLineArgs": "--model=CustomVision.onnx --device=LifeCam"
+      "commandLineArgs": "--model=CustomVision.onnx --device=LifeCam -f -w"
     }
   }
 }

@@ -22,7 +22,8 @@ You can use **Settings** on the local device to quickly configure one or a few d
 4.  When prompted to select an Application, select **IoTLabs.TestApp**
    ![](./media/lab06/select-app.jpg)
 5.  Select **Close**.
-   ![](./media/lab06/kiosk-done.jpg)
+
+![](./media/lab06/kiosk-done.jpg)
 
 ### Remove Assigned Access
 1. Push **Ctrl + Alt + Delete**

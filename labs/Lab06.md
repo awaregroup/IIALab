@@ -37,10 +37,15 @@
 ![](./media/lab06/chosen-cert.png)
 7.	Make sure only the **x86** and **ARM** Architectures are selected then click **Create**\
 ![](./media/lab06/architecture.png)
-8.	Wait for the publish to finish, then click on the **Output location** link\
+8.	Wait a couple minutes for the publish to finish, then click on the **Output location** link\
 ![](./media/lab06/finished-publishing.png)
 9.	Open **IoTLabs.TestApp_1.0.2.0_Debug_Test** folder, right click on **install.ps1** and click **Run with PowerShell**\
 ![](./media/lab06/install-script.jpg)
+10. Press **A** when prompted and allow the installation to complete/
+![](./media/lab06/app-installed.jpg)
+11. Open your start menu and check that **IoTLabs.TestApp** has been installed\
+![](./media/lab06/start-menu.jpg)
+
 
 ## Option 1 - Using Settings to set up Assigned Access
 

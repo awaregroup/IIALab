@@ -5,7 +5,8 @@ This lab covers setting up Windows 10 IoT Core on a SolidRun HummingBoard Edge b
 ## Pre-requisites
 ### Hardware
 * SolidRun HummingBoard Edge
-* ?
+* STM SensorTile.Box
+* USB HDMI Capture Card 
 
 ### Software
 * Visual Studio 2019 Community Edition (or above)

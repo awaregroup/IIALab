@@ -1,8 +1,18 @@
 # Lab 06 - Turn your device into a locked down kiosk
 
-## Option 1 - Using Settings to set up Assigned Access
+## Common setup steps
 
-You can use **Settings** on the local device to quickly configure one or a few devices as a kiosk. 
+### Install the certificate
+
+1. Navigate to 'C:\Labs\content\src\IoTLabs.TestApp\IoTLabs.TestApp'
+2. Open the file named **IoTLabs.pfx**
+3. Select **Local Machine**, then click **Next**
+4. When prompted by UAC, select **Yes**
+5. Leave the settings as default and click **Next**
+6. Leave the settings as default and click **Next**
+7. Select **Place all certificates in the following store**, then click **Browse...**
+8. Select **Trusted Root Certification Authorities** and click **Ok**
+9. Click Next, then click **Finish**
 
 ### Build the UWP Application that we will be using for assigned access
 
@@ -13,6 +23,10 @@ You can use **Settings** on the local device to quickly configure one or a few d
 5.	Make sure only **x86** and **ARM** are selected then click **Create**
 6.	Wait for the publish to finish, then click on the **Output location** link
 7.	Open **IoTLabs.TestApp_1.0.2.0_Debug_Test** folder, right click on **install.ps1** and click **Run with PowerShell**
+
+## Option 1 - Using Settings to set up Assigned Access
+
+You can use **Settings** on the local device to quickly configure one or a few devices as a kiosk. 
 
 ### Configure Assigned Access
 1.  Go to **Start** > **Settings** > **Accounts** > **Other users**

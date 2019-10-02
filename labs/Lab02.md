@@ -66,6 +66,8 @@
 4. Replace the IP address in the following commands with the IP Address of your device, then run the commands in your command prompt window:
 ```batch
 net use \\<device ip address here>\c$ /USER:administrator
-copy "%userprofile%\Downloads\tpm_override.json" \\<device ip address here>\users\administrator\appdata\....
+copy "%userprofile%\Downloads\tpm_override.json" \\<device ip address here>\c$\Data\Users\DefaultAccount\AppData\Local\Packages\IoTLabs.TestApp.App_wqmbmn0a4bde6\LocalState /y
 ```
+![](./media/2_13.png)
+
 5. Restart your application and you should see the IoT Hub connection show successful and data inside IoT Central

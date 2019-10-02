@@ -18,6 +18,8 @@
 |Payment Plan|Pay-as-you-go|
 |Application Template|Preview Application|
 |Application Name|[choose a name]|
+|Subscription|MSIoTLabs-IIA (or bring your own)|
+|Region|Central US|
 
 3. Click "Create" to provision your application
 
@@ -33,7 +35,7 @@
 1. Name your device and click 'Import Capability Model'
 ![](./media/2_iotc4.png)
 
-1. Browse to the `src/IoT Central/` folder and upload the file named `ST SensorTile.Box.json`.
+1. Browse to the `C:\Labs\Content\src/Azure.IoTCentral/` folder and upload the file named `ST SensorTile.Box.json`.
 ![](./media/2_iotc5.png)
 
 1. Click 'Views' and click 'Generate Default Views'

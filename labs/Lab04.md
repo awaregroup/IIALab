@@ -207,9 +207,9 @@ GROUP BY TumblingWindow(second,15)
 1. In the [Azure Portal (https://portal.azure.com)](https://portal.azure.com) open the **msiotlabs-iia-user##** resource group
 2. Open the **IoT Hub** resource, navigate to **IoT Edge** and then select the device created in [step 1.1](#11---cloud-setup)
 3. Click **Set modules**
-4. You will notice that the **SimulatedTemperatureSensor** module has a warning saying: "Module outdated - click here to update"
+4. You will notice that the **Stream Analytics** module has a warning saying: "Module outdated - click here to update"
 ![](./media/lab04/outdated-module.jpg)
-5. Click **Configure** next to the **SimulatedTemperatureSensor** module
+5. Click **Configure** next to the **Stream Analytics** module
 6. Click the **Update ASA module**, then click **Save** and finally **Next**.
 ![](./media/lab04/update-asa-module.jpg)
 7. Replace the current JSON with the following, substituting **[module name]** with the module name found in the previous step:

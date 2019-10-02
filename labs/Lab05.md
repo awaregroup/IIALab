@@ -120,7 +120,8 @@ The following steps assume that you have created a Azure Container Registry in L
 ```powershell
 cd C:\Labs\Content\src\IoTLabs.CustomVision
 
-[Environment]::SetEnvironmentVariable("DOCKER_HOST", "npipe:////./pipe/iotedge_moby_engine", [system.environmentvariabletarget]::Machine)
+#this command sets the default docker host to the IoT Edge Moby host
+[System.Environment]::SetEnvironmentVariable("DOCKER_HOST", "npipe:////./pipe/iotedge_moby_engine", [System.EnvironmentVariableTarget]::Machine)
 ```
 
 3. Update the `$registryName` variable below, then run the commands.

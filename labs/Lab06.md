@@ -4,16 +4,16 @@
 As we are deploying an app that has not been officially released on the Windows store, we need to turn on developer features. Once enbabled, the IoTLabs UWP app can be installed.
 
 ### Turn on developer features
-1. Open the start menu and type **Developer Settings** and select the top option/
+1. Open the start menu and type **Developer Settings** and select the top option\
 ![](./media/lab06/developer-start.png)
-2. Select the **Developer Mode** toggle/
+2. Select the **Developer Mode** toggle\
 ![](./media/lab06/developer-mode-selected.png)
-3. Click **Yes** and wait a few minutes for it to load the required packages/
+3. Click **Yes** and wait a few minutes for it to load the required packages\
 ![](./media/lab06/developer-mode.png)
 
 ### Install the application
 1. Navigate to `C:\Labs\content\src\IoTLabs.AssignedAccess\IoTLabs.TestApp_1.0.1.0_Debug_Test`
-2. Right click on the file named **Install.ps1** and click **Run with PowerShell**/
+2. Right click on the file named **Install.ps1** and click **Run with PowerShell**\
 ![](./media/lab06/install-app.png)
 3. When prompted, type **Y** and allow the app to finish installing.
 ![](./media/lab06/installed-app.png)

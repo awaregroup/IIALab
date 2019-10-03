@@ -34,6 +34,7 @@ You can use **Settings** on the local device to quickly configure one or a few d
 5.  Select **Close**\
 ![](./media/lab06/kiosk-done.jpg)
 6.  Restart the device
+7.  Your device should auto login as the locked down Kiosk user
 
 ### Remove Assigned Access
 1. Push **Ctrl + Alt + Delete**

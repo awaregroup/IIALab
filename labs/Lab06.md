@@ -1,51 +1,22 @@
 # Lab 06 - Turn your device into a locked down kiosk
 
 ## Deploy an app to use in Kiosk Mode
-There are a few steps required to prepare an application so that it's ready to be deployed on a Kiosk device. The following instructions detail how you can use a testing certificate to deploy the example application. When deploying your own application you can follow the following guide to [create your own certificate for deployment](https://docs.microsoft.com/en-us/windows/msix/package/create-certificate-package-signing).
+As we are deploying an app that has not been officially released on the Windows store, we need to turn on developer features. Once enbabled, the IoTLabs UWP app can be installed.
 
-### Install the certificate
+### Turn on developer features
+1. Open the start menu and type **Developer Settings** and select the top option/
+![](./media/lab06/developer-start.png)
+2. Select the **Developer Mode** toggle/
+![](./media/lab06/developer-mode-selected.png)
+3. Click **Yes** and wait a few minutes for it to load the required packages/
+![](./media/lab06/developer-mode.png)
 
-1. Navigate to `C:\Labs\content\src\IoTLabs.TestApp\IoTLabs.TestApp`
-2. Open the file named **IoTLabs.pfx**
-3. Select **Local Machine**, then click **Next**\
-![](./media/lab06/import-certificate.jpg)
-4. When prompted by UAC, select **Yes**\
-![](./media/lab06/uac.jpg)
-5. Leave the settings as default and click **Next**\
-![](./media/lab06/cert-location.jpg)
-6. Leave the settings as default and click **Next**\
-![](./media/lab06/cert-protection.jpg)
-7. Select **Place all certificates in the following store**, then click **Browse...**\
-![](./media/lab06/place-cert.jpg)
-8. Select **Trusted Root Certification Authorities** and click **Ok**\
-![](./media/lab06/store-select.jpg)\
-![](./media/lab06/certificate-installation.jpg)
-9. Click **Next**, then click **Finish**\
-![](./media/lab06/cert-final.jpg)
-
-### Build the UWP Application that we will be using for assigned access
-
-1.	Open up the lab project found in `C:\Labs\content\src\IoTLabs.TestApp\IoTLabs.TestApp.sln`
-2.	Right click on the project **IoTLabs.TestApp (Universal Windows)** and click **Publish**, then **Create App Packages...**\
-![](./media/lab06/publish.jpg)
-3.	Select **Sideloading**, then click **Next**\
-![](./media/lab06/sideload.png)
-4.	Click **Remove**, then **Select From File** \
-![](./media/lab06/remove-cert.jpg)![](./media/lab06/select-cert.png)
-5.  Select **IoTLabs.pfx**\
-![](./media/lab06/IoTLabs-cert.jpg)
-6.  Then click **Next**\
-![](./media/lab06/chosen-cert.png)
-7.	Make sure only the **x86** and **ARM** Architectures are selected then click **Create**\
-![](./media/lab06/architecture.png)
-8.	Wait a couple minutes for the publish to finish, then click on the **Output location** link\
-![](./media/lab06/finished-publishing.png)
-9.	Open **IoTLabs.TestApp_1.0.2.0_Debug_Test** folder, right click on **install.ps1** and click **Run with PowerShell**\
-![](./media/lab06/install-script.jpg)
-10. Press **A** when prompted and allow the installation to complete/
-![](./media/lab06/app-installed.jpg)
-11. Open your start menu and check that **IoTLabs.TestApp** has been installed\
-![](./media/lab06/start-menu.jpg)
+### Install the application
+1. Navigate to `C:\Labs\content\src\IoTLabs.AssignedAccess\IoTLabs.TestApp_1.0.1.0_Debug_Test`
+2. Right click on the file named **Install.ps1** and click **Run with PowerShell**/
+![](./media/lab06/install-app.png)
+3. When prompted, type **Y** and allow the app to finish installing.
+![](./media/lab06/installed-app.png)
 
 
 ## Option 1 - Using Settings to set up Assigned Access

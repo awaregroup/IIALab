@@ -25,7 +25,7 @@ This lab introduces Azure Stream Analytics with Azure IoT Edge on Windows 10 IoT
 ```powershell
 . {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Deploy-IoTEdge
 ```
-![](./media/lab04/iotedge-install.jpg)\
+![](./media/lab04/iotedge-install.jpg)
 3. When prompted, press **Y** to reboot
 4. When the system has booted again, re-open the PowerShell session as Administrator 
 5. Configure the Azure IoT Edge runtime with the following command:

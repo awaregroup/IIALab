@@ -33,6 +33,8 @@ This lab introduces Azure Stream Analytics with Azure IoT Edge on Windows 10 IoT
 ```powershell
 . {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Initialize-IoTEdge
 ```
+![](./media/lab04/iot-edge-initialize.png)
+
 6. Enter the Device Connection string from the previous step: 
 7. To validate the Azure IoT Edge runtime installation, use the command:
 ```powershell
@@ -44,7 +46,7 @@ iotedge check
 
 ### 2.1 - Module deployment using Azure CLI
 
-1. Open PowerShell as Administrator
+1. Open the Start Menu and type **PowerShell**, then click **Run as Administrator**\
 2. Login to Azure CLI using the following command:
 ```powershell
 az extension add --name azure-cli-iot-ext
@@ -162,7 +164,7 @@ Stream Analytics can be used to enable complex logic on streams of data. This qu
 ### 4.3 - Verify Deployment on IoT Edge Device
 The module deployment is instant, however changes to the device can take around 5-7 minutes to take effect. Let's check that our device has loaded our Azure Stream Analytics module from the last step.
 
-1. Open Powershell as Administrator
+1. Open the Start Menu and type **PowerShell**, then click **Run as Administrator**\
 2. Inspect the currently running modules using the following command:
 ```powershell
 iotedge list

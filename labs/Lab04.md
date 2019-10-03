@@ -6,33 +6,34 @@ This lab introduces Azure Stream Analytics with Azure IoT Edge on Windows 10 IoT
 
 ### 1.1 - Cloud setup
 
-1. Make a note of the Surface Laptop device name printed on the device. For example, IOTEDGE02 
-2. Open a browser and navigate to the [Azure Portal (portal.azure.com)](https://portal.azure.com). Log in with the lab credentials provided.
-3. Click **Resource groups** on the left-hand menu, select the **msiotlabs-iia-user##** resource group in the list and choose the **IoT Hub** created in [Lab 2](./Lab02.md#11---deploy-azure-iot-hub)
-![](./media/2_azure5.png)
-4. In the left hand menu under the heading **Automatic Device Management**, click **IoT Edge**. Then click **Add an IoT Edge device** at the top. **Note: that this is a slightly different menu than the one used earlier in the lab**
-![IoT Hub Portal](./media/4_SelectIoTEdge.png)
-5. Enter the Surface Laptop name (from earlier) as the device id and click **Save** to create the device
-6. Refresh the list and open the device properties
-7. We will be using the **Connection string (primary key)** in the next step - so keep this page ready 
-![IoT Edge Device Information](./media/4_CopyConnectionStringIoTEdge.png)
-
+1. Make a note of the Surface Laptop device name printed on the device. For example, IOTEDGE01
+2. Open a browser and navigate to the [Azure Portal (portal.azure.com)](https://portal.azure.com). Log in with the lab credentials provided
+3. Click **Resource groups** on the left-hand menu, select the **msiotlabs-iia-user##** resource group in the list and choose the **IoT Hub** created in [Lab 3](./Lab03.md#10---provision-azure-resources)
+4. In the left hand menu under the heading **Automatic Device Management**, click **IoT Edge**/
+![](./media/lab04/SelectIoTEdge.png)
+5. Click **Add an IoT Edge device** at the top of the page/
+6. Enter the Surface Laptop name (from earlier) as the device id, leave the rest of the settings as default and click **Save**
+![](./media/lab04/add-device.jpg)
+7. Click **Refresh** and your newly created device should appear in the list
+8. Select your device and take note of the **Primary Connection String**. We will be using it in the next step, so keep this page ready/
+![](./media/lab04/CopyConnectionStringIoTEdge.png)
 
 ### 1.2 - IoT Device setup using Azure CLI
-1. Open PowerShell as Administrator
+1. Open PowerShell as Administrator/
 ![](./media/lab04/powershell.jpg)
 2. Install the Azure IoT Edge runtime on the device by running the following command and waiting for the device to reboot:
 ```powershell
 . {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Deploy-IoTEdge
 ```
-3. When prompted, press 'Y' to reboot
-3. When the system is booted again, re-open the PowerShell session as Administrator 
-4. Configure the Azure IoT Edge runtime with the following command:
+![](./media/lab04/iotedge-install.jpg)/
+3. When prompted, press **Y** to reboot
+4. When the system has booted again, re-open the PowerShell session as Administrator 
+5. Configure the Azure IoT Edge runtime with the following command:
 ```powershell
 . {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Initialize-IoTEdge
 ```
-5. Enter the Device Connection string from the previous step: 
-6. To validate the Azure IoT Edge runtime installation, use the command:
+6. Enter the Device Connection string from the previous step: 
+7. To validate the Azure IoT Edge runtime installation, use the command:
 ```powershell
 iotedge check
 ``` 
@@ -55,6 +56,9 @@ az account set --subscription 'MSIoTLabs-IIA'
 4. Run the following command replacing **[device id]** and **[hub name]** with their respective fields:
 ```powershell
 az iot edge set-modules --device-id [device id] --hub-name [hub name] --content "C:\Labs\Content\src\IoTLabs.IoTEdge\deployment.example.win-x64.json"
+
+#NOTE - make sure to remove the square brackets above, for example:
+#az iot edge set-modules --device-id device1 --hub-name msiotlabs-iia-user06-iothub --content "C:\Labs\Content\src\IoTLabs.IoTEdge\deployment.example.win-x64.json"
 ```
 
 ### 2.2 - Verify Deployment on IoT Edge Device

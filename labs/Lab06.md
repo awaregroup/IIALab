@@ -1,43 +1,38 @@
 # Lab 06 - Turn your device into a locked down kiosk
 
-## Common Setup Steps
+## Deploy an app to use in Kiosk Mode
+As we are deploying an app that has not been officially released on the Windows store, we need to turn on developer features. Once enbabled, the IoTLabs UWP app can be installed.
 
-### Install the certificate
+### Turn on developer features
+1. Open the start menu and type **Developer Settings** and select the top option\
+![](./media/lab06/developer-start.png)
+2. Select the **Developer Mode** toggle\
+![](./media/lab06/developer-mode-selected.png)
+3. Click **Yes** and wait a few minutes for it to load the required packages\
+![](./media/lab06/developer-mode.png)
 
-1. Navigate to `C:\Labs\content\src\IoTLabs.TestApp\IoTLabs.TestApp`
-2. Open the file named **IoTLabs.pfx**
-3. Select **Local Machine**, then click **Next**
-4. When prompted by UAC, select **Yes**
-5. Leave the settings as default and click **Next**
-6. Leave the settings as default and click **Next**
-7. Select **Place all certificates in the following store**, then click **Browse...**
-8. Select **Trusted Root Certification Authorities** and click **Ok**
-9. Click **Next**, then click **Finish**
+### Install the application
+1. Navigate to `C:\Labs\content\src\IoTLabs.AssignedAccess\IoTLabs.TestApp_1.0.1.0_Debug_Test`
+2. Right click on the file named **Install.ps1** and click **Run with PowerShell**\
+![](./media/lab06/install-app.png)
+3. When prompted, type **Y** and allow the app to finish installing.
+![](./media/lab06/installed-app.png)
 
-### Build the UWP Application that we will be using for assigned access
-
-1.	Open up the lab project found in `C:\Labs\content\src\IoTLabs.TestApp\IoTLabs.TestApp.sln`
-2.	Right click on the project **IoTLabs.TestApp (Universal Windows)** and click **Publish**, then **Create App Packages...**
-3.	Select **Sideloading**, then click **Next**
-4.	Click **Remove**, then **Select From File** and select **IoTLabs.pfx**, then click **Next**
-5.	Make sure only **x86** and **ARM** are selected then click **Create**
-6.	Wait for the publish to finish, then click on the **Output location** link
-7.	Open **IoTLabs.TestApp_1.0.2.0_Debug_Test** folder, right click on **install.ps1** and click **Run with PowerShell**
 
 ## Option 1 - Using Settings to set up Assigned Access
 
 You can use **Settings** on the local device to quickly configure one or a few devices as a kiosk. 
 
 ### Configure Assigned Access
-1.  Go to **Start** > **Settings** > **Accounts** > **Other users**
-   ![](./media/lab06/assigned-access.jpg)
+1.  Go to **Start** > **Settings** > **Accounts** > **Other users**\
+![](./media/lab06/assigned-access.jpg)
 2.  Select **Set up a kiosk > Assigned access**, and then select **Get started**
-3.  When prompted set the Kiosk users name to **Kiosk**
-   ![](./media/lab06/setting-up-kiosk.jpg)
-4.  When prompted to select an Application, select **IoTLabs.TestApp**
-   ![](./media/lab06/select-app.jpg)
-5.  Select **Close**
-   ![](./media/lab06/kiosk-done.jpg)
+3.  When prompted set the Kiosk users name to **Kiosk**\
+![](./media/lab06/setting-up-kiosk.jpg)
+4.  When prompted to select an Application, select **IoTLabs.TestApp**\
+![](./media/lab06/select-app.jpg)
+5.  Select **Close**\
+![](./media/lab06/kiosk-done.jpg)
 6.  Restart the device
 
 ### Remove Assigned Access
@@ -49,13 +44,13 @@ You can use **Settings** on the local device to quickly configure one or a few d
 
 ## Option 2 - Using a Provisioning Package to set up Assigned Access
 
-You can use **Provisoning Packages** to quickly and consistently deploy settings to a fleet of devices. This can be done either during OOBE or after the device has been set up.
+You can use **Provisioning Packages** to quickly and consistently deploy settings to a fleet of devices. This can be done either during OOBE or after the device has been set up.
 
 ### Install
 
 1. Go to `C:\Labs\Content\src\IoTLabs.AssignedAccess\`
-2. Open the ppkg file `lab06.ppkg`, this is the provisoning package that holds all the settings and files required to deploy
-3. When prompted click **Yes, add it**
+2. Open the ppkg file `lab06.ppkg`, this is the provisioning package that holds all the settings and files required to deploy
+3. When prompted click **Yes, add it**\
 ![](./media/lab06/add-package.jpg)
 4. Restart your computer
 5. Your device should auto login as the locked down Kiosk user
@@ -64,8 +59,7 @@ You can use **Provisoning Packages** to quickly and consistently deploy settings
 
 1. Push **Ctrl + Alt + Delete**
 2. Switch user into your administrative account
-3. Go to **Start** > **Settings** > **Accounts** > **Access work or school** > **Add or remove a provisioning package**
-   ![](./media/lab06/add-remove-package.jpg)
-4. Select the provisoning package and then select **Remove**
-   
+3. Go to **Start** > **Settings** > **Accounts** > **Access work or school** > **Add or remove a provisioning package**\
+![](./media/lab06/add-remove-package.jpg)
+4. Select the provisioning package and then select **Remove**\
 ![](./media/lab06/remove-package.jpg)

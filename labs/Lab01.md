@@ -29,10 +29,11 @@ Devices running Windows 10 IoT Core can be installed and configured using the Io
 1. Dismiss any messages to format the drive. Close those windows.  
 1. Open IoT Dashboard and click 'Setup a new device'
 1. Change the device type to 'NXP [i.MX6/i.MX7/i.MX8]' and set the OS Build to 'Custom'.
-1. Browse to the FFU file downloaded earlier
+1. Browse to the FFU file found in `C:/Labs`
 1. Add a password. We recommend "p@ssw0rd" as it is used later in the labs. 
 1. Accept the license agreement and click 'Install'.
 1. Windows Explorer may prompt you to format the drive, this message can safely be ignored.
+1. It may take a few minutes for the Micro SD card to provision.
 
 ![IoT Dashboard](./media/1_iotdashboard2.png)
 
@@ -40,7 +41,7 @@ Devices running Windows 10 IoT Core can be installed and configured using the Io
 1. Plug the HDMI adapter into your Hummingboard and the USB end into the USB Hub attached to your PC. 
 1. Plug the Micro USB cable into your SensorTile and the other end into the Hummingboard.
 1. Plug in the ethernet cable to your Hummingboard.
-1. Insert the SD Card into your Hummingboard.
+1. Insert the Micro SD Card into your Hummingboard.
 1. Insert the Power Cable into your Hummingboard.
 1. On your Lab PC, open the Camera application to view the output of your Hummingboard as it boots. Select the camera cycle button to view the capture card. 
 

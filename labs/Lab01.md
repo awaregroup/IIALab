@@ -48,7 +48,7 @@ Devices running Windows 10 IoT Core can be installed and configured using the Io
 ### 1.4 - Validating your install
 
 1. Once the HummingBoard has completed booting, a line entry will show in the IoT Dashboard as above
-2. Right click on your device and select 'Device Portal' - **Note: if your device doesn't show, in the list, read the IP Address from the display and enter that in your browser on port 8080. For example: http://192.168.88.200:8080**
+2. Right click on your device and select 'Open in Device Portal' - **Note: if your device doesn't show, in the list, read the IP Address from the display and enter that in your browser on port 8080. For example: http://192.168.88.200:8080**
 3. In your browser enter the default username and password:
 
 |Name    |Value|
@@ -61,7 +61,7 @@ Devices running Windows 10 IoT Core can be installed and configured using the Io
 4. Open the Processes Menu, Select Run command
 5. Type "devcon status USB\VID_0483*" and hit enter to see if the device can see the connected SensorTile
 6. You should see Name: USB Serial Device with status of Running
-![SensorTile Connected](./media/1_detect_sensortile.png)
+![SensorTile Connected](./media/1_SensorTileConnected.png)
 
 
 

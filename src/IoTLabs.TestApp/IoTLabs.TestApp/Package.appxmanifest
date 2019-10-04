@@ -11,8 +11,8 @@
 
   <Identity
     Name="IoTLabs.TestApp.App"
-    Publisher="CN=IoT Labs, O=IoT Labs, C=NZ"
-    Version="1.0.1.0" />
+    Publisher="CN=suppo"
+    Version="1.0.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="b9c388ba-a887-4f7c-a42d-6e464f87ee87" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 

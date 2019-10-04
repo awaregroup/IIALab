@@ -20,7 +20,7 @@ Devices running Windows 10 IoT Core can be installed and configured using the Io
 1. Open a browser window to: [http://go.microsoft.com/fwlink/?LinkID=708576](http://go.microsoft.com/fwlink/?LinkID=708576)
 1. Launch the IoT Dashboard and verify the application starts correctly
 
-![IoT Dashboard](./media/1_iotdashboard.png)
+![IoT Dashboard](./media/1_iotdashboardinitial.png)
 
 ### 1.2 - Installing Windows 10 IoT Core
 

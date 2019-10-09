@@ -292,8 +292,6 @@ Get-Service iotedge
 
 ## Step 6 : Validate results in Time Series Insights
 
-### TODO
-
 Finally, back on the development machine, we can monitor device to cloud (D2C) messages from VS Code to ensure the messages are going up.
 
 1. In VS Code, open the "Azure IoT Hub Devices" pane. 

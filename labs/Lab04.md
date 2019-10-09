@@ -234,4 +234,9 @@ GROUP BY TumblingWindow(second,15)
 
 ### 5.4 - Enable IoT Hub Routes
 
-TODO: fill in.
+1. Return to your IoT Hub settings in the Azure Portal.
+2. Click on 'Message Routing'
+3. Choose the existing route and click 'Enable'
+4. Save changes
+
+This step will enable telemetry to flow into Time Series Insights which you can view from the common Resource Group.

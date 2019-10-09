@@ -9,29 +9,32 @@ This lab introduces Azure Stream Analytics with Azure IoT Edge on Windows 10 IoT
 1. Make a note of the Surface Laptop device name printed on the device. For example, IOTEDGE01
 2. Open a browser and navigate to the [Azure Portal (portal.azure.com)](https://portal.azure.com). Log in with the lab credentials provided
 3. Click **Resource groups** on the left-hand menu, select the **msiotlabs-iia-user##** resource group in the list and choose the **IoT Hub** created in [Lab 3](./Lab03.md#10---provision-azure-resources)
-4. In the left hand menu under the heading **Automatic Device Management**, click **IoT Edge**/
+4. In the left hand menu under the heading **Automatic Device Management**, click **IoT Edge**\
 ![](./media/lab04/SelectIoTEdge.png)
-5. Click **Add an IoT Edge device** at the top of the page/
+5. Click **Add an IoT Edge device** at the top of the page
 6. Enter the Surface Laptop name (from earlier) as the device id, leave the rest of the settings as default and click **Save**
 ![](./media/lab04/add-device.jpg)
 7. Click **Refresh** and your newly created device should appear in the list
-8. Select your device and take note of the **Primary Connection String**. We will be using it in the next step, so keep this page ready/
+8. Select your device and take note of the **Primary Connection String**. We will be using it in the next step, so keep this page ready\
 ![](./media/lab04/CopyConnectionStringIoTEdge.png)
 
 ### 1.2 - IoT Device setup using Azure CLI
-1. Open PowerShell as Administrator/
+1. Open the Start Menu and type **PowerShell**, then click **Run as Administrator**\
 ![](./media/lab04/powershell.jpg)
 2. Install the Azure IoT Edge runtime on the device by running the following command and waiting for the device to reboot:
 ```powershell
 . {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Deploy-IoTEdge
 ```
-![](./media/lab04/iotedge-install.jpg)/
+![](./media/lab04/iotedge-install.jpg)
+
 3. When prompted, press **Y** to reboot
 4. When the system has booted again, re-open the PowerShell session as Administrator 
 5. Configure the Azure IoT Edge runtime with the following command:
 ```powershell
 . {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Initialize-IoTEdge
 ```
+![](./media/lab04/iot-edge-initialize.png)
+
 6. Enter the Device Connection string from the previous step: 
 7. To validate the Azure IoT Edge runtime installation, use the command:
 ```powershell
@@ -43,7 +46,7 @@ iotedge check
 
 ### 2.1 - Module deployment using Azure CLI
 
-1. Open PowerShell as Administrator
+1. Open the Start Menu and type **PowerShell**, then click **Run as Administrator**\
 2. Login to Azure CLI using the following command:
 ```powershell
 az extension add --name azure-cli-iot-ext
@@ -84,7 +87,7 @@ az iot hub monitor-events --device-id [device id] --hub-name  [hub name]
 #NOTE - make sure to remove the square brackets above, for example:
 #az iot hub monitor-events --device-id device1 --hub-name  msiotlabs-iia-user06-iothub
 ```
-2. The first time that you run this command, you are required to update a dependency by pressing **y** then **enter**
+2. The first time that you run this command, you are required to update a dependency by pressing **Y** then **enter**
 
 This command will monitor the data being published into IoT Hub from the SimulatedTemperatureSensor container. It may take a while for data to start showing.
 
@@ -161,7 +164,7 @@ Stream Analytics can be used to enable complex logic on streams of data. This qu
 ### 4.3 - Verify Deployment on IoT Edge Device
 The module deployment is instant, however changes to the device can take around 5-7 minutes to take effect. Let's check that our device has loaded our Azure Stream Analytics module from the last step.
 
-1. Open Powershell as Administrator
+1. Open the Start Menu and type **PowerShell**, then click **Run as Administrator**\
 2. Inspect the currently running modules using the following command:
 ```powershell
 iotedge list

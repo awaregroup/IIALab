@@ -153,8 +153,9 @@ namespace SampleModule
                 if (Options.Exit)
                     return -1;
 
-                if (string.IsNullOrEmpty(Options.DeviceId))
-                    throw new ApplicationException("Please use --device to specify which camera to use");
+                if (!Options.UseImages)
+                    if (string.IsNullOrEmpty(Options.DeviceId))
+                        throw new ApplicationException("Please use --device to specify which camera to use");
 
                 try
                 {
@@ -237,19 +238,82 @@ namespace SampleModule
                 // Open camera
                 //
 
-                using (var frameSource = new FrameSource())
+                FrameSource frameSource = null;
+                ImageFileSource imageFileSource = null;
+
+                if (Options.UseImages)
                 {
-                    await frameSource.StartAsync(Options.DeviceId,Options.UseGpu);
+                    imageFileSource = new ImageFileSource();
+                    imageFileSource.ScanUpdateQueue(Options.ImagePath);
+                }
+                else
+                {
+                    frameSource = new FrameSource();
+                    await frameSource.StartAsync(Options.DeviceId, Options.UseGpu);
+                }
 
-                    _stats.DeviceInitialized = true;
-                    SetLatestStatsPayload(JsonConvert.SerializeObject(_stats));
+                _stats.DeviceInitialized = true;
+                SetLatestStatsPayload(JsonConvert.SerializeObject(_stats));
+
+                //
+                // Main loop
+                //
+                do
+                {
+                    ScoringOutput outcome = null;
+                    int evalticks = 0;
+                    Log.WriteLineVerbose("Getting frame...");
+
+                    byte[] data = new byte[] { };
+                    byte[] annotatedData = new byte[] { };
+                    MessageBody message = null;
 
                     //
-                    // Main loop
+                    // Use Image File Source or fall back to Webcam Source if not specified
                     //
-                    do
+                    if (Options.UseImages)
                     {
-                        Log.WriteLineVerbose("Getting frame...");
+                        using (var sbmp = await imageFileSource.GetNextImageAsync(Options.ImagePath, cts.Token))
+                            using (var vf = VideoFrame.CreateWithSoftwareBitmap(sbmp))
+                            {
+                                ImageFeatureValue imageTensor = ImageFeatureValue.CreateFromVideoFrame(vf);
+
+
+                                _stats.TotalFrames = _stats.TotalFrames + 1;
+
+                                //
+                                // Evaluate model
+                                //
+
+                                var ticksTaken = await BlockTimer("Running the model",
+                                    async () =>
+                                    {
+                                        var input = new ScoringInput() { data = imageTensor };
+                                        outcome = await model.EvaluateAsync(input);
+                                    });
+
+                                evalticks = ticksTaken;
+
+                                message = ResultsToMessage(outcome);
+                                message.metrics.evaltimeinms = evalticks;
+                                _stats.TotalEvaluations = _stats.TotalEvaluations + 1;
+
+                                string summaryText = "";
+
+                                if (message.results.Length > 0)
+                                {
+                                    summaryText = $"Matched : {message.results[0].label} - Confidence ={message.results[0].confidence.ToString("P")} - Eval Time {message.metrics.evaltimeinms} ms";
+                                }
+                                data = await ImageUtils.GetConvertedImage(sbmp);
+                                annotatedData = await ImageUtils.AnnotateImage(sbmp, $"Current Webcam : {Options.DeviceId ?? "-"}", summaryText);
+
+                                
+                        }
+
+
+                    }
+                    else
+                    {
                         using (var frame = await frameSource.GetFrameAsync())
                         {
                             var inputImage = frame.VideoMediaFrame.GetVideoFrame();
@@ -261,149 +325,83 @@ namespace SampleModule
                             // Evaluate model
                             //
 
-                            ScoringOutput outcome = null;
-                            var evalticks = await BlockTimer("Running the model",
+                            var ticksTaken = await BlockTimer("Running the model",
                                 async () =>
                                 {
                                     var input = new ScoringInput() { data = imageTensor };
                                     outcome = await model.EvaluateAsync(input);
                                 });
 
-                            //
-                            // Print results
-                            //
+                            evalticks = ticksTaken;
 
-                            _stats.TotalEvaluations = _stats.TotalEvaluations + 1;
-                            
-                            var message = ResultsToMessage(outcome);
+                            message = ResultsToMessage(outcome);
                             message.metrics.evaltimeinms = evalticks;
-                            var json = JsonConvert.SerializeObject(message);
-                            Log.WriteLineRaw($"Inferenced: {json}");
+                            _stats.TotalEvaluations = _stats.TotalEvaluations + 1;
 
-                            //
-                            // Send results to Edge
-                            //
+                            string summaryText = "";
 
-                            if (Options.UseWebServer)
+                            if (message.results.Length > 0)
                             {
-                                try
-                                {
-                                    ResultPayload payload = new ResultPayload() {Result = message};
-                                    string summaryText = "-";
-                                    if ((message.results != null)&&(message.metrics!=null))
-                                    {
-                                        long totalEvaluations = _stats.TotalEvaluationSuccessCount;
-                                        double confidence = 0.0;
-                                        string lastLabel = "";
-
-                                        _stats.TotalEvaluationSuccessCount = _stats.TotalEvaluationSuccessCount + 1;
-                                        if (message.results.Length > 0)
-                                        {
-                                            summaryText = $"Matched : {message.results[0].label} - Confidence ={message.results[0].confidence.ToString("P")} - Eval Time {message.metrics.evaltimeinms} ms";
-                                            confidence = message.results[0].confidence;
-                                            lastLabel = message.results[0].label;
-                                        }
-                                        else
-                                        {
-                                            summaryText = $"No Match - Eval Time {message.metrics.evaltimeinms} ms";
-                                        }
-
-                                        //update eval ms stats
-                                        try
-                                        {
-                                            if (totalEvaluations > 0)
-                                            {
-                                                _stats.AverageEvaluationMs = ((_stats.AverageEvaluationMs * ((double)totalEvaluations) + ((double)message.metrics.evaltimeinms))/((double)totalEvaluations+1));
-                                            }
-                                            else
-                                            {
-                                                _stats.AverageEvaluationMs = (double)message.metrics.evaltimeinms;
-                                            }
-                                        }
-                                        catch (Exception e)
-                                        {
-                                            
-                                        }
-
-                                        //update match totals
-                                        try
-                                        {
-                                            if (lastLabel != "")
-                                            {
-                                                if (totalEvaluations > 0)
-                                                {
-                                                    _stats.AverageConfidence = ((_stats.AverageConfidence * ((double)totalEvaluations) + ((double)confidence)) / ((double)totalEvaluations + 1));
-                                                }
-                                                else
-                                                {
-                                                    _stats.AverageConfidence = (double)confidence;
-                                                }
-
-                                                lock (_objLock)
-                                                {
-                                                    LabelSummary ls = _stats.MatchSummary.FirstOrDefault(o => o.Label == lastLabel);
-                                                    if (ls == null)
-                                                    {
-                                                        ls = new LabelSummary(){Label=lastLabel, TotalMatches = 1};
-                                                        _stats.MatchSummary.Add(ls);
-                                                    }
-                                                    else
-                                                    {
-                                                        ls.TotalMatches = ls.TotalMatches + 1;
-                                                    }
-                                                }
-
-                                            }
-                                        }
-                                        catch (Exception e)
-                                        {
-
-                                        }
-
-
-                                    }
-                                    else if (message.metrics == null)
-                                    {
-                                        _stats.TotalEvaluationFailCount = _stats.TotalEvaluationFailCount + 1;
-                                        summaryText = $"Evaluation Failed";
-                                    }
-                                    else
-                                    {
-                                        _stats.TotalEvaluationSuccessCount = _stats.TotalEvaluationSuccessCount + 1;
-                                        summaryText = $"No Match - Eval Time {message.metrics.evaltimeinms} ms";
-                                    }
-
-                                    payload.Statistics = _stats;
-
-                                    byte[] data = await ImageUtils.GetConvertedImage(inputImage.SoftwareBitmap);
-                                    byte[] annotatedData = await ImageUtils.AnnotateImage(inputImage.SoftwareBitmap, $"Current Webcam : {Options.DeviceId??"-"}", summaryText);
-
-                                    if (data != null)
-                                    {
-                                        payload.ImageSnapshot = Convert.ToBase64String(data);
-                                        SetLatestFrameData(JsonConvert.SerializeObject(payload), JsonConvert.SerializeObject(_stats), annotatedData);
-                                    }
-                                }
-                                catch (Exception e)
-                                {
-                                    Log.WriteLineRaw($"Failed to create Result Payload : {e.Message}");
-                                }
+                                summaryText = $"Matched : {message.results[0].label} - Confidence ={message.results[0].confidence.ToString("P")} - Eval Time {message.metrics.evaltimeinms} ms";
                             }
-
-                            if (Options.UseEdge)
-                            { 
-                                var eventMessage = new Message(Encoding.UTF8.GetBytes(json));
-                                await ioTHubModuleClient.SendEventAsync("resultsOutput", eventMessage); 
-
-                                // Let's not totally spam Edge :)
-                                await Task.Delay(500);
-                            }
+                            data = await ImageUtils.GetConvertedImage(inputImage.SoftwareBitmap);
+                            annotatedData = await ImageUtils.AnnotateImage(inputImage.SoftwareBitmap, $"Current Webcam : {Options.DeviceId ?? "-"}", summaryText);
                         }
-                    }
-                    while (Options.RunForever && ! cts.Token.IsCancellationRequested);
 
-                    await frameSource.StopAsync();
+
+
+                    }
+
+
+
+                    if (message != null)
+                    {
+
+                        //
+                        // Print results
+                        //
+                        message.metrics.evaltimeinms = evalticks;
+                        var json = JsonConvert.SerializeObject(message);
+                        Log.WriteLineRaw($"Inferenced: {json}");
+
+
+                        if (Options.UseWebServer)
+                        {
+                            //
+                            // Update the latest webserver payload snapshots with data from inferencing
+                            //
+                            UpdateWebServerPayloads(message, data, annotatedData);
+                        }
+
+                        //
+                        // Send results to Edge
+                        //
+
+
+                        if (Options.UseEdge)
+                        {
+                            var eventMessage = new Message(Encoding.UTF8.GetBytes(json));
+                            await ioTHubModuleClient.SendEventAsync("resultsOutput", eventMessage);
+
+                            // Let's not totally spam Edge :)
+                            await Task.Delay(500);
+                        }
+                        else if (Options.UseImages)
+                        {
+                            //slow it down a little..
+                            await Task.Delay(250);
+                        }
+
+
+                    }
+
+
                 }
+                while (Options.RunForever && ! cts.Token.IsCancellationRequested);
+
+                if (frameSource!=null)
+                    await frameSource.StopAsync();
+            
 
                 if (HttpServerStarted)
                 {
@@ -427,6 +425,111 @@ namespace SampleModule
             {
                 Log.WriteLineException(ex);
                 return -1;
+            }
+        }
+
+        private static void UpdateWebServerPayloads(MessageBody message, byte[] data, byte[] annotatedData)
+        {
+            try
+            {
+                ResultPayload payload = new ResultPayload() {Result = message};
+                string summaryText = "-";
+                if ((message.results != null) && (message.metrics != null))
+                {
+                    long totalEvaluations = _stats.TotalEvaluationSuccessCount;
+                    double confidence = 0.0;
+                    string lastLabel = "";
+
+                    _stats.TotalEvaluationSuccessCount = _stats.TotalEvaluationSuccessCount + 1;
+                    if (message.results.Length > 0)
+                    {
+                        summaryText =
+                            $"Matched : {message.results[0].label} - Confidence ={message.results[0].confidence.ToString("P")} - Eval Time {message.metrics.evaltimeinms} ms";
+                        confidence = message.results[0].confidence;
+                        lastLabel = message.results[0].label;
+                    }
+                    else
+                    {
+                        summaryText = $"No Match - Eval Time {message.metrics.evaltimeinms} ms";
+                    }
+
+                    //update eval ms stats
+                    try
+                    {
+                        if (totalEvaluations > 0)
+                        {
+                            _stats.AverageEvaluationMs =
+                                ((_stats.AverageEvaluationMs * ((double) totalEvaluations) +
+                                  ((double) message.metrics.evaltimeinms)) / ((double) totalEvaluations + 1));
+                        }
+                        else
+                        {
+                            _stats.AverageEvaluationMs = (double) message.metrics.evaltimeinms;
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                    }
+
+                    //update match totals
+                    try
+                    {
+                        if (lastLabel != "")
+                        {
+                            if (totalEvaluations > 0)
+                            {
+                                _stats.AverageConfidence =
+                                    ((_stats.AverageConfidence * ((double) totalEvaluations) + ((double) confidence)) /
+                                     ((double) totalEvaluations + 1));
+                            }
+                            else
+                            {
+                                _stats.AverageConfidence = (double) confidence;
+                            }
+
+                            lock (_objLock)
+                            {
+                                LabelSummary ls = _stats.MatchSummary.FirstOrDefault(o => o.Label == lastLabel);
+                                if (ls == null)
+                                {
+                                    ls = new LabelSummary() {Label = lastLabel, TotalMatches = 1};
+                                    _stats.MatchSummary.Add(ls);
+                                }
+                                else
+                                {
+                                    ls.TotalMatches = ls.TotalMatches + 1;
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                    }
+                }
+                else if (message.metrics == null)
+                {
+                    _stats.TotalEvaluationFailCount = _stats.TotalEvaluationFailCount + 1;
+                    summaryText = $"Evaluation Failed";
+                }
+                else
+                {
+                    _stats.TotalEvaluationSuccessCount = _stats.TotalEvaluationSuccessCount + 1;
+                    summaryText = $"No Match - Eval Time {message.metrics.evaltimeinms} ms";
+                }
+
+                payload.Statistics = _stats;
+
+
+                if ((data != null) && (annotatedData != null))
+                {
+                    payload.ImageSnapshot = Convert.ToBase64String(data);
+                    SetLatestFrameData(JsonConvert.SerializeObject(payload), JsonConvert.SerializeObject(_stats),
+                        annotatedData);
+                }
+            }
+            catch (Exception e)
+            {
+                Log.WriteLineRaw($"Failed to create Result Payload : {e.Message}");
             }
         }
 

@@ -7,7 +7,6 @@ For this lab, we will use the Azure Custom Vision service to train a machine lea
 
 When starting the lab, you should have these things open on your development machine:
 1. These instructions.
-1. Visual Studio Code.
 1. [Custom Vision Portal](https://www.customvision.ai/) open in a browser tab, logged in.  
 1. [Time Series Insights explorer](https://insights.timeseries.azure.com/) in another browser tab, also logged in.
 

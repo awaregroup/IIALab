@@ -85,7 +85,7 @@ When starting the lab, you should have these things open on your development mac
 
 ### 2.2 - Build & Test the sample
 
-1. Open a Command Prompt window and enter the following (this builds the machine learning model):
+1. Open a Command Prompt window and enter the following (this builds the application of the machine learning model):
 
 ```
 cd C:\Labs\Content\src\IoTLabs.CustomVision

@@ -32,16 +32,16 @@
 1. IoT Central can import existing Device Templates from the [Azure IoT Device Catalog](), however we are creating our own device. Click 'Custom'.
 ![](./media/2_iotc3.png)
 
-1. Name your device and click 'Import Capability Model'
+1. Name your device 'SensorTile.box', press Return and then click 'Import Capability Model'.  It is important that you name the device as listed.
 ![](./media/2_iotc4.png)
 
 1. Browse to the `C:\Labs\Content\src/Azure.IoTCentral/` folder and upload the file named `ST SensorTile.Box.json`.
 ![](./media/2_iotc5.png)
 
-1. Click 'Views' and click 'Generate Default Views'
+1. Click 'Views' and click 'Generate Default Views', change nothing on the sceen and click 'Generate Default Views' again.
 ![](./media/2_iotc7.png)
 
-1. Click 'Publish' and confirm the process by clicking 'Publish' again.
+1. Click 'Publish' (found at the top right) and confirm the process by clicking 'Publish' again.
 ![](./media/2_iotc6.png)
 
 ### 1.3 - Create Device from Template
@@ -62,17 +62,17 @@
 ### 2.1 - Prepare Azure IoT Hub Device Details
 1. Open a browser tab and navigate to [www.dpsgen.com/iia](https://www.dpsgen.com/iia).
 
-2. Enter the `Scope ID`, `Device ID` and `Primary Key` collected earlier and click 'Generate'. 
+2. Enter the `Scope ID`, `Device ID` and `Primary Key` collected earlier and click 'Generate JSON'. 
 
 3. Open a Command Prompt as Administrator.
-4. Replace the IP address in the following commands with the IP Address of your device, then run the commands in your command prompt window:
+4. Replace the IP address in each of the following two commands with the IP Address of your HummingBoard device, then run the two commands in your command prompt window; one command after the other:
 ```batch
 net use \\<device ip address here>\c$ /USER:administrator
 copy "%userprofile%\Downloads\tpmoverride.json" \\<device ip address here>\c$\Data\Users\DefaultAccount\AppData\Local\Packages\IoTLabs.TestApp.App_wqmbmn0a4bde6\LocalState /y
 ```
 ![](./media/2_13.png)
 
-5. Restart your device and you should see Azure IoT now showing as connected.
+5. Manually restart the HummingBoard device (you may need to connect a mouse to the device and then choose the Settings cog in the bottom left corner. In the drop-down list that shows at the top left under App Settings, choose 'Power Options' and click on the 'Restart' button). Once started you should see Azure IoT now showing as connected.
 
 ![](./media/2_14.png)
 

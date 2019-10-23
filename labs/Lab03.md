@@ -55,7 +55,7 @@ IoT Hub is the core of all IoT projects in Azure. Click on your IoT Hub resource
 |IoT Edge|This is an important component for the labs further on. This allows you to manage your IoT Edge devices in a similar fashion to the IoT Devices.|
 |Message Routing|Core to IoT Hub is a messaging platform - the ability to send messages from the Device-to-Cloud and Cloud-to-Device. Message routes allow you to forward device messages to other Azure services. There is a route configured in this solution that allows the telemetry to flow through to Time Series Insights.
 
-**Hint:** In preparation for the next step in the lab, either choose 'Resource groups' under Favorites or using the breadcrumb trail (at the top middle of the screen) click on 'Resource groups' to take you back to the higher level.
+**Hint:** In preparation for the next step in the lab, using the breadcrumb trail (at the top middle of the screen) click on the Resource group **msiotlabs-iia-userXX** to take you back to the higher level.
 
 ### 2.2 - Device Provisioning Service (DPS)
 
@@ -68,7 +68,7 @@ DPS allows devices to be embedded with an organization specific key, that allows
 |Linked IoT Hubs|DPS has the ability to enrol a device in a specific IoT Hub. You'll notice that the deployed template has connected DPS to the existing IoT Hub.|
 |Manage Enrollments|Devices that have enrolled show up in this list. You can check this area again in a future lab.|
 
-**Hint:** Once again for the next step, either choose 'Resource groups' under Favorites or using the breadcrumb trail (at the top middle of the screen) click on 'Resource groups' to take you back to the higher level.
+**Hint:** Once again for the next step, using the breadcrumb trail (at the top middle of the screen) click on **msiotlabs-iia-userXX** to take you back to the higher level.
 
 ### 2.3 - Stream Analytics (Edge)
 
@@ -82,7 +82,7 @@ Stream Analytics is a fully managed Platform as a Service (PaaS) offering on Azu
 
 The Edge version of Stream Analytics allows us to run this service inside a container on our Edge Device. 
 
-**Hint:** Jump back to 'Resource groups' once again.
+**Hint:** Jump back to **msiotlabs-iia-userXX** once again in preparation for the next step as you have done previously.
 
 ### 2.4 - Container Registry
 

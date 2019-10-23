@@ -37,7 +37,7 @@ This lab introduces Azure Stream Analytics with Azure IoT Edge on Windows 10 IoT
 ```
 ![](./media/lab04/iot-edge-initialize.png)
 
-6. Enter the Device Connection string from the previous step, including the SharedAccessKey): 
+6. Enter the Device Connection string from the previous step, including the SharedAccessKey. 
 7. To validate the Azure IoT Edge runtime installation, continue within PowerShell and use the command:
 ```powershell
 iotedge check
@@ -206,9 +206,9 @@ You should see that the machine temperature increases until it reaches a tempera
 4. Replace by edting the current query with the following:
 ```sql
 SELECT
-    AVG(machine.temperature) as temperature,
-    MAX(timeCreated) as timeCreated,
-    'lab4' AS source 
+    AVG(machine.temperature) AS temperature,
+    MAX(timeCreated) AS timeCreated,
+    'lab04' AS source 
 INTO 
    alert
 FROM

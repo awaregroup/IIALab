@@ -2,7 +2,7 @@
 
 This lab introduces Azure Stream Analytics with Azure IoT Edge on Windows 10 IoT Enterprise.
 
-## 1.0 - Set up your Surface Laptop Device
+## 1 - Set up your Surface Laptop Device
 
 ### 1.1 - Cloud setup
 
@@ -44,7 +44,7 @@ iotedge check
 ``` 
 
 
-## 2.0 - Deploy Simulated Temperature Sensor
+## 2 - Deploy Simulated Temperature Sensor
 
 ### 2.1 - Module deployment using Azure CLI
 
@@ -97,7 +97,7 @@ This command will monitor the data being published into IoT Hub from the Simulat
 
 **Note:** Use Ctrl-C to stop monitoring as we will be doing more PowerShell commands soon.
 
-## 3.0 - Configure Azure Stream Analytics Edge Job
+## 3 - Configure Azure Stream Analytics Edge Job
 
 ### 3.1 - Navigate to your Azure Stream Analytics Edge Job
 1. In the [Azure Portal (https://portal.azure.com)](https://portal.azure.com) open the **msiotlabs-iia-user##** resource group
@@ -137,7 +137,7 @@ Stream Analytics can be used to enable complex logic on streams of data. This qu
 3. Click **Save query**
 
 
-## 4.0 - Configure IoT Edge to use Azure Stream Analytics Edge Job
+## 4 - Configure IoT Edge to use Azure Stream Analytics Edge Job
 
 ### 4.1 - Module deployment using Azure Portal
 1. In the [Azure Portal (https://portal.azure.com)](https://portal.azure.com) open the **msiotlabs-iia-user##** resource group
@@ -187,7 +187,7 @@ You should see that the machine temperature increases until it reaches a tempera
 ![Temperature Reset](./media/lab04/temperature-reset.jpg)
 
 
-## 5.0 - Updating Existing IoT Edge Device Modules
+## 5 - Updating Existing IoT Edge Device Modules
 ### 5.1 - Update Module Twin
 1. In the [Azure Portal (https://portal.azure.com)](https://portal.azure.com) open the **msiotlabs-iia-user##** resource group
 2. Open the **IoT Hub** resource, navigate to **IoT Edge** and then select the device created in [step 1.1](#11---cloud-setup)

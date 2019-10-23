@@ -12,10 +12,11 @@ As we are deploying an app that has not been officially released on the Windows 
 ![](./media/lab06/developer-mode.png)
 
 ### 1.2 - Install the application
-1. Navigate to `C:\Labs\content\src\IoTLabs.AssignedAccess\IoTLabs.TestApp_1.0.1.0_Debug_Test`
-2. Right click on the file named **Install.ps1** and click **Run with PowerShell**\
+1. Navigate to `C:\Labs\content\src\IoTLabs.AssignedAccess\`
+2. Unzip **IoTLabs.TestApp_1.0.1.0_Debug_Test** and open the unzipped folder
+3. Right click on the file named **Install.ps1** and click **Run with PowerShell**\
 ![](./media/lab06/install-app.png)
-3. When prompted, type **Y** and allow the app to finish installing.
+4. When prompted, type **Y** and allow the app to finish installing.
 ![](./media/lab06/installed-app.png)
 
 

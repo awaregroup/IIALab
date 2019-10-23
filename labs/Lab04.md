@@ -50,6 +50,8 @@ iotedge check
 
 1. Open the Start Menu and type **PowerShell**, then click **Run as Administrator**\
 2. Login to Azure CLI using the following command:
+
+**Note:** You may be asked to login to your browser; use your lab credentials
 ```powershell
 az extension add --name azure-cli-iot-ext
 az login
@@ -93,6 +95,8 @@ az iot hub monitor-events --device-id [device id] --hub-name  [hub name]
 
 This command will monitor the data being published into IoT Hub from the SimulatedTemperatureSensor container. It may take a while for data to start showing.
 
+**Note:** Use Ctrl-C to stop monitoring as we will be doing more PowerShell commands soon.
+
 ## 3.0 - Configure Azure Stream Analytics Edge Job
 
 ### 3.1 - Navigate to your Azure Stream Analytics Edge Job
@@ -114,7 +118,7 @@ This command will monitor the data being published into IoT Hub from the Simulat
 
 ### 3.4 - Adding Query
 1. Under the **Job topology** heading in the left hand menu, select **Query**
-2. Enter the following query:
+2. Replace the existing Select statement with the one below:
 ```sql
 SELECT  
     'reset' AS command,
@@ -144,12 +148,14 @@ Stream Analytics can be used to enable complex logic on streams of data. This qu
 4. Under the **Deployment Modules** heading click **+ Add** and choose **Azure Stream Analytics Module**
 ![Adding ASA Module](./media/lab04/add-asa-module.jpg)
 5. Set the Subscription as **MSIoTLabs-IIA** and Edge Job as **msiotlabs-iia-user##-streamanalytics**, then click **Save**
-6. *Note: You may have to click on the **Edge job** dropdown for the save button to show.*
-7. When the module has loaded, select **Configure** and take note of the **Name** field. You will be using this module name in the next step.
-8. Click **Save**, then **Next**
+
+**Note:** You may have to click on the **Edge job** dropdown for the save button to show.
+
+6. When the module has loaded, select **Configure** and take note of the **Name** field. You will be using this module name in the next step.
+7. Click **Save**, then **Next**
 
 ### 4.2 - Selecting the routes
-1. Replace the current JSON with the following, substituting **[module name]** with the module name found in the previous step:
+1. Replace the current JSON with the following, substituting **[module name]** with the module name found in the previous step. There are 3 places that **[module name]** needs to be changed:
 
 ```javascript
 {
@@ -197,7 +203,7 @@ You should see that the machine temperature increases until it reaches a tempera
 1. In the [Azure Portal (https://portal.azure.com)](https://portal.azure.com) open the **msiotlabs-iia-user##** resource group
 2. Open the **Stream Analytics job** resource
 3. Under the **Job topology** heading in the left hand menu, select **Query**
-4. Replace the current query with the following:
+4. Replace by edting the current query with the following:
 ```sql
 SELECT
     AVG(machine.temperature) as temperature,
@@ -219,9 +225,9 @@ GROUP BY TumblingWindow(second,15)
 4. You will notice that the **Stream Analytics** module has a warning saying: "Module outdated - click here to update"
 ![](./media/lab04/outdated-module.jpg)
 5. Click **Configure** next to the **Stream Analytics** module
-6. Click the **Update ASA module**, then click **Save** and finally **Next**.
+6. Take a copy of the Name to be used in the next step. Click the **Update ASA module**, then click **Save** and finally **Next**.
 ![](./media/lab04/update-asa-module.jpg)
-7. Replace the current JSON with the following, substituting **[module name]** with the module name found in the previous step:
+7. Replace the current JSON with the following, substituting **[module name]** with the module name found in the previous step (replaced in two places):
 ```javascript
 {
   "routes": {

@@ -55,7 +55,7 @@ Devices running Windows 10 IoT Core can be installed and configured using the Io
 
 **Note:** if your device doesn't show, in the list, read the IP Address from the display and enter that in your browser on port 8080. For example: http://192.168.88.200:8080
 
-3. In your browser enter the default username and password:
+3. In your browser enter the default username and password, that we just set:
 
 |Name    |Value|
 |--------|-----|
@@ -75,7 +75,7 @@ Devices running Windows 10 IoT Core can be installed and configured using the Io
 
 ### 2.1 - Hello world
 
-1. Open up the first lab project found in [C:\Labs\content\src\IoTLabs.TestApp\IoTLabs.TestApp.sln](file:///C:\Labs\content\src\IoTLabs.TestApp\IoTLabs.TestApp.sln)  When prompted, open with VisualStudio.  Sign in to your VisualStudio account, or create one if you need to.
+1. Open up the first lab project found in [C:\Labs\content\src\IoTLabs.TestApp\IoTLabs.TestApp.sln](file:///C:\Labs\content\src\IoTLabs.TestApp\IoTLabs.TestApp.sln)  If prompted to open with VisualStudio, simply close the window as no sign in is required.
 2. Update the target system architecture to say 'ARM' as shown in the image below
 ![](./media/1_vs3.png)
 3. Change target system from 'Device' to 'Remote Machine' and enter the IP address of your HummingBoard device. This can be found on the camera screen showing your HummingBoard device.

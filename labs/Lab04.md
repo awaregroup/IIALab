@@ -15,19 +15,21 @@ This lab introduces Azure Stream Analytics with Azure IoT Edge on Windows 10 IoT
 6. Enter the Surface Laptop name (from earlier) as the device id, leave the rest of the settings as default and click **Save**
 ![](./media/lab04/add-device.jpg)
 7. Click **Refresh** and your newly created device should appear in the list
-8. Select your device and take note of the **Primary Connection String**. We will be using it in the next step, so keep this page ready\
+8. Select your device and take note of the **Primary Connection String**. We will be using it in the next step, so keep this page ready or save the into a document on your desktop for ease\
 ![](./media/lab04/CopyConnectionStringIoTEdge.png)
 
 ### 1.2 - IoT Device setup using Azure CLI
-1. Open the Start Menu and type **PowerShell**, then click **Run as Administrator**\
+**Note:** Now is a good time to Save any documents that you have been updating on your Surface Laptop device, as the next steps will cause a reboot.
+
+1. On your Surface Laptop device, open the Start Menu and type **PowerShell**, then click **Run as Administrator**\
 ![](./media/lab04/powershell.jpg)
-2. Install the Azure IoT Edge runtime on the device by running the following command and waiting for the device to reboot:
+2. Install the Azure IoT Edge runtime on the device by running the following command (click 'Yes' when it asks if you want to allow this app to make changes to your device) and waiting for the device to reboot:
 ```powershell
 . {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Deploy-IoTEdge
 ```
 ![](./media/lab04/iotedge-install.jpg)
 
-3. When prompted, press **Y** to reboot
+3. When prompted, press **Y** two times, including one to reboot
 4. When the system has booted again, re-open the PowerShell session as Administrator 
 5. Configure the Azure IoT Edge runtime with the following command:
 ```powershell
@@ -35,8 +37,8 @@ This lab introduces Azure Stream Analytics with Azure IoT Edge on Windows 10 IoT
 ```
 ![](./media/lab04/iot-edge-initialize.png)
 
-6. Enter the Device Connection string from the previous step: 
-7. To validate the Azure IoT Edge runtime installation, use the command:
+6. Enter the Device Connection string from the previous step, including the SharedAccessKey): 
+7. To validate the Azure IoT Edge runtime installation, continue within PowerShell and use the command:
 ```powershell
 iotedge check
 ``` 

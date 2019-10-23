@@ -17,7 +17,7 @@ Azure Resource Manager Templates (ARM Templates) can be deployed into Azure that
 </a><br/><br/>
 You can also visualize an ARM template to see the components that will be created.
 
-2. Choose the Resource Group that matches your lab user number, click 'Accept' on the terms and 'Purchase' to begin the provisioning process.
+2. Choose the Resource Group that matches your lab user number, click 'I agree' on the terms and 'Purchase' to begin the provisioning process.
 ![](./media/3_1.png)
 
 3. Wait for the provisioning process to complete.
@@ -55,6 +55,8 @@ IoT Hub is the core of all IoT projects in Azure. Click on your IoT Hub resource
 |IoT Edge|This is an important component for the labs further on. This allows you to manage your IoT Edge devices in a similar fashion to the IoT Devices.|
 |Message Routing|Core to IoT Hub is a messaging platform - the ability to send messages from the Device-to-Cloud and Cloud-to-Device. Message routes allow you to forward device messages to other Azure services. There is a route configured in this solution that allows the telemetry to flow through to Time Series Insights.
 
+**Hint:** In preparation for the next step in the lab, either choose 'Resource groups' under Favorites or using the breadcrumb trail (at the top middle of the screen) click on 'Resource groups' to take you back to the higher level.
+
 ### 2.2 - Device Provisioning Service (DPS)
 
 DPS allows devices to be embedded with an organization specific key, that allows them to register against a specific IoT Hub on first boot. This enables device builders to easily manufacture a fleet of devices and have them register against centrally managed IoT Hubs.
@@ -66,10 +68,11 @@ DPS allows devices to be embedded with an organization specific key, that allows
 |Linked IoT Hubs|DPS has the ability to enrol a device in a specific IoT Hub. You'll notice that the deployed template has connected DPS to the existing IoT Hub.|
 |Manage Enrollments|Devices that have enrolled show up in this list. You can check this area again in a future lab.|
 
+**Hint:** Once again for the next step, either choose 'Resource groups' under Favorites or using the breadcrumb trail (at the top middle of the screen) click on 'Resource groups' to take you back to the higher level.
 
 ### 2.3 - Stream Analytics (Edge)
 
-Stream Analytics is a fully managed PaaS offering on Azure, designed to analyze and process high volumes of fast streaming data from multiple sources simultaneously. It is available both in the Cloud and at the Edge.
+Stream Analytics is a fully managed Platform as a Service (PaaS) offering on Azure, designed to analyze and process high volumes of fast streaming data from multiple sources simultaneously. It is available both in the Cloud and at the Edge.
 
 ![](./media/3_6.png)
 
@@ -78,6 +81,8 @@ Stream Analytics is a fully managed PaaS offering on Azure, designed to analyze 
 |Query|Stream analytics allows you to write a query that is applied to the data streaming through. In a future lab we will modify this query.|
 
 The Edge version of Stream Analytics allows us to run this service inside a container on our Edge Device. 
+
+**Hint:** Jump back to 'Resource groups' once again.
 
 ### 2.4 - Container Registry
 
@@ -93,7 +98,7 @@ Container Registry is a private docker container registry that you can push cont
 
 
 ## 3 - Explore Common Resources
-As part of this lab a set of common resources have been provisioned for all lab users to share. Return to your list of Resource Groups and click on the 'common' resource group.
+As part of this lab a set of common resources have been provisioned for all lab users to share. Return to your list of Resource groups and click on the 'common' Resource group.
 
 ![](./media/3_7.png)
 
@@ -110,6 +115,6 @@ Custom Vision allows you to leverage the compute infrastructure in Azure to trai
 
 ### 3.5 - Time Series Insights
 
-Click on Time Series Insights and then 'Go To Environment' to view the user interface. The data can then be displayed here. You will return to this page to view the results of future lab exercises.
+Click on Time Series Insights Environment and then 'Go To Environment' to view the user interface. The data can then be displayed here. You will return to this page to view the results of future lab exercises.
 
 ![](./media/3_8.png)

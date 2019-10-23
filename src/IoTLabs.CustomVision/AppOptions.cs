@@ -18,6 +18,8 @@ namespace SampleModule
         public string ModelPath { get; private set; }
         public bool Exit { get; private set; } = false;
         public int WebServerPort { get; private set; } = 27418;
+        public bool UseImages { get; private set; }
+        public string ImagePath { get; private set; } = "c:\\images";
 
         public AppOptions()
         {
@@ -30,6 +32,7 @@ namespace SampleModule
             Add( "f|forever", "run forever", v => RunForever = v != null);
             Add( "g|gpu", "use GPU inferencing", v => UseGpu = v != null);
             Add("w|webserver", "use Webserver", v => UseWebServer = v != null);
+            Add("i|images", "use Images instead of camera", v => UseImages = v != null);
         }
 
         public new List<string> Parse(IEnumerable<string> args)

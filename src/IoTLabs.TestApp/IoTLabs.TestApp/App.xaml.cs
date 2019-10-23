@@ -95,14 +95,14 @@ namespace IoTLabs.TestApp
                 // 2. Add Reference to SensorTile (AwareThings.IoTCoreServices.SensorTileSensors.dll in components folder).
                 // 3. Add the HOL Skin directory to the App (create new folder HOL under \Skins). Add the skin files to the project + set them to 'Embedded Resource' / 'Copy always'
                 // 4. Uncomment these lines to (a) Set Contoso skin with SensorTile Support,  (b) Add the new Sensor Providor required by the skin (for SensorTiles.Box)
-                //locator.SensorFactoryService.AddProvidor(new SensorTileSensorProvidor());
-                //locator.DeviceConfigurationService.SetDefaultSkin("HOL", "AwareThings.WinIoTCoreServices.Skins.HOL");
+                locator.SensorFactoryService.AddProvidor(new SensorTileSensorProvidor());
+                locator.DeviceConfigurationService.SetDefaultSkin("HOL", "AwareThings.WinIoTCoreServices.Skins.HOL");
 
 
                 //HOL Step 3: 
                 // 1. Deploy the Generated TPMOverride.json file to the device (LocalState folder) with Connection settings pointing to Iot Central Device using SensorTile.Box DeviceTemplate
                 // 3. Uncomment this line so that Azure IoT Services are autostarted if TPM information is available on device (either tpmoverride.json or if not available will attempt to use device tpm).
-                //locator.DeviceConfigurationService.SetAutoStartIfTpmAvailable(true);
+                locator.DeviceConfigurationService.SetAutoStartIfTpmAvailable(true);
 
                 //------------------------------------------------------------
 

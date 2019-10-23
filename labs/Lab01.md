@@ -89,11 +89,6 @@ Devices running Windows 10 IoT Core can be installed and configured using the Io
 5. After package creation, click on the link to verify the .appx files have been created
 ![](./media/1_createapppackages5.png)
 
-## 4 - Sideload custom APPX packages _(optional)_
-
-1. TODO: Flesh these out properly
-1. Use portal to delete existing app
-1. Install new app from msix packages
 
 Once you've confirmed the appx file has been created, you can move onto the next lab: [2 - Integrating Windows IoT with Azure](./Lab02.md)
 

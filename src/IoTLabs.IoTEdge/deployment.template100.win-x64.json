@@ -61,8 +61,13 @@
         "$edgeHub": {
             "properties.desired": {
                 "routes": {
+                    "alertsToCloud": "FROM /messages/modules/[module name]/* INTO $upstream",
+                    "alertsToReset": "FROM /messages/modules/[module name]/* INTO BrokeredEndpoint(\"/modules/SimulatedTemperatureSensor/inputs/control\")",
+                    "telemetryToAsa": "FROM /messages/modules/SimulatedTemperatureSensor/* INTO BrokeredEndpoint(\"/modules/[module name]/inputs/temperature\")"
+
                     "route": "FROM /messages/* INTO $upstream",
-                    "upstream": "FROM /messages/* INTO $upstream"
+                    "upstream": "FROM /messages/* INTO $upstream",
+                    "sensorToSampleModule": "FROM /messages/modules/customvision/outputs/resultsOutput INTO $upstream",
                 },
                 "schemaVersion": "1.0",
                 "storeAndForwardConfiguration": {

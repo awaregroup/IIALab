@@ -1,4 +1,5 @@
 # Lab 02 - Integrating Windows 10 IoT with Azure IoT Central
+This lab covers setting up Azure IoT Central, creating a Device Template and adding your HummingBoard as a device. By the end of this Lab you should be able to monitor your HummingBoard device in the cloud.
 
 ## Pre-requisites
 
@@ -35,7 +36,7 @@
 1. Name your Device Template **SensorTile.box**, press Return and then click **Import Capability Model**.
 ![](./media/2_iotc4.png)
 
-1. Browse to the `C:\Labs\Content\src/Azure.IoTCentral/` folder and upload the file named `ST SensorTile.Box.json`.
+1. Browse to the `C:\Labs\Content\src\Azure.IoTCentral\` folder and upload the file named `ST SensorTile.Box.json`.
 ![](./media/2_iotc5.png)
 
 1. Click **Views** and click **Generate Default Views**, change nothing on the sceen and click **Generate Default Views** again.
@@ -76,6 +77,6 @@ copy "%userprofile%\Downloads\tpmoverride.json" \\<device ip address here>\c$\Da
 
 ![](./media/2_14.png)
 
-6. Switching back to IoT Central, you should also be able to see data in the dashboard also.
+6. Switching back to IoT Central, you should be able to see data in the dashboard as well.
 
 ![](./media/2_15.png)

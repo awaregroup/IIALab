@@ -32,7 +32,7 @@
 1. IoT Central can import existing Device Templates from the [Azure IoT Device Catalog](), however we are creating our own device. Click **Custom**.
 ![](./media/2_iotc3.png)
 
-1. Name your device **SensorTile.box**, press Return and then click **Import Capability Model**.  It is important that you name the device as listed.
+1. Name your Device Template **SensorTile.box**, press Return and then click **Import Capability Model**.
 ![](./media/2_iotc4.png)
 
 1. Browse to the `C:\Labs\Content\src/Azure.IoTCentral/` folder and upload the file named `ST SensorTile.Box.json`.

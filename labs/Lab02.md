@@ -11,7 +11,7 @@
 
 1. Navigate to [apps.azureiotcentral.com](https://apps.azureiotcentral.com) and log in with supplied lab credentials
 ![](./media/2_iotc1.png)
-2. Click "New Application", and choose the following settings:
+2. Click **New Application**, and choose the following settings:
 
 |Name    |Value|
 |--------|-----|
@@ -21,7 +21,7 @@
 |Subscription|MSIoTLabs-IIA (or bring your own)|
 |Region|Central US|
 
-3. Click "Create" to provision your application
+3. Click **Create** to provision your application
 
 
 ### 1.2 - Create Device Template

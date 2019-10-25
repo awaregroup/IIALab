@@ -6,4 +6,4 @@ WORKDIR /app
 
 COPY $EXE_DIR/ ./
 
-CMD [ "WindowsAiEdgeLabCV.exe", "-mCustomVision.onnx", "-dFront", "-fvwe" ]
+CMD [ "WindowsAiEdgeLabCV.exe", "-mCustomVision.onnx", "-dFront", "-fvwie" ]

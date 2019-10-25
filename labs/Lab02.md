@@ -19,7 +19,7 @@ This lab covers setting up Azure IoT Central, creating a Device Template and add
 |Payment Plan|Pay-as-you-go|
 |Application Template|Preview Application|
 |Application Name|[choose a name]|
-|Subscription|MSIoTLabs-IIA (or bring your own)|
+|Subscription|**MSIoTLabs-IIA-IOTC** (or bring your own)|
 |Region|Central US|
 
 3. Click **Create** to provision your application

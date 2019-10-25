@@ -11,6 +11,7 @@ using EdgeModuleSamples.Common;
 using static EdgeModuleSamples.Common.AsyncHelper;
 using System.Security.Cryptography.X509Certificates;
 using Windows.Globalization.DateTimeFormatting;
+using Windows.Media;
 
 //
 // This sample directly implements the following:
@@ -20,7 +21,7 @@ using Windows.Globalization.DateTimeFormatting;
 
 namespace SampleModule
 {
-    class FrameSource: IDisposable
+    class FrameSource :  IDisposable
     {
         private const int MinimumVideoWidth = 1080;
         private MediaCapture mediaCapture = null;
@@ -29,7 +30,7 @@ namespace SampleModule
         public static async Task<IEnumerable<string>> GetSourceNamesAsync()
         {
             var frameSourceGroups = await AsAsync(MediaFrameSourceGroup.FindAllAsync());
-            return frameSourceGroups.Select(x=>x.DisplayName);
+            return frameSourceGroups.Select(x => x.DisplayName);
         }
 
         public async Task StartAsync(string Name, bool UseGpu = false)
@@ -44,10 +45,47 @@ namespace SampleModule
                 .OrderBy(x => x.DisplayName)
                 .FirstOrDefault();
 
-            if (null == selectedGroup)
-                throw new ApplicationException($"Unable to find frame source named '{Name}'");
+            if (selectedGroup == null)
+            {
+                if ((Name == "*"))
+                {
+                    //get first camera
+                    selectedGroup = frameSourceGroups.FirstOrDefault();
+                }
+                else if (("0123456789").Contains(Name))
+                {
+                    //get camera by index
+                    try
+                    {
+                        int vCameraId = int.Parse(Name);
+                        if (vCameraId < frameSourceGroups.Count)
+                        {
+                            selectedGroup = frameSourceGroups[vCameraId];
+                        }
+                    }
+                    catch (Exception e)
+                    {
 
-            Log.WriteLine($"Selected device named '{selectedGroup.DisplayName}', based on '{Name}' filter");
+                    }
+                }
+            }
+
+            if (selectedGroup == null)
+            {
+                throw new ApplicationException($"Unable to find frame source from parameter '{Name}'");
+            }
+            else
+            {
+                try
+                {
+                    Log.WriteLine($"Selected device named '{selectedGroup.DisplayName}', based on '{Name}' filter");
+                }
+                catch (Exception e)
+                {
+                }
+            }
+
+
 
             var colorSourceInfo = selectedGroup.SourceInfos
                 .Where(x => x.MediaStreamType == MediaStreamType.VideoRecord && x.SourceKind == MediaFrameSourceKind.Color)
@@ -65,7 +103,7 @@ namespace SampleModule
             {
                 SourceGroup = selectedGroup,
                 SharingMode = MediaCaptureSharingMode.ExclusiveControl,
-                MemoryPreference =  UseGpu ? MediaCaptureMemoryPreference.Auto : MediaCaptureMemoryPreference.Cpu,
+                MemoryPreference = UseGpu ? MediaCaptureMemoryPreference.Auto : MediaCaptureMemoryPreference.Cpu,
                 StreamingCaptureMode = StreamingCaptureMode.Video
             };
 
@@ -113,7 +151,7 @@ namespace SampleModule
                 throw new ApplicationException($"Unable to create new mediaframereader");
 
             evtFrame = new EventWaitHandle(false, EventResetMode.ManualReset);
-            mediaFrameReader.FrameArrived += (s,a) => evtFrame.Set();
+            mediaFrameReader.FrameArrived += (s, a) => evtFrame.Set();
             await AsAsync(mediaFrameReader.StartAsync());
 
             Log.WriteLineVerbose("FrameReader Started");
@@ -121,12 +159,13 @@ namespace SampleModule
 
         public async Task<MediaFrameReference> GetFrameAsync()
         {
+
             MediaFrameReference result = null;
             do
             {
-                
+
                 var frameReceived = evtFrame.WaitOne(4000);
-                if(!frameReceived)
+                if (!frameReceived)
                 {
                     throw new Exception("Unable to get exclusive lock for camera device, are other camera applications open?");
                 }
@@ -139,7 +178,7 @@ namespace SampleModule
             }
             while (null == result);
 
-            return result;            
+            return result;
         }
 
         public async Task StopAsync()
@@ -152,7 +191,7 @@ namespace SampleModule
         #region IDisposable Support
         private bool disposedValue = false; // To detect redundant calls
 
-        protected virtual void Dispose(bool disposing)
+        public virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
             {

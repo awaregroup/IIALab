@@ -7,7 +7,6 @@ For this lab, we will use the Azure Custom Vision service to train a Machine Lea
 
 When starting the lab, you should have these things open on your development machine:
 1. These instructions.
-1. Visual Studio Code.
 1. [Custom Vision Portal](https://www.customvision.ai/) open in a browser tab, logged in.  
 1. [Time Series Insights explorer](https://insights.timeseries.azure.com/) in another browser tab, also logged in.
 
@@ -119,7 +118,7 @@ The following steps assume that you have created a Azure Container Registry in L
 2.  Open a PowerShell window **as Administrator** and run the following commands:
 
 ```powershell
-cd C:\Labs\Content\src\IoTLabs.CustomVision
+cd C:\Labs\Content\src\IoTLabs.CustomVision\release
 
 #this command sets the default docker host to the IoT Edge Moby host
 [System.Environment]::SetEnvironmentVariable("DOCKER_HOST", "npipe:////./pipe/iotedge_moby_engine", [System.EnvironmentVariableTarget]::Machine)
@@ -294,8 +293,6 @@ Get-Service iotedge
 ```
 
 ## 6 : Validate results in Time Series Insights
-
-### TODO
 
 Finally, back on the development machine, we can monitor device to cloud (D2C) messages from VS Code to ensure the messages are going up.
 

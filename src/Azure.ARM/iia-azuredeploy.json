@@ -85,7 +85,7 @@
                             "endpointNames": [
                                 "[variables('eventHubName')]"
                             ],
-                            "isEnabled": true
+                            "isEnabled": false
                         }
                     ],
                     "fallbackRoute": {

@@ -138,7 +138,7 @@ $containerTag = "$registryName.azurecr.io/$($imageName):$version-x64-win1809"
 docker build . -t $containerTag
 ```
 
-4.Type **$containerTag** and press **Enter** to get the full container string. Save a copy of this value as you will need it in step 5.2.
+4.  Type **$containerTag** and press **Enter** to get the full container string. Save a copy of this value as you will need it in step 5.3.
 
 ## 4 - Push Docker image to Azure Container Registery (ACR)
 
@@ -179,13 +179,19 @@ Now we need to create a device registration for an IoT Edge Device in IoT Hub th
 1. An example of the device details page is shown below:
    ![Create IoT Edge Device 4](./media/lab05/add-iot-edge-device-in-azure4.jpg)
 
-### 5.2 - Author a deployment.json file
+### 5.2 - Find Azure Container Registry Values 
+In this step we will be gathering the keys/values required for the next step. You can find most of this information in the access keys section of your container registry in Azure:
+1. Login to the [Azure Portal](https://portal.azure.com)
+2. Click on **Resource groups** and select your resource group (E.g. msiotlabs-iia-user01).
+3. Select your **Container registry** (E.g. msiotlabsiiauser01acr)
+4. Click **Access Keys**
+5. Keep this page ready for the next step
+
+### 5.3 - Author a deployment.json file
 
 Now that we have a container image with our inferencing logic stored in our container registry, it's time to create an Azure IoT Edge deployment to our device.
 
-Most of 
-
-1. Go to `C:\Labs\Content\src\IoTLabs.IoTEdge`
+1. Go to **C:\Labs\Content\src\IoTLabs.IoTEdge**
 2. Edit the **deployment.template.lab05.win-x64.json** file.
 3. In the JSON find the following variables and replace them with the correct values:
 
@@ -197,9 +203,9 @@ Most of
    | ACR_ADDRESS | Login server | *E.g. msiotlabsiiauser01acr.azurecr.io* |
    | ACR_IMAGE | Value of $containerTag | *E.g. msiotlabsiiauser01acr.azurecr.io/customvision:1.0-x64-win1809* |
    
-**Hint:** You can type $containerTag in PowerShell to get the full container string required to replace ACR_IMAGE.
+**Hint:** You can type **$containerTag** in PowerShell to get the full container string required to replace ACR_IMAGE.
 
-### 5.3 - Deploy the IoT Edge deployment.json file. 
+### 5.4 - Deploy the IoT Edge deployment.json file. 
 
 On your development machine:
 
@@ -214,7 +220,7 @@ az iot edge set-modules --device-id [device name] --hub-name [hub name] --conten
 az iot hub module-identity list --device-id [device name] --hub-name [hub name]
 ```
 
-### 5.4 - Verify the deploy has started in Azure
+### 5.5 - Verify the deploy has started in Azure
 
 1. Navigate to your IoT Edge Device in your IoT Hub.
 1. Go to the device details page.
@@ -228,7 +234,7 @@ az iot hub module-identity list --device-id [device name] --hub-name [hub name]
 **Hint:** The Desired Value column matches what is specified in the deploment template, the Reported Value column matches what the devices believes it is running.
 
 
-### 5.5 - Verify the deployment on device
+### 5.6 - Verify the deployment on device
 
 Wait a few minutes for the deployment to go through. On the target device you can inspect the running modules. Success looks like this:
 
@@ -246,7 +252,7 @@ Once the modules are up, you can inspect that the "customvision" module is opera
 PS C:\data\modules\customvision> iotedge logs customvision
 ```
 
-### 5.6 - Troubleshooting modules
+### 5.7 - Troubleshooting modules
 
 #### 1. Check that IoT Edge is configured correctly
 

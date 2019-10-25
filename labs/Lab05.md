@@ -51,28 +51,28 @@ When starting the lab, you should have these things open on your development mac
     
 ### 1.4 - Train your model
 
-1. Click on the Training button (green one in the top right).
-1. Select the Quick Training option.
-1. Click Train.
-4. Example of training your model.
+1. Click on the **Training** button (green one in the top right).
+1. Select the **Quick Training** option.
+1. Click **Train**.
+4. Example of training your model:
    ![Train model](./media/lab05/train-your-model.jpg)
 
 ### 1.5 - Test your model
 
-1. Select "Quick Test" to test the model.
+1. Select **Quick Test** to test the model.
 1. Using the camera app on your PC, take one more picture of one of the objects
 1. Upload the picture you took, verify that it was predicted correctly.
 
 ### 1.6 - Export your model
 
 1. Switch to the Performance tab in the portal.
-1. Click on Export.
-1. Select ONNX for the type.
-1. Select ONNX1.2 for the version, if you are given the option to do so.
+1. Click on **Export**.
+1. Select **ONNX** for the type.
+1. Select **ONNX1.2** for the version, if you are given the option to do so.
 1. Click Export.
    ![Export model](./media/lab05/export-your-model.jpg)
-1. After Custom Vision has prepared the Export, click Download.
-1. Extract the downloaded zip file and rename `model.onnx` to `CustomVision.onnx`.
+1. After Custom Vision has prepared the Export, click **Download**.
+1. Extract the downloaded zip file and rename **model.onnx**to **CustomVision.onnx**.
 **Hint:** Browse to your Downloads folder, find the zipped folder, right-click and 'Extract all'. 
 
 
@@ -80,7 +80,7 @@ When starting the lab, you should have these things open on your development mac
 
 ### 2.1 - Get your model file
 
-1. Copy the CustomVision.onnx model file from your downloads directory into the lab directory "C:\Labs\Content\src\IoTLabs.CustomVision", overwrite the existing onnx file.
+1. Copy the CustomVision.onnx model file from your downloads directory into the lab directory **C:\Labs\Content\src\IoTLabs.CustomVision**, overwrite the existing onnx file.
 
 ### 2.2 - Build & Test the sample
 
@@ -124,9 +124,9 @@ cd C:\Labs\Content\src\IoTLabs.CustomVision\release
 [System.Environment]::SetEnvironmentVariable("DOCKER_HOST", "npipe:////./pipe/iotedge_moby_engine", [System.EnvironmentVariableTarget]::Machine)
 ```
 
-3. Update the `$registryName` variable below, then run the commands.
+3. Update the **$registryName** variable below, then run the commands.
 
-**Note:** each time you rebuild the container, you should increment the `$version` variable.
+**Note:** each time you rebuild the container, you should increment the **$version** variable.
 
 ```powershell
 #SAMPLE: msiotlabsuser06acr (this is the container registry created in lab 03)
@@ -138,32 +138,23 @@ $containerTag = "$registryName.azurecr.io/$($imageName):$version-x64-win1809"
 docker build . -t $containerTag
 ```
 
-**Hint:** you can type $containerTag to show the full container string.
+4.Type **$containerTag** and press **Enter** to get the full container string. Save a copy of this value as you will need it in step 5.2.
 
 ## 4 - Push Docker image to Azure Container Registery (ACR)
 
 ### 4.1 - Push container to ACR
 
-1. Run the following commands to login and upload the container into Azure:
+1. Run the following powershell commands to login to the Azure CLI and set your Azure subscription scope to our lab subscription:
+```
+az login
+az account set --subscription 'MSIoTLabs-IIA'
+```
+
+2. Run the following commands to login to the Azure Container Registry and upload the container into Azure:
 
 ```powershell
 az acr login --name $registryName
 docker push $containerTag
-```
-
-1. If you get an error about not being able to connect to the registry then you will have to login.
-
-```
-az login
-az account show
-```
-
-* Note: You may have to set the tenant first using the `az login` command with the `--tenant` flag
-
-1. Login to the correct subscription
-
-```
-az account set --subscription 'MSIoTLabs-IIA'
 ```
 
 ## 5 - Deploy IoT Edge Modules
@@ -172,7 +163,7 @@ az account set --subscription 'MSIoTLabs-IIA'
 
 Now we need to create a device registration for an IoT Edge Device in IoT Hub that mirrors our physical IoT Edge device.
 
-1. Login to the Azure Portal.
+1. Login to the [Azure Portal](https://portal.azure.com).
 1. Find your IoT Hub.
 1. Go to Automatic Device Management > IoT Edge.
    ![Create IoT Edge Device 1](./media/lab05/add-iot-edge-device-in-azure1.jpg)   
@@ -182,8 +173,8 @@ Now we need to create a device registration for an IoT Edge Device in IoT Hub th
 1. Leave the rest of the settings as the default values.
 1. Verify that all the details you have entered are correct.
    ![Create IoT Edge Device 3](./media/lab05/add-iot-edge-device-in-azure3.jpg)   
-1. Click Save.
-1. Click Refresh to update the list of devices.
+1. Click **Save**.
+1. Click **Refresh** to update the list of devices.
 1. Click on your device to view its details.
 1. An example of the device details page is shown below:
    ![Create IoT Edge Device 4](./media/lab05/add-iot-edge-device-in-azure4.jpg)
@@ -192,11 +183,21 @@ Now we need to create a device registration for an IoT Edge Device in IoT Hub th
 
 Now that we have a container image with our inferencing logic stored in our container registry, it's time to create an Azure IoT Edge deployment to our device.
 
-1. Go to "C:\Labs\Content\src\IoTLabs.IoTEdge"
-1. Edit the "deployment.template.lab05.win-x64.json" file.
-1. Search for any variables starting with ACR and replace those values with the correct values for your container repository. The ACR_IMAGE must exactly match what you pushed, e.g. aiedgelabcr.azurecr.io/customvision:1.0-x64-iotcore
+Most of 
 
-**Hint:** You can type $containerTag to get the full container string from PowerShell.
+1. Go to `C:\Labs\Content\src\IoTLabs.IoTEdge`
+2. Edit the **deployment.template.lab05.win-x64.json** file.
+3. In the JSON find the following variables and replace them with the correct values:
+
+   | Variables | Value | Example |
+   | --- | --- | --- |
+   | ACR_NAME | Registry name | *E.g. msiotlabsiiauser01acr* |
+   | ACR_USER | Username | *E.g. msiotlabsiiauser01acr* |
+   | ACR_PASSWORD | Password | *E.g. gEkhrpi7ODwuZnpyoCY1WTPyOGX/+JEB* |
+   | ACR_ADDRESS | Login server | *E.g. msiotlabsiiauser01acr.azurecr.io* |
+   | ACR_IMAGE | Value of $containerTag | *E.g. msiotlabsiiauser01acr.azurecr.io/customvision:1.0-x64-win1809* |
+   
+**Hint:** You can type $containerTag in PowerShell to get the full container string required to replace ACR_IMAGE.
 
 ### 5.3 - Deploy the IoT Edge deployment.json file. 
 

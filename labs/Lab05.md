@@ -72,8 +72,8 @@ When starting the lab, you should have these things open on your development mac
 1. Click Export.
    ![Export model](./media/lab05/export-your-model.jpg)
 1. After Custom Vision has prepared the Export, click **Download**.
-1. Extract the downloaded zip file and rename **model.onnx**to **CustomVision.onnx**.
-**Hint:** Browse to your Downloads folder, find the zipped folder, right-click and 'Extract all'. 
+1. Extract the downloaded zip file and rename **model.onnx** to **CustomVision.onnx**.
+**Hint:** Browse to your Downloads folder, find the zipped folder, right-click and **Extract all**. 
 
 
 ## 2 - Package the model into a C# .NET Application

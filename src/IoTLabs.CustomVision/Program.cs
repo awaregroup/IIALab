@@ -49,7 +49,7 @@ namespace SampleModule
                     _lastStatsPayload = lastStatsPayload;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
             }
         }
@@ -65,7 +65,7 @@ namespace SampleModule
                     _lastAnnotatedImage = lastAnnotatedImage;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
             }
         }
@@ -75,16 +75,16 @@ namespace SampleModule
             byte[] result = new byte[] { };
             try
             {
-                
+
                 lock (_objLock)
                 {
-                    if (_lastStatsPayload!=null)
-                    { 
+                    if (_lastStatsPayload != null)
+                    {
                         result = _lastAnnotatedImage;
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
             }
 
@@ -102,7 +102,7 @@ namespace SampleModule
                     result = _lastPayload;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
             }
 
@@ -120,7 +120,7 @@ namespace SampleModule
                     result = _lastStatsPayload;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
             }
 
@@ -145,8 +145,8 @@ namespace SampleModule
                     var devices = await FrameSource.GetSourceNamesAsync();
 
                     Log.WriteLine("Available cameras:");
-                    
-                    foreach(var device in devices)
+
+                    foreach (var device in devices)
                         Log.WriteLine(device);
                 }
 
@@ -170,10 +170,10 @@ namespace SampleModule
                     _stats.CurrentVideoDeviceId = Options.DeviceId;
                     _stats.Platform = $"{AnalyticsInfo.VersionInfo.DeviceFamily} - {System.Environment.GetEnvironmentVariable("PROCESSOR_ARCHITECTURE") ?? "Unknown"} - {systemVersion}";
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                 }
-                
+
 
                 //
                 // Init module client
@@ -195,11 +195,12 @@ namespace SampleModule
 
                 ScoringModel model = null;
                 await BlockTimer($"Loading modelfile '{Options.ModelPath}' on the {(Options.UseGpu ? "GPU" : "CPU")}",
-                    async () => {
+                    async () =>
+                    {
                         var d = Directory.GetCurrentDirectory();
                         var path = d + "\\" + Options.ModelPath;
                         StorageFile modelFile = await AsAsync(StorageFile.GetFileFromPathAsync(path));
-                        model = await ScoringModel.CreateFromStreamAsync(modelFile,Options.UseGpu);
+                        model = await ScoringModel.CreateFromStreamAsync(modelFile, Options.UseGpu);
                     });
 
                 _stats.OnnxModelLoaded = true;
@@ -273,41 +274,39 @@ namespace SampleModule
                     //
                     if (Options.UseImages)
                     {
-                        using (var sbmp = await imageFileSource.GetNextImageAsync(Options.ImagePath, cts.Token))
-                            using (var vf = VideoFrame.CreateWithSoftwareBitmap(sbmp))
-                            {
-                                ImageFeatureValue imageTensor = ImageFeatureValue.CreateFromVideoFrame(vf);
+                        var (fileName, sbmp) = await imageFileSource.GetNextImageAsync(Options.ImagePath, cts.Token);
+                        using (var vf = VideoFrame.CreateWithSoftwareBitmap(sbmp))
+                        {
+                            ImageFeatureValue imageTensor = ImageFeatureValue.CreateFromVideoFrame(vf);
 
 
-                                _stats.TotalFrames = _stats.TotalFrames + 1;
+                            _stats.TotalFrames = _stats.TotalFrames + 1;
 
-                                //
-                                // Evaluate model
-                                //
+                            //
+                            // Evaluate model
+                            //
 
-                                var ticksTaken = await BlockTimer("Running the model",
-                                    async () =>
-                                    {
-                                        var input = new ScoringInput() { data = imageTensor };
-                                        outcome = await model.EvaluateAsync(input);
-                                    });
-
-                                evalticks = ticksTaken;
-
-                                message = ResultsToMessage(outcome);
-                                message.metrics.evaltimeinms = evalticks;
-                                _stats.TotalEvaluations = _stats.TotalEvaluations + 1;
-
-                                string summaryText = "";
-
-                                if (message.results.Length > 0)
+                            var ticksTaken = await BlockTimer("Running the model",
+                                async () =>
                                 {
-                                    summaryText = $"Matched : {message.results[0].label} - Confidence ={message.results[0].confidence.ToString("P")} - Eval Time {message.metrics.evaltimeinms} ms";
-                                }
-                                data = await ImageUtils.GetConvertedImage(sbmp);
-                                annotatedData = await ImageUtils.AnnotateImage(sbmp, $"Current Webcam : {Options.DeviceId ?? "-"}", summaryText);
+                                    var input = new ScoringInput() { data = imageTensor };
+                                    outcome = await model.EvaluateAsync(input);
+                                });
 
-                                
+                            evalticks = ticksTaken;
+
+                            message = ResultsToMessage(outcome);
+                            message.metrics.evaltimeinms = evalticks;
+                            _stats.TotalEvaluations = _stats.TotalEvaluations + 1;
+
+                            string summaryText = "";
+
+                            if (message.results.Length > 0)
+                            {
+                                summaryText = $"Matched : {message.results[0].label} - Confidence ={message.results[0].confidence.ToString("P")} - Eval Time {message.metrics.evaltimeinms} ms";
+                            }
+                            data = await ImageUtils.GetConvertedImage(sbmp);
+                            annotatedData = await ImageUtils.AnnotateImage(sbmp, $"Current Image : {fileName ?? "-"}", summaryText);
                         }
 
 
@@ -397,11 +396,11 @@ namespace SampleModule
 
 
                 }
-                while (Options.RunForever && ! cts.Token.IsCancellationRequested);
+                while (Options.RunForever && !cts.Token.IsCancellationRequested);
 
-                if (frameSource!=null)
+                if (frameSource != null)
                     await frameSource.StopAsync();
-            
+
 
                 if (HttpServerStarted)
                 {
@@ -413,9 +412,9 @@ namespace SampleModule
                         httpsv = null;
                         Log.WriteLine($"- Web Server Stopped.");
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
-                        
+
                     }
                 }
 
@@ -432,7 +431,7 @@ namespace SampleModule
         {
             try
             {
-                ResultPayload payload = new ResultPayload() {Result = message};
+                ResultPayload payload = new ResultPayload() { Result = message };
                 string summaryText = "-";
                 if ((message.results != null) && (message.metrics != null))
                 {
@@ -459,15 +458,15 @@ namespace SampleModule
                         if (totalEvaluations > 0)
                         {
                             _stats.AverageEvaluationMs =
-                                ((_stats.AverageEvaluationMs * ((double) totalEvaluations) +
-                                  ((double) message.metrics.evaltimeinms)) / ((double) totalEvaluations + 1));
+                                ((_stats.AverageEvaluationMs * ((double)totalEvaluations) +
+                                  ((double)message.metrics.evaltimeinms)) / ((double)totalEvaluations + 1));
                         }
                         else
                         {
-                            _stats.AverageEvaluationMs = (double) message.metrics.evaltimeinms;
+                            _stats.AverageEvaluationMs = (double)message.metrics.evaltimeinms;
                         }
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
                     }
 
@@ -479,12 +478,12 @@ namespace SampleModule
                             if (totalEvaluations > 0)
                             {
                                 _stats.AverageConfidence =
-                                    ((_stats.AverageConfidence * ((double) totalEvaluations) + ((double) confidence)) /
-                                     ((double) totalEvaluations + 1));
+                                    ((_stats.AverageConfidence * ((double)totalEvaluations) + ((double)confidence)) /
+                                     ((double)totalEvaluations + 1));
                             }
                             else
                             {
-                                _stats.AverageConfidence = (double) confidence;
+                                _stats.AverageConfidence = (double)confidence;
                             }
 
                             lock (_objLock)
@@ -492,7 +491,7 @@ namespace SampleModule
                                 LabelSummary ls = _stats.MatchSummary.FirstOrDefault(o => o.Label == lastLabel);
                                 if (ls == null)
                                 {
-                                    ls = new LabelSummary() {Label = lastLabel, TotalMatches = 1};
+                                    ls = new LabelSummary() { Label = lastLabel, TotalMatches = 1 };
                                     _stats.MatchSummary.Add(ls);
                                 }
                                 else
@@ -502,7 +501,7 @@ namespace SampleModule
                             }
                         }
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
                     }
                 }
@@ -549,7 +548,7 @@ namespace SampleModule
                 {
                     //get last full payload with image
                     e.Response.ContentType = "application/json";
-                    e.Response.WriteContent(Encoding.UTF8.GetBytes(GetLatestStatsPayload()??"{}"));
+                    e.Response.WriteContent(Encoding.UTF8.GetBytes(GetLatestStatsPayload() ?? "{}"));
                 }
                 else if (t == "/image")
                 {
@@ -558,7 +557,7 @@ namespace SampleModule
                     e.Response.WriteContent(GetLatestAnnotatedImage());
                 }
             }
-            catch (Exception exception)
+            catch (Exception)
             {
             }
         }
@@ -573,7 +572,7 @@ namespace SampleModule
             return message;
         }
 
-        
+
         /// <summary>
         /// Initializes the ModuleClient and sets up the callback to receive
         /// messages containing temperature information

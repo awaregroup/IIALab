@@ -98,7 +98,7 @@ Run the sample locally to classify the object. This will test that the app is ru
 
 **Note:** You must close the camera app if it is open
 ```
-dotnet run --model=CustomVision.onnx --device=Front
+dotnet run -i --model=CustomVision.onnx
 
 4/24/2019 4:09:04 PM: Loading modelfile 'CustomVision.onnx' on the CPU...
 4/24/2019 4:09:04 PM: ...OK 594 ticks

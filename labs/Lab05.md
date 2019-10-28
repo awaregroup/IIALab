@@ -39,7 +39,7 @@ When starting the lab, you should have these things open on your development mac
     
 1. Verify that all the details you have entered are correct.
    ![Create Custom Vision project](./media/lab05/create-custom-vision-project.jpg)
-1. Click Create project.
+1. Click **Create project**.
 
 ### 1.3 - Upload and tag training data
 
@@ -167,7 +167,7 @@ Now we need to create a device registration for an IoT Edge Device in IoT Hub th
 1. Find your IoT Hub.
 1. Go to Automatic Device Management > IoT Edge.
    ![Create IoT Edge Device 1](./media/lab05/add-iot-edge-device-in-azure1.jpg)   
-1. Click + Add an IoT Edge device.
+1. Click **+ Add an IoT Edge device**.
    ![Create IoT Edge Device 2](./media/lab05/add-iot-edge-device-in-azure2.jpg)   
 1. Enter a name for your IoT Edge device.
 1. Leave the rest of the settings as the default values.
@@ -303,9 +303,9 @@ Get-Service iotedge
 
 Finally, back on the development machine, we can monitor device to cloud (D2C) messages from VS Code to ensure the messages are going up.
 
-1. In VS Code, open the "Azure IoT Hub Devices" pane. 
-1. Locate the device there named "ai-edge-lab-device". 
-1. Right-click on that device, then select "Start monitoring D2C message".
+1. In VS Code, open the **Azure IoT Hub Devices** pane. 
+1. Locate the device there named **ai-edge-lab-device**. 
+1. Right-click on that device, then select **Start monitoring D2C message**.
 1. Look for inferencing results in the output window.
 
 Once you see this, you can be certain the inferencing is happening on the target device and flowing up to the Azure IoT Hub.

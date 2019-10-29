@@ -127,7 +127,7 @@ cd C:\Labs\Content\src\IoTLabs.CustomVision\release
 **Note:** each time you rebuild the container, you should increment the **$version** variable.
 
 ```powershell
-#SAMPLE: msiotlabsuser06acr (this is the container registry created in lab 03)
+#SAMPLE: msiotlabsiiauser01acr (this is the container registry created in lab 03)
 $registryName = "[azure-container-registry-name]"
 $version = "1.0"
 $imageName = "customvision"

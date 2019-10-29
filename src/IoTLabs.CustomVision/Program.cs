@@ -286,7 +286,7 @@ namespace SampleModule
                             // Evaluate model
                             //
 
-                            var ticksTaken = await BlockTimer("Running the model",
+                            var ticksTaken = await BlockTimer($"Running the model",
                                 async () =>
                                 {
                                     var input = new ScoringInput() { data = imageTensor };
@@ -298,6 +298,7 @@ namespace SampleModule
                             message = ResultsToMessage(outcome);
                             message.metrics.evaltimeinms = evalticks;
                             _stats.TotalEvaluations = _stats.TotalEvaluations + 1;
+                            message.imgSrc = fileName;
 
                             string summaryText = "";
 
@@ -323,7 +324,6 @@ namespace SampleModule
                             //
                             // Evaluate model
                             //
-
                             var ticksTaken = await BlockTimer("Running the model",
                                 async () =>
                                 {
@@ -346,23 +346,21 @@ namespace SampleModule
                             data = await ImageUtils.GetConvertedImage(inputImage.SoftwareBitmap);
                             annotatedData = await ImageUtils.AnnotateImage(inputImage.SoftwareBitmap, $"Current Webcam : {Options.DeviceId ?? "-"}", summaryText);
                         }
-
-
-
                     }
-
-
 
                     if (message != null)
                     {
-
                         //
                         // Print results
                         //
                         message.metrics.evaltimeinms = evalticks;
-                        var json = JsonConvert.SerializeObject(message);
+                        var json = JsonConvert.SerializeObject(message,
+                            new JsonSerializerSettings
+                            {
+                                //won't print null imgSrc if null
+                                NullValueHandling = NullValueHandling.Ignore
+                            });
                         Log.WriteLineRaw($"Inferenced: {json}");
-
 
                         if (Options.UseWebServer)
                         {
@@ -388,13 +386,9 @@ namespace SampleModule
                         else if (Options.UseImages)
                         {
                             //slow it down a little..
-                            await Task.Delay(250);
+                            await Task.Delay(TimeSpan.FromSeconds(5));
                         }
-
-
                     }
-
-
                 }
                 while (Options.RunForever && !cts.Token.IsCancellationRequested);
 

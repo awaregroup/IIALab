@@ -10,6 +10,7 @@ namespace SampleModule
     {
         public LabelResult[] results;
         public Metrics metrics = new Metrics();
+        public string imgSrc;
     }
 
     public class LabelResult

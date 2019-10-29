@@ -97,7 +97,10 @@ cd C:\Labs\Content\src\IoTLabs.CustomVision
 dotnet restore -r win-x64
 dotnet publish -c Release -o ./release -r win-x64 --self-contained true
 dotnet run -i --model=CustomVision.onnx
+```
 
+**Example output:**
+```
 4/24/2019 4:09:04 PM: Loading modelfile 'CustomVision.onnx' on the CPU...
 4/24/2019 4:09:04 PM: ...OK 594 ticks
 4/24/2019 4:09:05 PM: Running the model...

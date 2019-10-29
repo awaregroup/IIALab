@@ -157,27 +157,8 @@ docker push $containerTag
 
 ## 5 - Deploy IoT Edge Modules
 
-### 5.1 - Create an IoT Edge Device in IoT Hub
 
-Now we need to create a device registration for an IoT Edge Device in IoT Hub that mirrors our physical IoT Edge device.
-
-1. Login to the [Azure Portal](https://portal.azure.com).
-1. Find your IoT Hub.
-1. Go to Automatic Device Management > IoT Edge.
-   ![Create IoT Edge Device 1](./media/lab05/add-iot-edge-device-in-azure1.jpg)   
-1. Click **+ Add an IoT Edge device**.
-   ![Create IoT Edge Device 2](./media/lab05/add-iot-edge-device-in-azure2.jpg)   
-1. Enter a name for your IoT Edge device.
-1. Leave the rest of the settings as the default values.
-1. Verify that all the details you have entered are correct.
-   ![Create IoT Edge Device 3](./media/lab05/add-iot-edge-device-in-azure3.jpg)   
-1. Click **Save**.
-1. Click **Refresh** to update the list of devices.
-1. Click on your device to view its details.
-1. An example of the device details page is shown below:
-   ![Create IoT Edge Device 4](./media/lab05/add-iot-edge-device-in-azure4.jpg)
-
-### 5.2 - Find Azure Container Registry Values 
+### 5.1 - Find Azure Container Registry Values 
 In this step we will be gathering the keys/values required for the next step. You can find most of this information in the access keys section of your container registry in Azure:
 1. Login to the [Azure Portal](https://portal.azure.com)
 2. Click on **Resource groups** and select your resource group (E.g. msiotlabs-iia-user01).
@@ -185,7 +166,7 @@ In this step we will be gathering the keys/values required for the next step. Yo
 4. Click **Access Keys**
 5. Keep this page ready for the next step
 
-### 5.3 - Author a deployment.json file
+### 5.2 - Author a deployment.json file
 
 Now that we have a container image with our inferencing logic stored in our container registry, it's time to create an Azure IoT Edge deployment to our device.
 
@@ -203,22 +184,24 @@ Now that we have a container image with our inferencing logic stored in our cont
    
 **Hint:** You can type **$containerTag** in PowerShell to get the full container string required to replace ACR_IMAGE.
 
-### 5.4 - Deploy the IoT Edge deployment.json file. 
+### 5.3 - Deploy the IoT Edge deployment.json file. 
 
-On your development machine:
+Using the IoT Edge device that we created in Lab04, we will overwrite the modules with a new 'custom vision' module.
 
-1. Just like the example deployment, use the following syntax to update the expected module state on the device. IoT Edge will pick up on this configuration change and deploy the container to the device.
+1. Swap out **[device name]** and **[hub name]** then run the following command:
 
 ```
+#SAMPLE: az iot edge set-modules --device-id IOTEDGE01 --hub-name msiotlabs-iia-user01-iothub --content "C:\Labs\Content\src\IoTLabs.IoTEdge\deployment.template.lab05.win-x64.json"
 az iot edge set-modules --device-id [device name] --hub-name [hub name] --content "C:\Labs\Content\src\IoTLabs.IoTEdge\deployment.template.lab05.win-x64.json"
 ```
 
-2. Run the following command to get information about the modules deployed to your IoT Hub.
+2. To get information about the modules deployed to your IoT Hub, swap out **[device name]** and **[hub name]** then run the following command:
 ```
+#SAMPLE: az iot hub module-identity list  --device-id IOTEDGE01 --hub-name msiotlabs-iia-user01-iothub
 az iot hub module-identity list --device-id [device name] --hub-name [hub name]
 ```
 
-### 5.5 - Verify the deploy has started in Azure
+### 5.4 - Verify the deploy has started in Azure
 
 1. Navigate to your IoT Edge Device in your IoT Hub.
 1. Go to the device details page.
@@ -232,7 +215,7 @@ az iot hub module-identity list --device-id [device name] --hub-name [hub name]
 **Hint:** The Desired Value column matches what is specified in the deploment template, the Reported Value column matches what the devices believes it is running.
 
 
-### 5.6 - Verify the deployment on device
+### 5.5 - Verify the deployment on device
 
 Wait a few minutes for the deployment to go through. On the target device you can inspect the running modules. Success looks like this:
 
@@ -250,7 +233,7 @@ Once the modules are up, you can inspect that the "customvision" module is opera
 PS C:\data\modules\customvision> iotedge logs customvision
 ```
 
-### 5.7 - Troubleshooting modules
+### 5.6 - Troubleshooting modules
 
 #### 1. Check that IoT Edge is configured correctly
 

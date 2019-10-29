@@ -82,29 +82,27 @@ When starting the lab, you should have these things open on your development mac
 
 1. Copy the CustomVision.onnx model file from your downloads directory into the lab directory **C:\Labs\Content\src\IoTLabs.CustomVision**, overwrite the existing onnx file.
 
-### 2.2 - Build & Test the sample
+### 2.2 Add Images 
 
-1. Open a Command Prompt window and enter the following (this builds the application of the machine learning model):
+1. Navigate to **C:\images** and add some new images that you would like the model to evaluate.
+**Note:** The images must be .jpg and **must not** be in a sub folder (C:/images/sub/image.jpg).
+
+
+### 2.3 - Build & Test the sample
+
+1. Open a Command Prompt window and enter the following commands (this builds the application and runs our machine learning model on the `C:/images` folder):
 
 ```
 cd C:\Labs\Content\src\IoTLabs.CustomVision
 dotnet restore -r win-x64
 dotnet publish -c Release -o ./release -r win-x64 --self-contained true
-```
-
-2. Hold your objects up in front of the camera, while still connected to your development Lab PC.
-
-Run the sample locally to classify the object. This will test that the app is running correctly locally. We specify "Front" for this model of camera. Here we can see that a "Mug" has been recognized.
-
-**Note:** You must close the camera app if it is open
-```
 dotnet run -i --model=CustomVision.onnx
 
 4/24/2019 4:09:04 PM: Loading modelfile 'CustomVision.onnx' on the CPU...
 4/24/2019 4:09:04 PM: ...OK 594 ticks
 4/24/2019 4:09:05 PM: Running the model...
 4/24/2019 4:09:05 PM: ...OK 47 ticks
-4/24/2019 4:09:05 PM: Recognized {"results":[{"label":"Mug","confidence":1.0}],"metrics":{"evaltimeinms":47,"cycletimeinms":0}}
+4/24/2019 4:09:05 PM: Inferenced: {"results":[{"label":"Mug","confidence":1.0}],"metrics":{"evaltimeinms":47,"cycletimeinms":0},"imgSrc":"c:\images\mug.jpg"}
 ```
 
 ## 3 - Build and push a container

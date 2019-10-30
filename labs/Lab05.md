@@ -90,7 +90,7 @@ When starting the lab, you should have these things open on your development mac
 
 ### 2.3 - Build & Test the sample
 
-1. Open a Command Prompt window and enter the following commands (this builds the application and runs our machine learning model on the `C:/images` folder):
+1. Open a Command Prompt window and enter the following 4 lines of commands, **one after the other**. These commands build, then runs the application using our machine learning model and the images in the `C:/images` folder as the test data:
 
 ```
 cd C:\Labs\Content\src\IoTLabs.CustomVision
@@ -116,7 +116,7 @@ The following steps assume that you have created a Azure Container Registry in L
 
 1. Ensure that docker is running or that it is in your PATH variables.
     * If you are using Docker Desktop then ensure it is running in Windows mode.
-2.  Open a PowerShell window **as Administrator** and run the following commands:
+2.  Open a PowerShell window **as Administrator** (right click on the PowerShell entry and select Run as Administrator) and run the following commands:
 
 ```powershell
 cd C:\Labs\Content\src\IoTLabs.CustomVision\release
@@ -184,19 +184,23 @@ Now that we have a container image with our inferencing logic stored in our cont
    | ACR_PASSWORD | Password | *E.g. gEkhrpi7ODwuZnpyoCY1WTPyOGX/+JEB* |
    | ACR_ADDRESS | Login server | *E.g. msiotlabsiiauser01acr.azurecr.io* |
    | ACR_IMAGE | Value of $containerTag | *E.g. msiotlabsiiauser01acr.azurecr.io/customvision:1.0-x64-win1809* |
-   
+
+**Hint:** Jump back to the page you kept ready in the previous step, especially for the password.
 **Hint:** You can type **$containerTag** in PowerShell to get the full container string required to replace ACR_IMAGE.
+**Hint:** The ACR_IMAGE is in the customvision module definition.
 
 ### 5.3 - Deploy the IoT Edge deployment.json file. 
 
 Using the IoT Edge device that we created in Lab04, we will overwrite the modules with a new 'custom vision' module.
 
-1. Swap out **[device name]** and **[hub name]** then run the following command:
+1. Swap out **[device name]** and **[hub name]** then run the following command in PowerShell:
 
 ```
 #SAMPLE: az iot edge set-modules --device-id IOTEDGE01 --hub-name msiotlabs-iia-user01-iothub --content "C:\Labs\Content\src\IoTLabs.IoTEdge\deployment.template.lab05.win-x64.json"
 az iot edge set-modules --device-id [device name] --hub-name [hub name] --content "C:\Labs\Content\src\IoTLabs.IoTEdge\deployment.template.lab05.win-x64.json"
 ```
+
+**Hint:** If your forgot your device id, check the note on your lab laptop. Alternatively you can find this in the Azure Portal by navigating to your Resource group, then into the IoT Hub, and selecting the IoT Edge option under the Automatic Device Manager header on the left.
 
 2. To get information about the modules deployed to your IoT Hub, swap out **[device name]** and **[hub name]** then run the following command:
 ```
@@ -220,10 +224,15 @@ az iot hub module-identity list --device-id [device name] --hub-name [hub name]
 
 ### 5.5 - Verify the deployment on device
 
-Wait a few minutes for the deployment to go through. On the target device you can inspect the running modules. Success looks like this:
+Wait a few minutes for the deployment to go through. On the target device you can inspect the running modules. Run the command below in PowerShell:
 
 ```
-[192.168.1.102]: PS C:\data\modules\customvision> iotedge list
+iotedge list
+```
+
+Success looks like this:
+
+```
 NAME             STATUS           DESCRIPTION      CONFIG
 customvision     running          Up 32 seconds    aiedgelabcr.azurecr.io/customvision:1.0-x64-iotcore
 edgeAgent        running          Up 2 minutes     mcr.microsoft.com/azureiotedge-agent:1.0
@@ -233,7 +242,7 @@ edgeHub          running          Up 1 second      mcr.microsoft.com/azureiotedg
 Once the modules are up, you can inspect that the "customvision" module is operating correctly:
 
 ```
-PS C:\data\modules\customvision> iotedge logs customvision
+iotedge logs customvision
 ```
 
 ### 5.6 - Troubleshooting modules
@@ -282,14 +291,3 @@ Make sure to check that the `iotedge` runtime has started successfully:
 ```
 Get-Service iotedge
 ```
-
-## 6 : Validate results in Time Series Insights
-
-Finally, back on the development machine, we can monitor device to cloud (D2C) messages from VS Code to ensure the messages are going up.
-
-1. In VS Code, open the **Azure IoT Hub Devices** pane. 
-1. Locate the device there named **ai-edge-lab-device**. 
-1. Right-click on that device, then select **Start monitoring D2C message**.
-1. Look for inferencing results in the output window.
-
-Once you see this, you can be certain the inferencing is happening on the target device and flowing up to the Azure IoT Hub.

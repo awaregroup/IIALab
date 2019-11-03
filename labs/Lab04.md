@@ -2,7 +2,7 @@
 
 This lab introduces Azure Stream Analytics with Azure IoT Edge on Windows 10 IoT Enterprise.
 
-## 1.0 - Set up your Surface Laptop Device
+## 1 - Set up your Surface Laptop Device
 
 ### 1.1 - Cloud setup
 
@@ -15,19 +15,21 @@ This lab introduces Azure Stream Analytics with Azure IoT Edge on Windows 10 IoT
 6. Enter the Surface Laptop name (from earlier) as the device id, leave the rest of the settings as default and click **Save**
 ![](./media/lab04/add-device.jpg)
 7. Click **Refresh** and your newly created device should appear in the list
-8. Select your device and take note of the **Primary Connection String**. We will be using it in the next step, so keep this page ready\
+8. Select your device and take note of the **Primary Connection String**. We will be using it in the next step, so keep this page ready or save the into a document on your desktop for ease\
 ![](./media/lab04/CopyConnectionStringIoTEdge.png)
 
 ### 1.2 - IoT Device setup using Azure CLI
-1. Open the Start Menu and type **PowerShell**, then click **Run as Administrator**\
+**Note:** Now is a good time to Save any documents that you have been updating on your Surface Laptop device, as the next steps will cause a reboot.
+
+1. On your Surface Laptop device, open the Start Menu and type **PowerShell**, then click **Run as Administrator**\
 ![](./media/lab04/powershell.jpg)
-2. Install the Azure IoT Edge runtime on the device by running the following command and waiting for the device to reboot:
+2. Install the Azure IoT Edge runtime on the device by running the following command (click 'Yes' when it asks if you want to allow this app to make changes to your device) and waiting for the device to reboot:
 ```powershell
 . {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Deploy-IoTEdge
 ```
 ![](./media/lab04/iotedge-install.jpg)
 
-3. When prompted, press **Y** to reboot
+3. When prompted, press **Y** two times, including one to reboot
 4. When the system has booted again, re-open the PowerShell session as Administrator 
 5. Configure the Azure IoT Edge runtime with the following command:
 ```powershell
@@ -35,19 +37,21 @@ This lab introduces Azure Stream Analytics with Azure IoT Edge on Windows 10 IoT
 ```
 ![](./media/lab04/iot-edge-initialize.png)
 
-6. Enter the Device Connection string from the previous step: 
-7. To validate the Azure IoT Edge runtime installation, use the command:
+6. Enter the Device Connection string from the previous step, including the SharedAccessKey. 
+7. To validate the Azure IoT Edge runtime installation, continue within PowerShell and use the command:
 ```powershell
 iotedge check
 ``` 
 
 
-## 2.0 - Deploy Simulated Temperature Sensor
+## 2 - Deploy Simulated Temperature Sensor
 
 ### 2.1 - Module deployment using Azure CLI
 
 1. Open the Start Menu and type **PowerShell**, then click **Run as Administrator**\
 2. Login to Azure CLI using the following command:
+
+**Note:** You may be asked to login to your browser; use your lab credentials
 ```powershell
 az extension add --name azure-cli-iot-ext
 az login
@@ -91,7 +95,9 @@ az iot hub monitor-events --device-id [device id] --hub-name  [hub name]
 
 This command will monitor the data being published into IoT Hub from the SimulatedTemperatureSensor container. It may take a while for data to start showing.
 
-## 3.0 - Configure Azure Stream Analytics Edge Job
+**Note:** Use Ctrl-C to stop monitoring as we will be doing more PowerShell commands soon.
+
+## 3 - Configure Azure Stream Analytics Edge Job
 
 ### 3.1 - Navigate to your Azure Stream Analytics Edge Job
 1. In the [Azure Portal (https://portal.azure.com)](https://portal.azure.com) open the **msiotlabs-iia-user##** resource group
@@ -112,7 +118,7 @@ This command will monitor the data being published into IoT Hub from the Simulat
 
 ### 3.4 - Adding Query
 1. Under the **Job topology** heading in the left hand menu, select **Query**
-2. Enter the following query:
+2. Replace the existing Select statement with the one below:
 ```sql
 SELECT  
     'reset' AS command,
@@ -131,7 +137,7 @@ Stream Analytics can be used to enable complex logic on streams of data. This qu
 3. Click **Save query**
 
 
-## 4.0 - Configure IoT Edge to use Azure Stream Analytics Edge Job
+## 4 - Configure IoT Edge to use Azure Stream Analytics Edge Job
 
 ### 4.1 - Module deployment using Azure Portal
 1. In the [Azure Portal (https://portal.azure.com)](https://portal.azure.com) open the **msiotlabs-iia-user##** resource group
@@ -142,12 +148,14 @@ Stream Analytics can be used to enable complex logic on streams of data. This qu
 4. Under the **Deployment Modules** heading click **+ Add** and choose **Azure Stream Analytics Module**
 ![Adding ASA Module](./media/lab04/add-asa-module.jpg)
 5. Set the Subscription as **MSIoTLabs-IIA** and Edge Job as **msiotlabs-iia-user##-streamanalytics**, then click **Save**
-6. *Note: You may have to click on the **Edge job** dropdown for the save button to show.*
-7. When the module has loaded, select **Configure** and take note of the **Name** field. You will be using this module name in the next step.
-8. Click **Save**, then **Next**
+
+**Note:** You may have to click on the **Edge job** dropdown for the save button to show.
+
+6. When the module has loaded, select **Configure** and take note of the **Name** field. You will be using this module name in the next step.
+7. Click **Save**, then **Next**
 
 ### 4.2 - Selecting the routes
-1. Replace the current JSON with the following, substituting **[module name]** with the module name found in the previous step:
+1. Replace the current JSON with the following, substituting **[module name]** with the module name found in the previous step. There are 3 places that **[module name]** needs to be changed:
 
 ```javascript
 {
@@ -179,7 +187,7 @@ You should see that the machine temperature increases until it reaches a tempera
 ![Temperature Reset](./media/lab04/temperature-reset.jpg)
 
 
-## 5.0 - Updating Existing IoT Edge Device Modules
+## 5 - Updating Existing IoT Edge Device Modules
 ### 5.1 - Update Module Twin
 1. In the [Azure Portal (https://portal.azure.com)](https://portal.azure.com) open the **msiotlabs-iia-user##** resource group
 2. Open the **IoT Hub** resource, navigate to **IoT Edge** and then select the device created in [step 1.1](#11---cloud-setup)
@@ -195,12 +203,12 @@ You should see that the machine temperature increases until it reaches a tempera
 1. In the [Azure Portal (https://portal.azure.com)](https://portal.azure.com) open the **msiotlabs-iia-user##** resource group
 2. Open the **Stream Analytics job** resource
 3. Under the **Job topology** heading in the left hand menu, select **Query**
-4. Replace the current query with the following:
+4. Replace by edting the current query with the following:
 ```sql
 SELECT
-    AVG(machine.temperature) as temperature,
-    MAX(timeCreated) as timeCreated,
-    'lab4' AS source 
+    AVG(machine.temperature) AS temperature,
+    MAX(timeCreated) AS timeCreated,
+    'lab04' AS source 
 INTO 
    alert
 FROM
@@ -217,9 +225,9 @@ GROUP BY TumblingWindow(second,15)
 4. You will notice that the **Stream Analytics** module has a warning saying: "Module outdated - click here to update"
 ![](./media/lab04/outdated-module.jpg)
 5. Click **Configure** next to the **Stream Analytics** module
-6. Click the **Update ASA module**, then click **Save** and finally **Next**.
+6. Take a copy of the Name to be used in the next step. Click the **Update ASA module**, then click **Save** and finally **Next**.
 ![](./media/lab04/update-asa-module.jpg)
-7. Replace the current JSON with the following, substituting **[module name]** with the module name found in the previous step:
+7. Replace the current JSON with the following, substituting **[module name]** with the module name found in the previous step (replaced in two places):
 ```javascript
 {
   "routes": {

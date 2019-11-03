@@ -63,7 +63,7 @@ namespace SampleModule
                             selectedGroup = frameSourceGroups[vCameraId];
                         }
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
 
                     }
@@ -80,7 +80,7 @@ namespace SampleModule
                 {
                     Log.WriteLine($"Selected device named '{selectedGroup.DisplayName}', based on '{Name}' filter");
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                 }
             }

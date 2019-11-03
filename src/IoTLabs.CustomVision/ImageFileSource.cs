@@ -12,10 +12,11 @@ namespace SampleModule
 {
     class ImageFileSource 
     {
+        private const string _supportedFilePath = "*.jpg";
 
         private Queue<string> _availableImages = new Queue<string>();
         
-        public async Task<SoftwareBitmap> GetNextImageAsync(string path, CancellationToken token)
+        public async Task<(string fileName, SoftwareBitmap bitmap)> GetNextImageAsync(string path, CancellationToken token)
         {
             try
             {
@@ -23,6 +24,7 @@ namespace SampleModule
                 // Load the SoftwareBitmap in the Queue
                 //
                 SoftwareBitmap sbmp = null;
+                string fileName = null;
                 do
                 {
                     //Check for new files
@@ -31,16 +33,15 @@ namespace SampleModule
                     //Get next SoftwareBitmap if an item exists on the queue.
                     if (_availableImages.Count > 0)
                     {
-                        string item = _availableImages.Dequeue();
-                        _availableImages.Enqueue(item);
-                        Log.WriteLine($"Loading Image : {item}");
+                        fileName = _availableImages.Dequeue();
+                        _availableImages.Enqueue(fileName);
                         try
                         {
-                            sbmp = await LoadSoftwareBitmap(item);
+                            sbmp = await LoadSoftwareBitmap(fileName);
                         }
                         catch (Exception e2)
                         {
-                            Log.WriteLine($"Error Loading Image : {item} - {e2.Message}");
+                            Log.WriteLine($"Error Loading Image : {fileName} - {e2.Message}");
                         }
                     }
 
@@ -48,18 +49,17 @@ namespace SampleModule
                     {
 
                         //wait 2 second between each directory scan if no files found.
-                        Log.WriteLine($"No Image Files found in {path} - waiting for 2 seconds");
+                        Log.WriteLine($"No Image Files matching {_supportedFilePath} found in {path} - waiting for 2 seconds");
                         await Task.Delay(2000, token);
                     }
                 } while ((sbmp == null) && (!token.IsCancellationRequested));
 
-                return sbmp;
+                return (fileName,sbmp);
             }
             catch (Exception e)
             {
-                throw new Exception("Error Obtaining Software Bitmap from Files : " + e.Message);
+                throw new Exception("Error Obtaining Software Bitmap from Files : " + e.Message, e);
             }
-            return null;
         }
 
         public void ScanUpdateQueue(string path)
@@ -68,12 +68,12 @@ namespace SampleModule
             try
             {
                 
-                foreach (var file in Directory.GetFiles(path, "*.jpg"))
+                foreach (var file in Directory.GetFiles(path, _supportedFilePath))
                 {
                     currentFiles.Add(file);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
             }
 
@@ -93,7 +93,7 @@ namespace SampleModule
                 var decoder = await AsyncHelper.AsAsync(BitmapDecoder.CreateAsync(await ConvertBytesToInputStream(File.ReadAllBytes(path))));
                 return (await AsyncHelper.AsAsync(decoder.GetSoftwareBitmapAsync(BitmapPixelFormat.Bgra8, BitmapAlphaMode.Ignore)));
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
             }
@@ -116,7 +116,7 @@ namespace SampleModule
                 return strm;
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
             }

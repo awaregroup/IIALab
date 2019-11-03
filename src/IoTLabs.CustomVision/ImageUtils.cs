@@ -36,9 +36,8 @@ namespace WindowsAiEdgeLabCV
                     {
                         await AsyncHelper.AsAsync(encoder.FlushAsync());
                     }
-                    catch (Exception err)
+                    catch (Exception)
                     {
-                        string t = "a";
                     }
 
                     if (encoder.IsThumbnailGenerated == false)
@@ -54,9 +53,9 @@ namespace WindowsAiEdgeLabCV
                     return bytes;
                 }
             }
-            catch (Exception ep)
+            catch (Exception)
             {
-                string t = ep.Message;
+                
             }
 
             return new byte[] { };
@@ -82,7 +81,7 @@ namespace WindowsAiEdgeLabCV
                 reader.ReadBytes(bytes);
                 return bytes;
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
             }
@@ -144,7 +143,7 @@ namespace WindowsAiEdgeLabCV
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
             }

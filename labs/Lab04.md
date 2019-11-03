@@ -203,7 +203,7 @@ You should see that the machine temperature increases until it reaches a tempera
 1. In the [Azure Portal (https://portal.azure.com)](https://portal.azure.com) open the **msiotlabs-iia-user##** resource group
 2. Open the **Stream Analytics job** resource
 3. Under the **Job topology** heading in the left hand menu, select **Query**
-4. Replace by edting the current query with the following:
+4. Replace by editing the current query with the following:
 ```sql
 SELECT
     AVG(machine.temperature) AS temperature,

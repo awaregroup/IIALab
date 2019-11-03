@@ -84,7 +84,7 @@ When starting the lab, you should have these things open on your development mac
 
 ### 2.2 Add Images 
 
-1. Navigate to **C:\images** and add some new images that you would like the model to evaluate.
+1. Navigate to **C:\images** (create this folder if it doesn't exist) and add some new images that you would like the model to evaluate.
 **Note:** The images must be .jpg and **must not** be in a sub folder (C:/images/sub/image.jpg).
 
 

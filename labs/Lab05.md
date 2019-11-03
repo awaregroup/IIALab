@@ -141,7 +141,7 @@ docker build . -t $containerTag
 
 4.  Type **$containerTag** and press **Enter** to get the full container string. Save a copy of this value as you will need it in step 5.3.
 
-## 4 - Push Docker image to Azure Container Registery (ACR)
+## 4 - Push Docker image to Azure Container Registry (ACR)
 
 ### 4.1 - Push container to ACR
 

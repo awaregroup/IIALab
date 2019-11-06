@@ -17,6 +17,14 @@
     <RootPropertyPathName Name="Value" />
     <RootPropertyPathName Name="SkinPanelOuterHostStyle" />
     <RootPropertyPathName Name="SkinPanelHostStyle" />
+    <RootPropertyPathName Name="IsFailed" />
+    <RootPropertyPathName Name="IsInitializing" />
+    <RootPropertyPathName Name="IsRunning" />
+    <RootPropertyPathName Name="HasMatch" />
+    <RootPropertyPathName Name="LastLabelFound" />
+    <RootPropertyPathName Name="OnnxModelName" />
+    <RootPropertyPathName Name="ItemHeaderDataTemplate" />
+    <RootPropertyPathName Name="LastImageSource" />
     <RootPropertyPathName Name="IsRebootRequired" />
     <RootPropertyPathName Name="IsInstalling" />
     <RootPropertyPathName Name="IsDownloading" />
@@ -26,7 +34,6 @@
     <RootPropertyPathName Name="LastInstalled" />
     <RootPropertyPathName Name="FlightRingName" />
     <RootPropertyPathName Name="IsTitleShown" />
-    <RootPropertyPathName Name="ItemHeaderDataTemplate" />
     <RootPropertyPathName Name="ImageUri" />
     <RootPropertyPathName Name="Stretch" />
     <RootPropertyPathName Name="CustomElement" />
@@ -44,10 +51,7 @@
     <RootPropertyPathName Name="DisplayItems" />
     <RootPropertyPathName Name="DisplayValue" />
     <RootPropertyPathName Name="Label" />
-    <RootPropertyPathName Name="IsRunning" />
     <RootPropertyPathName Name="Symbol" />
-    <RootPropertyPathName Name="IsFailed" />
-    <RootPropertyPathName Name="IsInitializing" />
     <RootPropertyPathName Name="ChartRow" />
     <RootPropertyPathName Name="ChartColumn" />
     <RootPropertyPathName Name="ChartColumnSpan" />
@@ -568,6 +572,7 @@
       <RootProperty Name="ProvisioningActionPanel" />
       <RootProperty Name="ProvisioningDetailsPanel" />
       <RootProperty Name="SliderSensorPanelTemplate" />
+      <RootProperty Name="GenericImageClassificationPanelTemplate" />
     </RootType>
     <RootType FullName="AwareThings.WinIoTCoreServices.Core.Controls.FlexibleHeaderTemplateSelector">
       <RootProperty Name="DefaultTemplate" />
@@ -575,11 +580,11 @@
       <RootProperty Name="DefaultTemplate2" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ContentControl">
-      <RootProperty Name="Visibility" />
       <RootProperty Name="ContentTemplate" />
       <RootProperty Name="Content" />
       <RootProperty Name="HorizontalAlignment" />
       <RootProperty Name="HorizontalContentAlignment" />
+      <RootProperty Name="Visibility" />
       <RootProperty Name="MinWidth" />
       <RootProperty Name="Margin" />
       <RootProperty Name="Width" />

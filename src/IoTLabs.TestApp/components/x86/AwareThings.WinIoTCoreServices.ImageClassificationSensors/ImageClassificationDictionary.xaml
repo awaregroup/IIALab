@@ -16,7 +16,7 @@
                     <Image Source="{Binding LastImageSource}" Stretch="UniformToFill" Margin="0" />
                 </Grid>
                 <ContentControl ContentTemplate="{Binding ItemHeaderDataTemplate}" Content="{Binding Title}" Grid.Row="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"/>
-                <Border HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,4,20,14" Padding="0" Grid.Row="1">
+                <Border HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,4,20,14" Padding="0" Grid.Row="1" Visibility="{Binding ShowHeaderPanel, Converter={StaticResource VisibilityConverter}}">
                     <TextBlock Text="{Binding OnnxModelName}" Style="{StaticResource SkinLargeHeaderTextBlockStyle}"/>
                 </Border>
                 <Grid Grid.Row="2" Visibility="{Binding IsRunning, Converter={StaticResource VisibilityConverter}}">

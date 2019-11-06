@@ -625,6 +625,45 @@
         </Border>
     </DataTemplate>
 
+    <DataTemplate x:Key="GenericImageClassificationItemTemplate">
+        <Border Style="{Binding SkinPanelOuterHostStyle}">
+            <Grid Style="{Binding SkinPanelHostStyle}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid BorderBrush="Transparent" BorderThickness="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,0,0,0" Grid.Row="2"  Visibility="{Binding IsRunning, Converter={StaticResource VisibilityConverter}}">
+                    <Image Source="{Binding LastImageSource}" Stretch="UniformToFill" Margin="0" />
+                </Grid>
+                <ContentControl ContentTemplate="{Binding ItemHeaderDataTemplate}" Content="{Binding Title}" Grid.Row="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"/>
+                <Border HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,4,20,14" Padding="0" Grid.Row="1">
+                    <TextBlock Text="{Binding OnnxModelName}" Style="{StaticResource SkinLargeHeaderTextBlockStyle}"/>
+                </Border>
+                <Grid Grid.Row="2" Visibility="{Binding IsRunning, Converter={StaticResource VisibilityConverter}}">
+                    <Border Background="{StaticResource SkinPrimaryAccentBrush}" CornerRadius="6" Visibility="{Binding HasMatch, Converter={StaticResource VisibilityConverter}}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="20,20" Padding="10,4" >
+                        <StackPanel Orientation="Horizontal" >
+                            <TextBlock Text="FOUND : " Style="{StaticResource SkinMediumTextBlockStyle}" Foreground="{StaticResource SkinInverseForegroundBrush}" Margin="12,2,12,2"  />
+                            <TextBlock Text="{Binding LastLabelFound}" Style="{StaticResource SkinMediumTextBlockStyle}" Foreground="{StaticResource SkinInverseForegroundBrush}" FontWeight="SemiBold" Margin="0,2,12,2"  />
+                        </StackPanel>
+                    </Border>
+                    <Border Visibility="{Binding HasMatch, Converter={StaticResource InverseVisibilityConverter}}" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" Background="{StaticResource SkinAlertAccentBrush}" Margin="20,20"  Padding="10,4" CornerRadius="6">
+                        <TextBlock Text="- NO MATCH -" Style="{StaticResource SkinMediumTextBlockStyle}" Foreground="{StaticResource SkinInverseForegroundBrush}" Margin="12,2"  />
+                    </Border>
+                </Grid>
+
+                <Border Grid.Row="0" Grid.RowSpan="3" Background="{StaticResource SkinPanelInverseBackgroundBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="10,5" Visibility="{Binding IsInitializing, Converter={StaticResource VisibilityConverter}}" BorderThickness="1" CornerRadius="4" BorderBrush="{StaticResource SkinPanelInverseHeaderBrush}" >
+                    <TextBlock Text="Initializing" Style="{StaticResource SkinMediumTextBlockStyle}" FontWeight="SemiBold" Foreground="{StaticResource SkinPanelInverseHeaderBrush}" VerticalAlignment="Bottom"  HorizontalAlignment="Center"/>
+                </Border>
+
+                <Border Grid.Row="0" Grid.RowSpan="3" Background="{StaticResource RedAccentBrush}" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="10,5" Visibility="{Binding IsFailed, Converter={StaticResource VisibilityConverter}}" >
+                    <TextBlock Text="Failed" Style="{StaticResource DetailsValueSmallTextBlockStyle}" FontWeight="SemiBold" Foreground="{StaticResource SkinForegroundBrush}" VerticalAlignment="Bottom"  HorizontalAlignment="Center" />
+                </Border>
+
+            </Grid>
+        </Border>
+    </DataTemplate>
+
     <controls2:FlexibleLayoutContentTemplateSelector x:Key="SkinTemplateSelector"
                                                     ConnectionStatusPanelTemplate="{StaticResource ConnectionsSkinPanelTemplate}"
                                                     FlightRingPanelTemplate="{StaticResource FlightRingSkinPanelTemplate}"
@@ -647,6 +686,7 @@
                                                     ProvisioningActionPanel="{StaticResource ProvisioningActionPanelTemplate}"
                                                     ProvisioningDetailsPanel="{StaticResource ProvisioningDetailsPanelTemplate}"
                                                     SliderSensorPanelTemplate="{StaticResource SliderSensorSkinPanelTemplate}"
+                                                    GenericImageClassificationPanelTemplate="{StaticResource GenericImageClassificationItemTemplate}"
     />
 
     <controls2:FlexibleHeaderTemplateSelector x:Key="HeaderTemplateSelector"

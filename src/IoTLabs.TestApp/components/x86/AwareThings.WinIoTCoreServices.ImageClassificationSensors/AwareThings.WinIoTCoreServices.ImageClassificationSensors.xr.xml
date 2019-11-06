@@ -8,6 +8,7 @@
     <RootPropertyPathName Name="IsRunning" />
     <RootPropertyPathName Name="HasMatch" />
     <RootPropertyPathName Name="LastLabelFound" />
+    <RootPropertyPathName Name="ShowHeaderPanel" />
     <RootPropertyPathName Name="OnnxModelName" />
     <RootPropertyPathName Name="ItemHeaderDataTemplate" />
     <RootPropertyPathName Name="Title" />
@@ -26,8 +27,8 @@
       <RootProperty Name="VerticalAlignment" />
       <RootProperty Name="Margin" />
       <RootProperty Name="Padding" />
-      <RootProperty Name="Background" />
       <RootProperty Name="Visibility" />
+      <RootProperty Name="Background" />
       <RootProperty Name="BorderThickness" />
       <RootProperty Name="CornerRadius" />
       <RootProperty Name="BorderBrush" />

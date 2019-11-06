@@ -9,7 +9,7 @@ This lab covers setting up Windows 10 IoT Core on a SolidRun HummingBoard Edge b
 * USB HDMI Capture Card 
 
 ### Software
-* Visual Studio 2019 Community Edition (or above)
+* Visual Studio 2019 Community Edition (or above) 
 
 ## 1 - Installing Windows 10 IoT Core with IoT Dashboard
 

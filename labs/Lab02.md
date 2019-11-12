@@ -10,28 +10,38 @@ This lab covers setting up Azure IoT Central, creating a Device Template and add
 
 ### 1.1 - Create IOTC application
 
-1. Navigate to [apps.azureiotcentral.com](https://apps.azureiotcentral.com) and log in with supplied lab credentials
-![](./media/2_iotc1.png)
-2. Click **New Application**, and choose the following settings:
+1. Navigate to [https://portal.azure.com/#create/Microsoft.IoTCentral](https://portal.azure.com/#create/Microsoft.IoTCentral) and log in with supplied lab credentials. 
+![](./media/lab02/azure_setup_empty.png)
+
+2. Click **New Application**, and choose the following settings.:
 
 |Name    |Value|
 |--------|-----|
-|Payment Plan|Pay-as-you-go|
-|Application Template|Preview Application|
-|Application Name|[choose a name]|
-|Subscription|**MSIoTLabs-IIA-IOTC** (or bring your own)|
-|Region|Central US|
+|Resource Name|`[choose a unique name]`|
+|Subscription|`MSIoTLabs-IIA`|
+|Resource Group| `msiotlabs-iia-userXX` where `XX` is your users number. |
+|Template|`Preview Application`|
+|Region|`Central US`|
+
 
 3. Click **Create** to provision your application
+
+4. Wait for the application to be deployed, this usually takes less than a minute. and then push the `Go to Resource` button.
+![](./media/lab02/go_to_resource.png)
+
+5. Click on the IoT Central Application URL to open your IoT Central Application. This URL will match the name you specified from step 2. You can also use the [apps.azureiotcentral.com](https://apps.azureiotcentral.com/myapps) portal to access your application.
+![](./media/lab02/iot_central_url.png)
 
 
 ### 1.2 - Create Device Template
 
 1. Navigate to Device Templates and click **New**
-![](./media/2_iotc2.png)
+![](./media/lab02/device_template_new.png)
 
-1. IoT Central can import existing Device Templates from the [Azure IoT Device Catalog](), however we are creating our own device. Click **Custom**.
-![](./media/2_iotc3.png)
+1. IoT Central can import existing Device Templates from the [Azure IoT Device Catalog](), however we are creating our own device. Click **IoT Device**. then the blue **Next: Customize"** button at the bottom of the window.
+![](./media/lab02/device_template_select_iot_device.png)
+
+1. Leave the "Gateway Device" checkbox unchecked, click the **Next: Review** button, then click **Create**
 
 1. Name your Device Template **SensorTile.box**, press Return and then click **Import Capability Model**.
 ![](./media/2_iotc4.png)

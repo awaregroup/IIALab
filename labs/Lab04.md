@@ -8,8 +8,8 @@ This lab introduces Azure Stream Analytics with Azure IoT Edge on Windows 10 IoT
 
 1. Make a note of the Surface Laptop device name printed on the device. For example, **LAB.USER##**
 2. Open a browser and navigate to the [Azure Portal (portal.azure.com)](https://portal.azure.com). Log in with the lab credentials provided
-3. Click **Resource groups**, select the **msiotlabs-iia-user##** resource group in the list and choose the **IoT Hub** created in [Lab 3](./Lab03.md#10---provision-azure-resources)\
-![](./media/lab04/azure dashboard.png)
+3. Click **Resource groups**, select the **msiotlabs-iia-user##** resource group in the list and choose the **IoT Hub** created in [Lab 3](./Lab03.md#10---provision-azure-resources)
+![](./media/lab04/azure%20dashboard.png)
 4. In the left hand menu under the heading **Automatic Device Management**, click **IoT Edge**\
 ![](./media/lab04/SelectIoTEdge.png)
 5. Click **Add an IoT Edge device** at the top of the page

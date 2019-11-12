@@ -42,7 +42,7 @@ These components represent the IoT platform your device connects to.
 
 ### 2.1 - IoT Hub
 
-IoT Hub is the core of all IoT projects in Azure. Open your IoT Hub resource (msiotlabs-iia-user##-iothub) and explore the different pages that are listed in the table below.
+IoT Hub is the core of all IoT projects in Azure. Open your IoT Hub resource **msiotlabs-iia-user##-iothub** and explore the different pages that are listed in the table below:
 
 |Component Name    |Notes|
 |--------|-----|

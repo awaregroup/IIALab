@@ -40,7 +40,7 @@ Devices running Windows 10 IoT Core can be installed and configured using the Io
 
 ### 1.3 - Plugging in your hardware
 1. Plug the HDMI adapter into your HummingBoard and the USB end into the USB Hub attached to your PC. 
-1. Plug the Micro USB cable into your SensorTile and the other end into the HummingBoard.
+1. Plug the Micro USB cable into your SensorTile and the other end into the HummingBoard (not your PC).
 1. Plug in the ethernet cable to your HummingBoard.
 1. Remove the Micro SD Card from the card reader.
 1. Insert the Micro SD Card into your HummingBoard.

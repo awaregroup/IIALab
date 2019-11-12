@@ -38,7 +38,7 @@ This lab covers setting up Azure IoT Central, creating a Device Template and add
 1. Navigate to Device Templates and click **New**
 ![](./media/lab02/device_template_new.png)
 
-1. IoT Central can import existing Device Templates from the [Azure IoT Device Catalog](), however we are creating our own device. Click **IoT Device**. then the blue **Next: Customize"** button at the bottom of the window.
+1. IoT Central can import existing Device Templates from the [Azure IoT Device Catalog](), however we are creating our own device. Click **IoT Device**. then the blue **Next: Customize** button at the bottom of the window.
 ![](./media/lab02/device_template_select_iot_device.png)
 
 1. Leave the "Gateway Device" checkbox unchecked, click the **Next: Review** button, then click **Create**

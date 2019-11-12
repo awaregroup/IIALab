@@ -84,7 +84,7 @@ Devices running Windows 10 IoT Core can be installed and configured using the Io
 ![](./media/1_vs3.png)
 4. Change target system from 'Device' to 'Remote Machine' and enter the IP address of your HummingBoard device. This can be found on the camera screen showing your HummingBoard device.
 ![](./media/1_vs2.png)
-5. Run the project back in VisualStudio (by pressing the green arrow beside the Remote Machine) to test it on your HummingBoard. You should see an interface, however no data should be showing. 
+5. Run the project back in VisualStudio (by pressing the green arrow beside the Remote Machine) to test it on your HummingBoard. If no sensor data is displayed, try changing the USB port the sensor tile is connected through to another port on the HummingBoard.
 
 **Note:** the first deployment can take a few minutes.  You will know it has finished as the camera screen of your HummingBoard will show an interesting dashboard.
 

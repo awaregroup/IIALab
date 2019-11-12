@@ -24,7 +24,7 @@ Devices running Windows 10 IoT Core can be installed and configured using the Io
 
 ### 1.2 - Installing Windows 10 IoT Core
 
-1. Ensure the Micro SD card is in the card reader, then connect the card reader to the host PC. 
+1. Ensure the Micro SD card is in the card reader and **not in the HummingBoard**, then plug the card reader into your PC. 
 ![MicroSD](./media/5_microsd.jpg)
 1. Dismiss any messages to format the drive. Close those windows.  
 1. Open IoT Dashboard and click **Setup a new device**
@@ -45,9 +45,9 @@ Devices running Windows 10 IoT Core can be installed and configured using the Io
 1. Remove the Micro SD Card from the card reader.
 1. Insert the Micro SD Card into your HummingBoard.
 1. Insert the Power Cable into your HummingBoard. 
-1. The 'out of the box experience' for the HummingBoard set up does not need any user input; it will automatically step through.
 1. On your Lab PC, open the Camera application to view the output of your HummingBoard as it boots. 
-1. Select the camera cycle button to view the capture card. 
+1. Select the camera cycle button, found in the top right corner of the Camera App, and select the capture card.
+1. The HummingBoard will begin its initial setup. Please note that the setup does not require any user input; it will automatically step through.
 
 **Hint:** If you get the order wrong, unplug and plug back in the Power Cable into the HummingBoard for the display to capture.
 

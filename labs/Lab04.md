@@ -40,10 +40,6 @@ This lab introduces Azure Stream Analytics with Azure IoT Edge on Windows 10 IoT
 ![](./media/lab04/iot-edge-initialize.png)
 
 6. Enter the Device Connection string from the previous step, including the SharedAccessKey. 
-7. To validate the Azure IoT Edge runtime installation, continue within PowerShell and use the command:
-```powershell
-iotedge check
-``` 
 
 
 ## 2 - Deploy Simulated Temperature Sensor
@@ -73,12 +69,17 @@ az iot edge set-modules --device-id [device id] --hub-name [hub name] --content 
 ### 2.2 - Verify Deployment on IoT Edge Device
 The module deployment is instant, however changes to the device can take around 5-7 minutes to take effect. This means it can take a while for the new container to be loaded. The following commands can be used to check the status of the SimulatedTemperatureSensor container:
 
-1. Run the following PowerShell command to see the current modules:
+1. To validate the Azure IoT Edge runtime installation, continue within PowerShell and use the command:
+```powershell
+iotedge check
+``` 
+
+2. Run the following PowerShell command to see the current modules:
 ```powershell
 iotedge list
 ```
 
-2. Try running the following to see the logs from our simulated temperature sensor:
+3. Try running the following to see the logs from our simulated temperature sensor:
 ```powershell
 iotedge logs SimulatedTemperatureSensor
 ```

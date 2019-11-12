@@ -71,12 +71,14 @@ This lab covers setting up Azure IoT Central, creating a Device Template and add
 ## 2 - Configure device to connect to IoT Central
 
 ### 2.1 - Prepare Azure IoT Hub Device Details
+In order to connect the application with the IoT Hub we will need to generate a connection string, this could be done programmatically through a command line tool such as [https://github.com/Azure/dps-keygen](dps-keygen), however we will be using the dpsgen.com website to generate a configuration file with a connection settings in a format the test application can consume.
+
 1. Open a browser tab and navigate to [www.dpsgen.com/iia](https://www.dpsgen.com/iia).
 
 2. Enter the `Scope ID`, `Device ID` and `Primary Key` collected earlier and click **Generate JSON**. 
 
 3. Open a Command Prompt as Administrator.
-4. Replace the IP address in each of the following two commands with the IP Address of your HummingBoard device, then run the two commands in your command prompt window; one command after the other:
+4. Copy the `tpmoveride.json` file to the HummingBoard by replacing the IP address in each of the following two commands with the IP Address of your HummingBoard device, then run the two commands in your command prompt window; one command after the other:
 ```batch
 net use \\<device ip address here>\c$ /USER:administrator
 copy "%userprofile%\Downloads\tpmoverride.json" \\<device ip address here>\c$\Data\Users\DefaultAccount\AppData\Local\Packages\IoTLabs.TestApp.App_wqmbmn0a4bde6\LocalState /y

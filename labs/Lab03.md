@@ -42,26 +42,22 @@ These components represent the IoT platform your device connects to.
 
 ### 2.1 - IoT Hub
 
-IoT Hub is the core of all IoT projects in Azure. Click on your IoT Hub resource and explore the different pages (listed below Overview are all the different pages that you will be interested in, these are to the left part of the screen depicting IoT Hub resource (not far left).
-
-1. Click on the Access Policies page, and change it to Shared Access Policies.
-
-
-![](./media/3_4.png)
-
+IoT Hub is the core of all IoT projects in Azure. Open your IoT Hub resource (msiotlabs-iia-user##-iothub) and explore the different pages that are listed in the table below.
 
 |Component Name    |Notes|
 |--------|-----|
-|Access Policies|IoT Hub has a specific focus on security and this is one of the areas to configure access to the management of the IoT Hub. |
+|Shared Access Policies|IoT Hub has a specific focus on security and this is one of the areas to configure access to the management of the IoT Hub. |
 |IoT Devices|This device list allows you to see all the devices that are currently registered against the IoT hub and manage them. You can also check the metadata for each device including their Device Twin.|
 |IoT Edge|This is an important component for the labs further on. This allows you to manage your IoT Edge devices in a similar fashion to the IoT Devices.|
 |Message Routing|Core to IoT Hub is a messaging platform - the ability to send messages from the Device-to-Cloud and Cloud-to-Device. Message routes allow you to forward device messages to other Azure services. There is a route configured in this solution that allows the telemetry to flow through to Time Series Insights.
 
-**Hint:** In preparation for the next step in the lab, using the breadcrumb trail (at the top middle of the screen) click on **msiotlabs-iia-user##** resource group to take you back to the higher level.
+**Hint:** In preparation for the next step in the lab, using the breadcrumb trail (at the top middle of the screen) click on **msiotlabs-iia-user##** resource group to take you back to your resource group.
+
+![](./media/3_4.png)
 
 ### 2.2 - Device Provisioning Service (DPS)
 
-The Device Provisioning Service is on the same level as the IoT Hub (see Hint in the previous step if stuck).
+The Device Provisioning Service is found in your resource group **msiotlabs-iia-user##** (see Hint in the previous step if stuck).
 
 DPS allows devices to be embedded with an organization specific key, that allows them to register against a specific IoT Hub on first boot. This enables device builders to easily manufacture a fleet of devices and have them register against centrally managed IoT Hubs.
 
@@ -103,7 +99,7 @@ Container Registry is a private docker container registry that you can push cont
 
 ## 3 - Explore Common Resources
 As part of this lab a set of common resources have been provisioned for all lab users to share. Return to your list of Resource groups and click on the 'common' Resource group.
-**Hint:** Use the search bar at the top of Azure and type in "common".
+**Hint:** You can also use the search bar at the top of Azure and type in "common".
 
 ![](./media/3_7.png)
 

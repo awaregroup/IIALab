@@ -6,16 +6,18 @@ This lab introduces Azure Stream Analytics with Azure IoT Edge on Windows 10 IoT
 
 ### 1.1 - Cloud setup
 
-1. Make a note of the Surface Laptop device name printed on the device. For example, IOTEDGE01
+1. Make a note of the Surface Laptop device name printed on the device. For example, **LAB.USER##**
 2. Open a browser and navigate to the [Azure Portal (portal.azure.com)](https://portal.azure.com). Log in with the lab credentials provided
-3. Click **Resource groups** on the left-hand menu, select the **msiotlabs-iia-user##** resource group in the list and choose the **IoT Hub** created in [Lab 3](./Lab03.md#10---provision-azure-resources)
-4. In the left hand menu under the heading **Automatic Device Management**, click **IoT Edge**\
+3. Select **Resource groups** from the Azure Portal homepage.
+![](./media/lab04/azure%20dashboard.png)
+4. Select the **msiotlabs-iia-user##** resource group in the list and choose the **IoT Hub** created in [Lab 3](./Lab03.md#10---provision-azure-resources)
+5. In the left hand menu under the heading **Automatic Device Management**, click **IoT Edge**\
 ![](./media/lab04/SelectIoTEdge.png)
-5. Click **Add an IoT Edge device** at the top of the page
-6. Enter the Surface Laptop name (from earlier) as the device id, leave the rest of the settings as default and click **Save**
+6. Click **Add an IoT Edge device** at the top of the page
+7. Enter the Surface Laptop name (from earlier) as the device id, leave the rest of the settings as default and click **Save**
 ![](./media/lab04/add-device.jpg)
-7. Click **Refresh** and your newly created device should appear in the list
-8. Select your device and take note of the **Primary Connection String**. We will be using it in the next step, so keep this page ready or save the into a document on your desktop for ease\
+8. Click **Refresh** and your newly created device should appear in the list
+9. Select your device and take note of the **Primary Connection String**. We will be using it in the next step, so keep this page ready or save the into a document on your desktop for ease\
 ![](./media/lab04/CopyConnectionStringIoTEdge.png)
 
 ### 1.2 - IoT Device setup using Azure CLI
@@ -38,10 +40,6 @@ This lab introduces Azure Stream Analytics with Azure IoT Edge on Windows 10 IoT
 ![](./media/lab04/iot-edge-initialize.png)
 
 6. Enter the Device Connection string from the previous step, including the SharedAccessKey. 
-7. To validate the Azure IoT Edge runtime installation, continue within PowerShell and use the command:
-```powershell
-iotedge check
-``` 
 
 
 ## 2 - Deploy Simulated Temperature Sensor
@@ -71,12 +69,17 @@ az iot edge set-modules --device-id [device id] --hub-name [hub name] --content 
 ### 2.2 - Verify Deployment on IoT Edge Device
 The module deployment is instant, however changes to the device can take around 5-7 minutes to take effect. This means it can take a while for the new container to be loaded. The following commands can be used to check the status of the SimulatedTemperatureSensor container:
 
-1. Run the following PowerShell command to see the current modules:
+1. To validate the Azure IoT Edge runtime installation, continue within PowerShell and use the command:
+```powershell
+iotedge check
+``` 
+
+2. Run the following PowerShell command to see the current modules:
 ```powershell
 iotedge list
 ```
 
-2. Try running the following to see the logs from our simulated temperature sensor:
+3. Try running the following to see the logs from our simulated temperature sensor:
 ```powershell
 iotedge logs SimulatedTemperatureSensor
 ```

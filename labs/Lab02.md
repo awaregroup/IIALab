@@ -10,28 +10,38 @@ This lab covers setting up Azure IoT Central, creating a Device Template and add
 
 ### 1.1 - Create IOTC application
 
-1. Navigate to [apps.azureiotcentral.com](https://apps.azureiotcentral.com) and log in with supplied lab credentials
-![](./media/2_iotc1.png)
-2. Click **New Application**, and choose the following settings:
+1. Navigate to [https://portal.azure.com/#create/Microsoft.IoTCentral](https://portal.azure.com/#create/Microsoft.IoTCentral) and log in with supplied lab credentials. 
+![](./media/lab02/azure_setup_empty.png)
+
+2. Click **New Application**, and choose the following settings.:
 
 |Name    |Value|
 |--------|-----|
-|Payment Plan|Pay-as-you-go|
-|Application Template|Preview Application|
-|Application Name|[choose a name]|
-|Subscription|**MSIoTLabs-IIA-IOTC** (or bring your own)|
-|Region|Central US|
+|Resource Name|`[choose a unique name]`|
+|Subscription|`MSIoTLabs-IIA`|
+|Resource Group| `msiotlabs-iia-userXX` where `XX` is your users number. |
+|Template|`Preview Application`|
+|Region|`Central US`|
+
 
 3. Click **Create** to provision your application
+
+4. Wait for the application to be deployed, this usually takes less than a minute. and then push the `Go to Resource` button.
+![](./media/lab02/go_to_resource.png)
+
+5. Click on the IoT Central Application URL to open your IoT Central Application. This URL will match the name you specified from step 2. You can also use the [apps.azureiotcentral.com](https://apps.azureiotcentral.com/myapps) portal to access your application.
+![](./media/lab02/iot_central_url.png)
 
 
 ### 1.2 - Create Device Template
 
 1. Navigate to Device Templates and click **New**
-![](./media/2_iotc2.png)
+![](./media/lab02/device_template_new.png)
 
-1. IoT Central can import existing Device Templates from the [Azure IoT Device Catalog](), however we are creating our own device. Click **Custom**.
-![](./media/2_iotc3.png)
+1. IoT Central can import existing Device Templates from the [Azure IoT Device Catalog](), however we are creating our own device. Click **IoT Device**. then the blue **Next: Customize** button at the bottom of the window.
+![](./media/lab02/device_template_select_iot_device.png)
+
+1. Leave the "Gateway Device" checkbox unchecked, click the **Next: Review** button, then click **Create**
 
 1. Name your Device Template **SensorTile.box**, press Return and then click **Import Capability Model**.
 ![](./media/2_iotc4.png)
@@ -61,12 +71,14 @@ This lab covers setting up Azure IoT Central, creating a Device Template and add
 ## 2 - Configure device to connect to IoT Central
 
 ### 2.1 - Prepare Azure IoT Hub Device Details
+In order to connect the application with the IoT Hub we will need to generate a connection string, this could be done programmatically through a command line tool such as [https://github.com/Azure/dps-keygen](dps-keygen), however we will be using the dpsgen.com website to generate a configuration file with a connection settings in a format the test application can consume.
+
 1. Open a browser tab and navigate to [www.dpsgen.com/iia](https://www.dpsgen.com/iia).
 
 2. Enter the `Scope ID`, `Device ID` and `Primary Key` collected earlier and click **Generate JSON**. 
 
 3. Open a Command Prompt as Administrator.
-4. Replace the IP address in each of the following two commands with the IP Address of your HummingBoard device, then run the two commands in your command prompt window; one command after the other:
+4. Copy the `tpmoveride.json` file to the HummingBoard by replacing the IP address in each of the following two commands with the IP Address of your HummingBoard device, then run the two commands in your command prompt window; one command after the other:
 ```batch
 net use \\<device ip address here>\c$ /USER:administrator
 copy "%userprofile%\Downloads\tpmoverride.json" \\<device ip address here>\c$\Data\Users\DefaultAccount\AppData\Local\Packages\IoTLabs.TestApp.App_wqmbmn0a4bde6\LocalState /y

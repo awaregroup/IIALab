@@ -17,6 +17,7 @@ Devices running Windows 10 IoT Core can be installed and configured using the Io
 
 ### 1.1 - Installing IoT Dashboard
 
+1. **If you already have Windows 10 IoT Core Dashboard on your desktop, you can skip this step and move on to 'Installing Windows 10 IoT Core'**
 1. Open a browser window to: [http://go.microsoft.com/fwlink/?LinkID=708576](http://go.microsoft.com/fwlink/?LinkID=708576)  This will install a file to setup the data and tools required for the labs.  
 1. Double click on the setup.exe file which will launch the IoT Dashboard and verify the application starts correctly (by seeing the screen appear as shown below).
 

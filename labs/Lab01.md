@@ -87,7 +87,7 @@ You should now have a working IoT device with Windows 10 IoT Core installed, alo
 ### 2.1 - Hello world
 
 1. Open up the first lab project found in [C:\Labs\content\src\IoTLabs.TestApp\IoTLabs.TestApp.sln](file:///C:\Labs\content\src\IoTLabs.TestApp\IoTLabs.TestApp.sln)  
-2. If prompted to open with VisualStudio, simply close the window as no Sign In is required.
+2. If prompted to log in with VisualStudio, simply close the window as no sign in is required.
 3. Update the target system architecture to say 'ARM' as shown in the image below
 ![](./media/1_vs3.png)
 4. Change target system from 'Device' to 'Remote Machine' and enter the IP address of your HummingBoard device. This can be found on the camera screen showing your HummingBoard device.

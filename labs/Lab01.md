@@ -73,7 +73,7 @@ Devices running Windows 10 IoT Core can be installed and configured using the Io
 
 4. Open the Processes Menu, Select Run command
 ![Device Portal](./media/1_deviceportal1.png)
-5. Type **"devcon status USB\VID_0483*"** and hit enter to see if the device can see the connected SensorTile
+5. Type **"devcon status USB\VID_0483\*"** and hit enter to see if the device can see the connected SensorTile
 6. You should see Name: USB Serial Device with status of Running
 ![SensorTile Connected](./media/1_SensorTileConnected.png)
 7. Another way to see what is on the screen of the IoT device is to use the inbuilt **Screenshot** command on the Windows Device Portal. 

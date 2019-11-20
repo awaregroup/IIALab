@@ -8,7 +8,7 @@ The focal point of all Microsoft IoT solutions is the Azure IoT Hub service. IoT
 
 Azure Resource Manager Templates (ARM Templates) can be deployed into Azure that include IoT Hub. 
 
-1. Open a browser and navigate to the [Azure Portal (portal.azure.com)](https://portal.azure.com). Log in with the lab credentials provided.  **LAB.USER## where ## are replaced with the number of your lab workstation. eg. #1 would be LAB.USER01@msiotlabs.com ** 
+1. Open a browser and navigate to the [Azure Portal (portal.azure.com)](https://portal.azure.com). Log in with the lab credentials provided.  **LAB.USER## where ## are replaced with the number of your lab workstation. eg. #1 would be LAB.USER01@msiotlabs.com** 
 1. Click the 'Deploy to Azure' button below to create the Azure IoT components required for the next labs:<br/><br/>
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fawaregroup%2FIIALab%2Fmaster%2Fsrc%2FAzure.ARM%2Fiia-azuredeploy.json" target="_blank" rel="noopener noreferrer">
 <img src="https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.png"/>

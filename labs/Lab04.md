@@ -2,16 +2,16 @@
 
 This lab introduces Azure Stream Analytics with Azure IoT Edge on Windows 10 IoT Enterprise.
 
-## 1 - Set up your Surface Laptop Device
+## 1 - Set up your Lab PC Device
 
 ### 1.1 - Cloud setup
 
-1. Make a note of the Surface Laptop device name printed on the device. For example, **LAB.USER##**
+1. Make a note of the Lab PC number  printed on the device. For example, #1 would convert to the **LAB.USER01**
 2. Open a browser and navigate to the [Azure Portal (portal.azure.com)](https://portal.azure.com). Log in with the lab credentials provided
 3. Select **Resource groups** from the Azure Portal homepage.
 ![](./media/lab04/azure%20dashboard.png)
 4. Select the **msiotlabs-iia-user##** resource group in the list and choose the **IoT Hub** created in [Lab 3](./Lab03.md#10---provision-azure-resources)
-5. In the left hand menu under the heading **Automatic Device Management**, click **IoT Edge**\
+5. In the IoT Hub menu under the heading **Automatic Device Management**, click **IoT Edge**\
 ![](./media/lab04/SelectIoTEdge.png)
 6. Click **Add an IoT Edge device** at the top of the page
 7. Enter the Surface Laptop name (from earlier) as the device id, leave the rest of the settings as default and click **Save**
@@ -39,9 +39,9 @@ This lab introduces Azure Stream Analytics with Azure IoT Edge on Windows 10 IoT
 ```powershell
 . {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Initialize-IoTEdge
 ```
-![](./media/lab04/iot-edge-initialize.png)
 
 6. Enter the Device Connection string from the previous step, including the SharedAccessKey. 
+![](./media/lab04/iot-edge-initialize.png)
 
 
 ## 2 - Deploy Simulated Temperature Sensor
@@ -64,8 +64,8 @@ az account set --subscription 'MSIoTLabs-IIA'
 ```powershell
 az iot edge set-modules --device-id [device id] --hub-name [hub name] --content "C:\Labs\Content\src\IoTLabs.IoTEdge\deployment.example.win-x64.json"
 
-#NOTE - make sure to remove the square brackets above, for example:
-#az iot edge set-modules --device-id device1 --hub-name msiotlabs-iia-user06-iothub --content "C:\Labs\Content\src\IoTLabs.IoTEdge\deployment.example.win-x64.json"
+#NOTE - entries are case sensitive and must be exactly the same as in the Azure port. Also make sure to remove the square brackets above, for example:
+#az iot edge set-modules --device-id labuser01 --hub-name msiotlabs-iia-user01-iothub --content "C:\Labs\Content\src\IoTLabs.IoTEdge\deployment.example.win-x64.json"
 ```
 
 
@@ -111,7 +111,7 @@ This command will monitor the data being published into IoT Hub from the Simulat
 ![Stream Analytics Job](./media/lab04/asa-overview.jpg)
 
 ### 3.2 - Adding Inputs
-1. Under the **Job topology** heading in the left hand menu, select **Inputs**
+1. Under the **Job topology** heading in the stream analytics menu, select **Inputs**
 2. Select **Add stream input**, then select **Edge Hub**
 3. Set the **Input Alias** as **temperature** and leave the rest of the settings as default.
 4. Click **Save**
@@ -210,7 +210,7 @@ You should see that the machine temperature increases until it reaches a tempera
 1. In the [Azure Portal (https://portal.azure.com)](https://portal.azure.com) open the **msiotlabs-iia-user##** resource group
 2. Open the **Stream Analytics job** resource
 3. Under the **Job topology** heading in the left hand menu, select **Query**
-4. Replace by editing the current query with the following:
+4. Click **Edit Query** and replace the current query with the following:
 ```sql
 SELECT
     AVG(machine.temperature) AS temperature,

@@ -1,7 +1,7 @@
 # Lab 05 - Machine Learning at the Edge
 
 
-For this lab, we will use the Azure Custom Vision service to train a Machine Learning (ML) model for image classification. We will use that model to create a .NET Core application to pull frames from the camera attached to your lab PC. It will then use Windows ML to classify the image, then send the result to Azure IoT Hub. We will deploy that application to a Azure IoT Edge container and deploy back to your Lab PC using Azure IoT Edge. Finally, we will visualize the results using Time Series Insights.
+For this lab, we will use the Azure Custom Vision service to train a Machine Learning (ML) model for image classification. We will use that model to create a .NET Core application to take images from a folder on your lab PC. It will then use Windows ML to classify the image, then send the result to Azure IoT Hub. We will deploy that application to a Azure IoT Edge container and deploy back to your Lab PC using Azure IoT Edge. Finally, we will visualize the results using Time Series Insights.
 
 ## Ready to go
 
@@ -130,9 +130,7 @@ After running these preparation steps, close **ALL** Command Prompt and PowerShe
 
 The following steps assume that you have created a Azure Container Registry in Lab 3.
 
-1. Ensure that docker is running or that it is in your PATH variables.
-    * If you are using Docker Desktop then ensure it is running in Windows mode.
-2.  Open a PowerShell window **as Administrator** (right click on the PowerShell entry and select Run as Administrator) and run the following commands:
+1.  Open a PowerShell window **as Administrator** (right click on the PowerShell entry and select Run as Administrator) and run the following commands:
 3. Update the **$registryName** variable below, then run the commands.
 
 **Note:** each time you rebuild the container, you should increment the **$version** variable.

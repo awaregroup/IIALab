@@ -17,7 +17,9 @@ This lab introduces Azure Stream Analytics with Azure IoT Edge on Windows 10 IoT
 7. Enter the Surface Laptop name (from earlier) as the device id, leave the rest of the settings as default and click **Save**
 ![](./media/lab04/add-device.jpg)
 8. Click **Refresh** and your newly created device should appear in the list
-9. Select your device and take note of the **Primary Connection String**. We will be using it in the next step, so keep this page ready or save the into a document on your desktop for ease\
+9. Take note of your **Device Id** (red circle) and your **IoT Hub Name** (red square) You will need to refer to these in future steps
+![](./media/lab04/DeviceAndHubDetails.png)
+10. Select your device and take note of the **Primary Connection String**. We will be using it in the next step, so keep this page ready or save the into a document on your desktop for ease\
 ![](./media/lab04/CopyConnectionStringIoTEdge.png)
 
 ### 1.2 - IoT Device setup using Azure CLI
@@ -58,13 +60,14 @@ az login
 ```powershell
 az account set --subscription 'MSIoTLabs-IIA'
 ```
-4. Run the following command replacing **[device id]** and **[hub name]** with their respective fields:
+4. Run the following command replacing **[device id]** and **[hub name]** with their respective fields from [step 1.1](#11---cloud-setup):
 ```powershell
 az iot edge set-modules --device-id [device id] --hub-name [hub name] --content "C:\Labs\Content\src\IoTLabs.IoTEdge\deployment.example.win-x64.json"
 
 #NOTE - make sure to remove the square brackets above, for example:
 #az iot edge set-modules --device-id device1 --hub-name msiotlabs-iia-user06-iothub --content "C:\Labs\Content\src\IoTLabs.IoTEdge\deployment.example.win-x64.json"
 ```
+
 
 ### 2.2 - Verify Deployment on IoT Edge Device
 The module deployment is instant, however changes to the device can take around 5-7 minutes to take effect. This means it can take a while for the new container to be loaded. The following commands can be used to check the status of the SimulatedTemperatureSensor container:
@@ -87,7 +90,7 @@ iotedge logs SimulatedTemperatureSensor
 Your device should be receiving simulated temperature data every 5 seconds with the machine temperature steadily rising.
 
 ### 2.3 - Monitor Device-to-Cloud messages
-1. Enter the following command to monitor Device-to-Cloud (D2C) messages being published to the IoT Hub:
+1. Enter the following command to monitor Device-to-Cloud (D2C) messages being published to the IoT Hub replacing **[device id]** and **[hub name]** with their respective fields from [step 1.1](#11---cloud-setup):
 ```powershell
 az iot hub monitor-events --device-id [device id] --hub-name  [hub name]
 
@@ -155,6 +158,7 @@ Stream Analytics can be used to enable complex logic on streams of data. This qu
 **Note:** You may have to click on the **Edge job** dropdown for the save button to show.
 
 6. When the module has loaded, select **Configure** and take note of the **Name** field. You will be using this module name in the next step.
+![Adding ASA Module](./media/lab04/configure-and-read-name.png)
 7. Click **Save**, then **Next**
 
 ### 4.2 - Selecting the routes

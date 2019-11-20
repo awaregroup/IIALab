@@ -17,6 +17,7 @@ Devices running Windows 10 IoT Core can be installed and configured using the Io
 
 ### 1.1 - Installing IoT Dashboard
 
+1. **If you already have Windows 10 IoT Core Dashboard on your desktop, you can skip this step and move on to 'Installing Windows 10 IoT Core'**
 1. Open a browser window to: [http://go.microsoft.com/fwlink/?LinkID=708576](http://go.microsoft.com/fwlink/?LinkID=708576)  This will install a file to setup the data and tools required for the labs.  
 1. Double click on the setup.exe file which will launch the IoT Dashboard and verify the application starts correctly (by seeing the screen appear as shown below).
 
@@ -72,7 +73,7 @@ Devices running Windows 10 IoT Core can be installed and configured using the Io
 
 4. Open the Processes Menu, Select Run command
 ![Device Portal](./media/1_deviceportal1.png)
-5. Type **"devcon status USB\VID_0483*"** and hit enter to see if the device can see the connected SensorTile
+5. Type **"devcon status USB\VID_0483\*"** and hit enter to see if the device can see the connected SensorTile
 6. You should see Name: USB Serial Device with status of Running
 ![SensorTile Connected](./media/1_SensorTileConnected.png)
 7. Another way to see what is on the screen of the IoT device is to use the inbuilt **Screenshot** command on the Windows Device Portal. 
@@ -87,7 +88,7 @@ You should now have a working IoT device with Windows 10 IoT Core installed, alo
 ### 2.1 - Hello world
 
 1. Open up the first lab project found in [C:\Labs\content\src\IoTLabs.TestApp\IoTLabs.TestApp.sln](file:///C:\Labs\content\src\IoTLabs.TestApp\IoTLabs.TestApp.sln)  
-2. If prompted to open with VisualStudio, simply close the window as no Sign In is required.
+2. If prompted to log in with VisualStudio, simply close the window as no sign in is required.
 3. Update the target system architecture to say 'ARM' as shown in the image below
 ![](./media/1_vs3.png)
 4. Change target system from 'Device' to 'Remote Machine' and enter the IP address of your HummingBoard device. This can be found on the camera screen showing your HummingBoard device.

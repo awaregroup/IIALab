@@ -21,7 +21,7 @@ This lab covers setting up Azure IoT Central, creating a Device Template and add
 |Subscription|`MSIoTLabs-IIA`|
 |Resource Group| `msiotlabs-iia-userXX` where `XX` is your users number. |
 |Template|`Preview Application`|
-|Region|`Central US`|
+|Region|`United States`|
 
 
 3. Click **Create** to provision your application

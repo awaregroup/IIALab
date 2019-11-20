@@ -193,6 +193,11 @@ iotedge logs SimulatedTemperatureSensor
 You should see that the machine temperature increases until it reaches a temperature higher than the 24 degree threshold for at least 30 seconds.
 ![Temperature Reset](./media/lab04/temperature-reset.jpg)
 
+4. When the SimulatedTemperatureSensor container stops producing data you can reset it to start over
+```powershell
+iotedge restart SimulatedTemperatureSensor
+```
+
 
 ## 5 - Updating Existing IoT Edge Device Modules
 ### 5.1 - Update Module Twin

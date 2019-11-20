@@ -130,9 +130,7 @@ After running these preparation steps, close **ALL** Command Prompt and PowerShe
 
 The following steps assume that you have created a Azure Container Registry in Lab 3.
 
-1. Ensure that docker is running or that it is in your PATH variables.
-    * If you are using Docker Desktop then ensure it is running in Windows mode.
-2.  Open a PowerShell window **as Administrator** (right click on the PowerShell entry and select Run as Administrator) and run the following commands:
+1.  Open a PowerShell window **as Administrator** (right click on the PowerShell entry and select Run as Administrator) and run the following commands:
 3. Update the **$registryName** variable below, then run the commands.
 
 **Note:** each time you rebuild the container, you should increment the **$version** variable.

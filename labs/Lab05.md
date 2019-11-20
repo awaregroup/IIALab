@@ -1,7 +1,7 @@
 # Lab 05 - Machine Learning at the Edge
 
 
-For this lab, we will use the Azure Custom Vision service to train a Machine Learning (ML) model for image classification. We will use that model to create a .NET Core application to pull frames from the camera attached to your lab PC. It will then use Windows ML to classify the image, then send the result to Azure IoT Hub. We will deploy that application to a Azure IoT Edge container and deploy back to your Lab PC using Azure IoT Edge. Finally, we will visualize the results using Time Series Insights.
+For this lab, we will use the Azure Custom Vision service to train a Machine Learning (ML) model for image classification. We will use that model to create a .NET Core application to take images from a folder on your lab PC. It will then use Windows ML to classify the image, then send the result to Azure IoT Hub. We will deploy that application to a Azure IoT Edge container and deploy back to your Lab PC using Azure IoT Edge. Finally, we will visualize the results using Time Series Insights.
 
 ## Ready to go
 

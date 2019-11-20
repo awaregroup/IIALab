@@ -255,3 +255,17 @@ GROUP BY TumblingWindow(second,15)
 4. Save changes
 
 This step will enable telemetry to flow into Time Series Insights which you can view from the common Resource Group.
+
+
+### 5.5 - Visualise your data with Azure Time Series Insights (TSI)
+
+These labs demonstrate how to collect, process and consolidate data from many different streaming sources into a single data platform. Azure Time Series Insights (TSI) allows mass collection and visualisation of time series data.
+
+1. Open the Azure Portal and navigate to the 'common' Resource Group
+![](./media/4_resources.png)
+2. Click on the 'msiotlabs-iia-tsi' resource to view the TSI details
+![](./media/4_tsi.png)
+3. Click 'Go to environment' to navigate to the TSI dashboard
+![](./media/__.png)
+4. On the left column, look for your lab username and lab number. For example, "LAB.USER01 LAB04", click this device and choose 'Show temperature'
+5. Explore the TSI environment by adjusting settings such as the timescale? needs some rewording on this one

@@ -110,6 +110,22 @@ dotnet run -i --model=CustomVision.onnx
 
 ## 3 - Build and push a container
 
+### 3.0 - Prepare your docker lab environment
+
+1.  **If you are not using a pre-configured lab environment**, the following command must be run in a Command Prompt window as Administrator:
+
+```batch
+setx /M DOCKER_HOST "npipe:////./pipe/iotedge_moby_engine"
+```
+
+2. **If you are using a pre-configured lab environment**, the following command must be run in a Command Prompt window as Administrator:
+
+```batch
+docker load -i C:\Labs\windows1809.tar
+```
+
+After running these preparation steps, close **ALL** Command Prompt and PowerShell windows to continue the lab steps below.
+
 ### 3.1 - Containerize the sample app
 
 The following steps assume that you have created a Azure Container Registry in Lab 3.
@@ -117,19 +133,13 @@ The following steps assume that you have created a Azure Container Registry in L
 1. Ensure that docker is running or that it is in your PATH variables.
     * If you are using Docker Desktop then ensure it is running in Windows mode.
 2.  Open a PowerShell window **as Administrator** (right click on the PowerShell entry and select Run as Administrator) and run the following commands:
-
-```powershell
-cd C:\Labs\Content\src\IoTLabs.CustomVision\release
-
-#this command sets the default docker host to the IoT Edge Moby host
-[System.Environment]::SetEnvironmentVariable("DOCKER_HOST", "npipe:////./pipe/iotedge_moby_engine", [System.EnvironmentVariableTarget]::Machine)
-```
-
 3. Update the **$registryName** variable below, then run the commands.
 
 **Note:** each time you rebuild the container, you should increment the **$version** variable.
 
 ```powershell
+cd C:\Labs\Content\src\IoTLabs.CustomVision\release
+
 #SAMPLE: msiotlabsiiauser01acr (this is the container registry created in lab 03)
 $registryName = "[azure-container-registry-name]"
 $version = "1.0"
@@ -185,22 +195,24 @@ Now that we have a container image with our inferencing logic stored in our cont
    | ACR_ADDRESS | Login server | *E.g. msiotlabsiiauser01acr.azurecr.io* |
    | ACR_IMAGE | Value of $containerTag | *E.g. msiotlabsiiauser01acr.azurecr.io/customvision:1.0-x64-win1809* |
 
-**Hint:** Jump back to the page you kept ready in the previous step, especially for the password.
+**Hint:** Refer to the page from the previous step, for details such as usernames and passwords.
+
 **Hint:** You can type **$containerTag** in PowerShell to get the full container string required to replace ACR_IMAGE.
-**Hint:** The ACR_IMAGE is in the customvision module definition.
+
+**Hint:** The ACR_IMAGE variable is in the customvision module definition.
 
 ### 5.3 - Deploy the IoT Edge deployment.json file. 
 
 Using the IoT Edge device that we created in Lab04, we will overwrite the modules with a new 'custom vision' module.
 
-1. Swap out **[device name]** and **[hub name]** then run the following command in PowerShell:
+1. Replace **[device name]** and **[hub name]**, then run the following command in PowerShell:
 
 ```
 #SAMPLE: az iot edge set-modules --device-id IOTEDGE01 --hub-name msiotlabs-iia-user01-iothub --content "C:\Labs\Content\src\IoTLabs.IoTEdge\deployment.template.lab05.win-x64.json"
 az iot edge set-modules --device-id [device name] --hub-name [hub name] --content "C:\Labs\Content\src\IoTLabs.IoTEdge\deployment.template.lab05.win-x64.json"
 ```
 
-**Hint:** If your forgot your device id, check the note on your lab laptop. Alternatively you can find this in the Azure Portal by navigating to your Resource group, then into the IoT Hub, and selecting the IoT Edge option under the Automatic Device Manager header on the left.
+**Hint:** Device ID can be retrieved from the Azure Portal by navigating to your Resource group, then into the IoT Hub, and selecting the IoT Edge option under the Automatic Device Manager header on the left.
 
 2. To get information about the modules deployed to your IoT Hub, swap out **[device name]** and **[hub name]** then run the following command:
 ```
@@ -234,12 +246,12 @@ Success looks like this:
 
 ```
 NAME             STATUS           DESCRIPTION      CONFIG
-customvision     running          Up 32 seconds    aiedgelabcr.azurecr.io/customvision:1.0-x64-iotcore
+customvision     running          Up 32 seconds    aiedgelabcr.azurecr.io/customvision:1.0-x64-win1809
 edgeAgent        running          Up 2 minutes     mcr.microsoft.com/azureiotedge-agent:1.0
 edgeHub          running          Up 1 second      mcr.microsoft.com/azureiotedge-hub:1.0
 ```
 
-Once the modules are up, you can inspect that the "customvision" module is operating correctly:
+Once the modules have started, the following command shows logs:
 
 ```
 iotedge logs customvision

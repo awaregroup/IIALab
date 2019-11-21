@@ -92,8 +92,9 @@ copy "%userprofile%\Downloads\tpmoverride.json" \\<device ip address here>\c$\Da
 6. Switching back to IoT Central, you should be able to see data in the dashboard as well.
 7. Select devices, and click on your device. 
 ![](./media/lab02/lab02-findyourdevice.png)
-8. The select overview to see your device dashboard. 
-![](./media/lab02/lab02-lab02-deviceoverview.png)
+
+8. Then select overview to see your device dashboard which should be showing. 
+![](./media/lab02/lab02-deviceoverview.png)
 
 
 **Note:** If your dashboard is showing "Waiting for data" then the application is not securly connected to Azure and you should revisit the steps to copy the tpmoverride file.

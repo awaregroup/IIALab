@@ -76,6 +76,7 @@ In order to connect the application with the IoT Hub we will need to generate a 
 1. Open a browser tab and navigate to [www.dpsgen.com/iia](https://www.dpsgen.com/iia).
 
 2. Enter the `Scope ID`, `Device ID` and `Primary Key` collected earlier and click **Generate JSON**. 
+1. Navigate to the download location for the tpmoverride.json file and open the file. If it is full of "null" that indicates that the dpsgen website had issues creating your connection string. In this case try again but if it still persists then you will have to use the [https://github.com/Azure/dps-keygen](dps-keygen) method.
 
 3. Open a Command Prompt as Administrator.
 4. Copy the `tpmoveride.json` file to the HummingBoard by replacing the IP address in each of the following two commands with the IP Address of your HummingBoard device, then run the two commands in your command prompt window; one command after the other:

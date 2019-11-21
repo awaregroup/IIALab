@@ -85,10 +85,15 @@ copy "%userprofile%\Downloads\tpmoverride.json" \\<device ip address here>\c$\Da
 ```
 ![](./media/2_13.png)
 
-5. Manually restart the HummingBoard device (you may need to connect a mouse to the device and then choose the Settings cog in the bottom left corner. In the drop-down list that shows at the top left under App Settings, choose **Power Options** and click on the **Restart** button). Once started you should see Azure IoT now showing as connected.
+5. Use Visual Studio to stop and then restart the application. Once started you should see Azure IoT now showing as connected.
 
 ![](./media/2_14.png)
 
 6. Switching back to IoT Central, you should be able to see data in the dashboard as well.
+7. Select devices, and click on your device. 
+![](./media/lab02/lab02-findyourdevice.png)
+8. The select overview to see your device dashboard. 
+![](./media/lab02/lab02-lab02-deviceoverview.png)
 
-![](./media/2_15.png)
+
+**Note:** If your dashboard is showing "Waiting for data" then the application is not securly connected to Azure and you should revisit the steps to copy the tpmoverride file.

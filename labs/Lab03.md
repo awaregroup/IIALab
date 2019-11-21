@@ -114,9 +114,7 @@ The Cognitive Services are a collection of pre-trained ML models that can be bui
 Custom Vision allows you to leverage the compute infrastructure in Azure to train your own Computer Vision model quickly and easily.
 
 
-
-
-### 3.5 - Time Series Insights
+### 3.2 - Time Series Insights
 
 Click on Time Series Insights Environment and then 'Go To Environment' to view the user interface. The data can then be displayed here. You will return to this page to view the results of future lab exercises.
 

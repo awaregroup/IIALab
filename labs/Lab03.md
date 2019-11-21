@@ -116,6 +116,6 @@ Custom Vision allows you to leverage the compute infrastructure in Azure to trai
 
 ### 3.2 - Time Series Insights
 
-Click on Time Series Insights Environment and then 'Go To Environment' to view the user interface. The data can then be displayed here. You will return to this page to view the results of future lab exercises.
+Click on Time Series Insights Environment and then 'Go To Environment' to view the user interface. The data can then be displayed here. Right now you won't see any data but you will return to this page to view the results of future lab exercises.
 
 ![](./media/3_8.png)

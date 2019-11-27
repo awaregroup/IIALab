@@ -1,4 +1,4 @@
-# Lab 04 - Introduction to Azure Stream Analytics with Azure IoT Edge
+# Lab 4 – Processing Data at the edge with Azure Stream Analytics
 
 This lab introduces Azure Stream Analytics with Azure IoT Edge on Windows 10 IoT Enterprise.
 

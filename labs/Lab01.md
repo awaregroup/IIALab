@@ -1,4 +1,4 @@
-# Lab 01 - Getting started with Windows 10 IoT
+# Lab 1 – Build your device with Windows 10 IoT Core
 
 This lab covers setting up Windows 10 IoT Core on a SolidRun HummingBoard Edge board and deploying apps using Visual Studio.
 

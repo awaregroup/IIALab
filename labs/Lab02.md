@@ -1,4 +1,5 @@
-# Lab 02 - Integrating Windows 10 IoT with Azure IoT Central
+# Lab 2 – Connect your device to Azure IoT Central
+
 This lab covers setting up Azure IoT Central, creating a Device Template and adding your HummingBoard as a device. By the end of this Lab you should be able to monitor your HummingBoard device in the cloud.
 
 ## Pre-requisites

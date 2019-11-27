@@ -1,4 +1,4 @@
-# Lab 03 - Configure your cloud solution platform
+# Lab 3 – Deploy Azure IoT Edge on Windows 10 IoT Enterprise
 
 ## 1 - Deploy and configure Azure IoT components
 
@@ -19,7 +19,7 @@ Azure Resource Manager Templates (ARM Templates) can be deployed into Azure that
 <img src="https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/visualizebutton.png"/>
 </a><br/><br/>
 
-2. Choose the Resource Group that matches your lab user number, click 'I agree' on the terms and 'Purchase' to begin the provisioning process.
+2. Choose the Resource Group that matches your lab user number, click '**I agree**' on the terms and **Purchase** to begin the provisioning process.
 ![](./media/3_1.png)
 
 3. Wait for the provisioning process to complete.

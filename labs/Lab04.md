@@ -90,11 +90,11 @@ INTO
    alert 
 FROM 
    temperature TIMESTAMP BY timeCreated 
-GROUP BY TumblingWindow(second,30) 
-HAVING Avg(machine.temperature) > 24
+GROUP BY TumblingWindow(second, 30) 
+HAVING Avg(machine.temperature) > 26
 ```
 
-Stream Analytics can be used to enable complex logic on streams of data. This query is enabling our device to send a 'reset' message when the average temperature exceeds 24 degrees over 30 seconds.
+Stream Analytics can be used to enable complex logic on streams of data. This query is enabling our device to send a '**reset**' message when the average temperature exceeds 26 degrees over 30 seconds.
 
 
 3. Click **Save query**
@@ -104,7 +104,7 @@ Stream Analytics can be used to enable complex logic on streams of data. This qu
 
 ### 3.1 - Module deployment using Azure Portal
 1. In the [Azure Portal (https://portal.azure.com)](https://portal.azure.com) open the **msiotlabs-iia-user##** resource group
-2. Open the **IoT Hub** resource, navigate to **IoT Edge** and then select the device created in [step 1.1](#11---cloud-setup)
+2. Open the **IoT Hub** resource, navigate to **IoT Edge** and then select the device created in Lab 3
 ![IoT Edge Devices](./media/lab04/iot-edge-devices.jpg)
 3. Click **Set modules**
 ![Set Modules](./media/lab04/set-modules.jpg)
@@ -114,7 +114,7 @@ Stream Analytics can be used to enable complex logic on streams of data. This qu
 
 **Note:** You may have to click on the **Edge job** dropdown for the save button to show.
 
-6. When the module has loaded, select **Configure** and take note of the **Name** field. You will be using this module name in the next step.
+6. When the module has loaded, select **Configure** and take note of the **Name** field. You will be using this module name in the next step
 ![Adding ASA Module](./media/lab04/configure-and-read-name.png)
 7. Click **Save**, then **Next**
 
@@ -136,7 +136,7 @@ Stream Analytics can be used to enable complex logic on streams of data. This qu
 ### 3.3 - Verify Deployment on IoT Edge Device
 The module deployment is instant, however changes to the device can take around 5-7 minutes to take effect. Let's check that our device has loaded our Azure Stream Analytics module from the last step.
 
-1. Open the Start Menu and type **PowerShell**, then click **Run as Administrator**\
+1. Open the Start Menu and type **PowerShell**, then click **Run as Administrator**
 2. Inspect the currently running modules using the following command:
 ```powershell
 iotedge list
@@ -147,7 +147,7 @@ iotedge list
 ```powershell
 iotedge logs SimulatedTemperatureSensor
 ```
-You should see that the machine temperature increases until it reaches a temperature higher than the 24 degree threshold for at least 30 seconds.
+You should see that the machine temperature increases until it reaches a temperature higher than the 26 degree threshold for at least 30 seconds.
 ![Temperature Reset](./media/lab04/temperature-reset.jpg)
 
 4. When the SimulatedTemperatureSensor container stops producing data you can reset it to start over
@@ -155,79 +155,25 @@ You should see that the machine temperature increases until it reaches a tempera
 iotedge restart SimulatedTemperatureSensor
 ```
 
-
-## 5 - Updating Existing IoT Edge Device Modules
-### 5.1 - Update Module Twin
-1. In the [Azure Portal (https://portal.azure.com)](https://portal.azure.com) open the **msiotlabs-iia-user##** resource group
-2. Open the **IoT Hub** resource, navigate to **IoT Edge** and then select the device created in [step 1.1](#11---cloud-setup)
-3. Click **Set modules**
-4. Click **Configure** next to the **SimulatedTemperatureSensor** module
-5. Update **SendInterval** from **5** to a new value of  **1**
-6. Click **Save**, then click **Next**, then click **Next**
-7. Leave the routes as they are and click **Next**
-8. Click **Submit**
-9. Run through step 4.3 again to verify that the SimulatedTemperatureSensor module is now reporting every second instead of every 5 seconds
-
-### 5.2 - Update Stream Analytics Edge Job
-1. In the [Azure Portal (https://portal.azure.com)](https://portal.azure.com) open the **msiotlabs-iia-user##** resource group
-2. Open the **Stream Analytics job** resource
-3. Under the **Job topology** heading in the left hand menu, select **Query**
-4. Click **Edit Query** and replace the current query with the following:
-```sql
-SELECT
-    AVG(machine.temperature) AS temperature,
-    MAX(timeCreated) AS timeCreated,
-    'lab04' AS source 
-INTO 
-   alert
-FROM
-     temperature TIMESTAMP BY timeCreated 
-GROUP BY TumblingWindow(second,15) 
-```
-
-5. Click **Save query**
-
-### 5.3 - Push the Updated Module
-1. In the [Azure Portal (https://portal.azure.com)](https://portal.azure.com) open the **msiotlabs-iia-user##** resource group
-2. Open the **IoT Hub** resource, navigate to **IoT Edge** and then select the device created in [step 1.1](#11---cloud-setup)
-3. Click **Set modules**
-4. You will notice that the **Stream Analytics** module has a warning saying: "Module outdated - click here to update"
-![](./media/lab04/outdated-module.jpg)
-5. Click **Configure** next to the **Stream Analytics** module
-6. Take a copy of the Name to be used in the next step. Click the **Update ASA module**, then click **Save** and finally **Next**.
-![](./media/lab04/update-asa-module.jpg)
-7. Replace the current JSON with the following, substituting **[module name]** with the module name found in the previous step (replaced in two places):
-```javascript
-{
-  "routes": {
-    "AsaToIotHub": "FROM /messages/modules/[module name]/* INTO $upstream",
-    "telemetryToAsa": "FROM /messages/modules/SimulatedTemperatureSensor/* INTO BrokeredEndpoint(\"/modules/[module name]/inputs/temperature\")"
-  }
-}
-```
-8. Click **Next**, then **Submit**
-
-
-### 5.4 - Enable IoT Hub Routes
+### 3.4 - Enable IoT Hub Routes
 
 1. Return to your IoT Hub settings in the Azure Portal.
-2. Click on 'Message Routing'
-3. Choose the existing route and click 'Enable'
+2. Click on **Message Routing**
+3. Choose the existing route and click **Enable**
 4. Save changes
 
 This step will enable telemetry to flow into Time Series Insights which you can view from the common Resource Group.
 
-## 6 - Azure Time Series Insights
+## 4 - Azure Time Series Insights (TSI)
 
-### 6.1 - Visualise your data with Azure Time Series Insights (TSI)
+### 4.1 - Visualise your data with Time Series Insights
 
 These labs demonstrate how to collect, process and consolidate data from many different streaming sources into a single data platform. Azure Time Series Insights (TSI) allows mass collection and visualisation of time series data.
 
-1. Open the Azure Portal and navigate to the 'common' Resource Group
+1. Open the Azure Portal and navigate to the **common** Resource Group
 ![](./media/4_resources.png)
-2. Click on the 'msiotlabs-iia-tsi' resource to view the TSI details
+2. Click on the **msiotlabs-iia-tsi** resource to view the TSI details
 ![](./media/4_tsi.png)
-3. Click 'Go to environment' to navigate to the TSI dashboard
+3. Click **Go to environment** to navigate to the TSI dashboard
 ![](./media/__.png)
-4. On the left column, look for your lab username and lab number. For example, "LAB.USER01 LAB04", click this device and choose 'Show temperature'
-5. Explore the TSI environment by adjusting settings such as the timescale? needs some rewording on this one
+4. On the left column, look for your lab username and lab number. For example, "**LAB.USER01 LAB04**", click this device and choose **Show temperature**

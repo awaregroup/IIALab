@@ -160,5 +160,3 @@ Click on Time Series Insights Environment and then 'Go To Environment' to view t
 ```
 7. When prompted, enter the Device Connection string from the previous step, including the SharedAccessKey
 ![](./media/lab04/iot-edge-initialize.png)
-
-### 4.3 - Tes

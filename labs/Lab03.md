@@ -1,4 +1,4 @@
-# Lab 03 - Configure your cloud solution platform
+# Lab 3 – Deploy Azure IoT Edge on Windows 10 IoT Enterprise
 
 ## 1 - Deploy and configure Azure IoT components
 
@@ -19,7 +19,7 @@ Azure Resource Manager Templates (ARM Templates) can be deployed into Azure that
 <img src="https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/visualizebutton.png"/>
 </a><br/><br/>
 
-2. Choose the Resource Group that matches your lab user number, click 'I agree' on the terms and 'Purchase' to begin the provisioning process.
+2. Choose the **Resource group** that matches your lab user number, click **I agree** on the terms and **Purchase** to begin the provisioning process.
 ![](./media/3_1.png)
 
 3. Wait for the provisioning process to complete.
@@ -38,7 +38,6 @@ Azure Resource Manager Templates (ARM Templates) can be deployed into Azure that
 * Stream Analytics Job
 
 These components represent the IoT platform your device connects to.
-
 
 ## 2 - Explore Resources
 
@@ -119,3 +118,66 @@ Custom Vision allows you to leverage the compute infrastructure in Azure to trai
 Click on Time Series Insights Environment and then 'Go To Environment' to view the user interface. The data can then be displayed here. Right now you **will not**  see any data but you will return to this page to view the results of future lab exercises.
 
 ![](./media/3_8.png)
+
+## 4 - Configure your Lab PC as an Edge Device
+
+### 4.1 - Create Device in Azure IoT Hub
+
+1. Make a note of the Lab PC number  printed on the device. For example, #1 would convert to the **LAB.USER01**
+2. Open a browser and navigate to the [Azure Portal (portal.azure.com)](https://portal.azure.com). Log in with the lab credentials provided
+3. Select **Resource groups** from the Azure Portal homepage.
+![](./media/lab04/azure%20dashboard.png)
+4. Select the **msiotlabs-iia-user##** resource group in the list and choose the **IoT Hub** (this is the same IoT Hub resource that we explored earlier in step 2.1 of this lab).
+5. In the IoT Hub menu under the heading **Automatic Device Management**, click **IoT Edge**\
+![](./media/lab04/SelectIoTEdge.png)
+6. Click **Add an IoT Edge device** at the top of the page
+7. Enter the Surface Laptop name (from earlier) as the device id, leave the rest of the settings as default and click **Save**
+![](./media/lab04/add-device.jpg)
+8. Click **Refresh** and your newly created device should appear in the list
+9. Take note of your **Device Id** (red circle) and your **IoT Hub Name** (red square) You will need to refer to these in future steps
+![](./media/lab04/DeviceAndHubDetails.png)
+10. Select your device and take note of the **Primary Connection String**. We will be using it in the next step, so keep this page ready or save the into a document on your desktop for ease\
+![](./media/lab04/CopyConnectionStringIoTEdge.png)
+
+### 4.2 - IoT Device setup using Azure CLI
+**Note:** This next step will cause your Surface Laptop to reboot, so now is a good time to save any documents that you have open.
+
+1. On your Surface Laptop device, open the Start Menu and type **PowerShell**, then click **Run as Administrator**\
+![](./media/lab04/powershell.jpg)
+2. Click **Yes** when it asks if you want to allow this app to make changes to your device
+3. Install the Azure IoT Edge runtime on the device by running the following command:
+```powershell
+. {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Deploy-IoTEdge
+```
+![](./media/lab04/iotedge-install.jpg)
+
+4. When prompted, press **Y** two times, including one to reboot
+5. When the system has booted again, re-open the PowerShell session as Administrator
+6. Configure the Azure IoT Edge runtime with the following command:
+```powershell
+. {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Initialize-IoTEdge
+```
+7. When prompted, enter the Device Connection string from the previous step, including the SharedAccessKey
+![](./media/lab04/iot-edge-initialize.png)
+
+### 4.2 - Verify successful installation
+Run the following powershell command to check the status of the IoT Edge service, it should be listed as running:
+
+```PowerShell
+Get-Service iotedge
+```
+Run the following powershell command to examine service logs from the last 5 minutes. If you just finished installing the IoT Edge runtime, you may see a list of errors from the time between running Deploy-IoTEdge and Initialize-IoTEdge. These errors are expected, as the service is trying to start before being configured.
+
+```PowerShell
+. {Invoke-WebRequest -useb https://aka.ms/iotedge-win} | Invoke-Expression; Get-IoTEdgeLog
+```
+Run the following powershell command to run an automated check for the most common configuration and networking errors.
+
+```PowerShell
+iotedge check
+```
+
+Run the following powershell command to list running modules. After a new installation, the only module you should see running is edgeAgent. After you deploy IoT Edge modules for the first time, the other system module, edgeHub, will start on the device too.
+```PowerShell
+iotedge list
+```

@@ -39,7 +39,6 @@ Azure Resource Manager Templates (ARM Templates) can be deployed into Azure that
 
 These components represent the IoT platform your device connects to.
 
-
 ## 2 - Explore Resources
 
 ### 2.1 - IoT Hub
@@ -144,8 +143,8 @@ Click on Time Series Insights Environment and then 'Go To Environment' to view t
 **Note:** This next step will cause your Surface Laptop to reboot, so now is a good time to save any documents that you have open.
 
 1. On your Surface Laptop device, open the Start Menu and type **PowerShell**, then click **Run as Administrator**\
-2. Click **Yes** when it asks if you want to allow this app to make changes to your device
 ![](./media/lab04/powershell.jpg)
+2. Click **Yes** when it asks if you want to allow this app to make changes to your device
 3. Install the Azure IoT Edge runtime on the device by running the following command:
 ```powershell
 . {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Deploy-IoTEdge
@@ -160,3 +159,25 @@ Click on Time Series Insights Environment and then 'Go To Environment' to view t
 ```
 7. When prompted, enter the Device Connection string from the previous step, including the SharedAccessKey
 ![](./media/lab04/iot-edge-initialize.png)
+
+### 4.2 - Verify successful installation
+Run the following powershell command to check the status of the IoT Edge service, it should be listed as running:
+
+```PowerShell
+Get-Service iotedge
+```
+Run the following powershell command to examine service logs from the last 5 minutes. If you just finished installing the IoT Edge runtime, you may see a list of errors from the time between running Deploy-IoTEdge and Initialize-IoTEdge. These errors are expected, as the service is trying to start before being configured.
+
+```PowerShell
+. {Invoke-WebRequest -useb https://aka.ms/iotedge-win} | Invoke-Expression; Get-IoTEdgeLog
+```
+Run the following powershell command to run an automated check for the most common configuration and networking errors.
+
+```PowerShell
+iotedge check
+```
+
+Run the following powershell command to list running modules. After a new installation, the only module you should see running is edgeAgent. After you deploy IoT Edge modules for the first time, the other system module, edgeHub, will start on the device too.
+```PowerShell
+iotedge list
+```

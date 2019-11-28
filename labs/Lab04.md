@@ -27,7 +27,7 @@ az iot edge set-modules --device-id [device id] --hub-name [hub name] --content 
 ```
 
 ### 1.2 - Verify Deployment on IoT Edge Device
-The module deployment is instant, however changes to the device can take around 5-7 minutes to take effect. This means it can take a while for the new container to be loaded. The following commands can be used to check the status of the SimulatedTemperatureSensor container:
+The module deployment is instant, however, changes to the device can take around 5-7 minutes to take effect. This means it can take a while for the new container to be loaded. The following commands can be used to check the status of the SimulatedTemperatureSensor container:
 
 1. To validate the Azure IoT Edge runtime installation, continue within PowerShell and use the command:
 ```powershell
@@ -74,13 +74,13 @@ This command will monitor the data being published into IoT Hub from the Simulat
 4. Click **Save**
 
 ### 2.3 - Adding Outputs
-1. Under the **Job topology** heading in the left hand menu, select **Outputs**
+1. Under the **Job topology** heading in the left-hand menu, select **Outputs**
 2. Select **Add**, then select **Edge Hub**
 3. Set the **Output Alias** as **alert** and leave the rest of the settings as default.
 4. Click **Save**
 
 ### 2.4 - Adding Query
-1. Under the **Job topology** heading in the left hand menu, select **Query**
+1. Under the **Job topology** heading in the left-hand menu, select **Query**
 2. Replace the existing Select statement with the one below:
 ```sql
 SELECT  
@@ -175,5 +175,41 @@ These labs demonstrate how to collect, process and consolidate data from many di
 2. Click on the **msiotlabs-iia-tsi** resource to view the TSI details
 ![](./media/4_tsi.png)
 3. Click **Go to environment** to navigate to the TSI dashboard
-![](./media/__.png)
-4. On the left column, look for your lab username and lab number. For example, "**LAB.USER01 LAB04**", click this device and choose **Show temperature**
+4. On the left column, look for your lab username and lab number. For example, "**LAB.USER30 LAB04**", click this device and choose **Show temperature**\
+![](./media/lab04/tsi-show-temp.png)
+
+### 4.2 - Selecting a Timeframe
+**Using the Time Selection Panel**
+1. At the top of the screen, you will see a bar that represents the currently selected timeframe 
+![](./media/lab04/time-selection.png)
+2. You can expand it using the little down arrow on the right
+![](./media/lab04/time-selection-expanded.png)
+3. Try changing the timeframe by dragging/moving the blue box across the timeline:
+![](./media/lab04/time-selection-updated.png)
+4. The peaks on the timeline show times that data was received by TSI
+
+**Using the Timeframe selector**
+1. In the top right corner of TSI click the **calendar icon** next to the word **Timeframe**\
+![](./media/lab04/tsi-timeframe.png)
+2. We can use this menu to choose a fixed timeframe:\
+![](./media/lab04/tsi-time-period.png)
+3. Try selecting **Last 4 hours** to see the data from today's lab
+
+### 4.2 - Compare multiple sources
+1. On the left column, select another lab users device and choose **Show temperature**
+2. If that user had data coming through to TSI, you should see 2 charts. Keep trying users until you find one with data.
+![](./media/lab04/tsi-multiple-sources.png)
+3. Each source you add can be seen at the bottom of the screen:\
+![](./media/lab04/tsi-sources-menu.png)
+4. Use the options in the **Zoom + Pan** menu until you get to a zoom that makes sense
+5. Try clicking on **Stacked** and change it to **Shared** or **Overlap** to see the graphs overlaid on the same axis 
+6. Try clicking on **Interval** and see how the TSI aggregates your data over the specified interval
+![](./media/lab04/tsi-interval-shared.png)
+7. Use the **Marker** button to compare the data for all selected sources at a specific time
+![](./media/lab04/tsi-markers.png)
+
+### 4.3 - Exploring Events
+1. Click and drag your mouse on the graph to select an area that you are intersted in, then click **Explore Events**
+![](./media/lab04/tsi-select.png)
+2. Here you can see the individual events that made up portion that you selected. You can even export the data as a CSV file for further processing.
+![](./media/lab04/tsi-events.png)

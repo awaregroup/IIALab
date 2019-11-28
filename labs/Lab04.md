@@ -6,7 +6,7 @@ This lab introduces Azure Stream Analytics with Azure IoT Edge on Windows 10 IoT
 
 ### 1.1 - Module deployment using Azure CLI
 
-1. Open the Start Menu and type **PowerShell**, then click **Run as Administrator**\
+1. Open the Start Menu and type **PowerShell**, then click **Run as Administrator**
 2. Login to Azure CLI using the following command:
 
 **Note:** You may be asked to login to your browser; use your lab credentials

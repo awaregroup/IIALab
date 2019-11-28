@@ -106,7 +106,7 @@ Stream Analytics can be used to enable complex logic on streams of data. This qu
 1. In the [Azure Portal (https://portal.azure.com)](https://portal.azure.com) open the **msiotlabs-iia-user##** resource group
 2. Open the **IoT Hub** resource, navigate to **IoT Edge** and then select the device created in Lab 3
 ![IoT Edge Devices](./media/lab04/iot-edge-devices.jpg)
-3. Click **Set modules**
+3. Click **Set modules**\
 ![Set Modules](./media/lab04/set-modules.jpg)
 4. Under the **Deployment Modules** heading click **+ Add** and choose **Azure Stream Analytics Module**
 ![Adding ASA Module](./media/lab04/add-asa-module.jpg)
@@ -134,7 +134,7 @@ Stream Analytics can be used to enable complex logic on streams of data. This qu
 2. Select **Next**, then **Submit**
 
 ### 3.3 - Verify Deployment on IoT Edge Device
-The module deployment is instant, however changes to the device can take around 5-7 minutes to take effect. Let's check that our device has loaded our Azure Stream Analytics module from the last step.
+The module deployment is instant, however, changes to the device can take around 5-7 minutes to take effect. Let's check that our device has loaded our Azure Stream Analytics module from the last step.
 
 1. Open the Start Menu and type **PowerShell**, then click **Run as Administrator**
 2. Inspect the currently running modules using the following command:

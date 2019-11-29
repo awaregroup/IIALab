@@ -7,6 +7,7 @@ This lab introduces Azure Stream Analytics with Azure IoT Edge on Windows 10 IoT
 ### 1.1 - Module deployment using Azure CLI
 
 1. Open the Start Menu and type **PowerShell**, then click **Run as Administrator**
+
 2. Login to Azure CLI using the following command:
 
 **Note:** You may be asked to login to your browser; use your lab credentials
@@ -64,23 +65,34 @@ This command will monitor the data being published into IoT Hub from the Simulat
 
 ### 2.1 - Navigate to your Azure Stream Analytics Edge Job
 1. In the [Azure Portal (https://portal.azure.com)](https://portal.azure.com) open the **msiotlabs-iia-user##** resource group
+
 2. Open the **Stream Analytics job** resource
 ![Stream Analytics Job](./media/lab04/asa-overview.jpg)
 
 ### 2.2 - Adding Inputs
+
 1. Under the **Job topology** heading in the stream analytics menu, select **Inputs**
+
 2. Select **Add stream input**, then select **Edge Hub**
+
 3. Set the **Input Alias** as **temperature** and leave the rest of the settings as default.
+
 4. Click **Save**
 
 ### 2.3 - Adding Outputs
+
 1. Under the **Job topology** heading in the left-hand menu, select **Outputs**
+
 2. Select **Add**, then select **Edge Hub**
+
 3. Set the **Output Alias** as **alert** and leave the rest of the settings as default.
+
 4. Click **Save**
 
 ### 2.4 - Adding Query
+
 1. Under the **Job topology** heading in the left-hand menu, select **Query**
+
 2. Replace the existing Select statement with the one below:
 ```sql
 SELECT  
@@ -93,9 +105,7 @@ FROM
 GROUP BY TumblingWindow(second, 30) 
 HAVING Avg(machine.temperature) > 26
 ```
-
 Stream Analytics can be used to enable complex logic on streams of data. This query is enabling our device to send a '**reset**' message when the average temperature exceeds 26 degrees over 30 seconds.
-
 
 3. Click **Save query**
 
@@ -103,19 +113,25 @@ Stream Analytics can be used to enable complex logic on streams of data. This qu
 ## 3 - Configure IoT Edge to use Azure Stream Analytics Edge Job
 
 ### 3.1 - Module deployment using Azure Portal
+
 1. In the [Azure Portal (https://portal.azure.com)](https://portal.azure.com) open the **msiotlabs-iia-user##** resource group
+
 2. Open the **IoT Hub** resource, navigate to **IoT Edge** and then select the device created in Lab 3
 ![IoT Edge Devices](./media/lab04/iot-edge-devices.jpg)
+
 3. Click **Set modules**\
 ![Set Modules](./media/lab04/set-modules.jpg)
+
 4. Under the **Deployment Modules** heading click **+ Add** and choose **Azure Stream Analytics Module**
 ![Adding ASA Module](./media/lab04/add-asa-module.jpg)
+
 5. Set the Subscription as **MSIoTLabs-IIA** and Edge Job as **msiotlabs-iia-user##-streamanalytics**, then click **Save**
 
 **Note:** You may have to click on the **Edge job** dropdown for the save button to show.
 
 6. When the module has loaded, select **Configure** and take note of the **Name** field. You will be using this module name in the next step
 ![Adding ASA Module](./media/lab04/configure-and-read-name.png)
+
 7. Click **Save**, then **Next**
 
 ### 3.2 - Selecting the routes
@@ -137,6 +153,7 @@ Stream Analytics can be used to enable complex logic on streams of data. This qu
 The module deployment is instant, however, changes to the device can take around 5-7 minutes to take effect. Let's check that our device has loaded our Azure Stream Analytics module from the last step.
 
 1. Open the Start Menu and type **PowerShell**, then click **Run as Administrator**
+
 2. Inspect the currently running modules using the following command:
 ```powershell
 iotedge list
@@ -158,8 +175,11 @@ iotedge restart SimulatedTemperatureSensor
 ### 3.4 - Enable IoT Hub Routes
 
 1. Return to your IoT Hub settings in the Azure Portal.
+
 2. Click on **Message Routing**
+
 3. Choose the existing route and click **Enable**
+
 4. Save changes
 
 This step will enable telemetry to flow into Time Series Insights which you can view from the common Resource Group.
@@ -172,44 +192,63 @@ These labs demonstrate how to collect, process and consolidate data from many di
 
 1. Open the Azure Portal and navigate to the **common** Resource Group
 ![](./media/4_resources.png)
+
 2. Click on the **msiotlabs-iia-tsi** resource to view the TSI details
 ![](./media/4_tsi.png)
+
 3. Click **Go to environment** to navigate to the TSI dashboard
+
 4. On the left column, look for your lab username and lab number. For example, "**LAB.USER30 LAB04**", click this device and choose **Show temperature**\
 ![](./media/lab04/tsi-show-temp.png)
 
 ### 4.2 - Selecting a Timeframe
 **Using the Time Selection Panel**
+
 1. At the top of the screen, you will see a bar that represents the currently selected timeframe 
 ![](./media/lab04/time-selection.png)
+
 2. You can expand it using the little down arrow on the right
 ![](./media/lab04/time-selection-expanded.png)
+
 3. Try changing the timeframe by dragging/moving the blue box across the timeline:
 ![](./media/lab04/time-selection-updated.png)
+
 4. The peaks on the timeline show times that data was received by TSI
 
 **Using the Timeframe selector**
+
 1. In the top right corner of TSI click the **calendar icon** next to the word **Timeframe**\
 ![](./media/lab04/tsi-timeframe.png)
+
 2. We can use this menu to choose a fixed timeframe:\
 ![](./media/lab04/tsi-time-period.png)
+
 3. Try selecting **Last 4 hours** to see the data from today's lab
 
 ### 4.2 - Compare multiple sources
+
 1. On the left column, select another lab users device and choose **Show temperature**
+
 2. If that user had data coming through to TSI, you should see 2 charts. Keep trying users until you find one with data.
 ![](./media/lab04/tsi-multiple-sources.png)
+
 3. Each source you add can be seen at the bottom of the screen:\
 ![](./media/lab04/tsi-sources-menu.png)
+
 4. Use the options in the **Zoom + Pan** menu until you get to a zoom that makes sense
+
 5. Try clicking on **Stacked** and change it to **Shared** or **Overlap** to see the graphs overlaid on the same axis 
+
 6. Try clicking on **Interval** and see how the TSI aggregates your data over the specified interval
 ![](./media/lab04/tsi-interval-shared.png)
+
 7. Use the **Marker** button to compare the data for all selected sources at a specific time
 ![](./media/lab04/tsi-markers.png)
 
 ### 4.3 - Exploring Events
+
 1. Click and drag your mouse on the graph to select an area that you are intersted in, then click **Explore Events**
 ![](./media/lab04/tsi-select.png)
+
 2. Here you can see the individual events that made up portion that you selected. You can even export the data as a CSV file for further processing.
 ![](./media/lab04/tsi-events.png)

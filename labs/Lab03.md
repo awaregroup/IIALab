@@ -8,7 +8,10 @@ The focal point of all Microsoft IoT solutions is the Azure IoT Hub service. IoT
 
 Azure Resource Manager Templates (ARM Templates) can be deployed into Azure that include IoT Hub. 
 
-1. Open a browser and navigate to the [Azure Portal (portal.azure.com)](https://portal.azure.com). Log in with the lab credentials provided.  **LAB.USER## where ## are replaced with the number of your lab workstation. eg. #1 would be LAB.USER01@msiotlabs.com** 
+1. Open a browser and navigate to the [Azure Portal (portal.azure.com)](https://portal.azure.com). 
+1. Log in with the lab credentials provided.  
+**lab.user##@msiotlabs.com where ## are replaced with the number of your lab workstation. 
+eg. #1 would be lab.user01@msiotlabs.com** 
 1. Click the 'Deploy to Azure' button below to create the Azure IoT components required for the next labs:<br/><br/>
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fawaregroup%2FIIALab%2Fmaster%2Fsrc%2FAzure.ARM%2Fiia-azuredeploy.json" target="_blank" rel="noopener noreferrer">
 <img src="https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.png"/>
@@ -20,16 +23,17 @@ Azure Resource Manager Templates (ARM Templates) can be deployed into Azure that
 </a><br/><br/>
 
 2. Choose the **Resource group** that matches your lab user number, click **I agree** on the terms and **Purchase** to begin the provisioning process.
-![](./media/3_1.png)
+![](./media/lab03/3_1.png)
 
 3. Wait for the provisioning process to complete.
 
 ### 1.2 - Validate Resources
 
 1. On the left hand icon menu, click 'Resource Groups'
-![](./media/3_2.png)
+![](./media/lab03/3_2.png)
+
 2. Click on the resource group that corresponds to your username
-![](./media/3_3.png)
+![](./media/lab03/3_3.png)
 3. Validate that you can see the following types of resources:<br/>
 * Container Registry
 * Device Provisioning Service
@@ -45,7 +49,7 @@ These components represent the IoT platform your device connects to.
 
 IoT Hub is the core of all IoT projects in Azure. Open your IoT Hub resource **msiotlabs-iia-user##-iothub** and explore the different pages that are listed in the table below:
 
-|Component Name    |Notes|
+|Component    |Description|
 |--------|-----|
 |Shared Access Policies|IoT Hub has a specific focus on security and this is one of the areas to configure access to the management of the IoT Hub. |
 |IoT Devices|This device list allows you to see all the devices that are currently registered against the IoT hub and manage them. You can also check the metadata for each device including their Device Twin.|
@@ -54,7 +58,7 @@ IoT Hub is the core of all IoT projects in Azure. Open your IoT Hub resource **m
 
 **Hint:** In preparation for the next step in the lab, using the breadcrumb trail (at the top middle of the screen) click on **msiotlabs-iia-user##** resource group to take you back to your resource group.
 
-![](./media/3_4.png)
+![](./media/lab03/3_4.png)
 
 ### 2.2 - Device Provisioning Service (DPS)
 
@@ -62,7 +66,7 @@ The Device Provisioning Service is found in your resource group **msiotlabs-iia-
 
 DPS allows devices to be embedded with an organization specific key, that allows them to register against a specific IoT Hub on first boot. This enables device builders to easily manufacture a fleet of devices and have them register against centrally managed IoT Hubs.
 
-![](./media/3_5.png)
+![](./media/lab03/3_5.png)
 
 |Component Name    |Notes|
 |--------|-----|
@@ -89,7 +93,7 @@ The Edge version of Stream Analytics allows us to run this service inside a cont
 
 Container Registry is a private docker container registry that you can push containers to. When combined with IoT Edge, you can store the containers to be used by your edge devices. Your proprietary code can stay protected in your own container registry rather than a public registry.
 
-![](./media/3_9.png)
+![](./media/lab03/3_9.png)
 
 |Component Name    |Notes|
 |--------|-----|
@@ -102,7 +106,7 @@ Container Registry is a private docker container registry that you can push cont
 As part of this lab a set of common resources have been provisioned for all lab users to share. Return to your list of Resource groups and click on the 'common' Resource group.
 **Hint:** You can also use the search bar at the top of Azure and type in "common".
 
-![](./media/3_7.png)
+![](./media/lab03/3_7.png)
 
 The resources here allow data to flow from all the separate lab IoT Hub instances into a single stream of IoT data which is then consumed and displayed through Time Series Insights.
 
@@ -115,50 +119,64 @@ Custom Vision allows you to leverage the compute infrastructure in Azure to trai
 
 ### 3.2 - Time Series Insights
 
-Click on Time Series Insights Environment and then 'Go To Environment' to view the user interface. The data can then be displayed here. Right now you **will not**  see any data but you will return to this page to view the results of future lab exercises.
+1. Click on Time Series Insights Environment
 
-![](./media/3_8.png)
+1. 'Go To Environment' to view the user interface. The data will be displayed here. Right now you **will not**  see any data but you will return to this page to view the results of future lab exercises.
+![](./media/lab03/3_8.png)
 
 ## 4 - Configure your Lab PC as an Edge Device
 
 ### 4.1 - Create Device in Azure IoT Hub
 
 1. Make a note of the Lab PC number  printed on the device. For example, #1 would convert to the **LAB.USER01**
+
 2. Open a browser and navigate to the [Azure Portal (portal.azure.com)](https://portal.azure.com). Log in with the lab credentials provided
+
 3. Select **Resource groups** from the Azure Portal homepage.
-![](./media/lab04/azure%20dashboard.png)
+![](./media/lab03/azure%20dashboard.png)
+
 4. Select the **msiotlabs-iia-user##** resource group in the list and choose the **IoT Hub** (this is the same IoT Hub resource that we explored earlier in step 2.1 of this lab).
+
 5. In the IoT Hub menu under the heading **Automatic Device Management**, click **IoT Edge**\
-![](./media/lab04/SelectIoTEdge.png)
+![](./media/lab03/SelectIoTEdge.png)
+
 6. Click **Add an IoT Edge device** at the top of the page
-7. Enter the Surface Laptop name (from earlier) as the device id, leave the rest of the settings as default and click **Save**
-![](./media/lab04/add-device.jpg)
+
+7. Enter the Lab PC name (from earlier) as the device id, leave the rest of the settings as default and click **Save**
+![](./media/lab03/add-device.jpg)
+
 8. Click **Refresh** and your newly created device should appear in the list
+
 9. Take note of your **Device Id** (red circle) and your **IoT Hub Name** (red square) You will need to refer to these in future steps
-![](./media/lab04/DeviceAndHubDetails.png)
+![](./media/lab03/DeviceAndHubDetails.png)
+
 10. Select your device and take note of the **Primary Connection String**. We will be using it in the next step, so keep this page ready or save the into a document on your desktop for ease\
-![](./media/lab04/CopyConnectionStringIoTEdge.png)
+![](./media/lab03/CopyConnectionStringIoTEdge.png)
 
 ### 4.2 - IoT Device setup using Azure CLI
-**Note:** This next step will cause your Surface Laptop to reboot, so now is a good time to save any documents that you have open.
+**Note:** This next step will cause your Lab PC to reboot, so now is a good time to save any documents that you have open.
 
-1. On your Surface Laptop device, open the Start Menu and type **PowerShell**, then click **Run as Administrator**\
-![](./media/lab04/powershell.jpg)
+1. On your Lab PC, open the Start Menu and type **PowerShell**, then click **Run as Administrator**\
+![](./media/lab03/powershell.jpg)
+
 2. Click **Yes** when it asks if you want to allow this app to make changes to your device
+
 3. Install the Azure IoT Edge runtime on the device by running the following command:
 ```powershell
 . {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Deploy-IoTEdge
 ```
-![](./media/lab04/iotedge-install.jpg)
+ 
 
-4. When prompted, press **Y** two times, including one to reboot
+4. When prompted, press **Y** two times, including one to reboot. 
+![](./media/lab03/iotedge-install.jpg)
+
 5. When the system has booted again, re-open the PowerShell session as Administrator
 6. Configure the Azure IoT Edge runtime with the following command:
 ```powershell
 . {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Initialize-IoTEdge
 ```
 7. When prompted, enter the Device Connection string from the previous step, including the SharedAccessKey
-![](./media/lab04/iot-edge-initialize.png)
+![](./media/lab03/iot-edge-initialize.png)
 
 ### 4.2 - Verify successful installation
 Run the following powershell command to check the status of the IoT Edge service, it should be listed as running:
@@ -177,7 +195,7 @@ Run the following powershell command to run an automated check for the most comm
 iotedge check
 ```
 
-Run the following powershell command to list running modules. After a new installation, the only module you should see running is edgeAgent. After you deploy IoT Edge modules for the first time, the other system module, edgeHub, will start on the device too.
+Run the following powershell command to list running modules. After a new installation, the only module you should see running is **edgeAgent**. After you deploy IoT Edge modules for the first time, the other system module, **edgeHub**, will start on the device too.
 ```PowerShell
 iotedge list
 ```

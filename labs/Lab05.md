@@ -1,4 +1,4 @@
-# Lab 05 - Machine Learning at the Edge
+# Lab 5 – Building a Computer Vision solution and deploying to the edge
 
 
 For this lab, we will use the Azure Custom Vision service to train a Machine Learning (ML) model for image classification. We will use that model to create a .NET Core application to take images from a folder on your lab PC. It will then use Windows ML to classify the image, then send the result to Azure IoT Hub. We will deploy that application to a Azure IoT Edge container and deploy back to your Lab PC using Azure IoT Edge. Finally, we will visualize the results using Time Series Insights.
@@ -6,8 +6,11 @@ For this lab, we will use the Azure Custom Vision service to train a Machine Lea
 ## Ready to go
 
 When starting the lab, you should have these things open on your development machine:
+
 1. These instructions.
+
 1. [Custom Vision Portal](https://www.customvision.ai/) open in a browser tab, logged in.  
+
 1. [Time Series Insights explorer](https://insights.timeseries.azure.com/) in another browser tab, also logged in.
 
 ## 1 - Custom Vision
@@ -21,7 +24,9 @@ When starting the lab, you should have these things open on your development mac
 ### 1.2 - Create a Custom Vision Image Classification project
 
 1. Log into the [Custom Vision Portal](https://www.customvision.ai/).
+
 1. Create a New Project. 
+
 1. Configure your project as follows:
 
     | Field | Value |
@@ -39,6 +44,7 @@ When starting the lab, you should have these things open on your development mac
     
 1. Verify that all the details you have entered are correct.
    ![Create Custom Vision project](./media/lab05/create-custom-vision-project.jpg)
+
 1. Click **Create project**.
 
 ### 1.3 - Upload and tag training data
@@ -46,32 +52,44 @@ When starting the lab, you should have these things open on your development mac
 1. Click the Add image button and bulk upload your images based on the object type.
     * Upload all of object1 first and add the object1 tag, then all of object2 and add the object2 tag, etc. Hold down the ctrl key to select multiple photos of the same object and it will label them with all the same tag.
     * Each time you upload all the images for a given object, specify the tag at that time.
- 1. Example of bulk uploading and tagging images.
+
+1. Example of bulk uploading and tagging images.
    ![Upload and tag images](./media/lab05/upload-and-tag-images.jpg)
     
 ### 1.4 - Train your model
 
 1. Click on the **Training** button (green one in the top right).
+
 1. Select the **Quick Training** option.
+
 1. Click **Train**.
+
 4. Example of training your model:
    ![Train model](./media/lab05/train-your-model.jpg)
 
 ### 1.5 - Test your model
 
 1. Select **Quick Test** to test the model.
+
 1. Using the camera app on your PC, take one more picture of one of the objects
+
 1. Upload the picture you took, verify that it was predicted correctly.
 
 ### 1.6 - Export your model
 
 1. Switch to the Performance tab in the portal.
+
 1. Click on **Export**.
+
 1. Select **ONNX** for the type.
+
 1. Select **ONNX1.2** for the version, if you are given the option to do so.
+
 1. Click Export.
    ![Export model](./media/lab05/export-your-model.jpg)
+
 1. After Custom Vision has prepared the Export, click **Download**.
+
 1. Extract the downloaded zip file and rename **model.onnx** to **CustomVision.onnx**.
 **Hint:** Browse to your Downloads folder, find the zipped folder, right-click and **Extract all**. 
 
@@ -131,6 +149,7 @@ After running these preparation steps, close **ALL** Command Prompt and PowerShe
 The following steps assume that you have created a Azure Container Registry in Lab 3.
 
 1.  Open a PowerShell window **as Administrator** (right click on the PowerShell entry and select Run as Administrator) and run the following commands:
+
 3. Update the **$registryName** variable below, then run the commands.
 
 **Note:** each time you rebuild the container, you should increment the **$version** variable.
@@ -171,10 +190,15 @@ docker push $containerTag
 
 ### 5.1 - Find Azure Container Registry Values 
 In this step we will be gathering the keys/values required for the next step. You can find most of this information in the access keys section of your container registry in Azure:
+
 1. Login to the [Azure Portal](https://portal.azure.com)
+
 2. Click on **Resource groups** and select your resource group (E.g. msiotlabs-iia-user01).
+
 3. Select your **Container registry** (E.g. msiotlabsiiauser01acr)
+
 4. Click **Access Keys**
+
 5. Keep this page ready for the next step
 
 ### 5.2 - Author a deployment.json file
@@ -182,7 +206,9 @@ In this step we will be gathering the keys/values required for the next step. Yo
 Now that we have a container image with our inferencing logic stored in our container registry, it's time to create an Azure IoT Edge deployment to our device.
 
 1. Go to **C:\Labs\Content\src\IoTLabs.IoTEdge**
+
 2. Edit the **deployment.template.lab05.win-x64.json** file.
+
 3. In the JSON find the following variables and replace them with the correct values:
 
    | Variables | Value | Example |
@@ -221,11 +247,16 @@ az iot hub module-identity list --device-id [device name] --hub-name [hub name]
 ### 5.4 - Verify the deploy has started in Azure
 
 1. Navigate to your IoT Edge Device in your IoT Hub.
+
 1. Go to the device details page.
+
 1. Under the Modules tab click on the customvision module.
    ![Verify Azure module deployment 1](./media/lab05/verify-azure-deployment-of-customvision-module1.jpg)
+
 1. Under the IoT Edge Module Settings tab.
+
 1. Verify that the Desired Value for the Image URI matches the one that you entered in your deployment template.
+
 1. An example of IoT Edge Module Settings.
    ![Verify Azure module deployment 2](./media/lab05/verify-azure-deployment-of-customvision-module2.jpg)
 
@@ -286,7 +317,6 @@ If the module logs are empty or unhelpful, can you pull all of the IoT Edge logs
 ```
 . {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Get-IoTEdgeLog
 ```
-
 
 #### 5. Restart the IoT Edge runtime
 

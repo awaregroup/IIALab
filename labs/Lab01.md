@@ -1,4 +1,4 @@
-# Lab 01 - Getting started with Windows 10 IoT
+# Lab 1 – Build your device with Windows 10 IoT Core
 
 This lab covers installing Windows 10 IoT Core on an NXP iMX6 based SolidRun HummingBoard Edge. We will deploy a UWP app to act as an IoT gateway connecting STM SensorTile.Box over a serial connection. 
 

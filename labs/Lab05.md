@@ -130,13 +130,7 @@ dotnet run -i --model=CustomVision.onnx
 
 ### 3.0 - Prepare your docker lab environment
 
-1.  **If you ARE NOT using a pre-configured lab environment**, the following command must be run in a Command Prompt window as Administrator:
-
-```batch
-setx /M DOCKER_HOST "npipe:////./pipe/iotedge_moby_engine"
-```
-
-2. **If you ARE using a pre-configured lab environment**, the following command must be run in a Command Prompt window as Administrator:
+1. **If you ARE using a pre-configured lab environment**, the following command must be run in a Command Prompt window as Administrator:
 
 ```batch
 docker load -i C:\Labs\windows1809.tar

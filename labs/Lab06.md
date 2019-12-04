@@ -28,45 +28,7 @@ As we are deploying an app that has not been officially released on the Windows 
 ![](./media/lab06/installed-app.png)
 
 
-## Option 1 - Using Settings to set up Assigned Access
-
-You can use **Settings** on the local device to quickly configure one or a few devices as a kiosk. 
-
-### 1.1 - Configure Assigned Access
-
-1.  Go to **Start** > **Settings** > **Accounts** > **Family & other users**  **Hint:** Ignore the warning (under ‘Your Info’) in red it says ‘You need to activate Windows before you can personalize your PC.’  Simply click ‘Family & other users’.
-![](./media/lab06/assigned-access.jpg)
-
-2.  Select **Set up a kiosk > Assigned access**, and then select **Get started**
-
-3.  When prompted set the Kiosk user name to **Kiosk** and click **Next**\
-![](./media/lab06/setting-up-kiosk.jpg)
-
-4.  When prompted to select an Application, select **IoTLabs.TestApp**\
-![](./media/lab06/select-app.jpg)
-
-5.  Select **Close**\
-![](./media/lab06/kiosk-done.jpg)
-
-6.  Restart the device. 
-
-7.  Your device should auto login as the locked down Kiosk user.  Wait for the kiosk to power up and take a look at the IoT Dashboard before you carry out the next steps.
-
-### 1.2 - Remove Assigned Access
-
-1. Push **Ctrl + Alt + Delete**
-
-2. Switch user into your administrative account, this is likely to be 'LabUser'. Enter your password that you used previously for your user **lab.userXX@msiotlabs.com**
-
-3. Go to **Start** > **Settings** > **Accounts** > **Familty & other users**
-
-4. Select **Set up a kiosk**
-
-5. Select the **Kiosk** users tile and then select **Remove kiosk.** The system will ask you to confirm that you really wish to remove the kiosk, click **Remove** again.
-
-**Hint:** you may want to restart your device in preparation for the next step.
-
-## Option 2 - Using a Provisioning Package to set up Assigned Access
+## 2. Using a Provisioning Package to set up Assigned Access
 
 You can use **Provisioning Packages** to quickly and consistently deploy settings to a fleet of devices. This can be done either during OOBE (Out-Of-Box Experience) or after the device has been set up.
 
@@ -82,7 +44,7 @@ You can use **Provisioning Packages** to quickly and consistently deploy setting
 
 4. It may look as if nothing has occurred, simply restart your computer.
 
-5. Your device should auto login as the locked down Kiosk user. This should display the same IoT Dashboard that you saw with Option 1 above.
+5. Your device should auto login as the locked down Kiosk user. You should see your application start in full screen without the ability to close it or access any other windows features. 
 
 ### 2.2 - Removing the provisioning package 
 

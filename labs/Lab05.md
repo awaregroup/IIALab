@@ -130,13 +130,11 @@ dotnet run -i --model=CustomVision.onnx
 
 ### 3.0 - Prepare your docker lab environment
 
-1. **If you ARE using a pre-configured lab environment**, the following command must be run in a Command Prompt window as Administrator:
+1.  Open a PowerShell window **as an Administrator** (right click on the PowerShell entry and select Run as Administrator) and run the following commands to use a cached version of the base container to reduce internet bandwidth use.
 
-```batch
+```powershell
 docker load -i C:\Labs\windows1809.tar
 ```
-
-After running these preparation steps, close **ALL** Command Prompt and PowerShell windows to continue the lab steps below.
 
 ### 3.1 - Containerize the sample app
 

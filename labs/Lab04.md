@@ -4,6 +4,14 @@ This lab introduces Azure Stream Analytics with Azure IoT Edge on Windows 10 IoT
 
 ## 1 - Deploy Simulated Temperature Sensor
 
+### 1.0 - Prepare your docker lab environment
+
+1.  Open a PowerShell window **as an Administrator** (right click on the PowerShell entry and select Run as Administrator) and run the following command to use a cached version of the base container to reduce internet bandwidth use.
+
+```powershell
+docker load -i C:\Labs\temperaturesimulator.tar
+```
+
 ### 1.1 - Module deployment using Azure CLI
 
 1. Open the Start Menu and type **PowerShell**, then click **Run as Administrator**
@@ -62,6 +70,14 @@ This command will monitor the data being published into IoT Hub from the Simulat
 **Note:** Use Ctrl-C to stop monitoring as we will be doing more PowerShell commands soon.
 
 ## 2 - Configure Azure Stream Analytics Edge Job
+
+### 2.0 - Prepare your docker lab environment
+
+1.  Open a PowerShell window **as an Administrator** (right click on the PowerShell entry and select Run as Administrator) and run the following command to use a cached version of the base container to reduce internet bandwidth use.
+
+```powershell
+docker load -i C:\Labs\streamanalytics.tar
+```
 
 ### 2.1 - Navigate to your Azure Stream Analytics Edge Job
 1. In the [Azure Portal (https://portal.azure.com)](https://portal.azure.com) open the **msiotlabs-iia-user##** resource group

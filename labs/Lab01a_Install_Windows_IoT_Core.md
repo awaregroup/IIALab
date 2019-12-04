@@ -120,3 +120,6 @@ Devices running Windows 10 IoT Core can be installed and configured using the Io
 
 You should now have a working IoT device with Windows 10 IoT Core installed, along with screen output being shown through the HDMI capture card to the Windows Camera app acting as a second screen, and confirmed that the sensor device is connected as a virtual com port. 
 
+
+Now you can proceed to deploying the UWP Gateway application
+[Deploy Apps to your device with Visual Studio](./Lab01c.md)

@@ -14,42 +14,38 @@ Before going through the installation guide below, ensure that your device is co
 
 1. In the Windows Device Portal, Select **Apps** on the left menu and then **App manager**
 
-![](media/bc150349d330682041d1a8df044ddba4.png)
+![](media/lab01/1_apps_manager.png)
 
-**Install the FarmBeats Sensor Application Software**
+**Install the Sensor Application Software**
 
--   Select **[Choose File]** button in the **“Select the application package”**
+1. Select **[Choose File]** button in the **“Select the application package”**
 
--   Browse to the location of the downloaded files and select the file ending in
-    starting with **FarmBeatsLabs** and ending in **.appxbundle** file.
+1. Browse to the location of the downloaded files in **C:\Labs\IoTLabs.TestApp** and select the file ending in starting with **IoTLabs.TestApp** and ending in **.appxbundle** file.
 
-![](media/ee2058e2e0cdaa676a719212aeac5569.png)
+![](media/lab01/1_choose_appxbundle.png)
 
--   Select the **“Allow me to select optional packages”** and click **Next**
+1. Select the **“Allow me to select optional packages”** and click **Next**
 
--   Select the **[Choose File]** button, and select
-    Microsoft.NET.CoreRuntime2.1.appx
+1. Select the **[Choose File]** button, and select Microsoft.NET.CoreFramework.Debug.2.2.appx
 
--   Select the **[Choose File]** again, and select
-    Microsoft.VCLibs.ARM.Debug.14.00.appx
+1. Select the **[Choose File]** button, and select Microsoft.NET.CoreRuntime2.2.appx
 
-![](media/24c4147d4c7ed9ff6ce841b681f42c6f.png)
+1. Select the **[Choose File]** again, and select Microsoft.VCLibs.ARM.Debug.14.00.appx
+![](media/lab01/1_choose_optional_packages.png)
 
--   Click the **Install** button
+1. Click the **Install** button
 
-![](media/a4386c03a586f8b9f8ab4ac52c4e5d8e.png)
+![](media/lab01/1_install.png)
 
--   The application will take a little while to upload and then will pause while
-    it installs. When it has finished installing it will give you a **“Package
-    Successfully Registered”** message at the end with it’s complete.
+6. The application will take a little while to upload and then will pause while it installs. When it has finished installing it will give you a **“Package Successfully Registered”** message at the end with it’s complete.
 
 ![](media/b354423514a58623f768a1cfba0a9150.png)
 
--   Click **Done**
+7. Click **Done**
 
--   The application should now show up in the Apps list.
+8. The application should now show up in the Apps list.
 
--   Set the FarmBeatsLabs Indoor Grove Base Hat to **Startup** by switching the
+9. Set the FarmBeatsLabs Indoor Grove Base Hat to **Startup** by switching the
     toggle. This will start the application when the device boots.
 
 ![](media/26106e22a35f9156e50772ec7e130abc.png)
@@ -60,5 +56,5 @@ Software Installation Complete
 You have successfully installed your Windows 10 IoT Core sensor device and
 software
 
-Now proceed to [Step 2 – Register your FarmBeats Student Kit User and
-Device](https://github.com/farmbeatslabs/studentkit/blob/master/Indoor-m1/2_Register_your_FarmBeats_Student_Kit_User_and_Device.md)
+Now proceed to **Lab 2 – Connect your device to Azure IoT Central**
+[Deploy Apps to your device with Visual Studio](../Labs/Lab2.md)

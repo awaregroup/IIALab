@@ -144,7 +144,7 @@ docker load -i C:\Labs\windows1809.tar
 
 The following steps assume that you have created a Azure Container Registry in Lab 3.
 
-1.  Open a PowerShell window **as Administrator** (right click on the PowerShell entry and select Run as Administrator) and run the following commands:
+1.  Open PowerShell **as Administrator** (right click on the PowerShell entry and select Run as Administrator) and run the following commands:
 
 3. Update the **$registryName** variable below, then run the commands.
 

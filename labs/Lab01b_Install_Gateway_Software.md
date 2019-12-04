@@ -58,6 +58,8 @@ If the application loads correctly you should see sensors and sensor data on the
 
 If there are red lines on the sensors, unplug the sensor and plug it back in again. 
 
+![](media/lab01/1_IoTLabs_App_Sensor_Failed.jpg)
+
 
 Now proceed to **Lab 2 – Connect your device to Azure IoT Central**
 [Deploy Apps to your device with Visual Studio](../Labs/Lab2.md)

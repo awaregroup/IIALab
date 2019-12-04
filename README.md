@@ -2,7 +2,7 @@
 
 This set of hands-on-labs aims to give you a high level overview of the solution capabilities across the Azure IoT Platform as well as the Windows for IoT family.
 
-## Lab 1 – Building a Computer Vision solution and deploying to the edge
+## Lab 1 – Building your Windows 10 IoT Core Device 
 [Getting started with Windows 10 IoT Core and UWP Applications](./labs/Lab01.md)
 
 ## Lab 2 – Connect your device to Azure IoT Central

@@ -42,7 +42,7 @@ This lab covers setting up Azure IoT Central, creating a Device Template and add
 1. IoT Central can import existing Device Templates from the [Azure IoT Device Catalog](), however we are creating our own device. Click **IoT Device**. then the blue **Next: Customize** button at the bottom of the window.
 ![](./media/lab02/device_template_select_iot_device.png)
 
-1. Leave the "Gateway Device" checkbox unchecked, click the **Next: Review** button, then click **Create**
+1. Leave the "Gateway Device" checkbox **unchecked**, click the **Next: Review** button, then click **Create**
 
 1. Name your Device Template **SensorTile.box**, press Return and then click **Import Capability Model**.
 ![](./media/2_iotc4.png)
@@ -72,12 +72,14 @@ This lab covers setting up Azure IoT Central, creating a Device Template and add
 ## 2 - Configure device to connect to IoT Central
 
 ### 2.1 - Prepare Azure IoT Hub Device Details
-In order to connect the application with the IoT Hub we will need to generate a connection string, this could be done programmatically through a command line tool such as [https://github.com/Azure/dps-keygen](dps-keygen), however we will be using the dpsgen.com website to generate a configuration file with a connection settings in a format the test application can consume.
+In order to connect the application with the IoT Hub we will need to generate a connection string, this could be done programmatically through a command line tool such as **dps-keygen**.  
+
+We will be using the dpsgen.com website to generate a configuration file with a connection settings in a format the test application can consume.
 
 1. Open a browser tab and navigate to [www.dpsgen.com/iia](https://www.dpsgen.com/iia).
 
 2. Enter the `Scope ID`, `Device ID` and `Primary Key` collected earlier and click **Generate JSON**. 
-1. Navigate to the download location for the tpmoverride.json file and open the file. If it is full of "null" that indicates that the dpsgen website had issues creating your connection string. In this case try again but if it still persists then you will have to use the [https://github.com/Azure/dps-keygen](dps-keygen) method.
+1. Navigate to the download location for the tpmoverride.json file and open the file. If it is full of "null" that indicates that the dpsgen website had issues creating your connection string. In this case try again but if it still persists then you will have to use the [https://github.com/Azure/dps-keygen](https://github.com/Azure/dps-keygen) method.
 
 3. Open a Command Prompt as Administrator.
 4. Copy the `tpmoveride.json` file to the HummingBoard by replacing the IP address in each of the following two commands with the IP Address of your HummingBoard device, then run the two commands in your command prompt window; one command after the other:

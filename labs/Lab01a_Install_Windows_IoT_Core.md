@@ -122,4 +122,10 @@ You should now have a working IoT device with Windows 10 IoT Core installed, alo
 
 
 Now you can proceed to deploying the UWP Gateway application
+
+Lab 1b [Deploy Apps to your device via Sideloading](./Lab01b.md)
+
+or
+
+Lab 1c
 [Deploy Apps to your device with Visual Studio](./Lab01c.md)

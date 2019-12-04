@@ -19,8 +19,5 @@ This lab covers installing Windows 10 IoT Core on an NXP iMX6 based SolidRun Hum
 ## Lab 1a - Installing Windows 10 IoT Core with IoT Dashboard
 [Getting started with Windows 10 IoT Core and UWP Applications](./labs/Lab01a_Install_Windows_IoT_Core.md)
 
-## Lab 1b - Deploying apps to HummingBoard via Sideloading
-[Deploying apps to HummingBoard via Sideloading](./labs/Lab01a_Install_Gateway_Software.md)
-
 ## Lab 1c - Deploy Apps to your device with Visual Studio
 [Deploy Apps to your device with Visual Studio](./labs/Lab01c.md)

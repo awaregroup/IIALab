@@ -1,38 +1,18 @@
-Install the FarmBeats Sensor Application Software
+# Lab 1b - Install the Sensor Gateway Application Software
 -------------------------------------------------
 
-The sensor application is the piece of software that reads the values from the
-sensors and sends them to the cloud. The sensor application is critical to the
-supply of data from the device and into Azure IoT Central.
+The sensor application is the piece of software that reads the values from the sensors and sends them to the cloud. The sensor application is critical to the supply of data from the device and into Azure IoT Central.
 
 Preparation
 -----------
 
-Before going through the installation guide below, ensure that your device is
-connect to the internet and you have retrieved your device IP address. If you
-are missing these steps please refer to the Identifying your Unique Device ID
-guide.
-
-**Download the software**
-
-To complete these steps, you will need a keyboard, monitor and computer mouse.
-
--   Download the latest [FarmBeats Labs Sensor Application for the Indoor
-    M1](https://fblassets.blob.core.windows.net/releases/FarmBeatsLabs.UWP.Headless_1.0.11.0_arm.zip)
-    software.
-
--   Unzip the contents of the zip file to a folder on your PC or laptop.
-
-![](media/a91b28a4890c5a24427279e20aadc9d9.png)
+Before going through the installation guide below, ensure that your device is connect to the internet and you have retrieved your device IP address. 
 
 **Open the App Manager in the Windows Device Portal**
 
--   Open the Windows Device Portal. This can be done by opening a web browser
-    and typing in your device IP address (found in previous step by step
-    instructions) followed by 8080 (eg. http://192.168.1.60:8080)
+1. Open the Windows Device Portal. This can be done by opening a web browser and typing in your device IP address (found in previous step by step instructions) followed by 8080 (eg. http://192.168.1.60:8080)
 
--   In the Windows Device Portal, Select **Apps** on the left menu ad then **App
-    manager**
+1. In the Windows Device Portal, Select **Apps** on the left menu and then **App manager**
 
 ![](media/bc150349d330682041d1a8df044ddba4.png)
 

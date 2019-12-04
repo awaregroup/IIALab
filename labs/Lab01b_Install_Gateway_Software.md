@@ -39,16 +39,15 @@ Before going through the installation guide below, ensure that your device is co
 
 6. The application will take a little while to upload and then will pause while it installs. When it has finished installing it will give you a **“Package Successfully Registered”** message at the end with it’s complete.
 
-![](media/b354423514a58623f768a1cfba0a9150.png)
-
 7. Click **Done**
 
 8. The application should now show up in the Apps list.
 
-9. Set the FarmBeatsLabs Indoor Grove Base Hat to **Startup** by switching the
-    toggle. This will start the application when the device boots.
+9. You should now be able to select the app to startup when the device boots. 
 
-![](media/26106e22a35f9156e50772ec7e130abc.png)
+![](media/lab01/1_select_startup.png)
+
+10. View the camera app on you Lab PC to see the application start. 
 
 Software Installation Complete
 ------------------------------

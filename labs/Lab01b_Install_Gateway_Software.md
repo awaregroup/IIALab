@@ -62,4 +62,4 @@ If there are red lines on the sensors, unplug the sensor and plug it back in aga
 
 
 Now proceed to **Lab 2 – Connect your device to Azure IoT Central**
-[Deploy Apps to your device with Visual Studio](../Labs/Lab2.md)
+[Connect your device to Azure IoT Central](../Labs/Lab2.md)

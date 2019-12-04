@@ -1,4 +1,4 @@
-# Lab 1 – Build your device with Windows 10 IoT Core
+# Lab 1 – Getting started with Windows 10 IoT Core and UWP Applications
 
 This lab covers installing Windows 10 IoT Core on an NXP iMX6 based SolidRun HummingBoard Edge. We will deploy a UWP app to act as an IoT gateway connecting STM SensorTile.Box over a serial connection. 
 
@@ -16,18 +16,11 @@ This lab covers installing Windows 10 IoT Core on an NXP iMX6 based SolidRun Hum
 
 
 
-## Lab 01a - Installing Windows 10 IoT Core with IoT Dashboard
-### 1.1 - Installing IoT Dashboard
-### 1.2 - Installing Windows 10 IoT Core
-### 1.3 - Plugging in your hardware
-### 1.4 - Booting your device for the first time
-### 1.5 - Ignore the OOBE questions
-### 1.6 - Validating your install
+## Lab 1a - Installing Windows 10 IoT Core with IoT Dashboard
+[Getting started with Windows 10 IoT Core and UWP Applications](./labs/Lab01a_Install_Windows_IoT_Core.md)
 
-## Lab 01b - Deploying apps to HummingBoard
+## Lab 1b - Deploying apps to HummingBoard via Sideloading
+[Deploying apps to HummingBoard via Sideloading](./labs/Lab01a_Install_Gateway_Software.md)
 
-## 2 - 
-
-
-
-## 4 - Troubleshooting
+## Lab 1c - Deploy Apps to your device with Visual Studio
+[Deploy Apps to your device with Visual Studio](./labs/Lab01c.md)

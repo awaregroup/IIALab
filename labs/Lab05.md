@@ -223,7 +223,7 @@ Now that we have a container image with our inferencing logic stored in our cont
 
 ### 5.3 - Deploy the IoT Edge deployment.json file. 
 
-Using the IoT Edge device that we created in Lab04, we will overwrite the modules with a new 'custom vision' module.
+Using the IoT Edge device that we created in Lab03, we will overwrite the modules with a new 'custom vision' module.
 
 1. Replace **[device name]** and **[hub name]**, then run the following command in PowerShell:
 

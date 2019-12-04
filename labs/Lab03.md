@@ -178,7 +178,16 @@ Custom Vision allows you to leverage the compute infrastructure in Azure to trai
 7. When prompted, enter the Device Connection string from the previous step, including the SharedAccessKey
 ![](./media/lab03/iot-edge-initialize.png)
 
-### 4.2 - Verify successful installation
+### 4.3 - Prepare your docker lab environment
+
+1.  Open a PowerShell window **as an Administrator** (right click on the PowerShell entry and select Run as Administrator) and run the following command to use a cached version of the base containers to reduce internet bandwidth use.
+
+```powershell
+docker load -i C:\Labs\azureiotedgeagent.tar
+docker load -i C:\Labs\azureiotedgehub.tar
+```
+
+### 4.4 - Verify successful installation
 Run the following powershell command to check the status of the IoT Edge service, it should be listed as running:
 
 ```PowerShell

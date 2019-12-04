@@ -52,8 +52,12 @@ Before going through the installation guide below, ensure that your device is co
 Software Installation Complete
 ------------------------------
 
-You have successfully installed your Windows 10 IoT Core sensor device and
-software
+You have successfully installed your Windows 10 IoT Core sensor device and software
+
+If the application loads correctly you should see sensors and sensor data on the screen. 
+
+If there are red lines on the sensors, unplug the sensor and plug it back in again. 
+
 
 Now proceed to **Lab 2 – Connect your device to Azure IoT Central**
 [Deploy Apps to your device with Visual Studio](../Labs/Lab2.md)

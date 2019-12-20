@@ -198,8 +198,8 @@
                 "container.registry": "[variables('acrName')]"
             },
             "sku": {
-                "name": "Premium",
-                "tier": "Premium"
+                "name": "Basic",
+                "tier": "Basic"
             },
             "properties": {
                 "adminUserEnabled": true

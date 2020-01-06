@@ -137,7 +137,7 @@ dotnet run -i --model=CustomVision.onnx
 1.  Open a PowerShell window **as an Administrator** (right click on the PowerShell entry and select Run as Administrator) and run the following commands to use a cached version of the base container to reduce internet bandwidth use.
 
 ```powershell
-docker load -i C:\Labs\windows1809.tar
+docker load -i C:\Labs\Docker\windows1809.tar
 ```
 
 ### 3.1 - Containerize the sample app

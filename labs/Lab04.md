@@ -9,7 +9,7 @@ This lab introduces Azure Stream Analytics with Azure IoT Edge on Windows 10 IoT
 1.  Open a PowerShell window **as an Administrator** (right click on the PowerShell entry and select Run as Administrator) and run the following command to use a cached version of the base container to reduce internet bandwidth use.
 
 ```powershell
-docker load -i C:\Labs\temperaturesimulator.tar
+docker load -i C:\Labs\Docker\temperaturesimulator.tar
 ```
 
 ### 1.1 - Module deployment using Azure CLI
@@ -76,7 +76,7 @@ This command will monitor the data being published into IoT Hub from the Simulat
 1.  Open a PowerShell window **as an Administrator** (right click on the PowerShell entry and select Run as Administrator) and run the following command to use a cached version of the base container to reduce internet bandwidth use.
 
 ```powershell
-docker load -i C:\Labs\streamanalytics.tar
+docker load -i C:\Labs\Docker\streamanalytics.tar
 ```
 
 ### 2.1 - Navigate to your Azure Stream Analytics Edge Job

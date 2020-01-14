@@ -27,7 +27,7 @@ az login
 ```powershell
 az account set --subscription 'MSIoTLabs-IIA'
 ```
-4. Run the following command replacing **[device id]** and **[hub name]** with their respective fields **Edge Device Id** and **IoT Hub Name** collected earlier from **notes** file in lab03:
+4. Run the following command replacing **[device id]** and **[hub name]** with their respective fields **Edge Device Id** and **IoT Hub Name** collected earlier from **notes** file:
 ```powershell
 az iot edge set-modules --device-id [device id] --hub-name [hub name] --content "C:\Labs\Content\src\IoTLabs.IoTEdge\deployment.example.win-x64.json"
 
@@ -56,7 +56,7 @@ iotedge logs SimulatedTemperatureSensor
 Your device should be receiving simulated temperature data every 5 seconds with the machine temperature steadily rising.
 
 ### 1.3 - Monitor Device-to-Cloud messages
-1. Enter the following command to monitor Device-to-Cloud (D2C) messages being published to the IoT Hub replacing **[device id]** and **[hub name]** with their respective fields from [step 1.1](#11---cloud-setup):
+1. Enter the following command to monitor Device-to-Cloud (D2C) messages being published to the IoT Hub replacing **[device id]** and **[hub name]** with their respective fields **Edge Device Id** and **IoT Hub Name** collected earlier from **notes** file:
 ```powershell
 az iot hub monitor-events --device-id [device id] --hub-name  [hub name]
 
@@ -145,13 +145,13 @@ Stream Analytics can be used to enable complex logic on streams of data. This qu
 
 **Note:** You may have to click on the **Edge job** dropdown for the save button to show.
 
-6. When the module has loaded, select **Configure** and take note of the **Name** field. You will be using this module name in the next step
+6. When the module has loaded, select **Configure** and record the **module name** field into **notes** file which you can find on desktop. You will be using this module name in the next step
 ![Adding ASA Module](./media/lab04/configure-and-read-name.png)
 
 7. Click **Save**, then **Next**
 
 ### 3.2 - Selecting the routes
-1. Replace the current JSON with the following, substituting **[module name]** with the module name found in the previous step. There are 3 places that **[module name]** needs to be changed:
+1. Replace the current JSON with the following, substituting **[module name]** with the module name found in **notes** file. There are 3 places that **[module name]** needs to be changed:
 
 ```javascript
 {

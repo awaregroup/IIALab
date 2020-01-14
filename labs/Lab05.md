@@ -146,7 +146,7 @@ The following steps assume that you have created a Azure Container Registry in L
 
 1.  Open PowerShell **as Administrator** (right click on the PowerShell entry and select Run as Administrator) and run the following commands:
 
-3. Update the **$registryName** variable below, then run the commands.
+3. Substituting the **[azure-container-registry-name]** blow with the **container registry name** found in **notes** file, then run the commands.
 
 **Note:** each time you rebuild the container, you should increment the **$version** variable.
 
@@ -162,7 +162,7 @@ $containerTag = "$registryName.azurecr.io/$($imageName):$version-x64-win1809"
 docker build . -t $containerTag
 ```
 
-4.  Type **$containerTag** and press **Enter** to get the full container string. Save a copy of this value as you will need it in step 5.3.
+4.  Type **$containerTag** and press **Enter** to get the full container string. Save a copy of this value into your **notes** file as you will need it in step 5.3.
 
 ## 4 - Push Docker image to Azure Container Registry (ACR)
 
@@ -217,7 +217,7 @@ Now that we have a container image with our inferencing logic stored in our cont
 
 **Hint:** Refer to the page from the previous step, for details such as usernames and passwords.
 
-**Hint:** You can type **$containerTag** in PowerShell to get the full container string required to replace ACR_IMAGE.
+**Hint:** You can find the value of **$containerTag** in the **notes** file.
 
 **Hint:** The ACR_IMAGE variable is in the customvision module definition.
 
@@ -225,19 +225,19 @@ Now that we have a container image with our inferencing logic stored in our cont
 
 Using the IoT Edge device that we created in Lab03, we will overwrite the modules with a new 'custom vision' module.
 
-1. Replace **[device name]** and **[hub name]**, then run the following command in PowerShell:
+1. Replace **[Edge Device Id]** and **[IoT Hub Name]** with their respective fields from **notes** file, then run the following command in PowerShell:
 
 ```
 #SAMPLE: az iot edge set-modules --device-id IOTEDGE01 --hub-name msiotlabs-iia-user01-iothub --content "C:\Labs\Content\src\IoTLabs.IoTEdge\deployment.template.lab05.win-x64.json"
-az iot edge set-modules --device-id [device name] --hub-name [hub name] --content "C:\Labs\Content\src\IoTLabs.IoTEdge\deployment.template.lab05.win-x64.json"
+az iot edge set-modules --device-id [Edge Device Id] --hub-name [IoT Hub Name] --content "C:\Labs\Content\src\IoTLabs.IoTEdge\deployment.template.lab05.win-x64.json"
 ```
 
 **Hint:** Device ID can be retrieved from the Azure Portal by navigating to your Resource group, then into the IoT Hub, and selecting the IoT Edge option under the Automatic Device Manager header on the left.
 
-2. To get information about the modules deployed to your IoT Hub, swap out **[device name]** and **[hub name]** then run the following command:
+2. To get information about the modules deployed to your IoT Hub, swap out **[Edge Device Id]** and **[IoT Hub Name]** then run the following command:
 ```
 #SAMPLE: az iot hub module-identity list  --device-id IOTEDGE01 --hub-name msiotlabs-iia-user01-iothub
-az iot hub module-identity list --device-id [device name] --hub-name [hub name]
+az iot hub module-identity list --device-id [Edge Device Id] --hub-name [IoT Hub Name]
 ```
 
 ### 5.4 - Verify the deploy has started in Azure

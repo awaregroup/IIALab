@@ -44,7 +44,10 @@ This lab covers setting up Azure IoT Central, creating a Device Template and add
 
 1. Leave the "Gateway Device" checkbox **unchecked**, click the **Next: Review** button, then click **Create**
 
-1. Name your Device Template **SensorTile.box**, press Return and then click **Import Capability Model**.
+1. Name your Device Template **SensorTile.box**, press Return 
+![](./media/lab02/device_template_name_template.png)
+
+1. Click **Import Capability Model**.
 ![](./media/2_iotc4.png)
 
 1. Browse to the `C:\Labs\Content\src\Azure.IoTCentral\` folder and upload the file named `ST SensorTile.Box.json`.

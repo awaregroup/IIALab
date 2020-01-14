@@ -164,8 +164,8 @@ Add 4 routes settings.
 |---------|---------|
 |telemetryToCloud     | FROM /messages/modules/SimulatedTemperatureSensor/* INTO $upstream        |
 |alertsToCloud     | FROM /messages/modules/**[module name]**/* INTO $upstream        |
-|alertsToReset     |FROM /messages/modules/**[module name]**/* INTO BrokeredEndpoint(\"/modules/SimulatedTemperatureSensor/inputs/control\         |
-|telemetryToAsa     | FROM /messages/modules/SimulatedTemperatureSensor/* INTO BrokeredEndpoint(\"/modules/**[module name]**/inputs/temperature\        |
+|alertsToReset     |FROM /messages/modules/**[module name]**/* INTO BrokeredEndpoint("/modules/SimulatedTemperatureSensor/inputs/control")         |
+|telemetryToAsa     | FROM /messages/modules/SimulatedTemperatureSensor/* INTO BrokeredEndpoint("/modules/**[module name]**/inputs/temperature")        |
 
 
 

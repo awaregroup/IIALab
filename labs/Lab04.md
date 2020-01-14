@@ -145,25 +145,31 @@ Stream Analytics can be used to enable complex logic on streams of data. This qu
 
 **Note:** You may have to click on the **Edge job** dropdown for the save button to show.
 
-6. When the module has loaded, select **Configure** and take note of the **Name** field. You will be using this module name in the next step
-![Adding ASA Module](./media/lab04/configure-and-read-name.png)
+6. When the module has loaded, take note of the **Name** field. You will be using this module name in the next step
+![Adding ASA Module](./media/lab04/NextToRoute.png)
 
-7. Click **Save**, then **Next**
+7. Click **Next:Routes**
 
-### 3.2 - Selecting the routes
+### 3.2 - Adding the routes
+  
+Add 4 routes settings.  
+
+![Adding ASA Module](./media/lab04/Route.png)
+
 1. Replace the current JSON with the following, substituting **[module name]** with the module name found in the previous step. There are 3 places that **[module name]** needs to be changed:
 
-```javascript
-{
-    "routes": {
-        "telemetryToCloud": "FROM /messages/modules/SimulatedTemperatureSensor/* INTO $upstream",
-        "alertsToCloud": "FROM /messages/modules/[module name]/* INTO $upstream",
-        "alertsToReset": "FROM /messages/modules/[module name]/* INTO BrokeredEndpoint(\"/modules/SimulatedTemperatureSensor/inputs/control\")",
-        "telemetryToAsa": "FROM /messages/modules/SimulatedTemperatureSensor/* INTO BrokeredEndpoint(\"/modules/[module name]/inputs/temperature\")"
-    }
-}
-```
-2. Select **Next**, then **Submit**
+
+
+|Name     |Value  |
+|---------|---------|
+|telemetryToCloud     | FROM /messages/modules/SimulatedTemperatureSensor/* INTO $upstream        |
+|alertsToCloud     | FROM /messages/modules/**[module name]**/* INTO $upstream        |
+|alertsToReset     |FROM /messages/modules/**[module name]**/* INTO BrokeredEndpoint(\"/modules/SimulatedTemperatureSensor/inputs/control\         |
+|telemetryToAsa     | FROM /messages/modules/SimulatedTemperatureSensor/* INTO BrokeredEndpoint(\"/modules/**[module name]**/inputs/temperature\        |
+
+
+
+2. Select **Next:Review + create**, then **Create**
 
 ### 3.3 - Verify Deployment on IoT Edge Device
 The module deployment is instant, however, changes to the device can take around 5-7 minutes to take effect. Let's check that our device has loaded our Azure Stream Analytics module from the last step.

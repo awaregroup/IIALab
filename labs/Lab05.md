@@ -108,13 +108,12 @@ When starting the lab, you should have these things open on your development mac
 
 ### 2.3 - Build & Test the sample
 
-1. Open a Command Prompt window and enter the following 4 lines of commands, **one after the other**. These commands build, then runs the application using our machine learning model and the images in the `C:/images` folder as the test data:
+1. Open a Command Prompt window and enter the following 4 lines of commands, **one after the other**. These commands build and package the application into a release folder then runs the application using our machine learning model and the images in the `C:/images` folder as the test data:
 
 ```
 cd C:\Labs\Content\src\IoTLabs.CustomVision
-dotnet restore -r win-x64
 dotnet publish -c Release -o ./release -r win-x64 --self-contained true
-dotnet run -i --model=CustomVision.onnx
+./release/WindowsAiEdgeLabCV.exe -i --model=CustomVision.onnx
 ```
 
 **Example output:**

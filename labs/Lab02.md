@@ -85,15 +85,17 @@ We will be using the dpsgen.com website to generate a configuration file with a 
 1. Navigate to the download location for the tpmoverride.json file and open the file. If it is full of "null" that indicates that the dpsgen website had issues creating your connection string. In this case try again but if it still persists then you will have to use the [https://github.com/Azure/dps-keygen](https://github.com/Azure/dps-keygen) method.
 
 3. Open a Command Prompt as Administrator.
-4. Copy the `tpmoveride.json` file to the HummingBoard by replacing the IP address in each of the following two commands with the IP Address of your HummingBoard device, then run the two commands in your command prompt window; one command after the other:
-```batch
-net use \\<device ip address here>\c$ /USER:administrator
-copy "%userprofile%\Downloads\tpmoverride.json" \\<device ip address here>\c$\Data\Users\DefaultAccount\AppData\Local\Packages\IoTLabs.TestApp.App_wqmbmn0a4bde6\LocalState /y
-```
-![](./media/2_13.png)
 
-5. Use Visual Studio to stop and then restart the application. Once started you should see Azure IoT now showing as connected.
+4. Open Device Portal then select 'File Manager'
+![](./media/lab02/FileManager.png)
 
+5. Browse to 'LocalState' folder of IoTLabs.TestApp.  
+![](./media/lab02/BrowseToAppFolder.png)
+
+6. Select 'tpmoverride.json' in 'Downloads' folder from step above, then click 'upload' to copy the JSON file to IoT Core.
+![](./media/lab02/UploadFile.png)
+
+7. Use Visual Studio or Device Dashboard to stop and then restart the application. Once started you should see Azure IoT now showing as connected.
 ![](./media/2_14.png)
 
 6. Switching back to IoT Central, you should be able to see data in the dashboard as well.

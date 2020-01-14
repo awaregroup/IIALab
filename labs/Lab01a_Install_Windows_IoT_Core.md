@@ -88,7 +88,7 @@ Devices running Windows 10 IoT Core can be installed and configured using the Io
 
 ### 1.5 - Validating your install
 
-1. Once the HummingBoard has completed booting, a line entry will show in the IoT Dashboard. You can leave this window open to be notified when the device is ready. 
+1. Once the HummingBoard has completed booting, a line entry will show in the IoT Dashboard, record the `device IP address` in the 'notes' text file which you can find on your desktop. You can leave this window open to be notified when the device is ready. 
 ![Device in IoT Dashboard](./media/lab01/1_validatinginstall.png)
 
 2. Right click on your device and select **Open in Device Portal** 

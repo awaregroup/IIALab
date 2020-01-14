@@ -66,7 +66,7 @@ This lab covers setting up Azure IoT Central, creating a Device Template and add
 3. Click on your new device to see the device dashboard. There should be no data showing yet.
 ![](./media/2_iotc9.png)
 
-4. Click the **Connect** button and record the `Scope ID`, `Device ID` and `Primary Key`. These are the Azure IoT Hub Device Provisioning Service (DPS) details. You will need these to set up your device.
+4. Click the **Connect** button and record the `Scope ID`, `Device ID` and `Primary Key` in the 'notes' text file which you can find on your desktop. These are the Azure IoT Hub Device Provisioning Service (DPS) details. You will need these to set up your device.
 ![](./media/2_iotc10.png)
 
 ## 2 - Configure device to connect to IoT Central

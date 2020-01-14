@@ -147,10 +147,10 @@ Custom Vision allows you to leverage the compute infrastructure in Azure to trai
 
 8. Click **Refresh** and your newly created device should appear in the list
 
-9. Take note of your **Device Id** (red circle) and your **IoT Hub Name** (red square) You will need to refer to these in future steps
+9. Record your **Device Id** (red circle) and your **IoT Hub Name** (red square) into the **notes** file which you can find on the desktop. You will need to refer to these in future steps
 ![](./media/lab03/DeviceAndHubDetails.png)
 
-10. Select your device and take note of the **Primary Connection String**. We will be using it in the next step, so keep this page ready or save the into a document on your desktop for ease\
+10. Select your device and record the **Primary Connection String** into the **notes** file on your desktop. We will be using it in the next step.\
 ![](./media/lab03/CopyConnectionStringIoTEdge.png)
 
 ### 4.2 - IoT Device setup using Azure CLI

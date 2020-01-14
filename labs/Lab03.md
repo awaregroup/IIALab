@@ -147,7 +147,7 @@ Custom Vision allows you to leverage the compute infrastructure in Azure to trai
 
 8. Click **Refresh** and your newly created device should appear in the list
 
-9. Record your **Device Id** (red circle) and your **IoT Hub Name** (red square) into the **notes** file which you can find on the desktop. You will need to refer to these in future steps
+9. Record your **Edge Device Id** (red circle) and your **IoT Hub Name** (red square) into the **notes** file which you can find on the desktop. You will need to refer to these in future steps
 ![](./media/lab03/DeviceAndHubDetails.png)
 
 10. Select your device and record the **Primary Connection String** into the **notes** file on your desktop. We will be using it in the next step.\

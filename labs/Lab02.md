@@ -66,7 +66,7 @@ This lab covers setting up Azure IoT Central, creating a Device Template and add
 3. Click on your new device to see the device dashboard. There should be no data showing yet.
 ![](./media/2_iotc9.png)
 
-4. Click the **Connect** button and record the `Scope ID`, `Device ID` and `Primary Key` in the 'notes' text file which you can find on your desktop. These are the Azure IoT Hub Device Provisioning Service (DPS) details. You will need these to set up your device.
+4. Click the **Connect** button and record the `Scope ID`, `Device ID` and `Primary Key` into the **notes** file which you can find on your desktop. These are the Azure IoT Hub Device Provisioning Service (DPS) details. You will need these to set up your device.
 ![](./media/2_iotc10.png)
 
 ## 2 - Configure device to connect to IoT Central
@@ -78,11 +78,11 @@ We will be using the dpsgen.com website to generate a configuration file with a 
 
 1. Open a browser tab and navigate to [www.dpsgen.com/iia](https://www.dpsgen.com/iia).
 
-2. Enter the `Scope ID`, `Device ID` and `Primary Key` collected earlier and click **Generate JSON**. 
+2. Enter the `Scope ID`, `Device ID` and `Primary Key` collected earlier from **notes** file and click **Generate JSON**. 
 1. Navigate to the download location for the tpmoverride.json file and open the file. If it is full of "null" that indicates that the dpsgen website had issues creating your connection string. In this case try again but if it still persists then you will have to use the [https://github.com/Azure/dps-keygen](https://github.com/Azure/dps-keygen) method.
 
 3. Open a Command Prompt as Administrator.
-4. Copy the `tpmoveride.json` file to the HummingBoard by replacing the IP address in each of the following two commands with the IP Address of your HummingBoard device, then run the two commands in your command prompt window; one command after the other:
+4. Copy the `tpmoveride.json` file to the HummingBoard by replacing the `device IP address` collected earlier from **notes** file in each of the following two commands with the IP Address of your HummingBoard device, then run the two commands in your command prompt window; one command after the other:
 ```batch
 net use \\<device ip address here>\c$ /USER:administrator
 copy "%userprofile%\Downloads\tpmoverride.json" \\<device ip address here>\c$\Data\Users\DefaultAccount\AppData\Local\Packages\IoTLabs.TestApp.App_wqmbmn0a4bde6\LocalState /y

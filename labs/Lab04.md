@@ -27,7 +27,7 @@ az login
 ```powershell
 az account set --subscription 'MSIoTLabs-IIA'
 ```
-4. Run the following command replacing **[device id]** and **[hub name]** with their respective fields (found in the IoT Hub set up in Lab 3):
+4. Run the following command replacing **[device id]** and **[hub name]** with their respective fields **Edge Device Id** and **IoT Hub Name** collected earlier from **notes** file in lab03:
 ```powershell
 az iot edge set-modules --device-id [device id] --hub-name [hub name] --content "C:\Labs\Content\src\IoTLabs.IoTEdge\deployment.example.win-x64.json"
 

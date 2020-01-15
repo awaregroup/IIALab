@@ -12,12 +12,12 @@ Azure Resource Manager Templates (ARM Templates) can be deployed into Azure that
 1. Log in with the lab credentials provided.  
 **lab.user##@msiotlabs.com where ## are replaced with the number of your lab workstation. 
 eg. #1 would be lab.user01@msiotlabs.com** 
-1. Click the 'Deploy to Azure' button below to create the Azure IoT components required for the next labs:<br/><br/>
+1. Click the 'Deploy to Azure' button **below** to create the Azure IoT components required for the next labs:<br/><br/>
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fawaregroup%2FIIALab%2Fmaster%2Fsrc%2FAzure.ARM%2Fiia-azuredeploy.json" target="_blank" rel="noopener noreferrer">
 <img src="https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.png"/>
 </a>
 
-3. You can also visualize an ARM template to see the components that will be created.
+3. You can also visualize an ARM template to see the components that will be created.<br/><br/>
 <a href="http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2Fawaregroup%2FIIALab%2Fmaster%2Fsrc%2FAzure.ARM%2Fiia-azuredeploy.json" target="_blank" rel="noopener noreferrer">
 <img src="https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/visualizebutton.png"/>
 </a><br/><br/>
@@ -165,17 +165,15 @@ Custom Vision allows you to leverage the compute infrastructure in Azure to trai
 ```powershell
 . {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Deploy-IoTEdge
 ```
- 
 
-4. When prompted, press **Y** two times, including one to reboot. 
+4. When prompted, press **Y** to install.
 ![](./media/lab03/iotedge-install.jpg)
 
-5. When the system has booted again, re-open the PowerShell session as Administrator
-6. Configure the Azure IoT Edge runtime with the following command:
+5. Configure the Azure IoT Edge runtime with the following command:
 ```powershell
 . {Invoke-WebRequest -useb aka.ms/iotedge-win} | Invoke-Expression; Initialize-IoTEdge
 ```
-7. When prompted, enter the Device Connection string from the previous step, including the SharedAccessKey
+6. When prompted, enter the Device Connection string from the previous step, including the SharedAccessKey
 ![](./media/lab03/iot-edge-initialize.png)
 
 ### 4.3 - Prepare your docker lab environment

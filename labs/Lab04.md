@@ -27,9 +27,9 @@ az login
 ```powershell
 az account set --subscription 'MSIoTLabs-IIA'
 ```
-4. Run the following command replacing **[device id]** and **[hub name]** with their respective fields (found in the IoT Hub set up in Lab 3):
+4. Run the following command replacing **[Edge device id]** and **[IoT Hub Name]** with their respective fields from the **notes** file on your desktop (also found in the IoT Hub set up in Lab 3):
 ```powershell
-az iot edge set-modules --device-id [device id] --hub-name [hub name] --content "C:\Labs\Content\src\IoTLabs.IoTEdge\deployment.example.win-x64.json"
+az iot edge set-modules --device-id [Edge device id] --hub-name [IoT Hub Name] --content "C:\Labs\Content\src\IoTLabs.IoTEdge\deployment.example.win-x64.json"
 
 #NOTE - entries are case sensitive and must be exactly the same as in the Azure port. Also make sure to remove the square brackets above, for example:
 #az iot edge set-modules --device-id labuser01 --hub-name msiotlabs-iia-user01-iothub --content "C:\Labs\Content\src\IoTLabs.IoTEdge\deployment.example.win-x64.json"
@@ -56,9 +56,9 @@ iotedge logs SimulatedTemperatureSensor
 Your device should be receiving simulated temperature data every 5 seconds with the machine temperature steadily rising.
 
 ### 1.3 - Monitor Device-to-Cloud messages
-1. Enter the following command to monitor Device-to-Cloud (D2C) messages being published to the IoT Hub replacing **[device id]** and **[hub name]** with their respective fields from [step 1.1](#11---cloud-setup):
+1. Enter the following command to monitor Device-to-Cloud (D2C) messages being published to the IoT Hub replacing **[Edge Device Id]** and **[IoT Hub Name]** with their respective fields from the **notes** file on your desktop:
 ```powershell
-az iot hub monitor-events --device-id [device id] --hub-name  [hub name]
+az iot hub monitor-events --device-id [Edge Device Id] --hub-name  [IoT Hub Name]
 
 #NOTE - make sure to remove the square brackets above, for example:
 #az iot hub monitor-events --device-id device1 --hub-name  msiotlabs-iia-user06-iothub
@@ -145,7 +145,7 @@ Stream Analytics can be used to enable complex logic on streams of data. This qu
 
 **Note:** You may have to click on the **Edge job** dropdown for the save button to show.
 
-6. When the module has loaded, take note of the **Name** field. You will be using this module name in the next step
+6. When the module has loaded, take note of the **Name** field as **module name** with the **notes** file on your desktop. You will be using this module name in the next step
 ![Adding ASA Module](./media/lab04/NextToRoute.png)
 
 7. Click **Next:Routes**
@@ -156,7 +156,7 @@ Add 4 routes settings.
 
 ![Adding ASA Module](./media/lab04/Route.png)
 
-1. Replace the current JSON with the following, substituting **[module name]** with the module name found in the previous step. There are 3 places that **[module name]** needs to be changed:
+1. Replace the current JSON with the following, substituting **[module name]** with the module name found in the **notes** file on your desktop. There are 3 places that **[module name]** needs to be changed:
 
 
 

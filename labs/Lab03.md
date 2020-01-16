@@ -91,7 +91,7 @@ The Edge version of Stream Analytics allows us to run this service inside a cont
 
 ### 2.4 - Container Registry
 
-Container Registry is a private docker container registry that you can push containers to. When combined with IoT Edge, you can store the containers to be used by your edge devices. Your proprietary code can stay protected in your own container registry rather than a public registry.
+Container Registry is a private docker container registry that you can push containers to. When combined with IoT Edge, you can store the containers to be used by your edge devices. Your proprietary code can stay protected in your own container registry rather than a public registry. Take note of your **container registry name** with the **notes** file on your desktop, We will be using it in Lab05.
 
 ![](./media/lab03/3_9.png)
 
@@ -147,7 +147,7 @@ Custom Vision allows you to leverage the compute infrastructure in Azure to trai
 
 8. Click **Refresh** and your newly created device should appear in the list
 
-9. Take note of your **Device Id** (red circle) and your **IoT Hub Name** (red square) You will need to refer to these in future steps
+9. Take note of your **Edge Device Id** (red circle) and your **IoT Hub Name** (red square) with the **notes** file on your desktop, you will need to refer to these in future steps
 ![](./media/lab03/DeviceAndHubDetails.png)
 
 10. Select your device and take note of the **Primary Connection String**. We will be using it in the next step, so keep this page ready or save the into a document on your desktop for ease\

@@ -81,7 +81,7 @@ We will be using the dpsgen.com website to generate a configuration file with a 
 
 1. Open a browser tab and navigate to [www.dpsgen.com/iia](https://www.dpsgen.com/iia).
 
-2. Enter the `Scope ID`, `Device ID` and `Primary Key` collected earlier from **notes** file and click **Generate JSON**. 
+2. Enter the `Scope ID`, `Device ID` and `Primary Key` collected earlier from the **notes** file on your desktop and click **Generate JSON**. 
 1. Navigate to the download location for the tpmoverride.json file and open the file. If it is full of "null" that indicates that the dpsgen website had issues creating your connection string. In this case try again but if it still persists then you will have to use the [https://github.com/Azure/dps-keygen](https://github.com/Azure/dps-keygen) method.
 
 3. Open a Command Prompt as Administrator.

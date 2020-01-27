@@ -1,0 +1,16 @@
+lab02
+    - Scope ID:
+    - Device ID:
+    - Primary Key:
+
+lab03 
+    - Container Registry name: 
+    - Edge Device Id: 
+    - IoT Hub Name: 
+    - Primary Connection String: 
+
+lab04
+    - Module Name: 
+
+Lab05
+    - $containerTag: 

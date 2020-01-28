@@ -19,7 +19,7 @@ Before going through the installation guide below, ensure that your device is co
 
 1. Select **[Choose File]** button in the **“Select the application package”**
 
-1. Browse to the location of the downloaded files in **C:\Labs\IoTLabs.TestApp** and select the file ending in starting with **IoTLabs.TestApp** and ending in **.appxbundle** file.
+1. Browse to the location of the downloaded files in **C:\Labs\IoTLabs.TestApp** and select the file ending in starting with **IoTLabs.TestApp** and ending in **.msix** file.
 ![](media/lab01/1_choose_appxbundle.png)
 
 1. Select the **“Allow me to select optional packages”** and click **Next**

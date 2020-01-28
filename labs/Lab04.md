@@ -152,12 +152,7 @@ Stream Analytics can be used to enable complex logic on streams of data. This qu
 
 ### 3.2 - Adding the routes
   
-Add 4 routes settings.  
-
-![Adding ASA Module](./media/lab04/Route.png)
-
-1. Replace the current JSON with the following, substituting **[module name]** with the module name found in the **notes** file on your desktop. There are 3 places that **[module name]** needs to be changed:
-
+1. Remove the existing routes and edit the routing table to look like the image below by copying the fields in the following table and substituting **[module name]** with the module name found in the **notes** file on your desktop. There are 3 places that **[module name]** needs to be changed:
 
 
 |Name     |Value  |
@@ -167,7 +162,7 @@ Add 4 routes settings.
 |alertsToReset     |FROM /messages/modules/**[module name]**/* INTO BrokeredEndpoint("/modules/SimulatedTemperatureSensor/inputs/control")         |
 |telemetryToAsa     | FROM /messages/modules/SimulatedTemperatureSensor/* INTO BrokeredEndpoint("/modules/**[module name]**/inputs/temperature")        |
 
-
+![Adding ASA Module](./media/lab04/Route.png)
 
 2. Select **Next:Review + create**, then **Create**
 
@@ -184,12 +179,14 @@ iotedge list
 
 3. Try running the following to see the logs from our simulated temperature sensor:
 ```powershell
-iotedge logs SimulatedTemperatureSensor
+iotedge logs -f --tail 5 SimulatedTemperatureSensor
 ```
+**Note:** Use Ctrl-C to stop monitoring as we will be doing more PowerShell commands soon.
+
 You should see that the machine temperature increases until it reaches a temperature higher than the 26 degree threshold for at least 30 seconds.
 ![Temperature Reset](./media/lab04/temperature-reset.jpg)
 
-4. When the SimulatedTemperatureSensor container stops producing data you can reset it to start over
+4. When the SimulatedTemperatureSensor container stops producing data you can reset it to start over:
 ```powershell
 iotedge restart SimulatedTemperatureSensor
 ```

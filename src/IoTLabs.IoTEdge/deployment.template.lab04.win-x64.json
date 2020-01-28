@@ -2,62 +2,61 @@
     "modulesContent": {
         "$edgeAgent": {
             "properties.desired": {
-                "schemaVersion": "1.0",
-                "runtime": {
-                    "type": "docker",
-                    "settings": {
-                        "minDockerVersion": "v1.25",
-                        "loggingOptions": "",
-                        "registryCredentials": {
-                            "ACR_NAME": {
-                                "username": "ACR_USER",
-                                "password": "ACR_PASSWORD",
-                                "address": "ACR_ADDRESS"
-                            }
-                        }
-                    }
+                "modules": {
+                    "SimulatedTemperatureSensor": {
+                        "settings": {
+                            "image": "mcr.microsoft.com/azureiotedge-simulated-temperature-sensor:1.0",
+                            "createOptions": ""
+                        },
+                        "type": "docker",
+                        "status": "running",
+                        "restartPolicy": "always",
+                        "version": "1.0"
+                    }                
                 },
+                "runtime": {
+                    "settings": {
+                        "minDockerVersion": "v1.25",                        
+                    },
+                    "type": "docker"
+                },
+                "schemaVersion": "1.0",
                 "systemModules": {
                     "edgeAgent": {
-                        "type": "docker",
                         "settings": {
                             "image": "mcr.microsoft.com/azureiotedge-agent:1.0",
                             "createOptions": ""
-                        }
+                        },
+                        "type": "docker"
                     },
                     "edgeHub": {
-                        "type": "docker",
-                        "status": "running",
-                        "restartPolicy": "always",
                         "settings": {
                             "image": "mcr.microsoft.com/azureiotedge-hub:1.0",
-                            "createOptions": "{\"HostConfig\":{\"PortBindings\":{\"5671/tcp\":[{\"HostPort\":\"5671\"}], \"8883/tcp\":[{\"HostPort\":\"8883\"}],\"443/tcp\":[{\"HostPort\":\"443\"}]}}}"
-                        }
-                    }
-                },
-                "modules": {
-                    "customvision": {
-                        "version": "1.0",
+                            "createOptions": "{\"HostConfig\":{\"PortBindings\":{\"443/tcp\":[{\"HostPort\":\"443\"}],\"5671/tcp\":[{\"HostPort\":\"5671\"}],\"8883/tcp\":[{\"HostPort\":\"8883\"}]}}}"
+                        },
                         "type": "docker",
                         "status": "running",
-                        "restartPolicy": "always",
-                        "settings": {
-                            "image": "ACR_IMAGE",
-                            "createOptions": "{\"HostConfig\":{\"Devices\":[{\"CgroupPermissions\":\"\",\"PathInContainer\":\"\",\"PathOnHost\":\"class/E5323777-F976-4f5b-9B55-B94699C46E44\"},{\"CgroupPermissions\":\"\",\"PathInContainer\":\"\",\"PathOnHost\":\"class/5B45201D-F2F2-4F3B-85BB-30FF1F953599\"}],\"Isolation\":\"Process\"}}"
-                        }
+                        "restartPolicy": "always"
                     }
                 }
             }
         },
         "$edgeHub": {
             "properties.desired": {
-                "schemaVersion": "1.0",
                 "routes": {
-                    "sensorToSampleModule": "FROM /messages/modules/customvision/outputs/resultsOutput INTO $upstream"
+                    "route": "FROM /messages/* INTO $upstream",
+                    "upstream": "FROM /messages/* INTO $upstream"
                 },
+                "schemaVersion": "1.0",
                 "storeAndForwardConfiguration": {
                     "timeToLiveSecs": 7200
                 }
+            }
+        },
+        "SimulatedTemperatureSensor": {
+            "properties.desired": {
+                "SendData": true,
+                "SendInterval": 5
             }
         }
     }

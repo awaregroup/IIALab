@@ -134,12 +134,15 @@ dotnet publish -c Release -o ./release -r win-x64 --self-contained true
 
 > [!TIP]  
 > If you see compile error, please follow these steps to update package  
-> 1. Remove invalid assembly  
+> 1. Select `Dependencies`->`Assemblies1`->`Widnows`, then enter `Delete` key
 > ![CompileError1](./media/lab05/CompileError-1.png)
 > 2. Open Nuget Package Manager
 > ![CompileError2](./media/lab05/CompileError-2.png)
 > 3. Search `Microsoft.Windows.SDK.contract`, then install it
 > ![CompileError3](./media/lab05/CompileError-3.png)
+> 4. From `Build` menu, select `Clean Solution`
+> 5. From `Build` menu, select `Rebuild Solution`
+> ![CompileError4](./media/lab05/CompileError-4.png)
 
 ## 3 - Build and push a container
 

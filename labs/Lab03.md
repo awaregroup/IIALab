@@ -145,14 +145,14 @@ Custom Vision allows you to leverage the compute infrastructure in Azure to trai
 
 7. Click **Refresh** and your newly created device should appear in the list
 
-8. Take note of your **Edge Device Id** (red circle) and your **IoT Hub Name** (red square) with the **notes** file on your desktop, you will need to refer to these in future steps
+8. Take note of your **Edge Device Id** (red circle) and your **IoT Hub Name** (red square). Enter them into the the **Notes** file on your desktop, you will need to refer to these variables in future steps
 ![](./media/lab03/DeviceAndHubDetails.png)
 
 9. Select your device and take note of the **Primary Connection String**. We will be using it in the next step, so keep this page ready or save the into a document on your desktop for ease\
 ![](./media/lab03/CopyConnectionStringIoTEdge.png)
 
 ### 4.2 - IoT Device setup using Azure CLI
-**Note:** This next step will cause your Lab PC to reboot, so now is a good time to save any documents that you have open.
+**Note:** This next step may cause your Lab PC to reboot, so now is a good time to save any documents that you have open.
 
 1. On your Lab PC, open the Start Menu and type **PowerShell**, then click **Run as Administrator**\
 ![](./media/lab03/powershell.jpg)

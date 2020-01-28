@@ -132,6 +132,15 @@ dotnet publish -c Release -o ./release -r win-x64 --self-contained true
 4/24/2019 4:09:05 PM: Inferenced: {"results":[{"label":"Mug","confidence":1.0}],"metrics":{"evaltimeinms":47,"cycletimeinms":0},"imgSrc":"c:\images\mug.jpg"}
 ```
 
+> [!TIP]  
+> If you see compile error, please follow these steps to update package  
+> 1. Remove invalid assembly  
+> ![CompileError1](./media/lab05/CompileError-1.png)
+> 2. Open Nuget Package Manager
+> ![CompileError2](./media/lab05/CompileError-2.png)
+> 3. Search `Microsoft.Windows.SDK.contract`, then install it
+> ![CompileError3](./media/lab05/CompileError-3.png)
+
 ## 3 - Build and push a container
 
 ### 3.0 - Prepare your docker lab environment

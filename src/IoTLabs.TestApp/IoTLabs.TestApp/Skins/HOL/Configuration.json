@@ -2,50 +2,67 @@
 	"Id": "HOL",
 	"Title": "Hands On Lab",
 	"Description": "IoT Hackathon SensorTile.Box Dashboard",
-  "CurrentSkin": {
-    "HeaderIcon": "!Logo.png",
-    "PageHeader": "Contoso Engineering",
-    "PageSubHeader": "Environment Monitor",
-    "ShowVersion": false,
-    "ShowIpAddress": false,
-    "ShowAppVersion": false,
-    "ShowDateTime": false,
-    "ShowPreviewSymbol": false,
-    "ShowPreviewBand": false,
-    "IsPreviewDisplayEnabled": false,
-    "IsVisible": true,
-    "LayoutColumns": 12,
-    "LayoutRows": 12,
-    "HorizontalResolution": 1920,
-    "VerticalResolution": 1080,
-    "TitleHeight": 80,
-    "Layouts": 1,
-    "SkinOverride": "#DarkFarmbeats",
-    "LayoutMode": "Tabs",
-    "PageHeaderPresetTemplateIndex": 3,
-    "PanelStylingFlags": [ "RoundedNone", "Border", "BorderThick"],
-    "LayoutTabs": [
-      {
-        "Index": 0,
-        "Title": "Monitor",
-        "Glyph": "\uE80F"
-      },
-      {
-        "Index": 1,
-        "Title": "Information",
-        "Glyph": "\uE946"
-      }
-    ]
-  },
+	"CurrentSkin": {
+		"HeaderIcon": "!Logo.png",
+		"PageHeader": "Contoso Engineering",
+		"PageSubHeader": "Environment Monitor",
+		"ShowVersion": false,
+		"ShowIpAddress": false,
+		"ShowAppVersion": false,
+		"ShowDateTime": false,
+		"ShowPreviewSymbol": false,
+		"ShowPreviewBand": false,
+		"IsPreviewDisplayEnabled": false,
+		"IsVisible": true,
+		"LayoutColumns": 12,
+		"LayoutRows": 12,
+		"HorizontalResolution": 1920,
+		"VerticalResolution": 1080,
+		"TitleHeight": 80,
+		"Layouts": 1,
+		"SkinOverride": "#DarkFarmbeats",
+		"LayoutMode": "Tabs",
+		"PageHeaderPresetTemplateIndex": 3,
+		"PanelStylingFlags": ["RoundedNone",
+		"Border",
+		"BorderThick"],
+		"LayoutTabs": [{
+			"Index": 0,
+			"Title": "Monitor",
+			"Glyph": "\uE80F"
+		},
+		{
+			"Index": 1,
+			"Title": "Information",
+			"Glyph": "\uE946"
+		}]
+	},
 	"SkinPanels": [{
+		"Id": "",
+		"SkinPanelTypeId": "DeviceInformationPanel",
+		"IsVisible": true,
+		"IsTitleShown": true,
+		"Title": "Device Info",
+		"Column": 0,
+		"Row": 0,
+		"ColumnSpan": 3,
+		"RowSpan": 2,
+		"Settings": {
+			"Items": [{
+				"Title": "IP Address",
+				"SourceValueKey": "DeviceProperty.LocalIp"
+			}]
+		}
+	},
+	{
 		"Id": "",
 		"SkinPanelTypeId": "ConnectionStatusPanel",
 		"IsVisible": true,
 		"Title": "Connectivity",
 		"Column": 0,
-		"Row": 0,
+		"Row": 2,
 		"ColumnSpan": 3,
-		"RowSpan": 6,
+		"RowSpan": 5,
 		"Settings": null
 	},
 	{
@@ -54,9 +71,9 @@
 		"IsVisible": true,
 		"Title": "Event Log",
 		"Column": 0,
-		"Row": 6,
+		"Row": 7,
 		"ColumnSpan": 3,
-		"RowSpan": 6,
+		"RowSpan": 5,
 		"Settings": {
 			"MaxLogItems": 10,
 			"AddAtTop": true
@@ -122,14 +139,13 @@
 			"IdealMaximum": 1100.0,
 			"AlertMinimum": 800.0,
 			"AlertMaximum": 1300.0,
-			"DisplayFormat" : "#####0",
+			"DisplayFormat": "#####0",
 			"Symbol": "kPA",
 			"SensorValueKey": "Pressure",
 			"HostSensorId": "SensorTileBox",
 			"SensorValueType": "Pressure"
 		}
 	},
-	
 	{
 		"Id": "MagnetometerXVal",
 		"SkinPanelTypeId": "SingleValueSensorPanel",
@@ -143,7 +159,7 @@
 		"Settings": {
 			"Symbol": "X",
 			"SensorValueKey": "MagnetometerX",
-			"DisplayFormat" : "#####0.0###",
+			"DisplayFormat": "#####0.0###",
 			"HostSensorId": "SensorTileBox",
 			"SensorValueType": "Magnetometer",
 			"Header": "",
@@ -163,7 +179,7 @@
 		"Settings": {
 			"Symbol": "X",
 			"SensorValueKey": "MagnetometerY",
-			"DisplayFormat" : "#####0.0###",
+			"DisplayFormat": "#####0.0###",
 			"HostSensorId": "SensorTileBox",
 			"SensorValueType": "Magnetometer",
 			"Header": "",
@@ -183,15 +199,13 @@
 		"Settings": {
 			"Symbol": "X",
 			"SensorValueKey": "MagnetometerZ",
-			"DisplayFormat" : "#####0.0###",
+			"DisplayFormat": "#####0.0###",
 			"HostSensorId": "SensorTileBox",
 			"SensorValueType": "Magnetometer",
 			"Header": "",
 			"Footer": ""
 		}
 	},
-	
-	
 	{
 		"Id": "AccelerometerXVal",
 		"SkinPanelTypeId": "SingleValueSensorPanel",
@@ -205,7 +219,7 @@
 		"Settings": {
 			"Symbol": "X",
 			"SensorValueKey": "AccelerometerX",
-			"DisplayFormat" : "#####0.0###",
+			"DisplayFormat": "#####0.0###",
 			"HostSensorId": "SensorTileBox",
 			"SensorValueType": "Accelerometer",
 			"Header": "",
@@ -225,7 +239,7 @@
 		"Settings": {
 			"Symbol": "X",
 			"SensorValueKey": "AccelerometerY",
-			"DisplayFormat" : "#####0.0###",
+			"DisplayFormat": "#####0.0###",
 			"HostSensorId": "SensorTileBox",
 			"SensorValueType": "Accelerometer",
 			"Header": "",
@@ -245,14 +259,13 @@
 		"Settings": {
 			"Symbol": "X",
 			"SensorValueKey": "AccelerometerZ",
-			"DisplayFormat" : "#####0.0###",
+			"DisplayFormat": "#####0.0###",
 			"HostSensorId": "SensorTileBox",
 			"SensorValueType": "Accelerometer",
 			"Header": "",
 			"Footer": ""
 		}
 	},
-	
 	{
 		"Id": "GyroscopeXVal",
 		"SkinPanelTypeId": "SingleValueSensorPanel",
@@ -266,7 +279,7 @@
 		"Settings": {
 			"Symbol": "X",
 			"SensorValueKey": "GyroscopeX",
-			"DisplayFormat" : "#####0.0###",
+			"DisplayFormat": "#####0.0###",
 			"HostSensorId": "SensorTileBox",
 			"SensorValueType": "Gyroscope",
 			"Header": "",
@@ -286,7 +299,7 @@
 		"Settings": {
 			"Symbol": "X",
 			"SensorValueKey": "GyroscopeY",
-			"DisplayFormat" : "#####0.0###",
+			"DisplayFormat": "#####0.0###",
 			"HostSensorId": "SensorTileBox",
 			"SensorValueType": "Gyroscope",
 			"Header": "",
@@ -306,7 +319,7 @@
 		"Settings": {
 			"Symbol": "X",
 			"SensorValueKey": "GyroscopeZ",
-			"DisplayFormat" : "#####0.0###",
+			"DisplayFormat": "#####0.0###",
 			"HostSensorId": "SensorTileBox",
 			"SensorValueType": "Gyroscope",
 			"Header": "",
@@ -416,16 +429,12 @@
 		"Mode": "Average",
 		"ExpirySeconds": 10.0,
 		"MaxRangeSeconds": 2.0
-	}
-	
-	
-	],
+	}],
 	"Sensors": [{
 		"SensorTypeId": "SensorTileService",
 		"Id": "SensorTileBox",
 		"Settings": null,
-		"Aggregators": [
-		{
+		"Aggregators": [{
 			"AggregatorId": "Temperature",
 			"SensorValueKey": "Temperature"
 		},
@@ -472,8 +481,7 @@
 		{
 			"AggregatorId": "GyroscopeZ",
 			"SensorValueKey": "GyroscopeZ"
-		}
-		]
+		}]
 	},
 	{
 		"SensorTypeId": "SimulatedPollingDoubleSensor",

@@ -148,7 +148,7 @@ Custom Vision allows you to leverage the compute infrastructure in Azure to trai
 8. Take note of your **Edge Device Id** (red circle) and your **IoT Hub Name** (red square). Enter them into the the **Notes** file on your desktop, you will need to refer to these variables in future steps
 ![](./media/lab03/DeviceAndHubDetails.png)
 
-9. Select your device, then click the copy button to copy the **Primary Connection String**.  Paste this value into the **Notes** file on your desktop as we will be using it to set up the device in the next step.\
+9. Select your device by clicking red circle in the picture above, then click the copy button to copy the **Primary Connection String**.  Paste this value into the **Notes** file on your desktop as we will be using it to set up the device in the next step.\
 ![](./media/lab03/4_CopyConnectionStringIoTEdge.png)
 
 ### 4.2 - IoT Device setup using Azure CLI

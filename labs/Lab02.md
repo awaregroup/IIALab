@@ -92,7 +92,7 @@ We will be using the dpsgen.com website to generate a configuration file with a 
 5. Browse to 'LocalState' folder of IoTLabs.TestApp.  
 ![](./media/lab02/BrowseToAppFolder.png)
 
-6. Select 'tpmoverride.json' in 'Downloads' folder from step above, then click 'upload' to copy the JSON file to IoT Core.
+6. Select 'Choose File' and navigate to the 'tpmoverride.json' in 'Downloads' folder from step above, then click 'upload' to copy the JSON file to IoT Core.
 ![](./media/lab02/UploadFile.png)
 
 7. Use Visual Studio or Device Dashboard to stop and then restart the application. Once started you should see Azure IoT now showing as connected.

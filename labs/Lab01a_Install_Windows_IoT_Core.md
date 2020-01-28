@@ -82,7 +82,7 @@ Devices running Windows 10 IoT Core can be installed and configured using the Io
 
 **Note:** This initial boot process takes 3-5 minutes. It may reboot a couple times while it processes the initial setup. During boot you will see various screens that may take a minute before they proceed. If you see a Windows logo during this process thats a good sign. Once it reaches the Out of Box Experience (OOBE) you are ready to conitnue.  
 
-**Note: You can not interact with the IoT Core using your screen, mouse or keyboard. It is just a HDMI display being shown on your Lab PC. The setup does not require any user input; it will automatically step through.**
+**Note: You can not interact with the IoT Core using your screen, mouse or keyboard. It is just a HDMI display being shown on your Lab PC. The setup does not require any user input; it will automatically step through the OOBE screens.**
 
 **Hint:** If you get the order wrong, unplug and plug back in the Power Cable into the HummingBoard to reboot the device and for the display to capture to your camear app.
 
@@ -105,20 +105,7 @@ Devices running Windows 10 IoT Core can be installed and configured using the Io
 |Password|p@ssw0rd|
 
 
-4. To test the SensorTile is connected. Make sure it's plugged into the Hummingboard, then open the Processes Menu, Select Run command
-![Device Portal](./media/1_deviceportal1.png)
-
-5. Type **"devcon status USB\VID_0483\*"** and hit enter to see if the device can see the connected SensorTile
-
-6. You should see **Name: USB Serial Device** with status of Running
-![SensorTile Connected](./media/1_SensorTileConnected.png)
-
-7. Another way to see what is on the screen of the IoT device is to use the inbuilt **Screenshot** command on the Windows Device Portal. 
-
-8. Select **Device Settings** on the Windows Device Portal, in the bottom right press the **Screenshot** button. Try it twice if it shows the broken image icon the first time.
-![SensorTile Connected](./media/lab01/1_screenshot.png)   
-
-You should now have a working IoT device with Windows 10 IoT Core installed, along with screen output being shown through the HDMI capture card to the Windows Camera app acting as a second screen, and confirmed that the sensor device is connected as a virtual com port. 
+You should now have a working IoT device with Windows 10 IoT Core installed, along with screen output being shown through the HDMI capture card to the Windows Camera app acting as a second screen. 
 
 
 Now you can proceed to deploying the UWP Gateway application
@@ -129,3 +116,24 @@ or
 
 Lab 1c
 [Deploy Apps to your device with Visual Studio](./Lab01c.md)
+
+
+
+Troubleshooting Display 
+-----------------------
+
+1. If you are having issues with the HDMI capture card then another way to see what is on the screen of the IoT device is to use the inbuilt **Screenshot** command on the Windows Device Portal. 
+
+2. Select **Device Settings** on the Windows Device Portal, in the bottom right press the **Screenshot** button. Try it twice if it shows the broken image icon the first time.
+![Windows Device Portal Screenshot](./media/lab01/1_screenshot.png)   
+
+3. An additional tool you can used is installed on your lab PC that can assist in taking screenshots. On your PC start menu type "Aware" and select the Screenshot tool. 
+![AwareThings Screenshot Tool](./media/lab01/IoTScreenshotApp1a.png) 
+
+4. Type in your IP address and select Get Screenshot. Refresh as often as you like to see updated images of what is in the device screen. 
+![AwareThings Screenshot Tool](./media/lab01/IoTScreenshotApp1b.png)
+
+
+
+
+

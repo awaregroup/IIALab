@@ -194,7 +194,7 @@ Run the following powershell command to examine service logs from the last 5 min
 ```PowerShell
 . {Invoke-WebRequest -useb https://aka.ms/iotedge-win} | Invoke-Expression; Get-IoTEdgeLog
 ```
-Run the following powershell command to run an automated check for the most common configuration and networking errors. There will be a four yellow warnings relating to production readiness and one red error message relating to the Edge Hub container. The yellow warnings can be ignored within our lab environment and the red error message will resolve during the next lab when we deploy modules to our IoT Edge instance for the first time.
+Run the following powershell command to run an automated check for the most common configuration and networking errors. There will be four yellow warnings relating to production readiness and one red error message relating to the Edge Hub container. The yellow warnings can be ignored within our lab environment and the red error message will resolve during the next lab when we deploy modules to our IoT Edge instance for the first time.
 
 ```PowerShell
 iotedge check

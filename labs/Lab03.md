@@ -148,8 +148,8 @@ Custom Vision allows you to leverage the compute infrastructure in Azure to trai
 8. Take note of your **Edge Device Id** (red circle) and your **IoT Hub Name** (red square). Enter them into the the **Notes** file on your desktop, you will need to refer to these variables in future steps
 ![](./media/lab03/DeviceAndHubDetails.png)
 
-9. Select your device and take note of the **Primary Connection String**. We will be using it in the next step, so keep this page ready or save the into a document on your desktop for ease\
-![](./media/lab03/CopyConnectionStringIoTEdge.png)
+9. Select your device, then click the copy button to copy the **Primary Connection String**.  Paste this value into the **Notes** file on your desktop as we will be using it to set up the device in the next step.\
+![](./media/lab03/4_CopyConnectionStringIoTEdge.png)
 
 ### 4.2 - IoT Device setup using Azure CLI
 **Note:** This next step may cause your Lab PC to reboot, so now is a good time to save any documents that you have open.
@@ -194,7 +194,7 @@ Run the following powershell command to examine service logs from the last 5 min
 ```PowerShell
 . {Invoke-WebRequest -useb https://aka.ms/iotedge-win} | Invoke-Expression; Get-IoTEdgeLog
 ```
-Run the following powershell command to run an automated check for the most common configuration and networking errors.
+Run the following powershell command to run an automated check for the most common configuration and networking errors. There will be a four yellow warnings relating to production readiness and one red error message relating to the Edge Hub container. The yellow warnings can be ignored within our lab environment and the red error message will resolve during the next lab when we deploy modules to our IoT Edge instance for the first time.
 
 ```PowerShell
 iotedge check

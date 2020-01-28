@@ -128,29 +128,27 @@ Custom Vision allows you to leverage the compute infrastructure in Azure to trai
 
 ### 4.1 - Create Device in Azure IoT Hub
 
-1. Make a note of the Lab PC number  printed on the device. For example, #1 would convert to the **LAB.USER01**
+1. Open a browser and navigate to the [Azure Portal (portal.azure.com)](https://portal.azure.com). Log in with the lab credentials provided
 
-2. Open a browser and navigate to the [Azure Portal (portal.azure.com)](https://portal.azure.com). Log in with the lab credentials provided
-
-3. Select **Resource groups** from the Azure Portal homepage.
+2. Select **Resource groups** from the Azure Portal homepage.
 ![](./media/lab03/azure%20dashboard.png)
 
-4. Select the **msiotlabs-iia-user##** resource group in the list and choose the **IoT Hub** (this is the same IoT Hub resource that we explored earlier in step 2.1 of this lab).
+3. Select the **msiotlabs-iia-user##** resource group in the list and choose the **IoT Hub** (this is the same IoT Hub resource that we explored earlier in step 2.1 of this lab).
 
-5. In the IoT Hub menu under the heading **Automatic Device Management**, click **IoT Edge**\
+4. In the IoT Hub menu under the heading **Automatic Device Management**, click **IoT Edge**\
 ![](./media/lab03/SelectIoTEdge.png)
 
-6. Click **Add an IoT Edge device** at the top of the page
+5. Click **Add an IoT Edge device** at the top of the page
 
-7. Enter the Lab PC name (from earlier) as the device id, leave the rest of the settings as default and click **Save**
+6. Enter your Lab PC number printed on the device as the **Device Id**. For example #1 would convert to the **LAB.USER01**. Leave the rest of the settings as default and click **Save**
 ![](./media/lab03/add-device.jpg)
 
-8. Click **Refresh** and your newly created device should appear in the list
+7. Click **Refresh** and your newly created device should appear in the list
 
-9. Take note of your **Edge Device Id** (red circle) and your **IoT Hub Name** (red square) with the **notes** file on your desktop, you will need to refer to these in future steps
+8. Take note of your **Edge Device Id** (red circle) and your **IoT Hub Name** (red square) with the **notes** file on your desktop, you will need to refer to these in future steps
 ![](./media/lab03/DeviceAndHubDetails.png)
 
-10. Select your device and take note of the **Primary Connection String**. We will be using it in the next step, so keep this page ready or save the into a document on your desktop for ease\
+9. Select your device and take note of the **Primary Connection String**. We will be using it in the next step, so keep this page ready or save the into a document on your desktop for ease\
 ![](./media/lab03/CopyConnectionStringIoTEdge.png)
 
 ### 4.2 - IoT Device setup using Azure CLI

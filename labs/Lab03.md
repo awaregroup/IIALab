@@ -12,7 +12,7 @@ Azure Resource Manager Templates (ARM Templates) can be deployed into Azure that
 1. Log in with the lab credentials provided.  
 **lab.user##@msiotlabs.com where ## are replaced with the number of your lab workstation. 
 eg. #1 would be lab.user01@msiotlabs.com** 
-1. Click the 'Deploy to Azure' button **below** to create the Azure IoT components required for the next labs:<br/><br/>
+1. Click the 'Deploy to Azure' button **below on this page** to create the Azure IoT components required for the next labs:<br/><br/>
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fawaregroup%2FIIALab%2Fmaster%2Fsrc%2FAzure.ARM%2Fiia-azuredeploy.json" target="_blank" rel="noopener noreferrer">
 <img src="https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.png"/>
 </a>

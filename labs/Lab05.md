@@ -15,11 +15,12 @@ When starting the lab, you should have these things open on your development mac
 
 ## 1 - Custom Vision
 
-### 1.1 - Capture training images
+### 1.1 - Training images
 
-1. Using the Camera app on your development Lab PC, take at least 5 pictures each of your objects (perhaps 3 different objects with 5 photos of each making 15 in total).  There are no specifcations as to backgrounds, etc. 
-    * Store these pictures on your computer. 
-    * Organize all the photos for each object into a folder named for this object - this will make them easier to upload.
+1. On your development Lab PC in `C:\Labs\src\IoTLabs.Lab5Images` are  different objects with 5+ photos of each. The photos are organized in a folder named for each type of object - this will make them easier to upload.
+  ![Custom Vision Pictures](./media/lab05/CustomVisionPictures.png)
+
+
     
 ### 1.2 - Create a Custom Vision Image Classification project
 
@@ -50,8 +51,10 @@ When starting the lab, you should have these things open on your development mac
 ### 1.3 - Upload and tag training data
 
 1. Click the Add image button and bulk upload your images based on the object type.
-    * Upload all of object1 first and add the object1 tag, then all of object2 and add the object2 tag, etc. Hold down the ctrl key to select multiple photos of the same object and it will label them with all the same tag.
-    * Each time you upload all the images for a given object, specify the tag at that time.
+    * Upload five+, but not all of the first object picture and add the object tag. Then upload five+ of the second object and add the object2 tag, etc. Hold down the ctrl key to select multiple photos of the same object and it will label them with all the same tag.
+    * Each time you upload the images for a given object, specify the tag at that time.
+
+    **Note:** You will use the pictures you did not upload to the Custom Vision model to test the model later. 
 
 1. Example of bulk uploading and tagging images.
    ![Upload and tag images](./media/lab05/upload-and-tag-images.jpg)

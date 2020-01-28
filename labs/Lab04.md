@@ -197,9 +197,12 @@ iotedge restart SimulatedTemperatureSensor
 
 2. Click on **Message Routing**
 
-3. Choose the existing route and click **Enable**
+3. Choose the existing route named **SendTelemetryToEventHub** and click **Enable Route**
+
+![Enabling Route to send telemetry to Event Hub](./media/lab04/4_2_EnableRoute.png)
 
 4. Save changes
+
 
 This step will enable telemetry to flow into Time Series Insights which you can view from the common Resource Group.
 

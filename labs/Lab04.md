@@ -38,12 +38,12 @@ az iot edge set-modules --device-id [Edge device id] --hub-name [IoT Hub Name] -
 ### 1.2 - Verify Deployment on IoT Edge Device
 The module deployment is instant, however, changes to the device can take around 5-7 minutes to take effect. This means it can take a while for the new container to be loaded. The following commands can be used to check the status of the SimulatedTemperatureSensor container:
 
-1. Run the following PowerShell command to view the current modules. You should see three modules in total once the modules have been deployed to the device.
+1. Run the following PowerShell command to view the current modules. You should see 3 modules in total once the modules have been deployed to the device.
 ```powershell
 iotedge list
 ```
 
-1. Validate the Azure IoT Edge runtime installation to ensure there are no errors, there will still be warnings. Continue within PowerShell and use the command:
+1. Next run validation of the Azure IoT Edge runtime installation to ensure there are no errors. Note that there will still be warnings that can be safely ignored. Continue within PowerShell and use the command:
 ```powershell
 iotedge check
 ``` 

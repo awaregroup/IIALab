@@ -16,7 +16,7 @@
                 },
                 "runtime": {
                     "settings": {
-                        "minDockerVersion": "v1.25",                        
+                        "minDockerVersion": "v1.25"                       
                     },
                     "type": "docker"
                 },

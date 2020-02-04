@@ -10,7 +10,6 @@
         "prefix": "[toLower(concat(variables('prefixSegment'), '-', variables('projectName')))]",
         "storageAccountName": "[take(replace(concat(variables('prefix'), '-storage'), '-', ''), 24)]",
         "storageAccountAsaContainerName": "streamanalyticsedge",
-        "iotCentralName": "[concat(variables('prefix'), '-iotcentral')]",
         "iotHubName": "[concat(variables('prefix'), '-iothub')]",
         "iotHubRouteName": "SendTelemetryToEventHub",
         "iotHubDpsName": "[concat(variables('prefix'), '-dps')]",
@@ -21,21 +20,7 @@
         "eventHubSharedAccessPolicyName": "iothub",
         "acrName": "[replace(concat(variables('prefix'), '-', 'acr'), '-', '')]"
     },
-    "resources": [
-        {
-            "type": "Microsoft.IoTCentral/IoTApps",
-            "apiVersion": "2018-09-01",
-            "name": "[variables('iotCentralName')]",
-            "location": "unitedstates",
-            "sku": {
-                "name": "ST2"
-            },
-            "properties": {
-                "displayName": "[variables('iotCentralName')]",
-                "subdomain": "[concat(variables('prefix'), '-central')]",
-                "template": "iotc-pnp-preview@1.0.0"
-            }
-        },
+    "resources": [        
         {
             "type": "Microsoft.Storage/storageAccounts",
             "name": "[variables('storageAccountName')]",

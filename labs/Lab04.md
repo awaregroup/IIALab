@@ -152,7 +152,7 @@ Stream Analytics can be used to enable complex logic on streams of data. This qu
 
 ### 3.2 - Adding the routes
   
-1. Remove the existing routes and edit the routing table to look like the image below by copying the fields in the following table and substituting **[module name]** with the module name found in the **notes** file on your desktop. There are 3 places that **[module name]** needs to be changed:
+1. **Remove the existing routes** and edit the routing table to look like the image below by copying the fields in the following table and substituting **[module name]** with the module name found in the **notes** file on your desktop. There are 3 places that **[module name]** needs to be changed:
 
 
 |Name     |Value  |
